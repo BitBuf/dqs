@@ -1,10 +1,10 @@
 package dev.dewy.dqs.packet.ingame.server;
 
-import dev.dewy.dqs.protocol.MagicValues;
-import dev.dewy.dqs.protocol.game.statistic.*;
-import dev.dewy.dqs.packet.MinecraftPacket;
 import dev.dewy.dqs.io.NetInput;
 import dev.dewy.dqs.io.NetOutput;
+import dev.dewy.dqs.packet.MinecraftPacket;
+import dev.dewy.dqs.protocol.MagicValues;
+import dev.dewy.dqs.protocol.game.statistic.*;
 
 import java.io.IOException;
 import java.util.HashMap;

@@ -1,13 +1,13 @@
 package dev.dewy.dqs.utils;
 
-import dev.dewy.dqs.exceptions.request.InvalidCredentialsException;
-import dev.dewy.dqs.exceptions.request.RequestException;
-import dev.dewy.dqs.exceptions.request.ServiceUnavailableException;
-import dev.dewy.dqs.exceptions.request.UserMigratedException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import dev.dewy.dqs.exceptions.request.InvalidCredentialsException;
+import dev.dewy.dqs.exceptions.request.RequestException;
+import dev.dewy.dqs.exceptions.request.ServiceUnavailableException;
+import dev.dewy.dqs.exceptions.request.UserMigratedException;
 
 import java.io.*;
 import java.net.HttpURLConnection;

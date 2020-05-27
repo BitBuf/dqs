@@ -1,5 +1,10 @@
 package dev.dewy.dqs.networking;
 
+import dev.dewy.dqs.io.NetInput;
+import dev.dewy.dqs.io.NetOutput;
+import dev.dewy.dqs.io.stream.StreamNetInput;
+import dev.dewy.dqs.nbt.NBTIO;
+import dev.dewy.dqs.nbt.tag.builtin.CompoundTag;
 import dev.dewy.dqs.protocol.MagicValues;
 import dev.dewy.dqs.protocol.game.chunk.BlockStorage;
 import dev.dewy.dqs.protocol.game.chunk.Chunk;
@@ -8,11 +13,6 @@ import dev.dewy.dqs.protocol.game.chunk.NibbleArray3d;
 import dev.dewy.dqs.protocol.game.entity.metadata.*;
 import dev.dewy.dqs.protocol.game.world.block.BlockFace;
 import dev.dewy.dqs.protocol.game.world.block.BlockState;
-import dev.dewy.dqs.nbt.NBTIO;
-import dev.dewy.dqs.nbt.tag.builtin.CompoundTag;
-import dev.dewy.dqs.io.NetInput;
-import dev.dewy.dqs.io.NetOutput;
-import dev.dewy.dqs.io.stream.StreamNetInput;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

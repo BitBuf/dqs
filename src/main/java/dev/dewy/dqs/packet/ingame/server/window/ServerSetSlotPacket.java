@@ -1,10 +1,10 @@
 package dev.dewy.dqs.packet.ingame.server.window;
 
-import dev.dewy.dqs.protocol.game.entity.metadata.ItemStack;
-import dev.dewy.dqs.packet.MinecraftPacket;
-import dev.dewy.dqs.networking.NetUtil;
 import dev.dewy.dqs.io.NetInput;
 import dev.dewy.dqs.io.NetOutput;
+import dev.dewy.dqs.networking.NetUtil;
+import dev.dewy.dqs.packet.MinecraftPacket;
+import dev.dewy.dqs.protocol.game.entity.metadata.ItemStack;
 
 import java.io.IOException;
 

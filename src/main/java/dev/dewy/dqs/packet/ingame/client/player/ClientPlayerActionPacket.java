@@ -1,13 +1,13 @@
 package dev.dewy.dqs.packet.ingame.client.player;
 
+import dev.dewy.dqs.io.NetInput;
+import dev.dewy.dqs.io.NetOutput;
+import dev.dewy.dqs.networking.NetUtil;
+import dev.dewy.dqs.packet.MinecraftPacket;
 import dev.dewy.dqs.protocol.MagicValues;
 import dev.dewy.dqs.protocol.game.entity.metadata.Position;
 import dev.dewy.dqs.protocol.game.entity.player.PlayerAction;
 import dev.dewy.dqs.protocol.game.world.block.BlockFace;
-import dev.dewy.dqs.packet.MinecraftPacket;
-import dev.dewy.dqs.networking.NetUtil;
-import dev.dewy.dqs.io.NetInput;
-import dev.dewy.dqs.io.NetOutput;
 
 import java.io.IOException;
 

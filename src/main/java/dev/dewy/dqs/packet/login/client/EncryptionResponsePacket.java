@@ -1,9 +1,9 @@
 package dev.dewy.dqs.packet.login.client;
 
+import dev.dewy.dqs.crypto.CryptUtil;
 import dev.dewy.dqs.io.NetInput;
 import dev.dewy.dqs.io.NetOutput;
 import dev.dewy.dqs.packet.MinecraftPacket;
-import dev.dewy.dqs.crypto.CryptUtil;
 
 import javax.crypto.SecretKey;
 import java.io.IOException;

@@ -1,8 +1,8 @@
 package dev.dewy.dqs.networking.tcp;
 
-import dev.dewy.dqs.networking.Session;
 import dev.dewy.dqs.io.buf.ByteBufNetInput;
 import dev.dewy.dqs.io.buf.ByteBufNetOutput;
+import dev.dewy.dqs.networking.Session;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;

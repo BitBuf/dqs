@@ -1,11 +1,11 @@
 package dev.dewy.dqs.packet.ingame.server;
 
-import dev.dewy.dqs.protocol.MagicValues;
-import dev.dewy.dqs.protocol.game.MessageType;
-import dev.dewy.dqs.packet.MinecraftPacket;
+import com.google.gson.stream.JsonWriter;
 import dev.dewy.dqs.io.NetInput;
 import dev.dewy.dqs.io.NetOutput;
-import com.google.gson.stream.JsonWriter;
+import dev.dewy.dqs.packet.MinecraftPacket;
+import dev.dewy.dqs.protocol.MagicValues;
+import dev.dewy.dqs.protocol.game.MessageType;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -14,6 +14,7 @@ public class ServerChatPacket extends MinecraftPacket
 {
     private String message;
     private MessageType type;
+
     @SuppressWarnings("unused")
     private ServerChatPacket()
     {

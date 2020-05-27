@@ -1,14 +1,12 @@
 package dev.dewy.dqs.protocol;
 
-import dev.dewy.dqs.profiles.GameProfile;
+import dev.dewy.dqs.crypto.CryptUtil;
 import dev.dewy.dqs.exceptions.request.InvalidCredentialsException;
 import dev.dewy.dqs.exceptions.request.RequestException;
 import dev.dewy.dqs.exceptions.request.ServiceUnavailableException;
-import dev.dewy.dqs.services.SessionService;
-import dev.dewy.dqs.protocol.handshake.HandshakeIntent;
-import dev.dewy.dqs.protocol.status.ServerStatusInfo;
-import dev.dewy.dqs.protocol.status.handler.ServerInfoHandler;
-import dev.dewy.dqs.protocol.status.handler.ServerPingTimeHandler;
+import dev.dewy.dqs.networking.event.session.ConnectedEvent;
+import dev.dewy.dqs.networking.event.session.PacketReceivedEvent;
+import dev.dewy.dqs.networking.event.session.SessionAdapter;
 import dev.dewy.dqs.packet.client.HandshakePacket;
 import dev.dewy.dqs.packet.ingame.client.ClientKeepAlivePacket;
 import dev.dewy.dqs.packet.ingame.server.ServerDisconnectPacket;
@@ -24,10 +22,12 @@ import dev.dewy.dqs.packet.status.client.StatusPingPacket;
 import dev.dewy.dqs.packet.status.client.StatusQueryPacket;
 import dev.dewy.dqs.packet.status.server.StatusPongPacket;
 import dev.dewy.dqs.packet.status.server.StatusResponsePacket;
-import dev.dewy.dqs.crypto.CryptUtil;
-import dev.dewy.dqs.networking.event.session.ConnectedEvent;
-import dev.dewy.dqs.networking.event.session.PacketReceivedEvent;
-import dev.dewy.dqs.networking.event.session.SessionAdapter;
+import dev.dewy.dqs.profiles.GameProfile;
+import dev.dewy.dqs.protocol.handshake.HandshakeIntent;
+import dev.dewy.dqs.protocol.status.ServerStatusInfo;
+import dev.dewy.dqs.protocol.status.handler.ServerInfoHandler;
+import dev.dewy.dqs.protocol.status.handler.ServerPingTimeHandler;
+import dev.dewy.dqs.services.SessionService;
 
 import javax.crypto.SecretKey;
 import java.math.BigInteger;

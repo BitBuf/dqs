@@ -1,12 +1,12 @@
 package dev.dewy.dqs.packet.ingame.server;
 
+import dev.dewy.dqs.io.NetInput;
+import dev.dewy.dqs.io.NetOutput;
+import dev.dewy.dqs.packet.MinecraftPacket;
 import dev.dewy.dqs.protocol.MagicValues;
 import dev.dewy.dqs.protocol.game.BossBarAction;
 import dev.dewy.dqs.protocol.game.BossBarColor;
 import dev.dewy.dqs.protocol.game.BossBarDivision;
-import dev.dewy.dqs.packet.MinecraftPacket;
-import dev.dewy.dqs.io.NetInput;
-import dev.dewy.dqs.io.NetOutput;
 
 import java.io.IOException;
 import java.util.UUID;

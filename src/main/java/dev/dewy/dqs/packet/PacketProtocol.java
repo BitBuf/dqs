@@ -1,9 +1,9 @@
 package dev.dewy.dqs.packet;
 
+import dev.dewy.dqs.crypto.PacketEncryption;
 import dev.dewy.dqs.networking.Client;
 import dev.dewy.dqs.networking.Server;
 import dev.dewy.dqs.networking.Session;
-import dev.dewy.dqs.crypto.PacketEncryption;
 
 import java.lang.reflect.Constructor;
 import java.util.HashMap;

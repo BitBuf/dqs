@@ -1,8 +1,8 @@
 package dev.dewy.dqs.services;
 
-import dev.dewy.dqs.profiles.GameProfile;
 import dev.dewy.dqs.exceptions.request.InvalidCredentialsException;
 import dev.dewy.dqs.exceptions.request.RequestException;
+import dev.dewy.dqs.profiles.GameProfile;
 import dev.dewy.dqs.utils.HTTP;
 
 import java.net.Proxy;

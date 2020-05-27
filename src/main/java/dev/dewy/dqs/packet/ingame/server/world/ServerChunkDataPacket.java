@@ -1,12 +1,12 @@
 package dev.dewy.dqs.packet.ingame.server.world;
 
-import dev.dewy.dqs.protocol.game.chunk.Column;
-import dev.dewy.dqs.packet.MinecraftPacket;
-import dev.dewy.dqs.networking.NetUtil;
-import dev.dewy.dqs.nbt.tag.builtin.CompoundTag;
 import dev.dewy.dqs.io.NetInput;
 import dev.dewy.dqs.io.NetOutput;
 import dev.dewy.dqs.io.stream.StreamNetOutput;
+import dev.dewy.dqs.nbt.tag.builtin.CompoundTag;
+import dev.dewy.dqs.networking.NetUtil;
+import dev.dewy.dqs.packet.MinecraftPacket;
+import dev.dewy.dqs.protocol.game.chunk.Column;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

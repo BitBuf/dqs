@@ -1,12 +1,12 @@
 package dev.dewy.dqs.packet.ingame.server.entity;
 
+import dev.dewy.dqs.io.NetInput;
+import dev.dewy.dqs.io.NetOutput;
+import dev.dewy.dqs.networking.NetUtil;
+import dev.dewy.dqs.packet.MinecraftPacket;
 import dev.dewy.dqs.protocol.MagicValues;
 import dev.dewy.dqs.protocol.game.entity.EquipmentSlot;
 import dev.dewy.dqs.protocol.game.entity.metadata.ItemStack;
-import dev.dewy.dqs.packet.MinecraftPacket;
-import dev.dewy.dqs.networking.NetUtil;
-import dev.dewy.dqs.io.NetInput;
-import dev.dewy.dqs.io.NetOutput;
 
 import java.io.IOException;
 

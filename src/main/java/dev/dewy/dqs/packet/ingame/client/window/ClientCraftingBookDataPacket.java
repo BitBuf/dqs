@@ -1,10 +1,10 @@
 package dev.dewy.dqs.packet.ingame.client.window;
 
-import dev.dewy.dqs.protocol.MagicValues;
-import dev.dewy.dqs.protocol.game.window.CraftingBookDataType;
-import dev.dewy.dqs.packet.MinecraftPacket;
 import dev.dewy.dqs.io.NetInput;
 import dev.dewy.dqs.io.NetOutput;
+import dev.dewy.dqs.packet.MinecraftPacket;
+import dev.dewy.dqs.protocol.MagicValues;
+import dev.dewy.dqs.protocol.game.window.CraftingBookDataType;
 
 import java.io.IOException;
 

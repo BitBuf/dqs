@@ -1,9 +1,9 @@
 package dev.dewy.dqs.packet.login.server;
 
-import dev.dewy.dqs.packet.MinecraftPacket;
-import dev.dewy.dqs.packet.ingame.server.ServerChatPacket;
 import dev.dewy.dqs.io.NetInput;
 import dev.dewy.dqs.io.NetOutput;
+import dev.dewy.dqs.packet.MinecraftPacket;
+import dev.dewy.dqs.packet.ingame.server.ServerChatPacket;
 
 import java.io.IOException;
 

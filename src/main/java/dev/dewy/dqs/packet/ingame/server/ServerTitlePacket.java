@@ -1,10 +1,10 @@
 package dev.dewy.dqs.packet.ingame.server;
 
-import dev.dewy.dqs.protocol.MagicValues;
-import dev.dewy.dqs.protocol.game.TitleAction;
-import dev.dewy.dqs.packet.MinecraftPacket;
 import dev.dewy.dqs.io.NetInput;
 import dev.dewy.dqs.io.NetOutput;
+import dev.dewy.dqs.packet.MinecraftPacket;
+import dev.dewy.dqs.protocol.MagicValues;
+import dev.dewy.dqs.protocol.game.TitleAction;
 
 import java.io.IOException;
 

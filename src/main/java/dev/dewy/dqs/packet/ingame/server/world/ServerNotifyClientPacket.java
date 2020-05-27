@@ -1,11 +1,11 @@
 package dev.dewy.dqs.packet.ingame.server.world;
 
+import dev.dewy.dqs.io.NetInput;
+import dev.dewy.dqs.io.NetOutput;
+import dev.dewy.dqs.packet.MinecraftPacket;
 import dev.dewy.dqs.protocol.MagicValues;
 import dev.dewy.dqs.protocol.game.entity.player.GameMode;
 import dev.dewy.dqs.protocol.game.world.notify.*;
-import dev.dewy.dqs.packet.MinecraftPacket;
-import dev.dewy.dqs.io.NetInput;
-import dev.dewy.dqs.io.NetOutput;
 
 import java.io.IOException;
 

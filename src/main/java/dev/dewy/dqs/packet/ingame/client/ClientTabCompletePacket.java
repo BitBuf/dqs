@@ -1,10 +1,10 @@
 package dev.dewy.dqs.packet.ingame.client;
 
-import dev.dewy.dqs.protocol.game.entity.metadata.Position;
-import dev.dewy.dqs.packet.MinecraftPacket;
-import dev.dewy.dqs.networking.NetUtil;
 import dev.dewy.dqs.io.NetInput;
 import dev.dewy.dqs.io.NetOutput;
+import dev.dewy.dqs.networking.NetUtil;
+import dev.dewy.dqs.packet.MinecraftPacket;
+import dev.dewy.dqs.protocol.game.entity.metadata.Position;
 
 import java.io.IOException;
 

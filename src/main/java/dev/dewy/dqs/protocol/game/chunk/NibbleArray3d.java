@@ -1,8 +1,8 @@
 package dev.dewy.dqs.protocol.game.chunk;
 
-import dev.dewy.dqs.utils.ObjectUtil;
 import dev.dewy.dqs.io.NetInput;
 import dev.dewy.dqs.io.NetOutput;
+import dev.dewy.dqs.utils.ObjectUtil;
 
 import java.io.IOException;
 import java.util.Arrays;

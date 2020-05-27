@@ -1,12 +1,12 @@
 package dev.dewy.dqs.networking.tcp;
 
-import dev.dewy.dqs.networking.Session;
-import dev.dewy.dqs.networking.event.session.PacketReceivedEvent;
 import dev.dewy.dqs.io.NetInput;
 import dev.dewy.dqs.io.NetOutput;
-import dev.dewy.dqs.packet.Packet;
 import dev.dewy.dqs.io.buf.ByteBufNetInput;
 import dev.dewy.dqs.io.buf.ByteBufNetOutput;
+import dev.dewy.dqs.networking.Session;
+import dev.dewy.dqs.networking.event.session.PacketReceivedEvent;
+import dev.dewy.dqs.packet.Packet;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageCodec;

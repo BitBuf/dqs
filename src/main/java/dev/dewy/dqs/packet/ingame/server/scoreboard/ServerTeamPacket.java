@@ -1,13 +1,13 @@
 package dev.dewy.dqs.packet.ingame.server.scoreboard;
 
+import dev.dewy.dqs.io.NetInput;
+import dev.dewy.dqs.io.NetOutput;
+import dev.dewy.dqs.packet.MinecraftPacket;
 import dev.dewy.dqs.protocol.MagicValues;
 import dev.dewy.dqs.protocol.game.scoreboard.CollisionRule;
 import dev.dewy.dqs.protocol.game.scoreboard.NameTagVisibility;
 import dev.dewy.dqs.protocol.game.scoreboard.TeamAction;
 import dev.dewy.dqs.protocol.game.scoreboard.TeamColor;
-import dev.dewy.dqs.packet.MinecraftPacket;
-import dev.dewy.dqs.io.NetInput;
-import dev.dewy.dqs.io.NetOutput;
 
 import java.io.IOException;
 

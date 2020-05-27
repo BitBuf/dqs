@@ -2,9 +2,9 @@ package dev.dewy.dqs.packet.client;
 
 import dev.dewy.dqs.io.NetInput;
 import dev.dewy.dqs.io.NetOutput;
+import dev.dewy.dqs.packet.MinecraftPacket;
 import dev.dewy.dqs.protocol.MagicValues;
 import dev.dewy.dqs.protocol.handshake.HandshakeIntent;
-import dev.dewy.dqs.packet.MinecraftPacket;
 
 import java.io.IOException;
 

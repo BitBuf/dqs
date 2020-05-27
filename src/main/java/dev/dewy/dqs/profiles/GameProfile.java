@@ -1,7 +1,7 @@
 package dev.dewy.dqs.profiles;
 
-import dev.dewy.dqs.exceptions.property.SignatureValidateException;
 import dev.dewy.dqs.crypto.Base64;
+import dev.dewy.dqs.exceptions.property.SignatureValidateException;
 
 import java.security.PublicKey;
 import java.security.Signature;

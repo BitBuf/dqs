@@ -1,8 +1,14 @@
 package dev.dewy.dqs.protocol;
 
-import dev.dewy.dqs.profiles.GameProfile;
+import dev.dewy.dqs.crypto.AESEncryption;
+import dev.dewy.dqs.crypto.PacketEncryption;
 import dev.dewy.dqs.exceptions.request.RequestException;
-import dev.dewy.dqs.services.AuthenticationService;
+import dev.dewy.dqs.networking.Client;
+import dev.dewy.dqs.networking.Server;
+import dev.dewy.dqs.networking.Session;
+import dev.dewy.dqs.packet.DefaultPacketHeader;
+import dev.dewy.dqs.packet.PacketHeader;
+import dev.dewy.dqs.packet.PacketProtocol;
 import dev.dewy.dqs.packet.client.HandshakePacket;
 import dev.dewy.dqs.packet.ingame.client.*;
 import dev.dewy.dqs.packet.ingame.client.player.*;
@@ -28,14 +34,8 @@ import dev.dewy.dqs.packet.status.client.StatusPingPacket;
 import dev.dewy.dqs.packet.status.client.StatusQueryPacket;
 import dev.dewy.dqs.packet.status.server.StatusPongPacket;
 import dev.dewy.dqs.packet.status.server.StatusResponsePacket;
-import dev.dewy.dqs.networking.Client;
-import dev.dewy.dqs.networking.Server;
-import dev.dewy.dqs.networking.Session;
-import dev.dewy.dqs.crypto.AESEncryption;
-import dev.dewy.dqs.crypto.PacketEncryption;
-import dev.dewy.dqs.packet.DefaultPacketHeader;
-import dev.dewy.dqs.packet.PacketHeader;
-import dev.dewy.dqs.packet.PacketProtocol;
+import dev.dewy.dqs.profiles.GameProfile;
+import dev.dewy.dqs.services.AuthenticationService;
 
 import java.net.Proxy;
 import java.security.GeneralSecurityException;

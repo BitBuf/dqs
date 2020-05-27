@@ -1,13 +1,13 @@
 package dev.dewy.dqs.packet.ingame.server.entity;
 
+import dev.dewy.dqs.io.NetInput;
+import dev.dewy.dqs.io.NetOutput;
+import dev.dewy.dqs.packet.MinecraftPacket;
 import dev.dewy.dqs.protocol.MagicValues;
 import dev.dewy.dqs.protocol.game.entity.attribute.Attribute;
 import dev.dewy.dqs.protocol.game.entity.attribute.AttributeModifier;
 import dev.dewy.dqs.protocol.game.entity.attribute.AttributeType;
 import dev.dewy.dqs.protocol.game.entity.attribute.ModifierOperation;
-import dev.dewy.dqs.packet.MinecraftPacket;
-import dev.dewy.dqs.io.NetInput;
-import dev.dewy.dqs.io.NetOutput;
 
 import java.io.IOException;
 import java.util.ArrayList;

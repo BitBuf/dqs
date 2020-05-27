@@ -1,7 +1,7 @@
 package dev.dewy.dqs.protocol.game.entity.metadata;
 
-import dev.dewy.dqs.utils.ObjectUtil;
 import dev.dewy.dqs.nbt.tag.builtin.CompoundTag;
+import dev.dewy.dqs.utils.ObjectUtil;
 
 import java.util.Objects;
 

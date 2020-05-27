@@ -1,10 +1,10 @@
 package dev.dewy.dqs.packet.ingame.server.scoreboard;
 
-import dev.dewy.dqs.protocol.MagicValues;
-import dev.dewy.dqs.protocol.game.scoreboard.ScoreboardAction;
-import dev.dewy.dqs.packet.MinecraftPacket;
 import dev.dewy.dqs.io.NetInput;
 import dev.dewy.dqs.io.NetOutput;
+import dev.dewy.dqs.packet.MinecraftPacket;
+import dev.dewy.dqs.protocol.MagicValues;
+import dev.dewy.dqs.protocol.game.scoreboard.ScoreboardAction;
 
 import java.io.IOException;
 

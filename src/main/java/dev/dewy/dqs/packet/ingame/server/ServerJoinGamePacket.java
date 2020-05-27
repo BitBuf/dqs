@@ -1,12 +1,12 @@
 package dev.dewy.dqs.packet.ingame.server;
 
+import dev.dewy.dqs.io.NetInput;
+import dev.dewy.dqs.io.NetOutput;
+import dev.dewy.dqs.packet.MinecraftPacket;
 import dev.dewy.dqs.protocol.MagicValues;
 import dev.dewy.dqs.protocol.game.entity.player.GameMode;
 import dev.dewy.dqs.protocol.game.setting.Difficulty;
 import dev.dewy.dqs.protocol.game.world.WorldType;
-import dev.dewy.dqs.packet.MinecraftPacket;
-import dev.dewy.dqs.io.NetInput;
-import dev.dewy.dqs.io.NetOutput;
 
 import java.io.IOException;
 
