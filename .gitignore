@@ -270,3 +270,6 @@ gradle-app.setting
 
 ### Gradle Patch ###
 **/build/
+
+# DQS Working Directory
+run
