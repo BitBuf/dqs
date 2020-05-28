@@ -36,6 +36,14 @@ tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
 }
 
+jar {
+    manifest {
+        attributes("Implementation-Title": "DQS",
+                "Implementation-Version": "3.0.0-dev",
+                "Main-Class": "dev.dewy.dqs.DQS")
+    }
+}
+
 shadowJar {
     classifier = 'dist'
 }
