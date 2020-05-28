@@ -17,7 +17,7 @@ public class ChatHandler implements HandlerRegistry.IncomingHandler<ServerChatPa
                 && MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString().toLowerCase().startsWith("Exception Connecting:".toLowerCase()))
         {
             CLIENT_LOG.error("2b2t's queue is broken as per usual, disconnecting to avoid being stuck forever");
-            session.disconnect("heck");
+            session.disconnect("§7[§b§lDQS§r§7] §fAntiStuck Disconnect");
         }
         WEBSOCKET_SERVER.fireChat(packet.getMessage());
         return true;

@@ -303,11 +303,11 @@ public class DQS
                         if (CONFIG.server.kickPrevious)
                         {
                             this.currentPlayer.get().setPlayer(false);
-                            this.currentPlayer.get().disconnect("A new player has connected!");
+                            this.currentPlayer.get().disconnect("§7[§b§lDQS§r§7] §fA different, whitelisted player has taken control.");
                             this.currentPlayer.set(connection);
                         } else
                         {
-                            connection.disconnect("§cA client is already connected to this bot!");
+                            connection.disconnect("§7[§b§lDQS§r§7] §fA player is already connected to this instance.");
                             return;
                         }
                     }

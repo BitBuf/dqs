@@ -24,7 +24,7 @@ public class ServerChatHandler implements HandlerRegistry.IncomingHandler<Client
                 return true;
             } else if ("!dc".equalsIgnoreCase(packet.getMessage()))
             {
-                session.getDqs().getClient().getSession().disconnect("User forced disconnect", false);
+                session.getDqs().getClient().getSession().disconnect("§7[§b§lDQS§r§7] §fDisconnect command issued.", false);
                 return false;
             } else
             {
