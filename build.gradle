@@ -8,6 +8,7 @@ version '3.0.0-dev'
 
 repositories {
     mavenCentral()
+    jcenter()
 
     maven {
         name = "DaPorkchop_"
@@ -26,6 +27,10 @@ dependencies {
     implementation group: 'net.daporkchop.lib', name: 'logging', version: '0.5.5-SNAPSHOT'
     implementation group: 'net.daporkchop.lib', name: 'primitive', version: '0.5.5-SNAPSHOT'
     implementation group: 'net.daporkchop.lib', name: 'minecraft-text', version: '0.5.5-SNAPSHOT'
+
+    implementation ('net.dv8tion:JDA:4.1.1_155') {
+        exclude module: 'opus-java'
+    }
 }
 
 compileJava {
