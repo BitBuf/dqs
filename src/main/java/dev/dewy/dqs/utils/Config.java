@@ -31,6 +31,7 @@ public final class Config
         public String email = "john.doe@example.com";
         public String password = "my_secure_password";
         public String username = "Steve";
+        public String uuid = "lamo";
     }
 
     public static final class Discord
@@ -44,6 +45,7 @@ public final class Config
 
         public String operatorId = "326039530971070474";
         public String subscriberId = "default";
+        public String subscriberRole = "Subscriber";
 
         public int cooldown = 5;
         public String prefix = "&";

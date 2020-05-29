@@ -3,6 +3,7 @@ package dev.dewy.dqs;
 import com.jagrosh.jdautilities.command.CommandClientBuilder;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import dev.dewy.dqs.client.DQSClientSession;
+import dev.dewy.dqs.discord.HelpCommand;
 import dev.dewy.dqs.profiles.GameProfile;
 import dev.dewy.dqs.protocol.MinecraftConstants;
 import dev.dewy.dqs.protocol.MinecraftProtocol;
@@ -74,6 +75,10 @@ public class DQS
             commandClient.setActivity(Activity.playing("2b2t"));
             commandClient.setPrefix(CONFIG.discord.prefix);
             commandClient.setOwnerId(CONFIG.discord.operatorId);
+
+            commandClient.addCommand(new HelpCommand());
+
+            commandClient.setHelpWord("DWWWWWWWWWWWWWWWWWWWWWWWWWWWJIWJFUJEWMFCNWEF");
 
             new JDABuilder(AccountType.BOT)
                     .setToken(CONFIG.discord.token)
