@@ -168,6 +168,7 @@ public final class Config
         public AutoReconnect autoReconnect = new AutoReconnect();
         public AutoRespawn autoRespawn = new AutoRespawn();
         public ChatSpammer chatSpammer = new ChatSpammer();
+        public GameCommands gameCommands = new GameCommands();
         public Whitelist whitelist = new Whitelist();
 
         public static final class AutoReconnect
@@ -193,6 +194,13 @@ public final class Config
                     "bean",
                     "gggg"
             );
+        }
+
+        public static final class GameCommands
+        {
+            public boolean enabled = true;
+
+            public String prefix = "&";
         }
 
         public static final class Whitelist

@@ -4,6 +4,7 @@ import dev.dewy.dqs.handler.HandlerRegistry;
 import dev.dewy.dqs.packet.ingame.client.ClientChatPacket;
 import dev.dewy.dqs.packet.ingame.server.ServerChatPacket;
 import dev.dewy.dqs.server.DQSServerConnection;
+import dev.dewy.dqs.utils.Constants;
 import net.daporkchop.lib.unsafe.PUnsafe;
 
 public class ServerChatHandler implements HandlerRegistry.IncomingHandler<ClientChatPacket, DQSServerConnection>
@@ -13,14 +14,9 @@ public class ServerChatHandler implements HandlerRegistry.IncomingHandler<Client
     @Override
     public boolean apply(ClientChatPacket packet, DQSServerConnection session)
     {
-        if (packet.getMessage().startsWith("!"))
+        if (packet.getMessage().startsWith(Constants.CONFIG.modules.gameCommands.prefix))
         {
-            if (packet.getMessage().startsWith("!!"))
-            {
-                //allow sending ingame commands to bots or whatever
-                PUnsafe.putObject(packet, CLIENTCHATPACKET_MESSAGE_OFFSET, packet.getMessage().substring(1));
-                return true;
-            } else if ("!dc".equalsIgnoreCase(packet.getMessage()))
+            if ((Constants.CONFIG.modules.gameCommands.prefix + "dc").equalsIgnoreCase(packet.getMessage()))
             {
                 session.getDqs().getClient().getSession().disconnect("§7[§b§lDQS§r§7] §fDisconnect command issued.", false);
                 return false;
