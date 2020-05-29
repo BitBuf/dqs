@@ -11,6 +11,7 @@ import dev.dewy.dqs.client.handler.incoming.*;
 import dev.dewy.dqs.client.handler.incoming.entity.*;
 import dev.dewy.dqs.client.handler.incoming.spawn.*;
 import dev.dewy.dqs.discord.HelpCommand;
+import dev.dewy.dqs.discord.SignInCommand;
 import dev.dewy.dqs.handler.HandlerRegistry;
 import dev.dewy.dqs.server.DQSServerConnection;
 import dev.dewy.dqs.server.handler.incoming.LoginStartHandler;
@@ -164,9 +165,11 @@ public final class Constants
             commandClient.setPrefix(CONFIG.discord.prefix);
             commandClient.setOwnerId(CONFIG.discord.operatorId);
 
-            commandClient.addCommand(new HelpCommand());
-
             commandClient.setHelpWord("DWWWWWWWWWWWWWWWWWWWWWWWWWWWJIWJFUJEWMFCNWEF");
+
+            commandClient.addCommands(
+                    new HelpCommand(),
+                    new SignInCommand());
 
             try
             {
