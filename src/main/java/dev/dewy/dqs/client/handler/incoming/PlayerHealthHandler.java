@@ -1,12 +1,12 @@
 package dev.dewy.dqs.client.handler.incoming;
 
+import dev.dewy.dqs.DQS;
 import dev.dewy.dqs.client.DQSClientSession;
-import dev.dewy.dqs.protocol.game.ClientRequest;
+import dev.dewy.dqs.handler.HandlerRegistry;
 import dev.dewy.dqs.packet.ingame.client.ClientRequestPacket;
 import dev.dewy.dqs.packet.ingame.server.entity.player.ServerPlayerHealthPacket;
+import dev.dewy.dqs.protocol.game.ClientRequest;
 import net.daporkchop.lib.common.util.PorkUtil;
-import dev.dewy.dqs.DQS;
-import dev.dewy.dqs.handler.HandlerRegistry;
 
 import static dev.dewy.dqs.utils.Constants.*;
 

@@ -1,7 +1,7 @@
 package dev.dewy.dqs.cache.data.entity;
 
-import dev.dewy.dqs.packet.Packet;
 import dev.dewy.dqs.cache.CachedData;
+import dev.dewy.dqs.packet.Packet;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

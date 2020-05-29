@@ -1,10 +1,10 @@
 package dev.dewy.dqs.cache.data.entity;
 
+import dev.dewy.dqs.packet.Packet;
+import dev.dewy.dqs.packet.ingame.server.entity.spawn.ServerSpawnPaintingPacket;
 import dev.dewy.dqs.protocol.game.entity.metadata.Position;
 import dev.dewy.dqs.protocol.game.entity.type.PaintingType;
 import dev.dewy.dqs.protocol.game.entity.type.object.HangingDirection;
-import dev.dewy.dqs.packet.ingame.server.entity.spawn.ServerSpawnPaintingPacket;
-import dev.dewy.dqs.packet.Packet;
 
 import java.util.function.Consumer;
 

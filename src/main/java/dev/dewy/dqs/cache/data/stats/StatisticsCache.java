@@ -1,11 +1,11 @@
 package dev.dewy.dqs.cache.data.stats;
 
-import dev.dewy.dqs.protocol.game.advancement.Advancement;
-import dev.dewy.dqs.protocol.game.statistic.Statistic;
+import dev.dewy.dqs.cache.CachedData;
+import dev.dewy.dqs.packet.Packet;
 import dev.dewy.dqs.packet.ingame.server.ServerAdvancementsPacket;
 import dev.dewy.dqs.packet.ingame.server.ServerUnlockRecipesPacket;
-import dev.dewy.dqs.packet.Packet;
-import dev.dewy.dqs.cache.CachedData;
+import dev.dewy.dqs.protocol.game.advancement.Advancement;
+import dev.dewy.dqs.protocol.game.statistic.Statistic;
 
 import java.util.*;
 import java.util.function.Consumer;

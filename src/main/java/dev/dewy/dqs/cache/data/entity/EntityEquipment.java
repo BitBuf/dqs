@@ -1,10 +1,10 @@
 package dev.dewy.dqs.cache.data.entity;
 
-import dev.dewy.dqs.protocol.game.entity.EquipmentSlot;
-import dev.dewy.dqs.protocol.game.entity.metadata.ItemStack;
+import dev.dewy.dqs.packet.Packet;
 import dev.dewy.dqs.packet.ingame.server.entity.ServerEntityEffectPacket;
 import dev.dewy.dqs.packet.ingame.server.entity.ServerEntityEquipmentPacket;
-import dev.dewy.dqs.packet.Packet;
+import dev.dewy.dqs.protocol.game.entity.EquipmentSlot;
+import dev.dewy.dqs.protocol.game.entity.metadata.ItemStack;
 
 import java.util.ArrayList;
 import java.util.EnumMap;

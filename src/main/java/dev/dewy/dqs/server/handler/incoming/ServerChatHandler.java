@@ -1,12 +1,10 @@
 package dev.dewy.dqs.server.handler.incoming;
 
+import dev.dewy.dqs.handler.HandlerRegistry;
 import dev.dewy.dqs.packet.ingame.client.ClientChatPacket;
 import dev.dewy.dqs.packet.ingame.server.ServerChatPacket;
-import net.daporkchop.lib.unsafe.PUnsafe;
 import dev.dewy.dqs.server.DQSServerConnection;
-import dev.dewy.dqs.handler.HandlerRegistry;
-
-import static dev.dewy.dqs.utils.Constants.SHOULD_RECONNECT;
+import net.daporkchop.lib.unsafe.PUnsafe;
 
 public class ServerChatHandler implements HandlerRegistry.IncomingHandler<ClientChatPacket, DQSServerConnection>
 {

@@ -1,10 +1,10 @@
 package dev.dewy.dqs.client;
 
-import dev.dewy.dqs.protocol.MinecraftProtocol;
-import dev.dewy.dqs.protocol.SubProtocol;
+import dev.dewy.dqs.DQS;
 import dev.dewy.dqs.networking.event.session.*;
 import dev.dewy.dqs.packet.Packet;
-import dev.dewy.dqs.DQS;
+import dev.dewy.dqs.protocol.MinecraftProtocol;
+import dev.dewy.dqs.protocol.SubProtocol;
 import dev.dewy.dqs.server.DQSServerConnection;
 
 import static dev.dewy.dqs.utils.Constants.*;

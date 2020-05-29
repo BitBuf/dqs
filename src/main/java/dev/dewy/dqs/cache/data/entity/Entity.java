@@ -1,10 +1,10 @@
 package dev.dewy.dqs.cache.data.entity;
 
-import dev.dewy.dqs.protocol.game.entity.attribute.Attribute;
-import dev.dewy.dqs.protocol.game.entity.metadata.EntityMetadata;
+import dev.dewy.dqs.packet.Packet;
 import dev.dewy.dqs.packet.ingame.server.entity.ServerEntityPropertiesPacket;
 import dev.dewy.dqs.packet.ingame.server.entity.ServerEntitySetPassengersPacket;
-import dev.dewy.dqs.packet.Packet;
+import dev.dewy.dqs.protocol.game.entity.attribute.Attribute;
+import dev.dewy.dqs.protocol.game.entity.metadata.EntityMetadata;
 
 import java.util.ArrayList;
 import java.util.List;

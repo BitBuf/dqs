@@ -1,8 +1,8 @@
 package dev.dewy.dqs.utils;
 
 import dev.dewy.dqs.exceptions.request.RequestException;
-import dev.dewy.dqs.services.AuthenticationService;
 import dev.dewy.dqs.protocol.MinecraftProtocol;
+import dev.dewy.dqs.services.AuthenticationService;
 
 import java.net.Proxy;
 import java.util.UUID;

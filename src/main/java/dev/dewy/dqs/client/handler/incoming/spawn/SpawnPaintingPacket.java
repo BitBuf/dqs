@@ -1,9 +1,9 @@
 package dev.dewy.dqs.client.handler.incoming.spawn;
 
-import dev.dewy.dqs.client.DQSClientSession;
-import dev.dewy.dqs.packet.ingame.server.entity.spawn.ServerSpawnPaintingPacket;
 import dev.dewy.dqs.cache.data.entity.EntityPainting;
+import dev.dewy.dqs.client.DQSClientSession;
 import dev.dewy.dqs.handler.HandlerRegistry;
+import dev.dewy.dqs.packet.ingame.server.entity.spawn.ServerSpawnPaintingPacket;
 
 import static dev.dewy.dqs.utils.Constants.CACHE;
 

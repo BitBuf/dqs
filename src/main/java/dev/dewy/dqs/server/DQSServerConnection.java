@@ -1,12 +1,12 @@
 package dev.dewy.dqs.server;
 
-import dev.dewy.dqs.protocol.MinecraftProtocol;
-import dev.dewy.dqs.protocol.SubProtocol;
+import dev.dewy.dqs.DQS;
 import dev.dewy.dqs.networking.Session;
 import dev.dewy.dqs.networking.event.session.*;
 import dev.dewy.dqs.packet.Packet;
 import dev.dewy.dqs.packet.PacketProtocol;
-import dev.dewy.dqs.DQS;
+import dev.dewy.dqs.protocol.MinecraftProtocol;
+import dev.dewy.dqs.protocol.SubProtocol;
 
 import java.io.IOException;
 import java.net.SocketAddress;

@@ -1,9 +1,9 @@
 package dev.dewy.dqs.client.handler.incoming.entity;
 
-import dev.dewy.dqs.client.DQSClientSession;
-import dev.dewy.dqs.packet.ingame.server.entity.ServerEntityPositionPacket;
 import dev.dewy.dqs.cache.data.entity.Entity;
+import dev.dewy.dqs.client.DQSClientSession;
 import dev.dewy.dqs.handler.HandlerRegistry;
+import dev.dewy.dqs.packet.ingame.server.entity.ServerEntityPositionPacket;
 
 import static dev.dewy.dqs.utils.Constants.CACHE;
 import static dev.dewy.dqs.utils.Constants.CLIENT_LOG;

@@ -1,12 +1,12 @@
 package dev.dewy.dqs.client.handler.incoming;
 
 import dev.dewy.dqs.client.DQSClientSession;
-import dev.dewy.dqs.protocol.game.chunk.Column;
-import dev.dewy.dqs.packet.ingame.server.world.ServerUpdateTileEntityPacket;
+import dev.dewy.dqs.handler.HandlerRegistry;
 import dev.dewy.dqs.nbt.tag.builtin.CompoundTag;
 import dev.dewy.dqs.nbt.tag.builtin.IntTag;
+import dev.dewy.dqs.packet.ingame.server.world.ServerUpdateTileEntityPacket;
+import dev.dewy.dqs.protocol.game.chunk.Column;
 import net.daporkchop.lib.unsafe.PUnsafe;
-import dev.dewy.dqs.handler.HandlerRegistry;
 
 import static dev.dewy.dqs.utils.Constants.CACHE;
 

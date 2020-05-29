@@ -1,10 +1,10 @@
 package dev.dewy.dqs.client.handler.incoming;
 
-import dev.dewy.dqs.client.DQSClientSession;
-import dev.dewy.dqs.protocol.game.entity.player.PositionElement;
-import dev.dewy.dqs.packet.ingame.server.entity.player.ServerPlayerPositionRotationPacket;
 import dev.dewy.dqs.cache.data.PlayerCache;
+import dev.dewy.dqs.client.DQSClientSession;
 import dev.dewy.dqs.handler.HandlerRegistry;
+import dev.dewy.dqs.packet.ingame.server.entity.player.ServerPlayerPositionRotationPacket;
+import dev.dewy.dqs.protocol.game.entity.player.PositionElement;
 
 import static dev.dewy.dqs.utils.Constants.CACHE;
 

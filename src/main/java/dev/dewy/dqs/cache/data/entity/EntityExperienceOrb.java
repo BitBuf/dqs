@@ -1,7 +1,7 @@
 package dev.dewy.dqs.cache.data.entity;
 
-import dev.dewy.dqs.packet.ingame.server.entity.spawn.ServerSpawnExpOrbPacket;
 import dev.dewy.dqs.packet.Packet;
+import dev.dewy.dqs.packet.ingame.server.entity.spawn.ServerSpawnExpOrbPacket;
 
 import java.util.function.Consumer;
 

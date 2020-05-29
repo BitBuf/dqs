@@ -1,8 +1,8 @@
 package dev.dewy.dqs.server.handler.incoming.movement;
 
+import dev.dewy.dqs.handler.HandlerRegistry;
 import dev.dewy.dqs.packet.ingame.client.player.ClientPlayerPositionPacket;
 import dev.dewy.dqs.server.DQSServerConnection;
-import dev.dewy.dqs.handler.HandlerRegistry;
 
 import static dev.dewy.dqs.utils.Constants.CACHE;
 

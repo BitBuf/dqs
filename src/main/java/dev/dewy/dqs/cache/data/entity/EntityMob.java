@@ -1,9 +1,9 @@
 package dev.dewy.dqs.cache.data.entity;
 
+import dev.dewy.dqs.packet.Packet;
+import dev.dewy.dqs.packet.ingame.server.entity.spawn.ServerSpawnMobPacket;
 import dev.dewy.dqs.protocol.game.entity.metadata.EntityMetadata;
 import dev.dewy.dqs.protocol.game.entity.type.MobType;
-import dev.dewy.dqs.packet.ingame.server.entity.spawn.ServerSpawnMobPacket;
-import dev.dewy.dqs.packet.Packet;
 
 import java.util.function.Consumer;
 

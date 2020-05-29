@@ -1,9 +1,9 @@
 package dev.dewy.dqs.client.handler.incoming;
 
 import dev.dewy.dqs.client.DQSClientSession;
-import dev.dewy.dqs.protocol.game.entity.metadata.ItemStack;
-import dev.dewy.dqs.packet.ingame.server.window.ServerWindowItemsPacket;
 import dev.dewy.dqs.handler.HandlerRegistry;
+import dev.dewy.dqs.packet.ingame.server.window.ServerWindowItemsPacket;
+import dev.dewy.dqs.protocol.game.entity.metadata.ItemStack;
 
 import static dev.dewy.dqs.utils.Constants.CACHE;
 

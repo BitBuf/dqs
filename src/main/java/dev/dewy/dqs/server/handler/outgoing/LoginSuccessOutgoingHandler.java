@@ -1,8 +1,8 @@
 package dev.dewy.dqs.server.handler.outgoing;
 
+import dev.dewy.dqs.handler.HandlerRegistry;
 import dev.dewy.dqs.packet.login.server.LoginSuccessPacket;
 import dev.dewy.dqs.server.DQSServerConnection;
-import dev.dewy.dqs.handler.HandlerRegistry;
 
 import static dev.dewy.dqs.utils.Constants.CACHE;
 import static dev.dewy.dqs.utils.Constants.SERVER_LOG;

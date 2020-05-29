@@ -1,8 +1,8 @@
 package dev.dewy.dqs.client.handler.incoming;
 
 import dev.dewy.dqs.client.DQSClientSession;
-import dev.dewy.dqs.packet.ingame.server.ServerAdvancementsPacket;
 import dev.dewy.dqs.handler.HandlerRegistry;
+import dev.dewy.dqs.packet.ingame.server.ServerAdvancementsPacket;
 
 import java.util.HashMap;
 

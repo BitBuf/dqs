@@ -1,9 +1,9 @@
 package dev.dewy.dqs.client.handler.incoming;
 
 import dev.dewy.dqs.client.DQSClientSession;
+import dev.dewy.dqs.handler.HandlerRegistry;
 import dev.dewy.dqs.packet.ingame.server.ServerChatPacket;
 import net.daporkchop.lib.minecraft.text.parser.MCFormatParser;
-import dev.dewy.dqs.handler.HandlerRegistry;
 
 import static dev.dewy.dqs.utils.Constants.*;
 

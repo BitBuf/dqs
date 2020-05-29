@@ -1,9 +1,9 @@
 package dev.dewy.dqs.client.handler.incoming.spawn;
 
-import dev.dewy.dqs.client.DQSClientSession;
-import dev.dewy.dqs.packet.ingame.server.entity.spawn.ServerSpawnPlayerPacket;
 import dev.dewy.dqs.cache.data.entity.EntityPlayer;
+import dev.dewy.dqs.client.DQSClientSession;
 import dev.dewy.dqs.handler.HandlerRegistry;
+import dev.dewy.dqs.packet.ingame.server.entity.spawn.ServerSpawnPlayerPacket;
 
 import java.util.Arrays;
 

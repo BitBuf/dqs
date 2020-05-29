@@ -1,9 +1,9 @@
 package dev.dewy.dqs.client.handler.incoming;
 
-import dev.dewy.dqs.packet.ingame.server.ServerStatisticsPacket;
-import net.daporkchop.lib.unsafe.PUnsafe;
 import dev.dewy.dqs.client.DQSClientSession;
 import dev.dewy.dqs.handler.HandlerRegistry;
+import dev.dewy.dqs.packet.ingame.server.ServerStatisticsPacket;
+import net.daporkchop.lib.unsafe.PUnsafe;
 
 import java.util.HashMap;
 

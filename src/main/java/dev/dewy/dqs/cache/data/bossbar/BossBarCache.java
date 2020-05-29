@@ -1,8 +1,8 @@
 package dev.dewy.dqs.cache.data.bossbar;
 
-import dev.dewy.dqs.packet.ingame.server.ServerBossBarPacket;
-import dev.dewy.dqs.packet.Packet;
 import dev.dewy.dqs.cache.CachedData;
+import dev.dewy.dqs.packet.Packet;
+import dev.dewy.dqs.packet.ingame.server.ServerBossBarPacket;
 
 import java.util.Map;
 import java.util.UUID;
