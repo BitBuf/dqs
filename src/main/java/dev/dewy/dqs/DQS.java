@@ -64,24 +64,6 @@ public class DQS
             WEBSOCKET_SERVER.start();
         }
 
-        if (CONFIG.discord.discordService)
-        {
-            CommandClientBuilder commandClient = new CommandClientBuilder();
-
-            commandClient.setActivity(Activity.playing("2b2t"));
-            commandClient.setPrefix(CONFIG.discord.prefix);
-            commandClient.setOwnerId(CONFIG.discord.operatorId);
-
-            commandClient.addCommand(new HelpCommand());
-
-            commandClient.setHelpWord("DWWWWWWWWWWWWWWWWWWWWWWWWWWWJIWJFUJEWMFCNWEF");
-
-            new JDABuilder(AccountType.BOT)
-                    .setToken(CONFIG.discord.token)
-                    .addEventListeners(commandClient.build())
-                    .build();
-        }
-
         DQS dqs = new DQS();
         instance = dqs;
         dqs.start();
@@ -92,7 +74,7 @@ public class DQS
         return DQS.instance;
     }
 
-    public void start()
+    public void start() throws LoginException
     {
         try
         {
@@ -167,10 +149,10 @@ public class DQS
                     });
                 }
 
-                if (CONFIG.client.extra.spammer.enabled)
+                if (CONFIG.modules.chatSpammer.enabled)
                 {
-                    List<String> messages = CONFIG.client.extra.spammer.messages;
-                    int delaySeconds = CONFIG.client.extra.spammer.delaySeconds;
+                    List<String> messages = CONFIG.modules.chatSpammer.messages;
+                    int delaySeconds = CONFIG.modules.chatSpammer.delaySeconds;
                     AtomicInteger i = new AtomicInteger(0);
                     MODULE_LOG.trace("Enabling spammer with %d messages, choosing every %d seconds", messages.size(), delaySeconds);
                     modules.add(() ->
@@ -388,7 +370,7 @@ public class DQS
     {
         try
         {
-            for (int i = CONFIG.client.extra.autoReconnect.delaySeconds; SHOULD_RECONNECT && i > 0; i--)
+            for (int i = CONFIG.modules.autoReconnect.delaySeconds; SHOULD_RECONNECT && i > 0; i--)
             {
                 CLIENT_LOG.info("Reconnecting in %d", i);
                 Thread.sleep(1000L);

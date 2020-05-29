@@ -22,11 +22,11 @@ public class PlayerHealthHandler implements HandlerRegistry.IncomingHandler<Serv
         CACHE_LOG.debug("Player food: %d", packet.getFood())
                 .debug("Player saturation: %f", packet.getSaturation())
                 .debug("Player health: %f", packet.getHealth());
-        if (packet.getHealth() <= 0 && CONFIG.client.extra.autoRespawn.enabled)
+        if (packet.getHealth() <= 0 && CONFIG.modules.autoRespawn.enabled)
         {
             new Thread(() ->
             {
-                PorkUtil.sleep(CONFIG.client.extra.autoRespawn.delayMillis);
+                PorkUtil.sleep(CONFIG.modules.autoRespawn.delaySeconds);
                 if (DQS.getInstance().isConnected() && CACHE.getPlayerCache().getThePlayer().getHealth() <= 0)
                 {
                     CACHE.getChunkCache().reset(true); //i don't think this is needed, but it can't hurt

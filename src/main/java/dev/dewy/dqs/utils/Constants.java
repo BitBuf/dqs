@@ -3,11 +3,14 @@ package dev.dewy.dqs.utils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParser;
+import com.jagrosh.jdautilities.command.CommandClientBuilder;
+import dev.dewy.dqs.DQS;
 import dev.dewy.dqs.cache.DataCache;
 import dev.dewy.dqs.client.DQSClientSession;
 import dev.dewy.dqs.client.handler.incoming.*;
 import dev.dewy.dqs.client.handler.incoming.entity.*;
 import dev.dewy.dqs.client.handler.incoming.spawn.*;
+import dev.dewy.dqs.discord.HelpCommand;
 import dev.dewy.dqs.handler.HandlerRegistry;
 import dev.dewy.dqs.server.DQSServerConnection;
 import dev.dewy.dqs.server.handler.incoming.LoginStartHandler;
@@ -28,7 +31,11 @@ import net.daporkchop.lib.logging.Logger;
 import net.daporkchop.lib.logging.Logging;
 import net.daporkchop.lib.logging.impl.DefaultLogger;
 import net.daporkchop.lib.minecraft.text.parser.MCFormatParser;
+import net.dv8tion.jda.api.AccountType;
+import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.entities.Activity;
 
+import javax.security.auth.login.LoginException;
 import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
@@ -48,6 +55,7 @@ public final class Constants
     public static final Logger CACHE_LOG = DEFAULT_LOG.channel("DQS Cache");
     public static final Logger CLIENT_LOG = DEFAULT_LOG.channel("DQS Client");
     public static final Logger CHAT_LOG = DEFAULT_LOG.channel("Chat");
+    public static final Logger DISCORD_LOG = DEFAULT_LOG.channel("Discord");
     public static final Logger MODULE_LOG = DEFAULT_LOG.channel("DQS Modules");
     public static final Logger SERVER_LOG = DEFAULT_LOG.channel("DQS Server");
     public static final Logger WEBSOCKET_LOG = DEFAULT_LOG.channel("DQS WebSocket");
@@ -143,6 +151,35 @@ public final class Constants
 
         loadConfig();
 
+        if (CONFIG.discord.subscriberId.equals("default") || CONFIG.discord.token.equals("default"))
+        {
+            DISCORD_LOG.error("Subscriber ID or token not specified.");
+        }
+
+        if (CONFIG.discord.discordService)
+        {
+            CommandClientBuilder commandClient = new CommandClientBuilder();
+
+            commandClient.setActivity(Activity.playing("2b2t"));
+            commandClient.setPrefix(CONFIG.discord.prefix);
+            commandClient.setOwnerId(CONFIG.discord.operatorId);
+
+            commandClient.addCommand(new HelpCommand());
+
+            commandClient.setHelpWord("DWWWWWWWWWWWWWWWWWWWWWWWWWWWJIWJFUJEWMFCNWEF");
+
+            try
+            {
+                new JDABuilder(AccountType.BOT)
+                        .setToken(CONFIG.discord.token)
+                        .addEventListeners(commandClient.build())
+                        .build();
+            } catch (LoginException e)
+            {
+                e.printStackTrace();
+            }
+        }
+
         if (CONFIG.log.printDebug)
         {
             DEFAULT_LOG.setLogAmount(LogAmount.DEBUG);
@@ -152,7 +189,7 @@ public final class Constants
             DEFAULT_LOG.addFile(new File(logFolder, String.format("%s-debug.log", date)), LogAmount.DEBUG);
         }
 
-        SHOULD_RECONNECT = CONFIG.client.extra.autoReconnect.enabled;
+        SHOULD_RECONNECT = CONFIG.modules.autoReconnect.enabled;
 
         CACHE = new DataCache();
         WEBSOCKET_SERVER = new WebSocketServer();

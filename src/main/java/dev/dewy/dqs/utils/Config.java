@@ -10,6 +10,7 @@ public final class Config
     public Client client = new Client();
     public Debug debug = new Debug();
     public Log log = new Log();
+    public Modules modules = new Modules();
     public Server server = new Server();
     public Websocket websocket = new Websocket();
     private transient boolean donePostLoad = false;
@@ -59,9 +60,6 @@ public final class Config
         public static final class Extra
         {
             public AntiAFK antiafk = new AntiAFK();
-            public AutoReconnect autoReconnect = new AutoReconnect();
-            public AutoRespawn autoRespawn = new AutoRespawn();
-            public Spammer spammer = new Spammer();
 
             public static final class AntiAFK
             {
@@ -74,28 +72,6 @@ public final class Config
                     public boolean rotate = true;
                     public boolean swingHand = true;
                 }
-            }
-
-            public static final class AutoReconnect
-            {
-                public boolean enabled = true;
-                public int delaySeconds = 3;
-            }
-
-            public static final class AutoRespawn
-            {
-                public boolean enabled = false;
-                public int delayMillis = 100;
-            }
-
-            public static final class Spammer
-            {
-                public int delaySeconds = 30;
-                public boolean enabled = false;
-                public List<String> messages = Arrays.asList(
-                        "bean",
-                        "gggg"
-                );
             }
         }
 
@@ -184,6 +160,47 @@ public final class Config
             public boolean favicon = true;
             public int maxPlayers = Integer.MAX_VALUE;
             public String motd = "§7[§b§lDQS§r§7] §fDQS 3.0.0 Instance for %s";
+        }
+    }
+
+    public static final class Modules
+    {
+        public AutoReconnect autoReconnect = new AutoReconnect();
+        public AutoRespawn autoRespawn = new AutoRespawn();
+        public ChatSpammer chatSpammer = new ChatSpammer();
+        public Whitelist whitelist = new Whitelist();
+
+        public static final class AutoReconnect
+        {
+            public boolean enabled = true;
+
+            public int delaySeconds = 3;
+        }
+
+        public static final class AutoRespawn
+        {
+            public boolean enabled = false;
+
+            public int delaySeconds = 1;
+        }
+
+        public static final class ChatSpammer
+        {
+            public boolean enabled = false;
+
+            public int delaySeconds = 20;
+            public List<String> messages = Arrays.asList(
+                    "bean",
+                    "gggg"
+            );
+        }
+
+        public static final class Whitelist
+        {
+            public boolean enabled = true;
+            public List<String> whitelist = Arrays.asList(
+                    "nerdlets"
+            );
         }
     }
 

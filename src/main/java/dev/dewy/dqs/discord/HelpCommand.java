@@ -2,6 +2,7 @@ package dev.dewy.dqs.discord;
 
 import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
+import dev.dewy.dqs.DQS;
 import dev.dewy.dqs.utils.Constants;
 import net.dv8tion.jda.api.EmbedBuilder;
 
@@ -18,6 +19,7 @@ public class HelpCommand extends Command
         this.aliases = new String[] { "h", "halp", "?" };
         this.category = new Category("Information");
         this.guildOnly = false;
+        this.cooldown = Constants.CONFIG.discord.cooldown;
     }
 
     @Override
