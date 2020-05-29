@@ -6,6 +6,7 @@ import java.util.List;
 public final class Config
 {
     public Authentication authentication = new Authentication();
+    public Discord discord = new Discord();
     public Client client = new Client();
     public Debug debug = new Debug();
     public Log log = new Log();
@@ -30,6 +31,22 @@ public final class Config
         public String email = "john.doe@example.com";
         public String password = "my_secure_password";
         public String username = "Steve";
+    }
+
+    public static final class Discord
+    {
+        public boolean discordService = true;
+
+        public String token = "default";
+
+        public String serverId = "690871121406459924";
+        public String categoryName = "DQS";
+
+        public String operatorId = "326039530971070474";
+        public String subscriberId = "default";
+
+        public int cooldown = 5;
+        public String prefix = "&";
     }
 
     public static final class Client

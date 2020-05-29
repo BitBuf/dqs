@@ -1,5 +1,7 @@
 package dev.dewy.dqs;
 
+import com.jagrosh.jdautilities.command.CommandClientBuilder;
+import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import dev.dewy.dqs.client.DQSClientSession;
 import dev.dewy.dqs.profiles.GameProfile;
 import dev.dewy.dqs.protocol.MinecraftConstants;
@@ -22,8 +24,12 @@ import dev.dewy.dqs.protocol.DQSSessionFactory;
 import dev.dewy.dqs.server.DQSServerConnection;
 import dev.dewy.dqs.server.DQSServerListener;
 import dev.dewy.dqs.utils.Authenticator;
+import net.dv8tion.jda.api.AccountType;
+import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.entities.Activity;
 
 import javax.imageio.ImageIO;
+import javax.security.auth.login.LoginException;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -49,7 +55,9 @@ public class DQS
     protected Authenticator authenticator;
     protected BufferedImage serverIcon;
 
-    public static void main(String... args)
+    public EventWaiter waiter = new EventWaiter();
+
+    public static void main(String... args) throws LoginException
     {
         DEFAULT_LOG.info("Starting DQS %s...", VERSION);
 
@@ -57,6 +65,20 @@ public class DQS
         {
             WEBSOCKET_LOG.info("Starting WebSocket based server...");
             WEBSOCKET_SERVER.start();
+        }
+
+        if (CONFIG.discord.discordService)
+        {
+            CommandClientBuilder commandClient = new CommandClientBuilder();
+
+            commandClient.setActivity(Activity.playing("2b2t"));
+            commandClient.setPrefix(CONFIG.discord.prefix);
+            commandClient.setOwnerId(CONFIG.discord.operatorId);
+
+            new JDABuilder(AccountType.BOT)
+                    .setToken(CONFIG.discord.token)
+                    .addEventListeners(commandClient.build())
+                    .build();
         }
 
         DQS dqs = new DQS();
