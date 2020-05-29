@@ -2,13 +2,14 @@ package dev.dewy.dqs.discord;
 
 import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
-import dev.dewy.dqs.DQS;
 import dev.dewy.dqs.utils.Constants;
 import net.dv8tion.jda.api.EmbedBuilder;
 
-import java.awt.*;
+import java.awt.Color;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.Objects;
 
 public class HelpCommand extends Command
 {
@@ -36,7 +37,25 @@ public class HelpCommand extends Command
                     .build());
         } catch (MalformedURLException e)
         {
-            e.printStackTrace();
+            Constants.DISCORD_LOG.error(e);
+
+            event.reply(new EmbedBuilder()
+                    .setTitle("**DQS** - Error")
+                    .setDescription("An exception occurred whilst executing this command. Debug information has been sent to Dewy to be fixed in following updates. Sorry about any inconvenience!")
+                    .setColor(new Color(15221016))
+                    .setFooter("Signed in as " + Constants.CONFIG.authentication.username)
+                    .setAuthor("DQS 3.0.0", null, "https://i.imgur.com/xTd3Ri3.png")
+                    .build());
+
+            Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.operatorId)).openPrivateChannel().queue((privateChannel ->
+            {
+                privateChannel.sendMessage(new EmbedBuilder()
+                        .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.subscriberId)).getName() + ")")
+                        .setDescription("A " + e.getClass().getSimpleName() + " was thrown during the execution of a help command.\n\n**Cause:**\n\n```" + e.getMessage() + "```")
+                        .setColor(new Color(15221016))
+                        .setAuthor("DQS 3.0.0", null, "https://i.imgur.com/xTd3Ri3.png")
+                        .build()).queue();
+            }));
         }
     }
 }
