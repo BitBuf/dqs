@@ -58,6 +58,7 @@ public final class Constants
     public static final Logger DISCORD_LOG = DEFAULT_LOG.channel("Discord");
     public static final Logger MODULE_LOG = DEFAULT_LOG.channel("DQS Modules");
     public static final Logger SERVER_LOG = DEFAULT_LOG.channel("DQS Server");
+    public static final Logger TARIBONE_LOG = DEFAULT_LOG.channel("Taribone");
     public static final Logger WEBSOCKET_LOG = DEFAULT_LOG.channel("DQS WebSocket");
 
     public static final File CONFIG_FILE = new File("config.json");

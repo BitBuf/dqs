@@ -1,9 +1,7 @@
 package dev.dewy.dqs;
 
-import com.jagrosh.jdautilities.command.CommandClientBuilder;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import dev.dewy.dqs.client.DQSClientSession;
-import dev.dewy.dqs.discord.HelpCommand;
 import dev.dewy.dqs.networking.Client;
 import dev.dewy.dqs.networking.Server;
 import dev.dewy.dqs.networking.SessionFactory;
@@ -20,10 +18,17 @@ import dev.dewy.dqs.protocol.status.VersionInfo;
 import dev.dewy.dqs.protocol.status.handler.ServerInfoBuilder;
 import dev.dewy.dqs.server.DQSServerConnection;
 import dev.dewy.dqs.server.DQSServerListener;
+import dev.dewy.dqs.taribone.TariboneController;
+import dev.dewy.dqs.taribone.TariboneListener;
+import dev.dewy.dqs.taribone.entity.player.TariboneDQSPlayer;
+import dev.dewy.dqs.taribone.heuristic.EuclideanHeuristic;
+import dev.dewy.dqs.taribone.pathing.astar.TariboneAStar;
+import dev.dewy.dqs.taribone.task.api.TaskExecutor;
+import dev.dewy.dqs.taribone.ticker.TariboneTicker;
+import dev.dewy.dqs.taribone.world.World;
+import dev.dewy.dqs.taribone.world.physics.TariboneWorldPhysics;
 import dev.dewy.dqs.utils.Authenticator;
-import net.dv8tion.jda.api.AccountType;
-import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.entities.Activity;
+import dev.dewy.dqs.utils.ServerData;
 
 import javax.imageio.ImageIO;
 import javax.security.auth.login.LoginException;
@@ -53,6 +58,16 @@ public class DQS
     protected BufferedImage serverIcon;
 
     public EventWaiter waiter = new EventWaiter();
+
+    private World world;
+    private ServerData serverData;
+
+    private TariboneAStar pathFinder;
+    private TaskExecutor taskExecutor;
+
+    private TariboneController controller;
+    private TariboneTicker ticker;
+    private TariboneDQSPlayer player;
 
     public static void main(String... args) throws LoginException
     {
@@ -102,6 +117,16 @@ public class DQS
                     SHOULD_RECONNECT = false;
                     if (this.isConnected())
                     {
+                        if (this.ticker != null)
+                        {
+                            this.ticker.stop();
+                        }
+
+                        if (this.taskExecutor != null)
+                        {
+                            this.taskExecutor.stop();
+                        }
+
                         this.client.getSession().disconnect("user disconnect");
                     }
                     mainThread.interrupt();
@@ -250,8 +275,12 @@ public class DQS
             int port = CONFIG.client.server.port;
 
             CLIENT_LOG.info("Connecting to %s:%d...", address, port);
+            this.ticker = new TariboneTicker(this);
             this.client = new Client(address, port, this.protocol, this.sessionFactory);
+            this.client.getSession().addListener(new TariboneListener(this));
+            this.controller = new TariboneController(this);
             this.client.getSession().connect(true);
+            ticker.start();
         }
     }
 
@@ -421,5 +450,65 @@ public class DQS
     public AtomicReference<DQSServerConnection> getCurrentPlayer()
     {
         return this.currentPlayer;
+    }
+
+    public void setTaskExecutor(TaskExecutor activity)
+    {
+        if (this.taskExecutor != null)
+        {
+            this.taskExecutor.stop();
+        }
+
+        this.taskExecutor = activity;
+    }
+
+    public TaskExecutor getTaskExecutor()
+    {
+        return taskExecutor;
+    }
+
+    public TariboneAStar getPathFinder()
+    {
+        return pathFinder;
+    }
+
+    public TariboneController getController()
+    {
+        return controller;
+    }
+
+    public World getWorld()
+    {
+        return world;
+    }
+
+    public ServerData getServerData()
+    {
+        return serverData;
+    }
+
+    public TariboneDQSPlayer getPlayer()
+    {
+        return player;
+    }
+
+    public void setWorld(World world)
+    {
+        this.world = world;
+
+        if (this.pathFinder == null)
+        {
+            this.pathFinder = new TariboneAStar(new EuclideanHeuristic(), new TariboneWorldPhysics(world));
+        }
+    }
+
+    public void setServerData(ServerData serverData)
+    {
+        this.serverData = serverData;
+    }
+
+    public void setPlayer(TariboneDQSPlayer player)
+    {
+        this.player = player;
     }
 }
