@@ -70,6 +70,7 @@ public class DQS
     private TariboneDQSPlayer player;
 
     public boolean inQueue = true;
+    public int currentPos = -1;
 
     public static void main(String... args) throws LoginException
     {

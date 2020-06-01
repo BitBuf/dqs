@@ -18,6 +18,15 @@ public class ChatHandler implements HandlerRegistry.IncomingHandler<ServerChatPa
         DQS.getInstance().inQueue = "2b2t.org".equals(CONFIG.client.server.address)
                 && MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString().toLowerCase().startsWith("Position in queue".toLowerCase()) && !DQS.getInstance().inQueue;
 
+        if (DQS.getInstance().inQueue)
+        {
+            String[] result = MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString().split("(?=\\d*$)",2);
+
+            DQS.getInstance().currentPos = Integer.parseInt(result[1]);
+        }
+
+        CHAT_LOG.info(Integer.toString(DQS.getInstance().currentPos));
+
         if ("2b2t.org".equals(CONFIG.client.server.address)
                 && MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString().toLowerCase().startsWith("Exception Connecting:".toLowerCase()))
         {
