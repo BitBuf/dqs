@@ -49,8 +49,13 @@ jar {
     }
 }
 
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
 shadowJar {
     classifier = 'dist'
 }
 
-build.dependsOn(shadowJar)
+build.dependsOn(shadowJar, sourcesJar)
