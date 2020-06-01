@@ -24,9 +24,7 @@ public class ChatHandler implements HandlerRegistry.IncomingHandler<ServerChatPa
 
             DQS.getInstance().currentPos = Integer.parseInt(result[1]);
         }
-
-        CHAT_LOG.info(Integer.toString(DQS.getInstance().currentPos));
-
+        
         if ("2b2t.org".equals(CONFIG.client.server.address)
                 && MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString().toLowerCase().startsWith("Exception Connecting:".toLowerCase()))
         {
