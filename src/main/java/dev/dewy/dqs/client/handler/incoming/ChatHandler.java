@@ -4,10 +4,6 @@ import dev.dewy.dqs.DQS;
 import dev.dewy.dqs.client.DQSClientSession;
 import dev.dewy.dqs.handler.HandlerRegistry;
 import dev.dewy.dqs.packet.ingame.server.ServerChatPacket;
-import dev.dewy.dqs.taribone.task.WalkXZTask;
-import dev.dewy.dqs.taribone.task.executor.WalkTaskExecutor;
-import dev.dewy.dqs.utils.vector.Vector2i;
-import dev.dewy.dqs.utils.vector.Vector3i;
 import net.daporkchop.lib.minecraft.text.parser.MCFormatParser;
 
 import static dev.dewy.dqs.utils.Constants.*;
@@ -19,13 +15,8 @@ public class ChatHandler implements HandlerRegistry.IncomingHandler<ServerChatPa
     {
         CHAT_LOG.info(packet.getMessage());
 
-        if (MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString().contains("walk"))
-        {
-            WalkXZTask task = new WalkXZTask();
-            task.setTarget(new Vector2i(235, 242));
-
-            DQS.getInstance().setTaskExecutor(task.toExecutor(DQS.getInstance()));
-        }
+        DQS.getInstance().inQueue = "2b2t.org".equals(CONFIG.client.server.address)
+                && MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString().toLowerCase().startsWith("Position in queue".toLowerCase()) && !DQS.getInstance().inQueue;
 
         if ("2b2t.org".equals(CONFIG.client.server.address)
                 && MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString().toLowerCase().startsWith("Exception Connecting:".toLowerCase()))

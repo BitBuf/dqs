@@ -69,6 +69,8 @@ public class DQS
     private TariboneTicker ticker;
     private TariboneDQSPlayer player;
 
+    public boolean inQueue = true;
+
     public static void main(String... args) throws LoginException
     {
         DEFAULT_LOG.info("Starting DQS %s...", VERSION);

@@ -2,8 +2,8 @@ package dev.dewy.dqs.handler;
 
 import dev.dewy.dqs.networking.Session;
 import dev.dewy.dqs.packet.Packet;
+import dev.dewy.dqs.utils.ObjObjBoolFunction;
 import net.daporkchop.lib.logging.Logger;
-import net.daporkchop.lib.primitive.lambda.function.ObjObjBoolFunction;
 
 import java.util.IdentityHashMap;
 import java.util.Map;

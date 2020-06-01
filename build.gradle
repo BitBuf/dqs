@@ -24,10 +24,8 @@ dependencies {
 
     implementation group: 'org.java-websocket', name: 'Java-WebSocket', version: '1.4.0'
 
-    implementation group: 'net.daporkchop.lib', name: 'gui', version: '0.5.5-SNAPSHOT'
     implementation group: 'net.daporkchop.lib', name: 'hash', version: '0.5.5-SNAPSHOT'
     implementation group: 'net.daporkchop.lib', name: 'logging', version: '0.5.5-SNAPSHOT'
-    implementation group: 'net.daporkchop.lib', name: 'primitive', version: '0.5.5-SNAPSHOT'
     implementation group: 'net.daporkchop.lib', name: 'minecraft-text', version: '0.5.5-SNAPSHOT'
 
     implementation group: 'net.dv8tion', name: 'JDA', version: '4.1.1_155'
