@@ -29,7 +29,6 @@ dependencies {
     implementation group: 'net.daporkchop.lib', name: 'minecraft-text', version: '0.5.5-SNAPSHOT'
 
     implementation group: 'net.dv8tion', name: 'JDA', version: '4.1.1_155'
-
     implementation group: 'com.jagrosh', name: 'jda-utilities', version: '3.0.3'
 }
 
