@@ -42,7 +42,10 @@ public class SignInCommand extends Command
             return;
         }
 
-        DQS.getInstance().getClient().getSession().disconnect("Account changeup! :o");
+        if (DQS.getInstance().isConnected())
+        {
+            DQS.getInstance().getClient().getSession().disconnect("Account changeup! :o");
+        }
 
         Constants.CONFIG.authentication.email = args[0];
         Constants.CONFIG.authentication.password = args[1];

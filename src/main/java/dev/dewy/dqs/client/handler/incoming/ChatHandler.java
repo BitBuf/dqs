@@ -16,7 +16,13 @@ public class ChatHandler implements HandlerRegistry.IncomingHandler<ServerChatPa
         CHAT_LOG.info(packet.getMessage());
 
         DQS.getInstance().inQueue = "2b2t.org".equals(CONFIG.client.server.address)
-                && MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString().toLowerCase().startsWith("Position in queue".toLowerCase()) && !DQS.getInstance().inQueue;
+                && MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString().toLowerCase().startsWith("Position in queue".toLowerCase());
+
+        if ("2b2t.org".equals(CONFIG.client.server.address) && !MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString().toLowerCase().startsWith("Position in queue".toLowerCase()))
+        {
+            DQS.getInstance().inQueue = false;
+            DQS.getInstance().currentPos = -1;
+        }
 
         if (DQS.getInstance().inQueue)
         {
