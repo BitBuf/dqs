@@ -8,9 +8,9 @@ import java.util.Objects;
 
 public class Attribute
 {
-    private AttributeType type;
-    private double value;
-    private List<AttributeModifier> modifiers;
+    private final AttributeType type;
+    private final double value;
+    private final List<AttributeModifier> modifiers;
 
     public Attribute(AttributeType type)
     {

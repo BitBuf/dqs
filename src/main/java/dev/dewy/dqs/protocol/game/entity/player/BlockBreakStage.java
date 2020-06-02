@@ -12,5 +12,5 @@ public enum BlockBreakStage
     STAGE_8,
     STAGE_9,
     STAGE_10,
-    RESET;
+    RESET
 }

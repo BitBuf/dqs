@@ -8,14 +8,14 @@ import java.io.IOException;
 
 public class ServerTabCompletePacket extends MinecraftPacket
 {
-    private String matches[];
+    private String[] matches;
 
     @SuppressWarnings("unused")
     private ServerTabCompletePacket()
     {
     }
 
-    public ServerTabCompletePacket(String matches[])
+    public ServerTabCompletePacket(String[] matches)
     {
         this.matches = matches;
     }

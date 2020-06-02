@@ -8,5 +8,5 @@ public enum SkinPart
     RIGHT_SLEEVE,
     LEFT_PANTS_LEG,
     RIGHT_PANTS_LEG,
-    HAT;
+    HAT
 }

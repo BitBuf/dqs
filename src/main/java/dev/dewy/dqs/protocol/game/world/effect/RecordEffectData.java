@@ -4,7 +4,7 @@ import dev.dewy.dqs.utils.ObjectUtil;
 
 public class RecordEffectData implements WorldEffectData
 {
-    private int recordId;
+    private final int recordId;
 
     public RecordEffectData(int recordId)
     {

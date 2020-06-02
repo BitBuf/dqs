@@ -182,10 +182,10 @@ public class ServerSpawnObjectPacket extends MinecraftPacket
         {
             if (this.data instanceof MinecartType)
             {
-                data = MagicValues.value(Integer.class, (Enum<?>) this.data);
+                data = MagicValues.value(Integer.class, this.data);
             } else if (this.data instanceof HangingDirection)
             {
-                data = MagicValues.value(Integer.class, (Enum<?>) this.data);
+                data = MagicValues.value(Integer.class, this.data);
             } else if (this.data instanceof FallingBlockData)
             {
                 data = ((FallingBlockData) this.data).getId() | ((FallingBlockData) this.data).getMetadata() << 16;

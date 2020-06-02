@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class CustomStatistic implements Statistic
 {
-    private String name;
+    private final String name;
 
     public CustomStatistic(String name)
     {

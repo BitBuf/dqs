@@ -23,7 +23,7 @@ public class ServerTeamPacket extends MinecraftPacket
     private NameTagVisibility nameTagVisibility;
     private CollisionRule collisionRule;
     private TeamColor color;
-    private String players[];
+    private String[] players;
 
     @SuppressWarnings("unused")
     private ServerTeamPacket()
@@ -36,7 +36,7 @@ public class ServerTeamPacket extends MinecraftPacket
         this.action = TeamAction.REMOVE;
     }
 
-    public ServerTeamPacket(String name, TeamAction action, String players[])
+    public ServerTeamPacket(String name, TeamAction action, String[] players)
     {
         if (action != TeamAction.ADD_PLAYER && action != TeamAction.REMOVE_PLAYER)
         {
@@ -62,7 +62,7 @@ public class ServerTeamPacket extends MinecraftPacket
         this.action = TeamAction.UPDATE;
     }
 
-    public ServerTeamPacket(String name, String displayName, String prefix, String suffix, boolean friendlyFire, boolean seeFriendlyInvisibles, NameTagVisibility nameTagVisibility, CollisionRule collisionRule, TeamColor color, String players[])
+    public ServerTeamPacket(String name, String displayName, String prefix, String suffix, boolean friendlyFire, boolean seeFriendlyInvisibles, NameTagVisibility nameTagVisibility, CollisionRule collisionRule, TeamColor color, String[] players)
     {
         this.name = name;
         this.displayName = displayName;

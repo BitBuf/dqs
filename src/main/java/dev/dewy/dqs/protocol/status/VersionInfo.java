@@ -9,8 +9,8 @@ public class VersionInfo
 {
     public static final VersionInfo CURRENT = new VersionInfo(MinecraftConstants.GAME_VERSION, MinecraftConstants.PROTOCOL_VERSION);
 
-    private String name;
-    private int protocol;
+    private final String name;
+    private final int protocol;
 
     public VersionInfo(String name, int protocol)
     {

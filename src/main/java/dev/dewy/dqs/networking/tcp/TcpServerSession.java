@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class TcpServerSession extends TcpSession
 {
-    private Server server;
+    private final Server server;
 
     public TcpServerSession(String host, int port, PacketProtocol protocol, Server server)
     {

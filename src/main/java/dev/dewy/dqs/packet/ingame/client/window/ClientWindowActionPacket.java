@@ -105,25 +105,25 @@ public class ClientWindowActionPacket extends MinecraftPacket
         int param = 0;
         if (this.action == WindowAction.CLICK_ITEM)
         {
-            param = MagicValues.value(Integer.class, (Enum<?>) this.param);
+            param = MagicValues.value(Integer.class, this.param);
         } else if (this.action == WindowAction.SHIFT_CLICK_ITEM)
         {
-            param = MagicValues.value(Integer.class, (Enum<?>) this.param);
+            param = MagicValues.value(Integer.class, this.param);
         } else if (this.action == WindowAction.MOVE_TO_HOTBAR_SLOT)
         {
-            param = MagicValues.value(Integer.class, (Enum<?>) this.param);
+            param = MagicValues.value(Integer.class, this.param);
         } else if (this.action == WindowAction.CREATIVE_GRAB_MAX_STACK)
         {
-            param = MagicValues.value(Integer.class, (Enum<?>) this.param);
+            param = MagicValues.value(Integer.class, this.param);
         } else if (this.action == WindowAction.DROP_ITEM)
         {
-            param = MagicValues.value(Integer.class, (Enum<?>) this.param) + (this.slot != -999 ? 2 : 0);
+            param = MagicValues.value(Integer.class, this.param) + (this.slot != -999 ? 2 : 0);
         } else if (this.action == WindowAction.SPREAD_ITEM)
         {
-            param = MagicValues.value(Integer.class, (Enum<?>) this.param);
+            param = MagicValues.value(Integer.class, this.param);
         } else if (this.action == WindowAction.FILL_STACK)
         {
-            param = MagicValues.value(Integer.class, (Enum<?>) this.param);
+            param = MagicValues.value(Integer.class, this.param);
         }
 
         out.writeByte(param);

@@ -10,5 +10,5 @@ public interface SessionEvent
      *
      * @param listener Listener to call the event on.
      */
-    public void call(SessionListener listener);
+    void call(SessionListener listener);
 }

@@ -6,9 +6,9 @@ import java.util.Objects;
 
 public class EntityMetadata
 {
-    private int id;
-    private MetadataType type;
-    private Object value;
+    private final int id;
+    private final MetadataType type;
+    private final Object value;
 
     public EntityMetadata(int id, MetadataType type, Object value)
     {

@@ -22,36 +22,6 @@ public class TaskStatus
     }
 
     /**
-     * Returns the type of status.
-     *
-     * @return the type.
-     */
-    public StatusType getType()
-    {
-        return type;
-    }
-
-    /**
-     * Returns the message, if any.
-     *
-     * @return the message.
-     */
-    public String getMessage()
-    {
-        return message;
-    }
-
-    /**
-     * Returns the failure throwable, if any.
-     *
-     * @return the throwable.
-     */
-    public Throwable getThrowable()
-    {
-        return throwable;
-    }
-
-    /**
      * Creates a new failure status.
      *
      * @param message the failure message.
@@ -94,12 +64,42 @@ public class TaskStatus
     }
 
     /**
+     * Returns the type of status.
+     *
+     * @return the type.
+     */
+    public StatusType getType()
+    {
+        return type;
+    }
+
+    /**
+     * Returns the message, if any.
+     *
+     * @return the message.
+     */
+    public String getMessage()
+    {
+        return message;
+    }
+
+    /**
+     * Returns the failure throwable, if any.
+     *
+     * @return the throwable.
+     */
+    public Throwable getThrowable()
+    {
+        return throwable;
+    }
+
+    /**
      * Represents a type of status.
      */
-    public static enum StatusType
+    public enum StatusType
     {
         IN_PROGRESS,
         SUCCESS,
-        FAILURE;
+        FAILURE
     }
 }

@@ -118,7 +118,7 @@ public class ServerStatisticsPacket extends MinecraftPacket
                 value = PICKUP_ITEM_PREFIX + ((PickupItemStatistic) statistic).getId();
             } else if (statistic instanceof GenericStatistic)
             {
-                value = MagicValues.value(String.class, (GenericStatistic) statistic);
+                value = MagicValues.value(String.class, statistic);
             }
 
             out.writeString(value);

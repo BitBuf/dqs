@@ -7,8 +7,8 @@ import java.util.Objects;
 
 public class BlockChangeRecord
 {
-    private Position position;
-    private BlockState block;
+    private final Position position;
+    private final BlockState block;
 
     public BlockChangeRecord(Position position, BlockState block)
     {

@@ -9,7 +9,7 @@ import java.util.Objects;
 
 public class PlayerListEntry
 {
-    private GameProfile profile;
+    private final GameProfile profile;
 
     private GameMode gameMode;
     private int ping;

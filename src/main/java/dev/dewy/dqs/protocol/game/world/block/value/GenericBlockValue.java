@@ -4,7 +4,7 @@ import dev.dewy.dqs.utils.ObjectUtil;
 
 public class GenericBlockValue implements BlockValue
 {
-    private int value;
+    private final int value;
 
     public GenericBlockValue(int value)
     {

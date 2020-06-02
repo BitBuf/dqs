@@ -65,7 +65,7 @@ public class ServerNotifyClientPacket extends MinecraftPacket
         float value = 0;
         if (this.value instanceof Enum<?>)
         {
-            value = MagicValues.value(Integer.class, (Enum<?>) this.value);
+            value = MagicValues.value(Integer.class, this.value);
         } else if (this.value instanceof RainStrengthValue)
         {
             value = ((RainStrengthValue) this.value).getStrength();

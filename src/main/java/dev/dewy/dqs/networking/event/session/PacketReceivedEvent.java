@@ -8,8 +8,8 @@ import dev.dewy.dqs.packet.Packet;
  */
 public class PacketReceivedEvent implements SessionEvent
 {
-    private Session session;
-    private Packet packet;
+    private final Session session;
+    private final Packet packet;
 
     /**
      * Creates a new PacketReceivedEvent instance.

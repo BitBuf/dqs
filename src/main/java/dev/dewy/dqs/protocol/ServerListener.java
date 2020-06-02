@@ -43,8 +43,8 @@ public class ServerListener extends SessionAdapter
 {
     private static final KeyPair KEY_PAIR = CryptUtil.generateKeyPair();
 
-    private byte verifyToken[] = new byte[4];
-    private String serverId = "";
+    private final byte[] verifyToken = new byte[4];
+    private final String serverId = "";
     private String username = "";
 
     private long lastPingTime = 0;
@@ -188,8 +188,8 @@ public class ServerListener extends SessionAdapter
 
     private class UserAuthTask implements Runnable
     {
-        private Session session;
-        private SecretKey key;
+        private final Session session;
+        private final SecretKey key;
 
         public UserAuthTask(Session session, SecretKey key)
         {
@@ -205,7 +205,7 @@ public class ServerListener extends SessionAdapter
             GameProfile profile = null;
             if (verify && this.key != null)
             {
-                Proxy proxy = this.session.<Proxy>getFlag(MinecraftConstants.AUTH_PROXY_KEY);
+                Proxy proxy = this.session.getFlag(MinecraftConstants.AUTH_PROXY_KEY);
                 if (proxy == null)
                 {
                     proxy = Proxy.NO_PROXY;
@@ -255,7 +255,7 @@ public class ServerListener extends SessionAdapter
 
     private class KeepAliveTask implements Runnable
     {
-        private Session session;
+        private final Session session;
 
         public KeepAliveTask(Session session)
         {

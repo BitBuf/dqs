@@ -7,5 +7,5 @@ public enum BossBarAction
     UPDATE_HEALTH,
     UPDATE_TITLE,
     UPDATE_STYLE,
-    UPDATE_FLAGS;
+    UPDATE_FLAGS
 }

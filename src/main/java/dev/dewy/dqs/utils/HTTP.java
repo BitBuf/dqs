@@ -13,6 +13,7 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.Proxy;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 /**
@@ -202,7 +203,7 @@ public class HTTP
             throw new IllegalArgumentException("Type cannot be null.");
         }
 
-        byte[] bytes = post.getBytes("UTF-8");
+        byte[] bytes = post.getBytes(StandardCharsets.UTF_8);
 
         HttpURLConnection connection = createUrlConnection(proxy, url);
         connection.setRequestProperty("Content-Type", type + "; charset=utf-8");

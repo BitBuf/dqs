@@ -13,7 +13,7 @@ import java.lang.reflect.Array;
  */
 public abstract class Tag implements Cloneable
 {
-    private String name;
+    private final String name;
 
     /**
      * Creates a tag with the specified name.

@@ -4,7 +4,7 @@ import dev.dewy.dqs.utils.ObjectUtil;
 
 public class RainStrengthValue implements ClientNotificationValue
 {
-    private float strength;
+    private final float strength;
 
     public RainStrengthValue(float strength)
     {

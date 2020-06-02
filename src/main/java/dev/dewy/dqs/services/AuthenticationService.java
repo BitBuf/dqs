@@ -18,8 +18,8 @@ public class AuthenticationService
     private static final String REFRESH_URL = BASE_URL + "refresh";
     private static final String INVALIDATE_URL = BASE_URL + "invalidate";
 
-    private String clientToken;
-    private Proxy proxy;
+    private final String clientToken;
+    private final Proxy proxy;
 
     private String username;
     private String password;
@@ -27,7 +27,7 @@ public class AuthenticationService
 
     private boolean loggedIn;
     private String id;
-    private List<GameProfile.Property> properties = new ArrayList<GameProfile.Property>();
+    private final List<GameProfile.Property> properties = new ArrayList<GameProfile.Property>();
     private List<GameProfile> profiles = new ArrayList<GameProfile>();
     private GameProfile selectedProfile;
 
@@ -196,7 +196,7 @@ public class AuthenticationService
      */
     public List<GameProfile.Property> getProperties()
     {
-        return this.isLoggedIn() ? new ArrayList<GameProfile.Property>(this.properties) : Collections.<GameProfile.Property>emptyList();
+        return this.isLoggedIn() ? new ArrayList<GameProfile.Property>(this.properties) : Collections.emptyList();
     }
 
     /**
@@ -331,7 +331,7 @@ public class AuthenticationService
 
                 this.loggedIn = true;
                 this.accessToken = response.accessToken;
-                this.profiles = response.availableProfiles != null ? Arrays.asList(response.availableProfiles) : Collections.<GameProfile>emptyList();
+                this.profiles = response.availableProfiles != null ? Arrays.asList(response.availableProfiles) : Collections.emptyList();
                 this.selectedProfile = response.selectedProfile;
                 this.properties.clear();
                 if (response.user != null && response.user.properties != null)
@@ -376,7 +376,7 @@ public class AuthenticationService
 
                 this.loggedIn = true;
                 this.accessToken = response.accessToken;
-                this.profiles = response.availableProfiles != null ? Arrays.asList(response.availableProfiles) : Collections.<GameProfile>emptyList();
+                this.profiles = response.availableProfiles != null ? Arrays.asList(response.availableProfiles) : Collections.emptyList();
                 this.selectedProfile = response.selectedProfile;
                 this.properties.clear();
                 if (response.user != null && response.user.properties != null)
@@ -392,8 +392,8 @@ public class AuthenticationService
 
     private static class Agent
     {
-        private String name;
-        private int version;
+        private final String name;
+        private final int version;
 
         protected Agent(String name, int version)
         {
@@ -410,11 +410,11 @@ public class AuthenticationService
 
     private static class AuthenticationRequest
     {
-        private Agent agent;
-        private String username;
-        private String password;
-        private String clientToken;
-        private boolean requestUser;
+        private final Agent agent;
+        private final String username;
+        private final String password;
+        private final String clientToken;
+        private final boolean requestUser;
 
         protected AuthenticationRequest(String username, String password, String clientToken)
         {
@@ -428,10 +428,10 @@ public class AuthenticationService
 
     private static class RefreshRequest
     {
-        private String clientToken;
-        private String accessToken;
-        private GameProfile selectedProfile;
-        private boolean requestUser;
+        private final String clientToken;
+        private final String accessToken;
+        private final GameProfile selectedProfile;
+        private final boolean requestUser;
 
         protected RefreshRequest(String clientToken, String accessToken, GameProfile selectedProfile)
         {
@@ -444,8 +444,8 @@ public class AuthenticationService
 
     private static class InvalidateRequest
     {
-        private String clientToken;
-        private String accessToken;
+        private final String clientToken;
+        private final String accessToken;
 
         protected InvalidateRequest(String clientToken, String accessToken)
         {

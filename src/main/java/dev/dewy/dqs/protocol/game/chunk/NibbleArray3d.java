@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 public class NibbleArray3d
 {
-    private byte[] data;
+    private final byte[] data;
 
     public NibbleArray3d(int size)
     {

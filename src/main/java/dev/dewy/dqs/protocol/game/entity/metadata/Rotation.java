@@ -4,9 +4,9 @@ import dev.dewy.dqs.utils.ObjectUtil;
 
 public class Rotation
 {
-    private float pitch;
-    private float yaw;
-    private float roll;
+    private final float pitch;
+    private final float yaw;
+    private final float roll;
 
     public Rotation()
     {

@@ -12,5 +12,5 @@ public enum UpdatedTileType
     END_GATEWAY,
     SIGN,
     SHULKER_BOX,
-    BED;
+    BED
 }

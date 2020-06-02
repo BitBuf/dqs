@@ -28,5 +28,5 @@ public enum ObjectType
     FISH_HOOK,
     SPECTRAL_ARROW,
     TIPPED_ARROW,
-    DRAGON_FIREBALL;
+    DRAGON_FIREBALL
 }

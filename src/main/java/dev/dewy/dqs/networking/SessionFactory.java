@@ -11,7 +11,7 @@ public interface SessionFactory
      * @param client Client to create the session for.
      * @return The created session.
      */
-    public Session createClientSession(Client client);
+    Session createClientSession(Client client);
 
     /**
      * Creates a server network listener.
@@ -19,5 +19,5 @@ public interface SessionFactory
      * @param server Server to create the listener for.
      * @return The created listener.
      */
-    public ConnectionListener createServerListener(Server server);
+    ConnectionListener createServerListener(Server server);
 }

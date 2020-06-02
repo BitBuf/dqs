@@ -15,5 +15,5 @@ public enum MetadataType
     BLOCK_FACE,
     OPTIONAL_UUID,
     BLOCK_STATE,
-    NBT_TAG;
+    NBT_TAG
 }

@@ -241,7 +241,7 @@ public class NetUtil
 
                     break;
                 case BLOCK_FACE:
-                    out.writeVarInt(MagicValues.value(Integer.class, (BlockFace) meta.getValue()));
+                    out.writeVarInt(MagicValues.value(Integer.class, meta.getValue()));
                     break;
                 case OPTIONAL_UUID:
                     out.writeBoolean(meta.getValue() != null);
@@ -265,7 +265,7 @@ public class NetUtil
         out.writeByte(255);
     }
 
-    public static Column readColumn(byte data[], int x, int z, boolean fullChunk, boolean hasSkylight, int mask, CompoundTag[] tileEntities) throws IOException
+    public static Column readColumn(byte[] data, int x, int z, boolean fullChunk, boolean hasSkylight, int mask, CompoundTag[] tileEntities) throws IOException
     {
         NetInput in = new StreamNetInput(new ByteArrayInputStream(data));
         Throwable ex = null;
@@ -284,7 +284,7 @@ public class NetUtil
                 }
             }
 
-            byte biomeData[] = null;
+            byte[] biomeData = null;
             if (fullChunk)
             {
                 biomeData = in.readBytes(256);
@@ -311,7 +311,7 @@ public class NetUtil
     public static int writeColumn(NetOutput out, Column column, boolean fullChunk, boolean hasSkylight) throws IOException
     {
         int mask = 0;
-        Chunk chunks[] = column.getChunks();
+        Chunk[] chunks = column.getChunks();
         for (int index = 0; index < chunks.length; index++)
         {
             Chunk chunk = chunks[index];
@@ -337,9 +337,9 @@ public class NetUtil
 
     private static class NetInputStream extends InputStream
     {
-        private NetInput in;
+        private final NetInput in;
         private boolean readFirst;
-        private byte firstByte;
+        private final byte firstByte;
 
         public NetInputStream(NetInput in, byte firstByte)
         {
@@ -363,7 +363,7 @@ public class NetUtil
 
     private static class NetOutputStream extends OutputStream
     {
-        private NetOutput out;
+        private final NetOutput out;
 
         public NetOutputStream(NetOutput out)
         {

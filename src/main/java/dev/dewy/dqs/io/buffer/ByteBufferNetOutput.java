@@ -4,6 +4,7 @@ import dev.dewy.dqs.io.NetOutput;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 /**
@@ -11,7 +12,7 @@ import java.util.UUID;
  */
 public class ByteBufferNetOutput implements NetOutput
 {
-    private ByteBuffer buffer;
+    private final ByteBuffer buffer;
 
     public ByteBufferNetOutput(ByteBuffer buffer)
     {
@@ -96,13 +97,13 @@ public class ByteBufferNetOutput implements NetOutput
     }
 
     @Override
-    public void writeBytes(byte b[]) throws IOException
+    public void writeBytes(byte[] b) throws IOException
     {
         this.buffer.put(b);
     }
 
     @Override
-    public void writeBytes(byte b[], int length) throws IOException
+    public void writeBytes(byte[] b, int length) throws IOException
     {
         this.buffer.put(b, 0, length);
     }
@@ -160,7 +161,7 @@ public class ByteBufferNetOutput implements NetOutput
             throw new IllegalArgumentException("String cannot be null!");
         }
 
-        byte[] bytes = s.getBytes("UTF-8");
+        byte[] bytes = s.getBytes(StandardCharsets.UTF_8);
         if (bytes.length > 32767)
         {
             throw new IOException("String too big (was " + s.length() + " bytes encoded, max " + 32767 + ")");

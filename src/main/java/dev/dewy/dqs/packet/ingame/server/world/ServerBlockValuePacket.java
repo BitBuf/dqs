@@ -99,19 +99,19 @@ public class ServerBlockValuePacket extends MinecraftPacket
         int type = 0;
         if (this.type instanceof NoteBlockValueType)
         {
-            type = MagicValues.value(Integer.class, (NoteBlockValueType) this.type);
+            type = MagicValues.value(Integer.class, this.type);
         } else if (this.type instanceof PistonValueType)
         {
-            type = MagicValues.value(Integer.class, (PistonValueType) this.type);
+            type = MagicValues.value(Integer.class, this.type);
         } else if (this.type instanceof MobSpawnerValueType)
         {
-            type = MagicValues.value(Integer.class, (MobSpawnerValueType) this.type);
+            type = MagicValues.value(Integer.class, this.type);
         } else if (this.type instanceof ChestValueType)
         {
-            type = MagicValues.value(Integer.class, (ChestValueType) this.type);
+            type = MagicValues.value(Integer.class, this.type);
         } else if (this.type instanceof GenericBlockValueType)
         {
-            type = MagicValues.value(Integer.class, (GenericBlockValueType) this.type);
+            type = MagicValues.value(Integer.class, this.type);
         }
 
         out.writeByte(type);
@@ -121,7 +121,7 @@ public class ServerBlockValuePacket extends MinecraftPacket
             val = ((NoteBlockValue) this.value).getPitch();
         } else if (this.value instanceof PistonValue)
         {
-            val = MagicValues.value(Integer.class, (PistonValue) this.value);
+            val = MagicValues.value(Integer.class, this.value);
         } else if (this.value instanceof MobSpawnerValue)
         {
             val = 0;

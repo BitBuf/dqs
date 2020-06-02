@@ -7,10 +7,10 @@ import java.util.Objects;
 
 public class ItemStack
 {
-    private int id;
-    private int amount;
-    private int data;
-    private CompoundTag nbt;
+    private final int id;
+    private final int amount;
+    private final int data;
+    private final CompoundTag nbt;
 
     public ItemStack(int id)
     {

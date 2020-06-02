@@ -27,5 +27,5 @@ public enum PaintingType
     PIG_SCENE,
     BURNING_SKULL,
     SKELETON,
-    DONKEY_KONG;
+    DONKEY_KONG
 }

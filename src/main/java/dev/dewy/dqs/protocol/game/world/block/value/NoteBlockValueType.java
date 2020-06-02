@@ -11,5 +11,5 @@ public enum NoteBlockValueType implements BlockValueType
     BELL,
     GUITAR,
     CHIME,
-    XYLOPHONE;
+    XYLOPHONE
 }

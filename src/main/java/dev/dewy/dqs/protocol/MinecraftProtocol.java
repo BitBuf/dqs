@@ -45,7 +45,7 @@ import java.util.UUID;
 public class MinecraftProtocol extends PacketProtocol
 {
     private SubProtocol subProtocol = SubProtocol.HANDSHAKE;
-    private PacketHeader header = new DefaultPacketHeader();
+    private final PacketHeader header = new DefaultPacketHeader();
     private AESEncryption encrypt;
 
     private GameProfile profile;

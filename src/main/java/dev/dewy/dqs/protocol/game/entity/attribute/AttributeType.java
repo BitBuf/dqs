@@ -15,11 +15,11 @@ public enum AttributeType
     HORSE_JUMP_STRENGTH(0.7, 0, 2),
     ZOMBIE_SPAWN_REINFORCEMENTS(0, 0, 1);
 
-    private double def;
-    private double min;
-    private double max;
+    private final double def;
+    private final double min;
+    private final double max;
 
-    private AttributeType(double def, double min, double max)
+    AttributeType(double def, double min, double max)
     {
         this.def = def;
         this.min = min;

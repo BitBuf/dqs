@@ -4,5 +4,5 @@ public enum ChatVisibility
 {
     FULL,
     SYSTEM,
-    HIDDEN;
+    HIDDEN
 }

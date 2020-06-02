@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class UseItemStatistic implements Statistic
 {
-    private String id;
+    private final String id;
 
     public UseItemStatistic(String id)
     {

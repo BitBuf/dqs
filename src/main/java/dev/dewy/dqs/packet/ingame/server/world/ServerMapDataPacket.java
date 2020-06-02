@@ -15,7 +15,7 @@ public class ServerMapDataPacket extends MinecraftPacket
     private int mapId;
     private byte scale;
     private boolean trackingPosition;
-    private MapIcon icons[];
+    private MapIcon[] icons;
 
     private MapData data;
 
@@ -24,12 +24,12 @@ public class ServerMapDataPacket extends MinecraftPacket
     {
     }
 
-    public ServerMapDataPacket(int mapId, byte scale, boolean trackingPosition, MapIcon icons[])
+    public ServerMapDataPacket(int mapId, byte scale, boolean trackingPosition, MapIcon[] icons)
     {
         this(mapId, scale, trackingPosition, icons, null);
     }
 
-    public ServerMapDataPacket(int mapId, byte scale, boolean trackingPosition, MapIcon icons[], MapData data)
+    public ServerMapDataPacket(int mapId, byte scale, boolean trackingPosition, MapIcon[] icons, MapData data)
     {
         this.mapId = mapId;
         this.scale = scale;
@@ -86,7 +86,7 @@ public class ServerMapDataPacket extends MinecraftPacket
             int rows = in.readUnsignedByte();
             int x = in.readUnsignedByte();
             int y = in.readUnsignedByte();
-            byte data[] = in.readBytes(in.readVarInt());
+            byte[] data = in.readBytes(in.readVarInt());
             this.data = new MapData(columns, rows, x, y, data);
         }
     }

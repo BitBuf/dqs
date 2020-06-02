@@ -7,5 +7,5 @@ public enum TitleAction
     ACTION_BAR,
     TIMES,
     CLEAR,
-    RESET;
+    RESET
 }

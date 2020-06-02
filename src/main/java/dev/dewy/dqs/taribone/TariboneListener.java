@@ -13,7 +13,10 @@ import dev.dewy.dqs.packet.ingame.server.entity.player.ServerPlayerAbilitiesPack
 import dev.dewy.dqs.packet.ingame.server.entity.player.ServerPlayerHealthPacket;
 import dev.dewy.dqs.packet.ingame.server.entity.player.ServerPlayerPositionRotationPacket;
 import dev.dewy.dqs.packet.ingame.server.entity.spawn.*;
-import dev.dewy.dqs.packet.ingame.server.world.*;
+import dev.dewy.dqs.packet.ingame.server.world.ServerBlockChangePacket;
+import dev.dewy.dqs.packet.ingame.server.world.ServerChunkDataPacket;
+import dev.dewy.dqs.packet.ingame.server.world.ServerMultiBlockChangePacket;
+import dev.dewy.dqs.packet.ingame.server.world.ServerUnloadChunkPacket;
 import dev.dewy.dqs.protocol.MinecraftProtocol;
 import dev.dewy.dqs.protocol.SubProtocol;
 import dev.dewy.dqs.protocol.game.chunk.Column;
@@ -80,8 +83,7 @@ public class TariboneListener implements SessionListener
             obj.setType(p.getType());
 
             world.loadEntity(obj);
-        }
-        else if (packet instanceof ServerSpawnExpOrbPacket)
+        } else if (packet instanceof ServerSpawnExpOrbPacket)
         {
             // 0x01 Spawn Experience Orb
             ServerSpawnExpOrbPacket p = (ServerSpawnExpOrbPacket) packet;
@@ -91,8 +93,7 @@ public class TariboneListener implements SessionListener
             orb.setLocation(new Vector3d(p.getX(), p.getY(), p.getZ()));
             orb.setCount(p.getExp());
             world.loadEntity(orb);
-        }
-        else if (packet instanceof ServerSpawnGlobalEntityPacket)
+        } else if (packet instanceof ServerSpawnGlobalEntityPacket)
         {
             // 0x02 Spawn Global Entity
             ServerSpawnGlobalEntityPacket p = (ServerSpawnGlobalEntityPacket) packet;
@@ -109,8 +110,7 @@ public class TariboneListener implements SessionListener
             world.loadEntity(ls);
 
             // TODO: Remove entity?
-        }
-        else if (packet instanceof ServerSpawnMobPacket)
+        } else if (packet instanceof ServerSpawnMobPacket)
         {
             // 0x03 Spawn Mob
             ServerSpawnMobPacket p = (ServerSpawnMobPacket) packet;
@@ -123,8 +123,7 @@ public class TariboneListener implements SessionListener
             e.setPitch(p.getPitch());
             e.setVelocity(new Vector3d(p.getMotionX(), p.getMotionY(), p.getMotionZ()));
             world.loadEntity(e);
-        }
-        else if (packet instanceof ServerSpawnPaintingPacket)
+        } else if (packet instanceof ServerSpawnPaintingPacket)
         {
             // 0x04 Spawn painting
             ServerSpawnPaintingPacket p = (ServerSpawnPaintingPacket) packet;
@@ -133,8 +132,7 @@ public class TariboneListener implements SessionListener
             painting.setLocation(new Vector3d(p.getPosition().getX(), p.getPosition().getY(), p.getPosition().getZ()));
             // TODO: Direction, type
             world.loadEntity(painting);
-        }
-        else if (packet instanceof ServerSpawnPlayerPacket)
+        } else if (packet instanceof ServerSpawnPlayerPacket)
         {
             // 0x05 Spawn Player
             ServerSpawnPlayerPacket p = (ServerSpawnPlayerPacket) packet;
@@ -146,8 +144,7 @@ public class TariboneListener implements SessionListener
             // TODO Metadata
 
             dqs.getWorld().loadEntity(pl);
-        }
-        else if (packet instanceof ServerBlockChangePacket)
+        } else if (packet instanceof ServerBlockChangePacket)
         {
             // 0x0B Block Change
             ServerBlockChangePacket p = (ServerBlockChangePacket) packet;
@@ -167,22 +164,19 @@ public class TariboneListener implements SessionListener
             try
             {
                 b = dqs.getWorld().getBlockAt(pos.getX(), pos.getY(), pos.getZ());
-            }
-            catch (ChunkNotLoadedException e)
+            } catch (ChunkNotLoadedException e)
             {
                 Constants.TARIBONE_LOG.warn("Received BlockChange for block in unloaded chunk: " + pos);
                 return;
             }
 
             b.setInternalState(r.getBlock());
-        }
-        else if (packet instanceof ServerDifficultyPacket)
+        } else if (packet instanceof ServerDifficultyPacket)
         {
             ServerDifficultyPacket p = (ServerDifficultyPacket) packet;
 
             dqs.getServerData().setDifficulty(p.getDifficulty());
-        }
-        else if (packet instanceof ServerMultiBlockChangePacket)
+        } else if (packet instanceof ServerMultiBlockChangePacket)
         {
             // 0x10 Multi Block Change
             ServerMultiBlockChangePacket p = (ServerMultiBlockChangePacket) packet;
@@ -196,8 +190,7 @@ public class TariboneListener implements SessionListener
                 try
                 {
                     b = dqs.getWorld().getBlockAt(pos.getX(), pos.getY(), pos.getZ());
-                }
-                catch (ChunkNotLoadedException e)
+                } catch (ChunkNotLoadedException e)
                 {
                     Constants.TARIBONE_LOG.warn("Received MultiBlockChange for block in unloaded chunk: " + pos);
                     return;
@@ -205,15 +198,13 @@ public class TariboneListener implements SessionListener
 
                 b.setInternalState(r.getBlock());
             }
-        }
-        else if (packet instanceof ServerUnloadChunkPacket)
+        } else if (packet instanceof ServerUnloadChunkPacket)
         {
             // 0x1D Unload Chunk
             ServerUnloadChunkPacket p = (ServerUnloadChunkPacket) packet;
 
             world.unloadChunk(p.getX(), p.getZ());
-        }
-        else if (packet instanceof ServerChunkDataPacket)
+        } else if (packet instanceof ServerChunkDataPacket)
         {
             // 0x20 Chunk Data
             ServerChunkDataPacket p = (ServerChunkDataPacket) packet;
@@ -231,8 +222,7 @@ public class TariboneListener implements SessionListener
                     // Replace the previous chunk
                     //logger.info("Replacing pre-existing chunk: " + new ChunkLocation(newCol.getX(), newCol.getZ()));
                     world.loadChunk(new Chunk(world, p.getColumn()));
-                }
-                else
+                } else
                 {
                     // Only update the new chunk sections
                     StringBuilder s = new StringBuilder();
@@ -251,14 +241,12 @@ public class TariboneListener implements SessionListener
                     }
                     //logger.info("Updating pre-existing chunk: " + new ChunkLocation(newCol.getX(), newCol.getZ()) + ", sections: " + s);
                 }
-            }
-            catch (ChunkNotLoadedException ex)
+            } catch (ChunkNotLoadedException ex)
             {
                 // New chunk
                 world.loadChunk(new Chunk(world, p.getColumn()));
             }
-        }
-        else if (packet instanceof ServerJoinGamePacket)
+        } else if (packet instanceof ServerJoinGamePacket)
         {
             // 0x23 Join Game
             ServerJoinGamePacket p = (ServerJoinGamePacket) packet;
@@ -275,8 +263,7 @@ public class TariboneListener implements SessionListener
             this.player = new TariboneDQSPlayer(dqs, p.getEntityId());
             player.setGameMode(p.getGameMode());
             dqs.setPlayer(player);
-        }
-        else if (packet instanceof ServerEntityMovementPacket)
+        } else if (packet instanceof ServerEntityMovementPacket)
         {
             // 0x25 Entity Relative Move
             // 0x26 Entity Look And Relative Move
@@ -299,15 +286,13 @@ public class TariboneListener implements SessionListener
                 // 0x25
                 e.setLocation(e.getLocation().add(new Vector3d(p.getMovementX(), p.getMovementY(), p.getMovementZ())));
                 e.setOnGround(p.isOnGround());
-            }
-            else if (packet instanceof ServerEntityRotationPacket)
+            } else if (packet instanceof ServerEntityRotationPacket)
             {
                 // 0x27
                 e.setPitch(p.getPitch());
                 e.setYaw(p.getYaw());
                 e.setOnGround(p.isOnGround());
-            }
-            else if (packet instanceof ServerEntityPositionRotationPacket)
+            } else if (packet instanceof ServerEntityPositionRotationPacket)
             {
                 // 0x26
                 e.setLocation(e.getLocation().add(new Vector3d(p.getMovementX(), p.getMovementY(), p.getMovementZ())));
@@ -318,16 +303,14 @@ public class TariboneListener implements SessionListener
             // 0x28
             // Do nothing.
 
-        }
-        else if (packet instanceof ServerPlayerAbilitiesPacket)
+        } else if (packet instanceof ServerPlayerAbilitiesPacket)
         {
             // 0x2B Player Abilities
             ServerPlayerAbilitiesPacket p = (ServerPlayerAbilitiesPacket) packet;
 
             TariboneDQSPlayer player = dqs.getPlayer();
             player.setWalkSpeed(p.getWalkSpeed());
-        }
-        else if (packet instanceof ServerPlayerPositionRotationPacket)
+        } else if (packet instanceof ServerPlayerPositionRotationPacket)
         {
             // 0x2E Player Position And Look
             ServerPlayerPositionRotationPacket p = (ServerPlayerPositionRotationPacket) packet;
@@ -342,8 +325,7 @@ public class TariboneListener implements SessionListener
             session.send(new ClientTeleportConfirmPacket(p.getTeleportId()));
 
             Constants.TARIBONE_LOG.info("Received new Player position: " + player.getLocation());
-        }
-        else if (packet instanceof ServerEntityDestroyPacket)
+        } else if (packet instanceof ServerEntityDestroyPacket)
         {
             // 0x30 Destroy Entities
             ServerEntityDestroyPacket p = (ServerEntityDestroyPacket) packet;
@@ -353,14 +335,12 @@ public class TariboneListener implements SessionListener
                 if (world.isEntityLoaded(id))
                 {
                     world.unloadEntity(id);
-                }
-                else
+                } else
                 {
                     Constants.TARIBONE_LOG.warn("Received entity destroy packet for unknown entity: " + id);
                 }
             }
-        }
-        else if (packet instanceof ServerEntityHeadLookPacket)
+        } else if (packet instanceof ServerEntityHeadLookPacket)
         {
             // 0x34 Entity Head Look
             ServerEntityHeadLookPacket p = (ServerEntityHeadLookPacket) packet;
@@ -375,8 +355,7 @@ public class TariboneListener implements SessionListener
             }
 
             e.setHeadYaw(p.getHeadYaw());
-        }
-        else if (packet instanceof ServerEntityVelocityPacket)
+        } else if (packet instanceof ServerEntityVelocityPacket)
         {
             // 0x3B Entity Velocity
             ServerEntityVelocityPacket p = (ServerEntityVelocityPacket) packet;
@@ -390,15 +369,13 @@ public class TariboneListener implements SessionListener
             }
 
             e.setVelocity(new Vector3d(p.getMotionX(), p.getMotionY(), p.getMotionZ()));
-        }
-        else if (packet instanceof ServerPlayerHealthPacket)
+        } else if (packet instanceof ServerPlayerHealthPacket)
         {
             // 0x3E Update Health
             ServerPlayerHealthPacket p = (ServerPlayerHealthPacket) packet;
 
             player.setHealth(p.getHealth());
-        }
-        else if (packet instanceof ServerEntityTeleportPacket)
+        } else if (packet instanceof ServerEntityTeleportPacket)
         {
             // 0x49 Entity Teleport
             ServerEntityTeleportPacket p = (ServerEntityTeleportPacket) packet;
@@ -415,8 +392,7 @@ public class TariboneListener implements SessionListener
             e.setLocation(new Vector3d(p.getX(), p.getY(), p.getZ()));
             e.setYaw(p.getYaw());
             e.setPitch(p.getPitch());
-        }
-        else
+        } else
         {
             Constants.TARIBONE_LOG.debug("Recieved unhandled packet: " + packet.getClass().getName());
         }

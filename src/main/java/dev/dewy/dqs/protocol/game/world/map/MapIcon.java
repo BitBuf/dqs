@@ -4,10 +4,10 @@ import dev.dewy.dqs.utils.ObjectUtil;
 
 public class MapIcon
 {
-    private int centerX;
-    private int centerZ;
-    private MapIconType iconType;
-    private int iconRotation;
+    private final int centerX;
+    private final int centerZ;
+    private final MapIconType iconType;
+    private final int iconRotation;
 
     public MapIcon(int centerX, int centerZ, MapIconType iconType, int iconRotation)
     {

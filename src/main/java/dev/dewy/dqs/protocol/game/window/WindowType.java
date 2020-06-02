@@ -15,5 +15,5 @@ public enum WindowType
     HOPPER,
     VILLAGER,
     SHULKER_BOX,
-    HORSE;
+    HORSE
 }

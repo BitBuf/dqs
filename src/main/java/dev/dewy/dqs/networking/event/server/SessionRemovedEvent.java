@@ -8,8 +8,8 @@ import dev.dewy.dqs.networking.Session;
  */
 public class SessionRemovedEvent implements ServerEvent
 {
-    private Server server;
-    private Session session;
+    private final Server server;
+    private final Session session;
 
     /**
      * Creates a new SessionRemovedEvent instance.

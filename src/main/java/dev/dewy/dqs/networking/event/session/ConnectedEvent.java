@@ -7,7 +7,7 @@ import dev.dewy.dqs.networking.Session;
  */
 public class ConnectedEvent implements SessionEvent
 {
-    private Session session;
+    private final Session session;
 
     /**
      * Creates a new ConnectedEvent instance.

@@ -93,7 +93,7 @@ public class ServerPlayEffectPacket extends MinecraftPacket
             value = ((RecordEffectData) this.data).getRecordId();
         } else if (this.data instanceof SmokeEffectData)
         {
-            value = MagicValues.value(Integer.class, (SmokeEffectData) this.data);
+            value = MagicValues.value(Integer.class, this.data);
         } else if (this.data instanceof BreakBlockEffectData)
         {
             value = (((BreakBlockEffectData) this.data).getBlockState().getId() & 4095) | ((((BreakBlockEffectData) this.data).getBlockState().getData() & 255) << 12);

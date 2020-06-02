@@ -4,5 +4,5 @@ import dev.dewy.dqs.networking.Session;
 
 public interface ServerLoginHandler
 {
-    public void loggedIn(Session session);
+    void loggedIn(Session session);
 }

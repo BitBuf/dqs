@@ -14,7 +14,7 @@ public interface NetOutput
      * @param b Boolean to write.
      * @throws IOException If an I/O error occurs.
      */
-    public void writeBoolean(boolean b) throws IOException;
+    void writeBoolean(boolean b) throws IOException;
 
     /**
      * Writes a byte.
@@ -22,7 +22,7 @@ public interface NetOutput
      * @param b Byte to write.
      * @throws IOException If an I/O error occurs.
      */
-    public void writeByte(int b) throws IOException;
+    void writeByte(int b) throws IOException;
 
     /**
      * Writes a short.
@@ -30,7 +30,7 @@ public interface NetOutput
      * @param s Short to write.
      * @throws IOException If an I/O error occurs.
      */
-    public void writeShort(int s) throws IOException;
+    void writeShort(int s) throws IOException;
 
     /**
      * Writes a char.
@@ -38,7 +38,7 @@ public interface NetOutput
      * @param c Char to write.
      * @throws IOException If an I/O error occurs.
      */
-    public void writeChar(int c) throws IOException;
+    void writeChar(int c) throws IOException;
 
     /**
      * Writes a integer.
@@ -46,7 +46,7 @@ public interface NetOutput
      * @param i Integer to write.
      * @throws IOException If an I/O error occurs.
      */
-    public void writeInt(int i) throws IOException;
+    void writeInt(int i) throws IOException;
 
     /**
      * Writes a varint. A varint is a form of integer where only necessary bytes are written. This is done to save bandwidth.
@@ -54,7 +54,7 @@ public interface NetOutput
      * @param i Varint to write.
      * @throws IOException If an I/O error occurs.
      */
-    public void writeVarInt(int i) throws IOException;
+    void writeVarInt(int i) throws IOException;
 
     /**
      * Writes a long.
@@ -62,7 +62,7 @@ public interface NetOutput
      * @param l Long to write.
      * @throws IOException If an I/O error occurs.
      */
-    public void writeLong(long l) throws IOException;
+    void writeLong(long l) throws IOException;
 
     /**
      * Writes a varlong. A varlong is a form of long where only necessary bytes are written. This is done to save bandwidth.
@@ -70,7 +70,7 @@ public interface NetOutput
      * @param l Varlong to write.
      * @throws IOException If an I/O error occurs.
      */
-    public void writeVarLong(long l) throws IOException;
+    void writeVarLong(long l) throws IOException;
 
     /**
      * Writes a float.
@@ -78,7 +78,7 @@ public interface NetOutput
      * @param f Float to write.
      * @throws IOException If an I/O error occurs.
      */
-    public void writeFloat(float f) throws IOException;
+    void writeFloat(float f) throws IOException;
 
     /**
      * Writes a double.
@@ -86,7 +86,7 @@ public interface NetOutput
      * @param d Double to write.
      * @throws IOException If an I/O error occurs.
      */
-    public void writeDouble(double d) throws IOException;
+    void writeDouble(double d) throws IOException;
 
     /**
      * Writes a byte array.
@@ -94,7 +94,7 @@ public interface NetOutput
      * @param b Byte array to write.
      * @throws IOException If an I/O error occurs.
      */
-    public void writeBytes(byte b[]) throws IOException;
+    void writeBytes(byte[] b) throws IOException;
 
     /**
      * Writes a byte array, using the given amount of bytes.
@@ -103,7 +103,7 @@ public interface NetOutput
      * @param length Bytes to write.
      * @throws IOException If an I/O error occurs.
      */
-    public void writeBytes(byte b[], int length) throws IOException;
+    void writeBytes(byte[] b, int length) throws IOException;
 
     /**
      * Writes a short array.
@@ -111,7 +111,7 @@ public interface NetOutput
      * @param s Short array to write.
      * @throws IOException If an I/O error occurs.
      */
-    public void writeShorts(short s[]) throws IOException;
+    void writeShorts(short[] s) throws IOException;
 
     /**
      * Writes a short array, using the given amount of bytes.
@@ -120,7 +120,7 @@ public interface NetOutput
      * @param length Shorts to write.
      * @throws IOException If an I/O error occurs.
      */
-    public void writeShorts(short s[], int length) throws IOException;
+    void writeShorts(short[] s, int length) throws IOException;
 
     /**
      * Writes an int array.
@@ -128,7 +128,7 @@ public interface NetOutput
      * @param i Int array to write.
      * @throws IOException If an I/O error occurs.
      */
-    public void writeInts(int i[]) throws IOException;
+    void writeInts(int[] i) throws IOException;
 
     /**
      * Writes an int array, using the given amount of bytes.
@@ -137,7 +137,7 @@ public interface NetOutput
      * @param length Ints to write.
      * @throws IOException If an I/O error occurs.
      */
-    public void writeInts(int i[], int length) throws IOException;
+    void writeInts(int[] i, int length) throws IOException;
 
     /**
      * Writes a long array.
@@ -145,7 +145,7 @@ public interface NetOutput
      * @param l Long array to write.
      * @throws IOException If an I/O error occurs.
      */
-    public void writeLongs(long l[]) throws IOException;
+    void writeLongs(long[] l) throws IOException;
 
     /**
      * Writes a long array, using the given amount of bytes.
@@ -154,7 +154,7 @@ public interface NetOutput
      * @param length Longs to write.
      * @throws IOException If an I/O error occurs.
      */
-    public void writeLongs(long l[], int length) throws IOException;
+    void writeLongs(long[] l, int length) throws IOException;
 
     /**
      * Writes a string.
@@ -162,7 +162,7 @@ public interface NetOutput
      * @param s String to write.
      * @throws IOException If an I/O error occurs.
      */
-    public void writeString(String s) throws IOException;
+    void writeString(String s) throws IOException;
 
     /**
      * Writes a UUID.
@@ -170,12 +170,12 @@ public interface NetOutput
      * @param uuid UUID to write.
      * @throws IOException If an I/O error occurs.
      */
-    public void writeUUID(UUID uuid) throws IOException;
+    void writeUUID(UUID uuid) throws IOException;
 
     /**
      * Flushes the output.
      *
      * @throws IOException If an I/O error occurs.
      */
-    public void flush() throws IOException;
+    void flush() throws IOException;
 }

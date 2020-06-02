@@ -4,7 +4,7 @@ import dev.dewy.dqs.utils.ObjectUtil;
 
 public class BreakPotionEffectData implements WorldEffectData
 {
-    private int potionId;
+    private final int potionId;
 
     public BreakPotionEffectData(int potionId)
     {

@@ -11,14 +11,14 @@ import java.io.IOException;
 public class ClientUpdateSignPacket extends MinecraftPacket
 {
     private Position position;
-    private String lines[];
+    private String[] lines;
 
     @SuppressWarnings("unused")
     private ClientUpdateSignPacket()
     {
     }
 
-    public ClientUpdateSignPacket(Position position, String lines[])
+    public ClientUpdateSignPacket(Position position, String[] lines)
     {
         if (lines.length != 4)
         {

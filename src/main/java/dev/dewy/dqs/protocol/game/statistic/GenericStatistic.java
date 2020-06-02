@@ -51,5 +51,5 @@ public enum GenericStatistic implements Statistic
     MOB_KILLS,
     ANIMALS_BRED,
     PLAYERS_KILLED,
-    FISH_CAUGHT;
+    FISH_CAUGHT
 }

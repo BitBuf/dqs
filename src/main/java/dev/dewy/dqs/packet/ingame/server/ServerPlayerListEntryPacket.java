@@ -15,14 +15,14 @@ import java.util.UUID;
 public class ServerPlayerListEntryPacket extends MinecraftPacket
 {
     private PlayerListEntryAction action;
-    private PlayerListEntry entries[];
+    private PlayerListEntry[] entries;
 
     @SuppressWarnings("unused")
     private ServerPlayerListEntryPacket()
     {
     }
 
-    public ServerPlayerListEntryPacket(PlayerListEntryAction action, PlayerListEntry entries[])
+    public ServerPlayerListEntryPacket(PlayerListEntryAction action, PlayerListEntry[] entries)
     {
         this.action = action;
         this.entries = entries;

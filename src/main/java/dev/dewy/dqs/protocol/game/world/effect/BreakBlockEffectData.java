@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class BreakBlockEffectData implements WorldEffectData
 {
-    private BlockState blockState;
+    private final BlockState blockState;
 
     public BreakBlockEffectData(BlockState blockState)
     {

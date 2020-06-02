@@ -51,26 +51,21 @@ public class DQS
 
     protected final SessionFactory sessionFactory = new DQSSessionFactory(this);
     protected final AtomicReference<DQSServerConnection> currentPlayer = new AtomicReference<>();
+    public EventWaiter waiter = new EventWaiter();
+    public boolean inQueue = true;
+    public int currentPos = -1;
     protected MinecraftProtocol protocol;
     protected Client client;
     protected Server server;
     protected Authenticator authenticator;
     protected BufferedImage serverIcon;
-
-    public EventWaiter waiter = new EventWaiter();
-
     private World world;
     private ServerData serverData;
-
     private TariboneAStar pathFinder;
     private TaskExecutor taskExecutor;
-
     private TariboneController controller;
     private TariboneTicker ticker;
     private TariboneDQSPlayer player;
-
-    public boolean inQueue = true;
-    public int currentPos = -1;
 
     public static void main(String... args) throws LoginException
     {
@@ -455,6 +450,11 @@ public class DQS
         return this.currentPlayer;
     }
 
+    public TaskExecutor getTaskExecutor()
+    {
+        return taskExecutor;
+    }
+
     public void setTaskExecutor(TaskExecutor activity)
     {
         if (this.taskExecutor != null)
@@ -463,11 +463,6 @@ public class DQS
         }
 
         this.taskExecutor = activity;
-    }
-
-    public TaskExecutor getTaskExecutor()
-    {
-        return taskExecutor;
     }
 
     public TariboneAStar getPathFinder()
@@ -485,16 +480,6 @@ public class DQS
         return world;
     }
 
-    public ServerData getServerData()
-    {
-        return serverData;
-    }
-
-    public TariboneDQSPlayer getPlayer()
-    {
-        return player;
-    }
-
     public void setWorld(World world)
     {
         this.world = world;
@@ -505,9 +490,19 @@ public class DQS
         }
     }
 
+    public ServerData getServerData()
+    {
+        return serverData;
+    }
+
     public void setServerData(ServerData serverData)
     {
         this.serverData = serverData;
+    }
+
+    public TariboneDQSPlayer getPlayer()
+    {
+        return player;
     }
 
     public void setPlayer(TariboneDQSPlayer player)

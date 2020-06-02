@@ -9,7 +9,7 @@ import java.util.List;
 
 public class TcpPacketEncryptor extends ByteToMessageCodec<ByteBuf>
 {
-    private Session session;
+    private final Session session;
     private byte[] decryptedArray = new byte[0];
     private byte[] encryptedArray = new byte[0];
 

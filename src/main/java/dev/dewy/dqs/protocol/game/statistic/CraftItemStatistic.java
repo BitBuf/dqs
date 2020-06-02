@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class CraftItemStatistic implements Statistic
 {
-    private String id;
+    private final String id;
 
     public CraftItemStatistic(String id)
     {

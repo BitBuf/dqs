@@ -14,9 +14,9 @@ import java.net.InetSocketAddress;
 
 public class TcpConnectionListener implements ConnectionListener
 {
-    private String host;
-    private int port;
-    private Server server;
+    private final String host;
+    private final int port;
+    private final Server server;
 
     private EventLoopGroup group;
     private Channel channel;

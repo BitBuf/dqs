@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class BreakItemStatistic implements Statistic
 {
-    private String id;
+    private final String id;
 
     public BreakItemStatistic(String id)
     {

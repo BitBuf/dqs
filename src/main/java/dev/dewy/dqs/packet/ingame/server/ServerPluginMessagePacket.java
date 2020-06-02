@@ -9,14 +9,14 @@ import java.io.IOException;
 public class ServerPluginMessagePacket extends MinecraftPacket
 {
     private String channel;
-    private byte data[];
+    private byte[] data;
 
     @SuppressWarnings("unused")
     private ServerPluginMessagePacket()
     {
     }
 
-    public ServerPluginMessagePacket(String channel, byte data[])
+    public ServerPluginMessagePacket(String channel, byte[] data)
     {
         this.channel = channel;
         this.data = data;

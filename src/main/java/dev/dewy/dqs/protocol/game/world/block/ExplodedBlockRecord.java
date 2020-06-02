@@ -4,9 +4,9 @@ import dev.dewy.dqs.utils.ObjectUtil;
 
 public class ExplodedBlockRecord
 {
-    private int x;
-    private int y;
-    private int z;
+    private final int x;
+    private final int y;
+    private final int z;
 
     public ExplodedBlockRecord(int x, int y, int z)
     {

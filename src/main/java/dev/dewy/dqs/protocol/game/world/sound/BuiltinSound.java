@@ -550,5 +550,5 @@ public enum BuiltinSound implements Sound
     UI_TOAST_OUT,
     UI_TOAST_CHALLENGE_COMPLETE,
     WEATHER_RAIN,
-    WEATHER_RAIN_ABOVE;
+    WEATHER_RAIN_ABOVE
 }

@@ -15,8 +15,8 @@ import java.util.Hashtable;
 
 public class TcpClientSession extends TcpSession
 {
-    private Client client;
-    private Proxy proxy;
+    private final Client client;
+    private final Proxy proxy;
 
     private EventLoopGroup group;
 

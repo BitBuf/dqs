@@ -6,13 +6,13 @@ import java.util.Arrays;
 
 public class MapData
 {
-    private int columns;
-    private int rows;
-    private int x;
-    private int y;
-    private byte data[];
+    private final int columns;
+    private final int rows;
+    private final int x;
+    private final int y;
+    private final byte[] data;
 
-    public MapData(int columns, int rows, int x, int y, byte data[])
+    public MapData(int columns, int rows, int x, int y, byte[] data)
     {
         this.columns = columns;
         this.rows = rows;

@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class CustomSound implements Sound
 {
-    private String name;
+    private final String name;
 
     public CustomSound(String name)
     {

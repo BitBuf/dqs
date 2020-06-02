@@ -14,15 +14,15 @@ import java.util.Map;
  */
 public class Server
 {
-    private String host;
-    private int port;
-    private Class<? extends PacketProtocol> protocol;
-    private SessionFactory factory;
+    private final String host;
+    private final int port;
+    private final Class<? extends PacketProtocol> protocol;
+    private final SessionFactory factory;
     private ConnectionListener listener;
-    private List<Session> sessions = new ArrayList<Session>();
+    private final List<Session> sessions = new ArrayList<Session>();
 
-    private Map<String, Object> flags = new HashMap<String, Object>();
-    private List<ServerListener> listeners = new ArrayList<ServerListener>();
+    private final Map<String, Object> flags = new HashMap<String, Object>();
+    private final List<ServerListener> listeners = new ArrayList<ServerListener>();
 
     public Server(String host, int port, Class<? extends PacketProtocol> protocol, SessionFactory factory)
     {

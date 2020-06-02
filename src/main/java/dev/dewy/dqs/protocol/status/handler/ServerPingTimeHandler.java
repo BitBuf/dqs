@@ -4,5 +4,5 @@ import dev.dewy.dqs.networking.Session;
 
 public interface ServerPingTimeHandler
 {
-    public void handle(Session session, long pingTime);
+    void handle(Session session, long pingTime);
 }

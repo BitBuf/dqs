@@ -4,6 +4,7 @@ import dev.dewy.dqs.io.NetOutput;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 /**
@@ -11,7 +12,7 @@ import java.util.UUID;
  */
 public class StreamNetOutput implements NetOutput
 {
-    private OutputStream out;
+    private final OutputStream out;
 
     /**
      * Creates a new StreamNetOutput instance.
@@ -108,13 +109,13 @@ public class StreamNetOutput implements NetOutput
     }
 
     @Override
-    public void writeBytes(byte b[]) throws IOException
+    public void writeBytes(byte[] b) throws IOException
     {
         this.writeBytes(b, b.length);
     }
 
     @Override
-    public void writeBytes(byte b[], int length) throws IOException
+    public void writeBytes(byte[] b, int length) throws IOException
     {
         this.out.write(b, 0, length);
     }
@@ -172,7 +173,7 @@ public class StreamNetOutput implements NetOutput
             throw new IllegalArgumentException("String cannot be null!");
         }
 
-        byte[] bytes = s.getBytes("UTF-8");
+        byte[] bytes = s.getBytes(StandardCharsets.UTF_8);
         if (bytes.length > 32767)
         {
             throw new IOException("String too big (was " + s.length() + " bytes encoded, max " + 32767 + ")");

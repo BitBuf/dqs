@@ -4,7 +4,7 @@ import dev.dewy.dqs.utils.ObjectUtil;
 
 public class SplashPotionData implements ObjectData
 {
-    private int potionData;
+    private final int potionData;
 
     public SplashPotionData(int potionData)
     {

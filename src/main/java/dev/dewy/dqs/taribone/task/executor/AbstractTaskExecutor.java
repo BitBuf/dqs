@@ -41,8 +41,7 @@ public abstract class AbstractTaskExecutor implements TaskExecutor
         if (lastStatus == null)
         {
             return TaskStatus.forInProgress();
-        }
-        else
+        } else
         {
             return lastStatus;
         }

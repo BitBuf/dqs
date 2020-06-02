@@ -24,20 +24,22 @@ package dev.dewy.dqs.taribone.task.executor;
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-import java.util.concurrent.*;
 
 import dev.dewy.dqs.DQS;
-import dev.dewy.dqs.taribone.entity.player.TariboneDQSPlayer;
-import dev.dewy.dqs.taribone.task.api.TaskStatus;
-import dev.dewy.dqs.utils.Constants;
-import dev.dewy.dqs.taribone.pathing.PathNode;
-import dev.dewy.dqs.taribone.world.block.Block;
 import dev.dewy.dqs.exceptions.taribone.ChunkNotLoadedException;
+import dev.dewy.dqs.taribone.entity.player.TariboneDQSPlayer;
+import dev.dewy.dqs.taribone.pathing.PathNode;
+import dev.dewy.dqs.taribone.task.api.TaskStatus;
+import dev.dewy.dqs.taribone.world.block.Block;
 import dev.dewy.dqs.taribone.world.block.Material;
+import dev.dewy.dqs.utils.Constants;
 import dev.dewy.dqs.utils.vector.Vector3d;
 import dev.dewy.dqs.utils.vector.Vector3i;
 
-public class WalkTaskExecutor extends AbstractTaskExecutor {
+import java.util.concurrent.*;
+
+public class WalkTaskExecutor extends AbstractTaskExecutor
+{
 
     private static double speed = 0.15, jumpFactor = 3, fallFactor = 4, liquidFactor = 0.5;
     private static int defaultTimeout = 6000;
@@ -52,74 +54,140 @@ public class WalkTaskExecutor extends AbstractTaskExecutor {
     private int ticksSinceStepChange = 0;
     private int timeout = defaultTimeout;
 
-    private Callable<PathNode> task = new Callable<PathNode>() {
+    private final Callable<PathNode> task = new Callable<PathNode>()
+    {
         @Override
-        public PathNode call() throws Exception {
+        public PathNode call() throws Exception
+        {
             TariboneDQSPlayer player = dqs.getPlayer();
             PathNode start = dqs.getPathFinder().search(player.getLocation().intVector(), target);
             return start;
         }
     };
 
-    public WalkTaskExecutor(final DQS dqs, final Vector3i target) {
+    public WalkTaskExecutor(final DQS dqs, final Vector3i target)
+    {
         super(dqs);
         this.target = target;
 
-        if (dqs.getPlayer().getLocation().intVector().equals(target)) {
+        if (dqs.getPlayer().getLocation().intVector().equals(target))
+        {
             Constants.TARIBONE_LOG.warn("Useless walk task. Bot and given target location equal.");
         }
         pathFuture = service.submit(task);
         startTime = System.currentTimeMillis();
     }
 
-    @Override
-    protected TaskStatus onTick() {
+    public static double getDefaultSpeed()
+    {
+        return speed;
+    }
 
-        if (pathFuture != null && !pathFuture.isDone()) {
+    public static void setDefaultSpeed(double defaultSpeed)
+    {
+        WalkTaskExecutor.speed = defaultSpeed;
+    }
+
+    public static double getDefaultJumpFactor()
+    {
+        return jumpFactor;
+    }
+
+    public static void setDefaultJumpFactor(double defaultJumpFactor)
+    {
+        WalkTaskExecutor.jumpFactor = defaultJumpFactor;
+    }
+
+    public static double getDefaultFallFactor()
+    {
+        return fallFactor;
+    }
+
+    public static void setDefaultFallFactor(double defaultFallFactor)
+    {
+        WalkTaskExecutor.fallFactor = defaultFallFactor;
+    }
+
+    public static double getDefaultLiquidFactor()
+    {
+        return liquidFactor;
+    }
+
+    public static void setDefaultLiquidFactor(double defaultLiquidFactor)
+    {
+        WalkTaskExecutor.liquidFactor = defaultLiquidFactor;
+    }
+
+    public static int getDefaultTimeout()
+    {
+        return defaultTimeout;
+    }
+
+    public static void setDefaultTimeout(int defaultTimeout)
+    {
+        WalkTaskExecutor.defaultTimeout = defaultTimeout;
+    }
+
+    @Override
+    protected TaskStatus onTick()
+    {
+
+        if (pathFuture != null && !pathFuture.isDone())
+        {
             // If we're still calculating the path:
             // Check timeout
-            if (timeout > 0 && System.currentTimeMillis() - startTime > timeout) {
+            if (timeout > 0 && System.currentTimeMillis() - startTime > timeout)
+            {
                 pathFuture.cancel(true);
                 nextStep = null;
                 return TaskStatus.forFailure(String.format("Path search from %s to %s timed out (%s ms)", dqs.getPlayer().getLocation(), target, timeout));
-            } else {
+            } else
+            {
                 return TaskStatus.forInProgress();
             }
 
-        } else if (pathFuture != null && pathFuture.isDone() && !pathFuture.isCancelled()) {
+        } else if (pathFuture != null && pathFuture.isDone() && !pathFuture.isCancelled())
+        {
             // If we've found a path successfully
-            try {
+            try
+            {
                 nextStep = pathFuture.get();
                 ticksSinceStepChange = 0;
-            } catch (InterruptedException e) {
+            } catch (InterruptedException e)
+            {
                 return TaskStatus.forFailure(e.getMessage(), e);
-            } catch (ExecutionException e) {
+            } catch (ExecutionException e)
+            {
                 /*
                 if (e.getCause() instanceof ChunkNotLoadedException) {
                     return status = TaskStatus.forInProgress();
                 }*/
                 return TaskStatus.forFailure(e.getMessage(), e.getCause());
-            } finally {
+            } finally
+            {
                 pathFuture = null;
             }
         }
 
         // If we have no more steps to do, we're done
-        if (nextStep == null) {
+        if (nextStep == null)
+        {
             return TaskStatus.forSuccess();
         }
 
         TariboneDQSPlayer player = dqs.getPlayer();
 
         // Skip the step if the next step is close by
-        if (nextStep.getNext() != null && player.getLocation().distanceSquared(nextStep.getNext().getLocation().doubleVector()) < 0.05) {
+        if (nextStep.getNext() != null && player.getLocation().distanceSquared(nextStep.getNext().getLocation().doubleVector()) < 0.05)
+        {
             nextStep = nextStep.getNext();
             ticksSinceStepChange = 0;
         }
 
         // If the player is too far away from the next step
         // Abort for now
-        if (player.getLocation().distanceSquared(nextStep.getLocation().doubleVector()) > 5.0) {
+        if (player.getLocation().distanceSquared(nextStep.getLocation().doubleVector()) > 5.0)
+        {
             Constants.TARIBONE_LOG.info(String.format("Strayed from path. %s -> %s", player.getLocation(), nextStep.getLocation()));
             // TODO: Fix later
             //TaskStatus status = TaskStatus.forInProgress();
@@ -130,7 +198,8 @@ public class WalkTaskExecutor extends AbstractTaskExecutor {
         // Keep track of how many ticks a step takes
         // If a step takes too many ticks, abort
         ticksSinceStepChange++;
-        if (ticksSinceStepChange > 80) {
+        if (ticksSinceStepChange > 80)
+        {
             nextStep = null;
             return TaskStatus.forFailure("Too many ticks since step change");
         }
@@ -140,9 +209,11 @@ public class WalkTaskExecutor extends AbstractTaskExecutor {
         Vector3i blockLoc = moveLoc.intVector().add(new Vector3i(0, -1, 0));
         Block thisBlock;
 
-        try {
+        try
+        {
             thisBlock = dqs.getWorld().getBlockAt(blockLoc);
-        } catch (ChunkNotLoadedException e) {
+        } catch (ChunkNotLoadedException e)
+        {
             // TODO: Fix: Wait until chunk is loaded.
             Constants.TARIBONE_LOG.warn(String.format("Block under player: %s", blockLoc));
             Constants.TARIBONE_LOG.warn(String.format("Player at %s", moveLoc));
@@ -151,7 +222,8 @@ public class WalkTaskExecutor extends AbstractTaskExecutor {
 
         // Step
         Vector3i stepTargetBlock = nextStep.getLocation();
-        if (stepTargetBlock == null) {
+        if (stepTargetBlock == null)
+        {
             return TaskStatus.forFailure("No next step");
         }
         Vector3d stepTarget = stepTargetBlock.doubleVector();
@@ -160,32 +232,41 @@ public class WalkTaskExecutor extends AbstractTaskExecutor {
         stepTarget = stepTarget.add(0.5, 0, 0.5);
 
         // Calculate speed
-        double moveSpeed = this.speed;
+        double moveSpeed = speed;
         boolean inLiquid = false; // TODO: player.isInLiquid();
-        if (Material.getById(thisBlock.getTypeId()) == Material.SOUL_SAND) {
-            if (Material.getById(thisBlock.getTypeId()) == Material.SOUL_SAND) {
+        if (Material.getById(thisBlock.getTypeId()) == Material.SOUL_SAND)
+        {
+            if (Material.getById(thisBlock.getTypeId()) == Material.SOUL_SAND)
+            {
                 // Soulsand makes us shorter 8D
                 stepTarget = stepTarget.add(0, -0.12, 0);
             }
             moveSpeed *= liquidFactor;
-        } else if (inLiquid) {
+        } else if (inLiquid)
+        {
             moveSpeed *= liquidFactor;
         }
 
         double stepX = stepTarget.getX(), stepY = stepTarget.getY(), stepZ = stepTarget.getZ();
 
         // See if we're climbing, or jumping
-        if (moveLoc.getY() != stepY) {
+        if (moveLoc.getY() != stepY)
+        {
             boolean canClimbBlock = false;
-            try {
+            try
+            {
                 canClimbBlock = dqs.getPathFinder().getWorldPhysics().canClimb(moveLoc.intVector());
-            } catch (ChunkNotLoadedException e) {
+            } catch (ChunkNotLoadedException e)
+            {
                 return TaskStatus.forInProgress();
             }
-            if (!inLiquid && !canClimbBlock) {
-                if (moveLoc.getY() < stepY) {
+            if (!inLiquid && !canClimbBlock)
+            {
+                if (moveLoc.getY() < stepY)
+                {
                     moveSpeed *= jumpFactor;
-                } else {
+                } else
+                {
                     moveSpeed *= fallFactor;
                 }
             }
@@ -195,12 +276,14 @@ public class WalkTaskExecutor extends AbstractTaskExecutor {
             moveLoc = moveLoc.add(new Vector3d(0, offsetY, 0));
         }
 
-        if (moveLoc.getX() != stepX) {
+        if (moveLoc.getX() != stepX)
+        {
             double offsetX = moveLoc.getX() < stepX ? Math.min(moveSpeed, stepX - moveLoc.getX()) : Math.max(-moveSpeed, stepX - moveLoc.getX());
             moveLoc = moveLoc.add(new Vector3d(offsetX, 0, 0));
         }
 
-        if (moveLoc.getZ() != stepZ) {
+        if (moveLoc.getZ() != stepZ)
+        {
             double offsetZ = moveLoc.getZ() < stepZ ? Math.min(moveSpeed, stepZ - moveLoc.getZ()) : Math.max(-moveSpeed, stepZ - moveLoc.getZ());
             moveLoc = moveLoc.add(new Vector3d(0, 0, offsetZ));
         }
@@ -208,7 +291,8 @@ public class WalkTaskExecutor extends AbstractTaskExecutor {
         // Send new player location to server
         dqs.getController().updateLocation(moveLoc);
 
-        if (moveLoc.equals(stepTarget)) {
+        if (moveLoc.equals(stepTarget))
+        {
             nextStep = nextStep.getNext();
             ticksSinceStepChange = 0;
         }
@@ -217,26 +301,31 @@ public class WalkTaskExecutor extends AbstractTaskExecutor {
     }
 
     @Override
-    protected void onStop() {
-        if (pathFuture != null && !pathFuture.isDone()) {
+    protected void onStop()
+    {
+        if (pathFuture != null && !pathFuture.isDone())
+        {
             pathFuture.cancel(true);
         }
         nextStep = null;
         this.service.shutdown();
     }
 
-    public Vector3i getTarget() {
+    public Vector3i getTarget()
+    {
         return target;
     }
 
-    public void setTimeout(int timeout) {
+    public void setTimeout(int timeout)
+    {
         this.timeout = timeout;
     }
 
     /**
      * Walk speed, in blocks/tick. Default is 0.15.
      */
-    public double getSpeed() {
+    public double getSpeed()
+    {
         return speed;
     }
 
@@ -245,75 +334,43 @@ public class WalkTaskExecutor extends AbstractTaskExecutor {
      *
      * @param speed Walk speed, in blocks/tick. Default is 0.15.
      */
-    public void setSpeed(double speed) {
-        this.speed = speed;
+    public void setSpeed(double speed)
+    {
+        WalkTaskExecutor.speed = speed;
     }
 
-    public double getJumpFactor() {
+    public double getJumpFactor()
+    {
         return jumpFactor;
     }
 
-    public void setJumpFactor(double jumpFactor) {
-        this.jumpFactor = jumpFactor;
+    public void setJumpFactor(double jumpFactor)
+    {
+        WalkTaskExecutor.jumpFactor = jumpFactor;
     }
 
-    public double getFallFactor() {
+    public double getFallFactor()
+    {
         return fallFactor;
     }
 
-    public void setFallFactor(double fallFactor) {
-        this.fallFactor = fallFactor;
+    public void setFallFactor(double fallFactor)
+    {
+        WalkTaskExecutor.fallFactor = fallFactor;
     }
 
-    public double getLiquidFactor() {
+    public double getLiquidFactor()
+    {
         return liquidFactor;
     }
 
-    public void setLiquidFactor(double liquidFactor) {
-        this.liquidFactor = liquidFactor;
+    public void setLiquidFactor(double liquidFactor)
+    {
+        WalkTaskExecutor.liquidFactor = liquidFactor;
     }
 
-    public boolean isMoving() {
+    public boolean isMoving()
+    {
         return nextStep != null;
-    }
-
-    public static double getDefaultSpeed() {
-        return speed;
-    }
-
-    public static void setDefaultSpeed(double defaultSpeed) {
-        WalkTaskExecutor.speed = defaultSpeed;
-    }
-
-    public static double getDefaultJumpFactor() {
-        return jumpFactor;
-    }
-
-    public static void setDefaultJumpFactor(double defaultJumpFactor) {
-        WalkTaskExecutor.jumpFactor = defaultJumpFactor;
-    }
-
-    public static double getDefaultFallFactor() {
-        return fallFactor;
-    }
-
-    public static void setDefaultFallFactor(double defaultFallFactor) {
-        WalkTaskExecutor.fallFactor = defaultFallFactor;
-    }
-
-    public static double getDefaultLiquidFactor() {
-        return liquidFactor;
-    }
-
-    public static void setDefaultLiquidFactor(double defaultLiquidFactor) {
-        WalkTaskExecutor.liquidFactor = defaultLiquidFactor;
-    }
-
-    public static int getDefaultTimeout() {
-        return defaultTimeout;
-    }
-
-    public static void setDefaultTimeout(int defaultTimeout) {
-        WalkTaskExecutor.defaultTimeout = defaultTimeout;
     }
 }

@@ -77,7 +77,7 @@ public class SerializableTag extends Tag
 
     private static class DataInputInputStream extends InputStream
     {
-        private DataInput in;
+        private final DataInput in;
 
         public DataInputInputStream(DataInput in)
         {
@@ -142,7 +142,7 @@ public class SerializableTag extends Tag
 
     private static class DataOutputOutputStream extends OutputStream
     {
-        private DataOutput out;
+        private final DataOutput out;
 
         public DataOutputOutputStream(DataOutput out)
         {

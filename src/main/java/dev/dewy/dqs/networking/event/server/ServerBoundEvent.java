@@ -7,7 +7,7 @@ import dev.dewy.dqs.networking.Server;
  */
 public class ServerBoundEvent implements ServerEvent
 {
-    private Server server;
+    private final Server server;
 
     /**
      * Creates a new ServerBoundEvent instance.

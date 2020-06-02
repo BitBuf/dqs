@@ -16,7 +16,7 @@ public class PosCommand extends Command
     {
         this.name = "pos";
         this.help = "View your position in queue.";
-        this.aliases = new String[] { "qpos", "position" };
+        this.aliases = new String[] {"qpos", "position"};
         this.guildOnly = false;
         this.cooldown = Constants.CONFIG.discord.cooldown;
     }
@@ -35,8 +35,7 @@ public class PosCommand extends Command
                         .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                         .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
                         .build());
-            }
-            else if (DQS.getInstance().inQueue)
+            } else if (DQS.getInstance().inQueue)
             {
                 event.reply(new EmbedBuilder()
                         .setTitle("**DQS** - Queue Position")
@@ -45,8 +44,7 @@ public class PosCommand extends Command
                         .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                         .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
                         .build());
-            }
-            else
+            } else
             {
                 event.reply(new EmbedBuilder()
                         .setTitle("**DQS** - Queue Position")
@@ -56,8 +54,7 @@ public class PosCommand extends Command
                         .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
                         .build());
             }
-        }
-        catch (Exception e)
+        } catch (Exception e)
         {
             event.reply(new EmbedBuilder()
                     .setTitle("**DQS** - Error")

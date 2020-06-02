@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class DropItemStatistic implements Statistic
 {
-    private String id;
+    private final String id;
 
     public DropItemStatistic(String id)
     {

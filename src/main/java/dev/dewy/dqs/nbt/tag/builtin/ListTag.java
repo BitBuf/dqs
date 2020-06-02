@@ -16,7 +16,7 @@ import java.util.List;
 public class ListTag extends Tag implements Iterable<Tag>
 {
     private Class<? extends Tag> type;
-    private List<Tag> value;
+    private final List<Tag> value;
 
     /**
      * Creates an empty list tag with the specified name and no defined type.

@@ -4,6 +4,7 @@ import dev.dewy.dqs.io.NetInput;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 /**
@@ -11,7 +12,7 @@ import java.util.UUID;
  */
 public class ByteBufferNetInput implements NetInput
 {
-    private ByteBuffer buffer;
+    private final ByteBuffer buffer;
 
     public ByteBufferNetInput(ByteBuffer buffer)
     {
@@ -127,7 +128,7 @@ public class ByteBufferNetInput implements NetInput
             throw new IllegalArgumentException("Array cannot have length less than 0.");
         }
 
-        byte b[] = new byte[length];
+        byte[] b = new byte[length];
         this.buffer.get(b);
         return b;
     }
@@ -164,7 +165,7 @@ public class ByteBufferNetInput implements NetInput
             throw new IllegalArgumentException("Array cannot have length less than 0.");
         }
 
-        short s[] = new short[length];
+        short[] s = new short[length];
         for (int index = 0; index < length; index++)
         {
             s[index] = this.readShort();
@@ -209,7 +210,7 @@ public class ByteBufferNetInput implements NetInput
             throw new IllegalArgumentException("Array cannot have length less than 0.");
         }
 
-        int i[] = new int[length];
+        int[] i = new int[length];
         for (int index = 0; index < length; index++)
         {
             i[index] = this.readInt();
@@ -254,7 +255,7 @@ public class ByteBufferNetInput implements NetInput
             throw new IllegalArgumentException("Array cannot have length less than 0.");
         }
 
-        long l[] = new long[length];
+        long[] l = new long[length];
         for (int index = 0; index < length; index++)
         {
             l[index] = this.readLong();
@@ -295,8 +296,8 @@ public class ByteBufferNetInput implements NetInput
     public String readString() throws IOException
     {
         int length = this.readVarInt();
-        byte bytes[] = this.readBytes(length);
-        return new String(bytes, "UTF-8");
+        byte[] bytes = this.readBytes(length);
+        return new String(bytes, StandardCharsets.UTF_8);
     }
 
     @Override

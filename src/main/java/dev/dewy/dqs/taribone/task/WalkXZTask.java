@@ -12,19 +12,24 @@ public class WalkXZTask implements Task
 {
     private Vector2i target;
 
-    public Vector2i getTarget() {
+    public Vector2i getTarget()
+    {
         return target;
     }
 
-    public void setTarget(Vector2i target) {
+    public void setTarget(Vector2i target)
+    {
         this.target = target;
     }
 
     @Override
-    public TaskExecutor toExecutor(DQS dqs) {
-        try {
+    public TaskExecutor toExecutor(DQS dqs)
+    {
+        try
+        {
             return new WalkTaskExecutor(dqs, target.getHighestWalkTarget(dqs.getWorld()));
-        } catch (ChunkNotLoadedException e) {
+        } catch (ChunkNotLoadedException e)
+        {
             Constants.TARIBONE_LOG.warn(e);
             return new WalkTaskExecutor(dqs, dqs.getPlayer().getLocation().intVector());
         }

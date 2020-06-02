@@ -20,7 +20,7 @@ public class ChatHandler implements HandlerRegistry.IncomingHandler<ServerChatPa
 
         if (DQS.getInstance().inQueue)
         {
-            String[] result = MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString().split("(?=\\d*$)",2);
+            String[] result = MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString().split("(?=\\d*$)", 2);
 
             DQS.getInstance().currentPos = Integer.parseInt(result[1]);
         }

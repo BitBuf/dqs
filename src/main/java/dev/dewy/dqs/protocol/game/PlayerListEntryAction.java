@@ -6,5 +6,5 @@ public enum PlayerListEntryAction
     UPDATE_GAMEMODE,
     UPDATE_LATENCY,
     UPDATE_DISPLAY_NAME,
-    REMOVE_PLAYER;
+    REMOVE_PLAYER
 }

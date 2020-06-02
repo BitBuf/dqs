@@ -4,7 +4,7 @@ import dev.dewy.dqs.utils.ObjectUtil;
 
 public class BonemealGrowEffectData implements WorldEffectData
 {
-    private int particleCount;
+    private final int particleCount;
 
     public BonemealGrowEffectData(int particleCount)
     {

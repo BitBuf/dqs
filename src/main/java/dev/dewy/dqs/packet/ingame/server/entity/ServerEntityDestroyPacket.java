@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class ServerEntityDestroyPacket extends MinecraftPacket
 {
-    private int entityIds[];
+    private int[] entityIds;
 
     @SuppressWarnings("unused")
     private ServerEntityDestroyPacket()

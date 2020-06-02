@@ -4,8 +4,8 @@ import dev.dewy.dqs.utils.ObjectUtil;
 
 public class FallingBlockData implements ObjectData
 {
-    private int id;
-    private int metadata;
+    private final int id;
+    private final int metadata;
 
     public FallingBlockData(int id, int metadata)
     {

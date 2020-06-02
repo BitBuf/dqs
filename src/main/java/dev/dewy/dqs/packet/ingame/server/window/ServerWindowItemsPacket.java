@@ -11,14 +11,14 @@ import java.io.IOException;
 public class ServerWindowItemsPacket extends MinecraftPacket
 {
     private int windowId;
-    private ItemStack items[];
+    private ItemStack[] items;
 
     @SuppressWarnings("unused")
     private ServerWindowItemsPacket()
     {
     }
 
-    public ServerWindowItemsPacket(int windowId, ItemStack items[])
+    public ServerWindowItemsPacket(int windowId, ItemStack[] items)
     {
         this.windowId = windowId;
         this.items = items;

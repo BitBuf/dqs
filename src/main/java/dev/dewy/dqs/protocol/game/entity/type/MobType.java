@@ -51,5 +51,5 @@ public enum MobType
     POLAR_BEAR,
     LLAMA,
     PARROT,
-    VILLAGER;
+    VILLAGER
 }

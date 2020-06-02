@@ -5,5 +5,5 @@ import dev.dewy.dqs.protocol.status.ServerStatusInfo;
 
 public interface ServerInfoHandler
 {
-    public void handle(Session session, ServerStatusInfo info);
+    void handle(Session session, ServerStatusInfo info);
 }

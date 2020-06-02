@@ -4,7 +4,7 @@ import dev.dewy.dqs.utils.ObjectUtil;
 
 public class ProjectileData implements ObjectData
 {
-    private int ownerId;
+    private final int ownerId;
 
     public ProjectileData(int ownerId)
     {

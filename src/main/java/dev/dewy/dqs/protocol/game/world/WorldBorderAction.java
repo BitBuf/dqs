@@ -7,5 +7,5 @@ public enum WorldBorderAction
     SET_CENTER,
     INITIALIZE,
     SET_WARNING_TIME,
-    SET_WARNING_BLOCKS;
+    SET_WARNING_BLOCKS
 }

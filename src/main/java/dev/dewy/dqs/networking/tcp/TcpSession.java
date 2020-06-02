@@ -23,17 +23,17 @@ import java.util.concurrent.LinkedBlockingQueue;
 public abstract class TcpSession extends SimpleChannelInboundHandler<Packet> implements Session
 {
     protected boolean disconnected = false;
-    private String host;
-    private int port;
-    private PacketProtocol protocol;
+    private final String host;
+    private final int port;
+    private final PacketProtocol protocol;
     private int compressionThreshold = -1;
     private int connectTimeout = 30;
     private int readTimeout = 30;
     private int writeTimeout = 0;
-    private Map<String, Object> flags = new HashMap<String, Object>();
-    private List<SessionListener> listeners = new CopyOnWriteArrayList<SessionListener>();
+    private final Map<String, Object> flags = new HashMap<String, Object>();
+    private final List<SessionListener> listeners = new CopyOnWriteArrayList<SessionListener>();
     private Channel channel;
-    private BlockingQueue<Packet> packets = new LinkedBlockingQueue<Packet>();
+    private final BlockingQueue<Packet> packets = new LinkedBlockingQueue<Packet>();
     private Thread packetHandleThread;
 
     public TcpSession(String host, int port, PacketProtocol protocol)

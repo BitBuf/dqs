@@ -7,11 +7,11 @@ import java.util.Arrays;
 
 public class PlayerInfo
 {
-    private int max;
-    private int online;
-    private GameProfile players[];
+    private final int max;
+    private final int online;
+    private final GameProfile[] players;
 
-    public PlayerInfo(int max, int online, GameProfile players[])
+    public PlayerInfo(int max, int online, GameProfile[] players)
     {
         this.max = max;
         this.online = online;

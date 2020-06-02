@@ -3,6 +3,7 @@ package dev.dewy.dqs.profiles;
 import dev.dewy.dqs.crypto.Base64;
 import dev.dewy.dqs.exceptions.property.SignatureValidateException;
 
+import java.nio.charset.StandardCharsets;
 import java.security.PublicKey;
 import java.security.Signature;
 import java.util.*;
@@ -12,8 +13,8 @@ import java.util.*;
  */
 public class GameProfile
 {
-    private UUID id;
-    private String name;
+    private final UUID id;
+    private final String name;
 
     private List<Property> properties;
     private Map<TextureType, Texture> textures;
@@ -180,19 +181,19 @@ public class GameProfile
     /**
      * The type of a profile texture.
      */
-    public static enum TextureType
+    public enum TextureType
     {
         SKIN,
-        CAPE;
+        CAPE
     }
 
     /**
      * The model used for a profile texture.
      */
-    public static enum TextureModel
+    public enum TextureModel
     {
         NORMAL,
-        SLIM;
+        SLIM
     }
 
     /**
@@ -200,9 +201,9 @@ public class GameProfile
      */
     public static class Property
     {
-        private String name;
-        private String value;
-        private String signature;
+        private final String name;
+        private final String value;
+        private final String signature;
 
         /**
          * Creates a new Property instance.
@@ -288,7 +289,7 @@ public class GameProfile
                 Signature sig = Signature.getInstance("SHA1withRSA");
                 sig.initVerify(key);
                 sig.update(this.value.getBytes());
-                return sig.verify(Base64.decode(this.signature.getBytes("UTF-8")));
+                return sig.verify(Base64.decode(this.signature.getBytes(StandardCharsets.UTF_8)));
             } catch (Exception e)
             {
                 throw new SignatureValidateException("Could not validate property signature.", e);
@@ -307,8 +308,8 @@ public class GameProfile
      */
     public static class Texture
     {
-        private String url;
-        private Map<String, String> metadata;
+        private final String url;
+        private final Map<String, String> metadata;
 
         /**
          * Creates a new Texture instance.

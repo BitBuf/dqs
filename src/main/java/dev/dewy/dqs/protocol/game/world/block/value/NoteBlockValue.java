@@ -4,7 +4,7 @@ import dev.dewy.dqs.utils.ObjectUtil;
 
 public class NoteBlockValue implements BlockValue
 {
-    private int pitch;
+    private final int pitch;
 
     public NoteBlockValue(int pitch)
     {

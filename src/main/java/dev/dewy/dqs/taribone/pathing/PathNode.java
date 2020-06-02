@@ -4,11 +4,9 @@ import dev.dewy.dqs.utils.vector.Vector3i;
 
 public class PathNode implements Comparable<PathNode>
 {
+    private final Vector3i location;
     private PathNode next;
     private PathNode previous;
-
-    private final Vector3i location;
-
     private int cost = Integer.MAX_VALUE;
 
     public PathNode(Vector3i location)

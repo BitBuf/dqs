@@ -9,5 +9,5 @@ public enum ParticleEffect implements WorldEffect
     MOB_SPAWN,
     BONEMEAL_GROW,
     ENDERDRAGON_FIREBALL_EXPLODE,
-    END_GATEWAY_SPAWN;
+    END_GATEWAY_SPAWN
 }

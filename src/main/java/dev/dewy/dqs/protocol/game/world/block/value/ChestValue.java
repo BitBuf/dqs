@@ -4,7 +4,7 @@ import dev.dewy.dqs.utils.ObjectUtil;
 
 public class ChestValue implements BlockValue
 {
-    private int viewers;
+    private final int viewers;
 
     public ChestValue(int viewers)
     {

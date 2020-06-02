@@ -8,7 +8,7 @@ import java.net.Socket;
 
 public class ProxyOioChannelFactory implements ChannelFactory<OioSocketChannel>
 {
-    private Proxy proxy;
+    private final Proxy proxy;
 
     public ProxyOioChannelFactory(Proxy proxy)
     {

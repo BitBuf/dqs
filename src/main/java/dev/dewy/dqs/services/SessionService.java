@@ -47,7 +47,7 @@ public class SessionService
         {
             in = SessionService.class.getResourceAsStream("/mojangkey.der");
             ByteArrayOutputStream out = new ByteArrayOutputStream();
-            byte buffer[] = new byte[4096];
+            byte[] buffer = new byte[4096];
             int length = -1;
             while ((length = in.read(buffer)) != -1)
             {
@@ -77,7 +77,7 @@ public class SessionService
         GSON = new GsonBuilder().registerTypeAdapter(UUID.class, new UUIDSerializer()).create();
     }
 
-    private Proxy proxy;
+    private final Proxy proxy;
 
     /**
      * Creates a new SessionService instance.
@@ -226,7 +226,7 @@ public class SessionService
             MinecraftTexturesPayload result;
             try
             {
-                String json = new String(Base64.decode(textures.getValue().getBytes("UTF-8")));
+                String json = new String(Base64.decode(textures.getValue().getBytes(StandardCharsets.UTF_8)));
                 result = GSON.fromJson(json, MinecraftTexturesPayload.class);
             } catch (Exception e)
             {
@@ -276,9 +276,9 @@ public class SessionService
 
     private static class JoinServerRequest
     {
-        private String accessToken;
-        private UUID selectedProfile;
-        private String serverId;
+        private final String accessToken;
+        private final UUID selectedProfile;
+        private final String serverId;
 
         protected JoinServerRequest(String accessToken, UUID selectedProfile, String serverId)
         {

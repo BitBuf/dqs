@@ -20,7 +20,7 @@ public class ServerSpawnParticlePacket extends MinecraftPacket
     private float offsetZ;
     private float velocityOffset;
     private int amount;
-    private int data[];
+    private int[] data;
 
     @SuppressWarnings("unused")
     private ServerSpawnParticlePacket()

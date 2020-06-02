@@ -18,7 +18,7 @@ public class SignInCommand extends Command
     {
         this.name = "signin";
         this.help = "Sign into your Mojang account.";
-        this.aliases = new String[] { "login" };
+        this.aliases = new String[] {"login"};
         this.guildOnly = false;
         this.cooldown = Constants.CONFIG.discord.cooldown;
         this.arguments = "<EMAIL> <PASSWORD>";

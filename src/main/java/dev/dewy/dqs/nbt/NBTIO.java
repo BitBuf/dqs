@@ -6,6 +6,7 @@ import dev.dewy.dqs.nbt.tag.builtin.CompoundTag;
 import dev.dewy.dqs.nbt.tag.builtin.Tag;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
@@ -433,7 +434,7 @@ public class NBTIO
             byte[] bytes = new byte[this.readUnsignedShort()];
             this.readFully(bytes);
 
-            return new String(bytes, "UTF-8");
+            return new String(bytes, StandardCharsets.UTF_8);
         }
     }
 
@@ -547,7 +548,7 @@ public class NBTIO
         @Override
         public void writeUTF(String s) throws IOException
         {
-            byte[] bytes = s.getBytes("UTF-8");
+            byte[] bytes = s.getBytes(StandardCharsets.UTF_8);
 
             this.writeShort(bytes.length);
             this.write(bytes);

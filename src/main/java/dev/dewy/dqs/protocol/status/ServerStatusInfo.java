@@ -8,10 +8,10 @@ import java.util.Objects;
 
 public class ServerStatusInfo
 {
-    private VersionInfo version;
-    private PlayerInfo players;
-    private String description;
-    private BufferedImage icon;
+    private final VersionInfo version;
+    private final PlayerInfo players;
+    private final String description;
+    private final BufferedImage icon;
 
     public ServerStatusInfo(VersionInfo version, PlayerInfo players, String description, BufferedImage icon, boolean escape)
     {

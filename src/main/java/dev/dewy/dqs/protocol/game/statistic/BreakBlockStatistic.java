@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class BreakBlockStatistic implements Statistic
 {
-    private String id;
+    private final String id;
 
     public BreakBlockStatistic(String id)
     {

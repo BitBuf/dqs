@@ -18,7 +18,7 @@ public class BlockStorage
 
     private int bitsPerEntry;
 
-    private List<BlockState> states;
+    private final List<BlockState> states;
     private FlexibleStorage storage;
 
     public BlockStorage()

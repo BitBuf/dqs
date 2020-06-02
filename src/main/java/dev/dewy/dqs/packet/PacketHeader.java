@@ -15,14 +15,14 @@ public interface PacketHeader
      *
      * @return Whether the header's length value can vary in size.
      */
-    public boolean isLengthVariable();
+    boolean isLengthVariable();
 
     /**
      * Gets the size of the header's length value.
      *
      * @return The length value's size.
      */
-    public int getLengthSize();
+    int getLengthSize();
 
     /**
      * Gets the size of the header's length value.
@@ -30,7 +30,7 @@ public interface PacketHeader
      * @param length Length value to get the size of.
      * @return The length value's size.
      */
-    public int getLengthSize(int length);
+    int getLengthSize(int length);
 
     /**
      * Reads the length of a packet from the given input.
@@ -40,7 +40,7 @@ public interface PacketHeader
      * @return The resulting packet length.
      * @throws IOException If an I/O error occurs.
      */
-    public int readLength(NetInput in, int available) throws IOException;
+    int readLength(NetInput in, int available) throws IOException;
 
     /**
      * Writes the length of a packet to the given output.
@@ -49,7 +49,7 @@ public interface PacketHeader
      * @param length Length to write.
      * @throws IOException If an I/O error occurs.
      */
-    public void writeLength(NetOutput out, int length) throws IOException;
+    void writeLength(NetOutput out, int length) throws IOException;
 
     /**
      * Reads the ID of a packet from the given input.
@@ -58,7 +58,7 @@ public interface PacketHeader
      * @return The resulting packet ID, or -1 if the packet should not be read yet.
      * @throws IOException If an I/O error occurs.
      */
-    public int readPacketId(NetInput in) throws IOException;
+    int readPacketId(NetInput in) throws IOException;
 
     /**
      * Writes the ID of a packet to the given output.
@@ -67,5 +67,5 @@ public interface PacketHeader
      * @param packetId Packet ID to write.
      * @throws IOException If an I/O error occurs.
      */
-    public void writePacketId(NetOutput out, int packetId) throws IOException;
+    void writePacketId(NetOutput out, int packetId) throws IOException;
 }

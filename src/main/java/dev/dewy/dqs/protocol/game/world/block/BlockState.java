@@ -4,8 +4,8 @@ import dev.dewy.dqs.utils.ObjectUtil;
 
 public class BlockState
 {
-    private int id;
-    private int data;
+    private final int id;
+    private final int data;
 
     public BlockState(int id, int data)
     {

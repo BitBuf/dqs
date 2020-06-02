@@ -8,5 +8,5 @@ public enum WorldType
     AMPLIFIED,
     CUSTOMIZED,
     DEBUG,
-    DEFAULT_1_1;
+    DEFAULT_1_1
 }

@@ -8,7 +8,7 @@ import dev.dewy.dqs.packet.Packet;
  */
 public class PacketSendingEvent implements SessionEvent
 {
-    private Session session;
+    private final Session session;
     private Packet packet;
     private boolean cancelled = false;
 

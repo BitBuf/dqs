@@ -17,5 +17,5 @@ public enum MapIconType
     UNUSED_12,
     UNUSED_13,
     UNUSED_14,
-    UNUSED_15;
+    UNUSED_15
 }

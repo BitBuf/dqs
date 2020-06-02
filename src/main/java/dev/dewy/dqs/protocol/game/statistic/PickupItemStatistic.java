@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class PickupItemStatistic implements Statistic
 {
-    private String id;
+    private final String id;
 
     public PickupItemStatistic(String id)
     {

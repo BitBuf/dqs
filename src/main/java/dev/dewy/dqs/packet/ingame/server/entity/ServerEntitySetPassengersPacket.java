@@ -9,7 +9,7 @@ import java.io.IOException;
 public class ServerEntitySetPassengersPacket extends MinecraftPacket
 {
     private int entityId;
-    private int passengerIds[];
+    private int[] passengerIds;
 
     @SuppressWarnings("unused")
     private ServerEntitySetPassengersPacket()

@@ -16,7 +16,7 @@ public interface Packet
      * @param in The input source to read from.
      * @throws IOException If an I/O error occurs.
      */
-    public void read(NetInput in) throws IOException;
+    void read(NetInput in) throws IOException;
 
     /**
      * Writes the packet to the given output buffer.
@@ -24,7 +24,7 @@ public interface Packet
      * @param out The output destination to write to.
      * @throws IOException If an I/O error occurs.
      */
-    public void write(NetOutput out) throws IOException;
+    void write(NetOutput out) throws IOException;
 
     /**
      * Gets whether the packet has handling and writing priority.
@@ -33,5 +33,5 @@ public interface Packet
      *
      * @return Whether the packet has priority.
      */
-    public boolean isPriority();
+    boolean isPriority();
 }

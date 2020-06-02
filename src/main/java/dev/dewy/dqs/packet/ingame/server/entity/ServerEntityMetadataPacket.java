@@ -11,14 +11,14 @@ import java.io.IOException;
 public class ServerEntityMetadataPacket extends MinecraftPacket
 {
     private int entityId;
-    private EntityMetadata metadata[];
+    private EntityMetadata[] metadata;
 
     @SuppressWarnings("unused")
     private ServerEntityMetadataPacket()
     {
     }
 
-    public ServerEntityMetadataPacket(int entityId, EntityMetadata metadata[])
+    public ServerEntityMetadataPacket(int entityId, EntityMetadata[] metadata)
     {
         this.entityId = entityId;
         this.metadata = metadata;

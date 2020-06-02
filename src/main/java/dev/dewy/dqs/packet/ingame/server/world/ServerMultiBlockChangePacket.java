@@ -12,7 +12,7 @@ import java.io.IOException;
 
 public class ServerMultiBlockChangePacket extends MinecraftPacket
 {
-    private BlockChangeRecord records[];
+    private BlockChangeRecord[] records;
 
     @SuppressWarnings("unused")
     private ServerMultiBlockChangePacket()

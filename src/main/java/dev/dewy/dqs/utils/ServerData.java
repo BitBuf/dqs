@@ -15,6 +15,11 @@ public class ServerData
         return maxPlayers;
     }
 
+    public void setMaxPlayers(int maxPlayers)
+    {
+        this.maxPlayers = maxPlayers;
+    }
+
     public Difficulty getDifficulty()
     {
         return difficulty;
@@ -23,10 +28,5 @@ public class ServerData
     public void setDifficulty(Difficulty difficulty)
     {
         this.difficulty = difficulty;
-    }
-
-    public void setMaxPlayers(int maxPlayers)
-    {
-        this.maxPlayers = maxPlayers;
     }
 }

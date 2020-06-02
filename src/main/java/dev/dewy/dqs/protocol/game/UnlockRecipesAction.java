@@ -4,5 +4,5 @@ public enum UnlockRecipesAction
 {
     INIT,
     ADD,
-    REMOVE;
+    REMOVE
 }

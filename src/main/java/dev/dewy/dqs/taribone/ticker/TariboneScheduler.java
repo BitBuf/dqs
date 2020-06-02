@@ -18,7 +18,7 @@ public class TariboneScheduler
      * Creates a new Scheduler for executing tasks.
      *
      * @param tickMs the desired fixed delay between task executions, in
-     * milliseconds.
+     *               milliseconds.
      */
     public TariboneScheduler(long tickMs)
     {
@@ -73,9 +73,11 @@ public class TariboneScheduler
 
         if (toSleepNanos > YIELD_AT_NANOS)
         {
-            try {
+            try
+            {
                 Thread.sleep(TimeUnit.NANOSECONDS.toMillis(toSleepNanos - YIELD_AT_NANOS));
-            } catch (InterruptedException ignored) {
+            } catch (InterruptedException ignored)
+            {
             }
         }
 

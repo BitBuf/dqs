@@ -5,7 +5,7 @@ import com.jagrosh.jdautilities.command.CommandEvent;
 import dev.dewy.dqs.utils.Constants;
 import net.dv8tion.jda.api.EmbedBuilder;
 
-import java.awt.Color;
+import java.awt.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Objects;
@@ -16,7 +16,7 @@ public class HelpCommand extends Command
     {
         this.name = "help";
         this.help = "DQS help directory.";
-        this.aliases = new String[] { "h", "halp", "?" };
+        this.aliases = new String[] {"h", "halp", "?"};
         this.guildOnly = false;
         this.cooldown = Constants.CONFIG.discord.cooldown;
     }

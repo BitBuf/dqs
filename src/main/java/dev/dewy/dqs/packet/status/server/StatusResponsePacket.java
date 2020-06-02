@@ -15,6 +15,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 public class StatusResponsePacket extends MinecraftPacket
 {
@@ -42,7 +43,7 @@ public class StatusResponsePacket extends MinecraftPacket
         JsonObject ver = obj.get("version").getAsJsonObject();
         VersionInfo version = new VersionInfo(ver.get("name").getAsString(), ver.get("protocol").getAsInt());
         JsonObject plrs = obj.get("players").getAsJsonObject();
-        GameProfile profiles[] = new GameProfile[0];
+        GameProfile[] profiles = new GameProfile[0];
         if (plrs.has("sample"))
         {
             JsonArray prof = plrs.get("sample").getAsJsonArray();
@@ -111,7 +112,7 @@ public class StatusResponsePacket extends MinecraftPacket
             str = str.substring("data:image/png;base64,".length());
         }
 
-        byte bytes[] = Base64.decode(str.getBytes("UTF-8"));
+        byte[] bytes = Base64.decode(str.getBytes(StandardCharsets.UTF_8));
         ByteArrayInputStream in = new ByteArrayInputStream(bytes);
         BufferedImage icon = ImageIO.read(in);
         in.close();
@@ -133,7 +134,7 @@ public class StatusResponsePacket extends MinecraftPacket
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         ImageIO.write(icon, "PNG", out);
         out.close();
-        byte encoded[] = Base64.encode(out.toByteArray());
-        return "data:image/png;base64," + new String(encoded, "UTF-8");
+        byte[] encoded = Base64.encode(out.toByteArray());
+        return "data:image/png;base64," + new String(encoded, StandardCharsets.UTF_8);
     }
 }

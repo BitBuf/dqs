@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class KillEntityStatistic implements Statistic
 {
-    private String id;
+    private final String id;
 
     public KillEntityStatistic(String id)
     {

@@ -7,20 +7,20 @@ import java.util.Arrays;
 
 public class Column
 {
-    private int x;
-    private int z;
-    private Chunk chunks[];
-    private byte biomeData[];
-    private CompoundTag tileEntities[];
+    private final int x;
+    private final int z;
+    private final Chunk[] chunks;
+    private final byte[] biomeData;
+    private final CompoundTag[] tileEntities;
 
     private boolean skylight;
 
-    public Column(int x, int z, Chunk chunks[], CompoundTag[] tileEntities)
+    public Column(int x, int z, Chunk[] chunks, CompoundTag[] tileEntities)
     {
         this(x, z, chunks, null, tileEntities);
     }
 
-    public Column(int x, int z, Chunk chunks[], byte biomeData[], CompoundTag[] tileEntities)
+    public Column(int x, int z, Chunk[] chunks, byte[] biomeData, CompoundTag[] tileEntities)
     {
         if (chunks.length != 16)
         {

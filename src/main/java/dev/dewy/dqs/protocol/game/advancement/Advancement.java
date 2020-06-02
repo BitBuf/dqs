@@ -8,11 +8,11 @@ import java.util.Objects;
 
 public class Advancement
 {
-    private String id;
-    private String parentId;
+    private final String id;
+    private final String parentId;
     private DisplayData displayData;
-    private List<String> criteria;
-    private List<List<String>> requirements;
+    private final List<String> criteria;
+    private final List<List<String>> requirements;
 
     public Advancement(String id, String parentId, List<String> criteria, List<List<String>> requirements)
     {
@@ -81,14 +81,15 @@ public class Advancement
 
     public static class DisplayData
     {
-        private String title;
-        private String description;
-        private ItemStack icon;
-        private FrameType frameType;
-        private boolean showToast;
-        private boolean hidden;
+        private final String title;
+        private final String description;
+        private final ItemStack icon;
+        private final FrameType frameType;
+        private final boolean showToast;
+        private final boolean hidden;
         private String backgroundTexture;
-        private float posX, posY;
+        private final float posX;
+        private final float posY;
 
         public DisplayData(String title, String description, ItemStack icon, FrameType frameType,
                            boolean showToast, boolean hidden, float posX, float posY)
@@ -189,7 +190,7 @@ public class Advancement
         {
             TASK,
             CHALLENGE,
-            GOAL;
+            GOAL
         }
     }
 }

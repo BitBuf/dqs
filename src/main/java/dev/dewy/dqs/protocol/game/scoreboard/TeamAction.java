@@ -6,5 +6,5 @@ public enum TeamAction
     REMOVE,
     UPDATE,
     ADD_PLAYER,
-    REMOVE_PLAYER;
+    REMOVE_PLAYER
 }

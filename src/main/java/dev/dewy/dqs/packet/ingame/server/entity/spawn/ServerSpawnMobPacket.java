@@ -25,14 +25,14 @@ public class ServerSpawnMobPacket extends MinecraftPacket
     private double motX;
     private double motY;
     private double motZ;
-    private EntityMetadata metadata[];
+    private EntityMetadata[] metadata;
 
     @SuppressWarnings("unused")
     private ServerSpawnMobPacket()
     {
     }
 
-    public ServerSpawnMobPacket(int entityId, UUID uuid, MobType type, double x, double y, double z, float yaw, float pitch, float headYaw, double motX, double motY, double motZ, EntityMetadata metadata[])
+    public ServerSpawnMobPacket(int entityId, UUID uuid, MobType type, double x, double y, double z, float yaw, float pitch, float headYaw, double motX, double motY, double motZ, EntityMetadata[] metadata)
     {
         this.entityId = entityId;
         this.uuid = uuid;

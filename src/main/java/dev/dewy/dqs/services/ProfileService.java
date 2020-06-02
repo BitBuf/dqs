@@ -21,7 +21,7 @@ public class ProfileService
     private static final int DELAY_BETWEEN_FAILURES = 750;
     private static final int PROFILES_PER_REQUEST = 100;
 
-    private Proxy proxy;
+    private final Proxy proxy;
 
     /**
      * Creates a new ProfileService instance.
@@ -163,14 +163,14 @@ public class ProfileService
     /**
      * Callback for reporting profile lookup results.
      */
-    public static interface ProfileLookupCallback
+    public interface ProfileLookupCallback
     {
         /**
          * Called when a profile lookup request succeeds.
          *
          * @param profile Profile resulting from the request.
          */
-        public void onProfileLookupSucceeded(GameProfile profile);
+        void onProfileLookupSucceeded(GameProfile profile);
 
         /**
          * Called when a profile lookup request fails.
@@ -178,6 +178,6 @@ public class ProfileService
          * @param profile Profile that failed to be located.
          * @param e       Exception causing the failure.
          */
-        public void onProfileLookupFailed(GameProfile profile, Exception e);
+        void onProfileLookupFailed(GameProfile profile, Exception e);
     }
 }

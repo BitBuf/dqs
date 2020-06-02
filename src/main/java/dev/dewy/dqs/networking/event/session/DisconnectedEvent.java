@@ -7,9 +7,9 @@ import dev.dewy.dqs.networking.Session;
  */
 public class DisconnectedEvent implements SessionEvent
 {
-    private Session session;
-    private String reason;
-    private Throwable cause;
+    private final Session session;
+    private final String reason;
+    private final Throwable cause;
 
     /**
      * Creates a new DisconnectedEvent instance.

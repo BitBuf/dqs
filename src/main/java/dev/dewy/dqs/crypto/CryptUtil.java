@@ -41,7 +41,7 @@ public class CryptUtil
         }
     }
 
-    public static PublicKey decodePublicKey(byte bytes[]) throws IOException
+    public static PublicKey decodePublicKey(byte[] bytes) throws IOException
     {
         try
         {
@@ -84,7 +84,7 @@ public class CryptUtil
     {
         try
         {
-            return encrypt("SHA-1", new byte[][] {serverId.getBytes("ISO_8859_1"), secretKey.getEncoded(), publicKey.getEncoded()});
+            return encrypt("SHA-1", serverId.getBytes("ISO_8859_1"), secretKey.getEncoded(), publicKey.getEncoded());
         } catch (UnsupportedEncodingException e)
         {
             throw new Error("Failed to generate server id hash.", e);
@@ -96,7 +96,7 @@ public class CryptUtil
         try
         {
             MessageDigest digest = MessageDigest.getInstance(encryption);
-            for (byte array[] : data)
+            for (byte[] array : data)
             {
                 digest.update(array);
             }

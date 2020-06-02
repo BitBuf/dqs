@@ -7,10 +7,10 @@ import dev.dewy.dqs.packet.PacketProtocol;
  */
 public class Client
 {
-    private String host;
-    private int port;
-    private PacketProtocol protocol;
-    private Session session;
+    private final String host;
+    private final int port;
+    private final PacketProtocol protocol;
+    private final Session session;
 
     public Client(String host, int port, PacketProtocol protocol, SessionFactory factory)
     {

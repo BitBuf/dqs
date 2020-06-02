@@ -4,7 +4,7 @@ import dev.dewy.dqs.utils.ObjectUtil;
 
 public class ThunderStrengthValue implements ClientNotificationValue
 {
-    private float strength;
+    private final float strength;
 
     public ThunderStrengthValue(float strength)
     {
