@@ -19,7 +19,7 @@ public class SignInCommand extends Command
         this.aliases = new String[] {"login"};
         this.guildOnly = false;
         this.cooldown = Constants.CONFIG.discord.cooldown;
-        this.arguments = "<EMAIL> <PASSWORD>";
+        this.arguments = "<IGN> <EMAIL> <PASSWORD>";
     }
 
     @Override
@@ -29,7 +29,7 @@ public class SignInCommand extends Command
         {
             String[] args = event.getArgs().split("\\s+");
 
-            if (event.getArgs().isEmpty() || args.length != 2)
+            if (event.getArgs().isEmpty() || args.length != 3)
             {
                 event.reply(new EmbedBuilder()
                         .setTitle("**DQS** - Invalid Command Arguments")
@@ -42,8 +42,9 @@ public class SignInCommand extends Command
                 return;
             }
 
-            Constants.CONFIG.authentication.email = args[0];
-            Constants.CONFIG.authentication.password = args[1];
+            Constants.CONFIG.authentication.username = args[0];
+            Constants.CONFIG.authentication.email = args[1];
+            Constants.CONFIG.authentication.password = args[2];
 
             event.reply(new EmbedBuilder()
                     .setTitle("**DQS** - Authentication")
