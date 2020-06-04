@@ -69,7 +69,7 @@ public class TariboneListener implements SessionListener
 
             if (p.getEntityId() == 0)
             {
-                Constants.TARIBONE_LOG.warn("Received spawn object with EID == 0: " + p.getType());
+//                Constants.TARIBONE_LOG.warn("Received spawn object with EID == 0: " + p.getType());
                 return;
             }
 
@@ -100,7 +100,7 @@ public class TariboneListener implements SessionListener
 
             if (p.getType() != GlobalEntityType.LIGHTNING_BOLT)
             {
-                Constants.TARIBONE_LOG.warn("Received spawn global entity for non-lightning strike");
+//                Constants.TARIBONE_LOG.warn("Received spawn global entity for non-lightning strike");
                 return;
             }
 
@@ -155,7 +155,7 @@ public class TariboneListener implements SessionListener
             if (pos.getY() > 255)
             {
                 // https://github.com/Steveice10/MCProtocolLib/issues/347
-                Constants.TARIBONE_LOG.warn("Ignoring BlockChange: (" + pos.getX() + "," + pos.getY() + "," + pos.getZ() + ")");
+//                Constants.TARIBONE_LOG.warn("Ignoring BlockChange: (" + pos.getX() + "," + pos.getY() + "," + pos.getZ() + ")");
                 return;
             }
 
@@ -166,7 +166,7 @@ public class TariboneListener implements SessionListener
                 b = dqs.getWorld().getBlockAt(pos.getX(), pos.getY(), pos.getZ());
             } catch (ChunkNotLoadedException e)
             {
-                Constants.TARIBONE_LOG.warn("Received BlockChange for block in unloaded chunk: " + pos);
+//                Constants.TARIBONE_LOG.warn("Received BlockChange for block in unloaded chunk: " + pos);
                 return;
             }
 
@@ -192,7 +192,7 @@ public class TariboneListener implements SessionListener
                     b = dqs.getWorld().getBlockAt(pos.getX(), pos.getY(), pos.getZ());
                 } catch (ChunkNotLoadedException e)
                 {
-                    Constants.TARIBONE_LOG.warn("Received MultiBlockChange for block in unloaded chunk: " + pos);
+//                    Constants.TARIBONE_LOG.warn("Received MultiBlockChange for block in unloaded chunk: " + pos);
                     return;
                 }
 
@@ -276,7 +276,7 @@ public class TariboneListener implements SessionListener
 
             if (e == null)
             {
-                Constants.TARIBONE_LOG.warn("Received entity movement packet for unknown entity: " + p.getEntityId());
+//                Constants.TARIBONE_LOG.warn("Received entity movement packet for unknown entity: " + p.getEntityId());
 
                 return;
             }
@@ -324,7 +324,7 @@ public class TariboneListener implements SessionListener
             Session session = dqs.getClient().getSession();
             session.send(new ClientTeleportConfirmPacket(p.getTeleportId()));
 
-            Constants.TARIBONE_LOG.info("Received new Player position: " + player.getLocation());
+//            Constants.TARIBONE_LOG.info("Received new Player position: " + player.getLocation());
         } else if (packet instanceof ServerEntityDestroyPacket)
         {
             // 0x30 Destroy Entities
@@ -337,7 +337,7 @@ public class TariboneListener implements SessionListener
                     world.unloadEntity(id);
                 } else
                 {
-                    Constants.TARIBONE_LOG.warn("Received entity destroy packet for unknown entity: " + id);
+//                    Constants.TARIBONE_LOG.warn("Received entity destroy packet for unknown entity: " + id);
                 }
             }
         } else if (packet instanceof ServerEntityHeadLookPacket)
@@ -349,7 +349,7 @@ public class TariboneListener implements SessionListener
 
             if (e == null)
             {
-                Constants.TARIBONE_LOG.warn("Received entity head look packet for unknown entity: " + p.getEntityId());
+//                Constants.TARIBONE_LOG.warn("Received entity head look packet for unknown entity: " + p.getEntityId());
 
                 return;
             }
@@ -364,7 +364,7 @@ public class TariboneListener implements SessionListener
 
             if (e == null)
             {
-                Constants.TARIBONE_LOG.warn("Received entity velocity packet for unknown entity: " + p.getEntityId());
+//                Constants.TARIBONE_LOG.warn("Received entity velocity packet for unknown entity: " + p.getEntityId());
                 return;
             }
 
@@ -384,7 +384,7 @@ public class TariboneListener implements SessionListener
 
             if (e == null)
             {
-                Constants.TARIBONE_LOG.warn("Received entity movement packet for unknown entity: " + p.getEntityId());
+//                Constants.TARIBONE_LOG.warn("Received entity movement packet for unknown entity: " + p.getEntityId());
 
                 return;
             }
@@ -394,7 +394,7 @@ public class TariboneListener implements SessionListener
             e.setPitch(p.getPitch());
         } else
         {
-            Constants.TARIBONE_LOG.debug("Recieved unhandled packet: " + packet.getClass().getName());
+//            Constants.TARIBONE_LOG.debug("Recieved unhandled packet: " + packet.getClass().getName());
         }
     }
 
@@ -425,11 +425,11 @@ public class TariboneListener implements SessionListener
     @Override
     public void disconnected(DisconnectedEvent event)
     {
-        Constants.TARIBONE_LOG.info("Disconnected: " + event.getReason());
+//        Constants.TARIBONE_LOG.info("Disconnected: " + event.getReason());
 
         if (event.getCause() != null)
         {
-            Constants.TARIBONE_LOG.warn("Connection closed unexpectedly!", event.getCause());
+//            Constants.TARIBONE_LOG.warn("Connection closed unexpectedly!", event.getCause());
         }
     }
 }

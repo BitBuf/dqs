@@ -111,7 +111,7 @@ public class Block
         //GlobalLogger.getLogger().info("Get Internal Storage - y: " + y + ", index: " + index);
         if (index > 15)
         {
-            Constants.TARIBONE_LOG.warn("How did this happen: (" + x + "," + y + "," + z + ")");
+//            Constants.TARIBONE_LOG.warn("How did this happen: (" + x + "," + y + "," + z + ")");
         }
 
         dev.dewy.dqs.protocol.game.chunk.Chunk[] sections = handle.getChunks();

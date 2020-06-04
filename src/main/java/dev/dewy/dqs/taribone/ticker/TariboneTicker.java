@@ -67,10 +67,10 @@ public class TariboneTicker implements Runnable
 
                     if (status.getThrowable() != null)
                     {
-                        Constants.TARIBONE_LOG.warn("Task Failure: " + status.getMessage(), status.getThrowable());
+//                        Constants.TARIBONE_LOG.warn("Task Failure: " + status.getMessage(), status.getThrowable());
                     } else
                     {
-                        Constants.TARIBONE_LOG.warn("Task Failure: " + status.getMessage());
+//                        Constants.TARIBONE_LOG.warn("Task Failure: " + status.getMessage());
                     }
 
                     dqs.setTaskExecutor(null);

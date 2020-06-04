@@ -9,6 +9,7 @@ import dev.dewy.dqs.client.DQSClientSession;
 import dev.dewy.dqs.client.handler.incoming.*;
 import dev.dewy.dqs.client.handler.incoming.entity.*;
 import dev.dewy.dqs.client.handler.incoming.spawn.*;
+import dev.dewy.dqs.discord.AutoReconnectCommand;
 import dev.dewy.dqs.discord.HelpCommand;
 import dev.dewy.dqs.discord.PosCommand;
 import dev.dewy.dqs.discord.SignInCommand;
@@ -171,7 +172,8 @@ public final class Constants
             commandClient.addCommands(
                     new HelpCommand(),
                     new SignInCommand(),
-                    new PosCommand());
+                    new PosCommand(),
+                    new AutoReconnectCommand());
 
             try
             {

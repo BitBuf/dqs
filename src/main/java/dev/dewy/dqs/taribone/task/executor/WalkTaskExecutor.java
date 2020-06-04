@@ -72,7 +72,7 @@ public class WalkTaskExecutor extends AbstractTaskExecutor
 
         if (dqs.getPlayer().getLocation().intVector().equals(target))
         {
-            Constants.TARIBONE_LOG.warn("Useless walk task. Bot and given target location equal.");
+//            Constants.TARIBONE_LOG.warn("Useless walk task. Bot and given target location equal.");
         }
         pathFuture = service.submit(task);
         startTime = System.currentTimeMillis();
@@ -188,7 +188,7 @@ public class WalkTaskExecutor extends AbstractTaskExecutor
         // Abort for now
         if (player.getLocation().distanceSquared(nextStep.getLocation().doubleVector()) > 5.0)
         {
-            Constants.TARIBONE_LOG.info(String.format("Strayed from path. %s -> %s", player.getLocation(), nextStep.getLocation()));
+//            Constants.TARIBONE_LOG.info(String.format("Strayed from path. %s -> %s", player.getLocation(), nextStep.getLocation()));
             // TODO: Fix later
             //TaskStatus status = TaskStatus.forInProgress();
             //pathFuture = service.submit(task);
@@ -215,8 +215,8 @@ public class WalkTaskExecutor extends AbstractTaskExecutor
         } catch (ChunkNotLoadedException e)
         {
             // TODO: Fix: Wait until chunk is loaded.
-            Constants.TARIBONE_LOG.warn(String.format("Block under player: %s", blockLoc));
-            Constants.TARIBONE_LOG.warn(String.format("Player at %s", moveLoc));
+//            Constants.TARIBONE_LOG.warn(String.format("Block under player: %s", blockLoc));
+//            Constants.TARIBONE_LOG.warn(String.format("Player at %s", moveLoc));
             return TaskStatus.forFailure(e.getMessage());
         }
 

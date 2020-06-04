@@ -30,7 +30,7 @@ public class WalkXZTask implements Task
             return new WalkTaskExecutor(dqs, target.getHighestWalkTarget(dqs.getWorld()));
         } catch (ChunkNotLoadedException e)
         {
-            Constants.TARIBONE_LOG.warn(e);
+//            Constants.TARIBONE_LOG.warn(e);
             return new WalkTaskExecutor(dqs, dqs.getPlayer().getLocation().intVector());
         }
     }

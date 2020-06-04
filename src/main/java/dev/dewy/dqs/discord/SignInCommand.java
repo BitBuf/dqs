@@ -6,9 +6,7 @@ import dev.dewy.dqs.DQS;
 import dev.dewy.dqs.utils.Constants;
 import net.dv8tion.jda.api.EmbedBuilder;
 
-import javax.security.auth.login.LoginException;
 import java.awt.*;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Objects;
 
@@ -27,31 +25,26 @@ public class SignInCommand extends Command
     @Override
     protected void execute(CommandEvent event)
     {
-        String[] args = event.getArgs().split("\\s+");
-
-        if (event.getArgs().isEmpty() || args.length != 2)
-        {
-            event.reply(new EmbedBuilder()
-                    .setTitle("**DQS** - Invalid Command Arguments")
-                    .setDescription("You have entered invalid arguments for this command. Try again, like this:\n\n`" + Constants.CONFIG.discord.prefix + "signin " + this.arguments + "`")
-                    .setColor(new Color(15221016))
-                    .setFooter("Focused on " + Constants.CONFIG.authentication.username)
-                    .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
-                    .build());
-
-            return;
-        }
-
-        if (DQS.getInstance().isConnected())
-        {
-            DQS.getInstance().getClient().getSession().disconnect("Account changeup! :o");
-        }
-
-        Constants.CONFIG.authentication.email = args[0];
-        Constants.CONFIG.authentication.password = args[1];
-
         try
         {
+            String[] args = event.getArgs().split("\\s+");
+
+            if (event.getArgs().isEmpty() || args.length != 2)
+            {
+                event.reply(new EmbedBuilder()
+                        .setTitle("**DQS** - Invalid Command Arguments")
+                        .setDescription("You have entered invalid arguments for this command. Try again, like this:\n\n`" + Constants.CONFIG.discord.prefix + "signin " + this.arguments + "`")
+                        .setColor(new Color(15221016))
+                        .setFooter("Focused on " + Constants.CONFIG.authentication.username)
+                        .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
+                        .build());
+
+                return;
+            }
+
+            Constants.CONFIG.authentication.email = args[0];
+            Constants.CONFIG.authentication.password = args[1];
+
             event.reply(new EmbedBuilder()
                     .setTitle("**DQS** - Authentication")
                     .setDescription("Your Minecraft account details have been entered, encrypted and locked away. Attempting authentication...")
@@ -59,9 +52,19 @@ public class SignInCommand extends Command
                     .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                     .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
                     .build());
-        } catch (MalformedURLException e)
+
+            if (DQS.getInstance().isConnected())
+            {
+                DQS.getInstance().getClient().getSession().disconnect("Account changeup! :o");
+            }
+            else
+            {
+                DQS.getInstance().start();
+            }
+        }
+        catch (Throwable t)
         {
-            Constants.DISCORD_LOG.error(e);
+            Constants.DISCORD_LOG.error(t);
 
             event.reply(new EmbedBuilder()
                     .setTitle("**DQS** - Error")
@@ -74,18 +77,10 @@ public class SignInCommand extends Command
             Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.operatorId)).openPrivateChannel().queue((privateChannel ->
                     privateChannel.sendMessage(new EmbedBuilder()
                             .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.subscriberId)).getName() + ")")
-                            .setDescription("A " + e.getClass().getSimpleName() + " was thrown during the execution of a sign in command.\n\n**Cause:**\n\n```" + e.getMessage() + "```")
+                            .setDescription("A " + t.getClass().getSimpleName() + " was thrown during the execution of a sign in command.\n\n**Cause:**\n\n```" + t.getMessage() + "```")
                             .setColor(new Color(15221016))
                             .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
                             .build()).queue()));
-        }
-
-        try
-        {
-            DQS.getInstance().start();
-        } catch (LoginException e)
-        {
-            e.printStackTrace();
         }
     }
 }
