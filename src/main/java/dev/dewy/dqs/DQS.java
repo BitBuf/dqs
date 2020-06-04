@@ -172,21 +172,21 @@ public class DQS
                     });
                 }
 
-                if (CONFIG.modules.chatSpammer.enabled)
+                AtomicInteger i = new AtomicInteger(0);
+
+                modules.add(() ->
                 {
-                    List<String> messages = CONFIG.modules.chatSpammer.messages;
-                    int delaySeconds = CONFIG.modules.chatSpammer.delaySeconds;
-                    AtomicInteger i = new AtomicInteger(0);
-                    MODULE_LOG.trace("Enabling spammer with %d messages, choosing every %d seconds", messages.size(), delaySeconds);
-                    modules.add(() ->
+                    if ((i.getAndIncrement() >> 1) == CONFIG.modules.chatSpammer.delaySeconds)
                     {
-                        if ((i.getAndIncrement() >> 1) == delaySeconds)
+                        i.set(0);
+
+                        if (CONFIG.modules.chatSpammer.enabled)
                         {
-                            i.set(0);
-                            this.client.getSession().send(new ClientChatPacket(messages.get(ThreadLocalRandom.current().nextInt(messages.size()))));
+                            this.client.getSession().send(new ClientChatPacket(CONFIG.modules.chatSpammer.messages.get(ThreadLocalRandom.current().nextInt(CONFIG.modules.chatSpammer.messages.size()))));
                         }
-                    });
-                }
+                    }
+                });
+
                 Thread moduleRunnerThread = new Thread(() ->
                 {
                     try

@@ -171,7 +171,8 @@ public final class Constants
                     new SignInCommand(),
                     new PosCommand(),
                     new AutoReconnectCommand(),
-                    new MuteCommand());
+                    new MuteCommand(),
+                    new SpammerCommand());
 
             try
             {
