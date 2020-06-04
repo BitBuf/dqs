@@ -176,7 +176,7 @@ public class DQS
 
                 modules.add(() ->
                 {
-                    if ((i.getAndIncrement() >> 1) == CONFIG.modules.chatSpammer.delaySeconds)
+                    if ((i.getAndIncrement() >> 1) >= CONFIG.modules.chatSpammer.delaySeconds)
                     {
                         i.set(0);
 

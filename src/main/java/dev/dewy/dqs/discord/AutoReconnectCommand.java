@@ -62,7 +62,7 @@ public class AutoReconnectCommand extends Command
             {
                 event.reply(new EmbedBuilder()
                         .setTitle("**DQS** - Invalid Command Arguments")
-                        .setDescription("The DQS auto reconnect delay must be a positive integer. Try again, like this:\n\n`" + Constants.CONFIG.discord.prefix + "autoreconnect " + this.arguments + "`")
+                        .setDescription("The DQS auto reconnect delay must be a positive integer above 0. Try again, like this:\n\n`" + Constants.CONFIG.discord.prefix + "autoreconnect " + this.arguments + "`")
                         .setColor(new Color(15221016))
                         .setFooter("Focused on " + Constants.CONFIG.authentication.username)
                         .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
