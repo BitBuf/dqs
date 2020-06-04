@@ -9,10 +9,7 @@ import dev.dewy.dqs.client.DQSClientSession;
 import dev.dewy.dqs.client.handler.incoming.*;
 import dev.dewy.dqs.client.handler.incoming.entity.*;
 import dev.dewy.dqs.client.handler.incoming.spawn.*;
-import dev.dewy.dqs.discord.AutoReconnectCommand;
-import dev.dewy.dqs.discord.HelpCommand;
-import dev.dewy.dqs.discord.PosCommand;
-import dev.dewy.dqs.discord.SignInCommand;
+import dev.dewy.dqs.discord.*;
 import dev.dewy.dqs.handler.HandlerRegistry;
 import dev.dewy.dqs.server.DQSServerConnection;
 import dev.dewy.dqs.server.handler.incoming.LoginStartHandler;
@@ -173,7 +170,8 @@ public final class Constants
                     new HelpCommand(),
                     new SignInCommand(),
                     new PosCommand(),
-                    new AutoReconnectCommand());
+                    new AutoReconnectCommand(),
+                    new MuteCommand());
 
             try
             {

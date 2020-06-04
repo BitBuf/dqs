@@ -48,6 +48,8 @@ public final class Config
         public String subscriberId = "default";
         public String subscriberRole = "Subscriber";
 
+        public boolean muted = false;
+
         public int cooldown = 5;
         public String prefix = "&";
     }
