@@ -172,7 +172,8 @@ public final class Constants
                     new PosCommand(),
                     new AutoReconnectCommand(),
                     new MuteCommand(),
-                    new SpammerCommand());
+                    new SpammerCommand(),
+                    new PrefixCommand());
 
             try
             {
