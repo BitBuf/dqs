@@ -137,17 +137,6 @@ public final class Config
         public static final class Extra
         {
             public Timeout timeout = new Timeout();
-            public Whitelist whitelist = new Whitelist();
-
-            public static final class Whitelist
-            {
-                public boolean enable = false;
-                public List<String> allowedUsers = Arrays.asList(
-                        "iBuyMountainDew",
-                        "dude"
-                );
-                public String kickmsg = "§7[§b§lDQS§r§7] §fAccess denied.";
-            }
 
             public static final class Timeout
             {
@@ -209,6 +198,7 @@ public final class Config
             public List<String> whitelist = Arrays.asList(
                     "Taribone"
             );
+            public String kickmsg = "§7[§b§lDQS§r§7] §fAccess denied.";
         }
     }
 

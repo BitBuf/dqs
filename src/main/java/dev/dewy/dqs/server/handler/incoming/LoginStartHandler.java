@@ -14,10 +14,10 @@ public class LoginStartHandler implements HandlerRegistry.IncomingHandler<LoginS
     public boolean apply(LoginStartPacket packet, DQSServerConnection session)
     {
         //SERVER_LOG.info("login start");
-        if (CONFIG.server.extra.whitelist.enable && !CONFIG.server.extra.whitelist.allowedUsers.contains(packet.getUsername()))
+        if (CONFIG.modules.whitelist.enabled && !CONFIG.modules.whitelist.whitelist.contains(packet.getUsername()))
         {
             SERVER_LOG.warn("User %s [%s] tried to connect!", packet.getUsername(), session.getRemoteAddress());
-            session.disconnect(CONFIG.server.extra.whitelist.kickmsg);
+            session.disconnect(CONFIG.modules.whitelist.kickmsg);
             return false;
         }
         if (!DQS.getInstance().isConnected())
