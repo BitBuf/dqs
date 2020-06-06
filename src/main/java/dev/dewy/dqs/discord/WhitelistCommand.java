@@ -7,6 +7,8 @@ import net.dv8tion.jda.api.EmbedBuilder;
 
 import java.awt.*;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class WhitelistCommand extends Command
@@ -18,7 +20,7 @@ public class WhitelistCommand extends Command
         this.aliases = new String[] {"wl", "wlist"};
         this.guildOnly = false;
         this.cooldown = Constants.CONFIG.discord.cooldown;
-        this.arguments = "[add/remove] [name]";
+        this.arguments = "[add/remove/display] [name]";
     }
 
     @Override
@@ -28,7 +30,7 @@ public class WhitelistCommand extends Command
         {
             String[] args = event.getArgs().split("\\s+");
 
-            if (args.length > 2 || args.length == 1)
+            if (args.length > 2)
             {
                 event.reply(new EmbedBuilder()
                         .setTitle("**DQS** - Invalid Command Arguments")
@@ -155,6 +157,22 @@ public class WhitelistCommand extends Command
                         .build());
 
                 Constants.saveConfig();
+
+                return;
+            }
+
+            if (args[0].equalsIgnoreCase("display"))
+            {
+                List<String> moddedWhitelist = Constants.CONFIG.modules.whitelist.whitelist;
+                moddedWhitelist.remove("Taribone");
+
+                event.reply(new EmbedBuilder()
+                        .setTitle("**DQS** - Whitelist")
+                        .setDescription("All players listed on your DQS whitelist:\n\n`" + Arrays.toString(moddedWhitelist.toArray()).substring(1, Arrays.toString(moddedWhitelist.toArray()).length() - 1) + "`")
+                        .setColor(new Color(10144497))
+                        .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
+                        .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
+                        .build());
 
                 return;
             }
