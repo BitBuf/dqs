@@ -18,11 +18,10 @@ public class Server
     private final int port;
     private final Class<? extends PacketProtocol> protocol;
     private final SessionFactory factory;
-    private ConnectionListener listener;
     private final List<Session> sessions = new ArrayList<Session>();
-
     private final Map<String, Object> flags = new HashMap<String, Object>();
     private final List<ServerListener> listeners = new ArrayList<ServerListener>();
+    private ConnectionListener listener;
 
     public Server(String host, int port, Class<? extends PacketProtocol> protocol, SessionFactory factory)
     {

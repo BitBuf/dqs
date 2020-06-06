@@ -15,10 +15,8 @@ import java.util.Objects;
 public class BlockStorage
 {
     private static final BlockState AIR = new BlockState(0, 0);
-
-    private int bitsPerEntry;
-
     private final List<BlockState> states;
+    private int bitsPerEntry;
     private FlexibleStorage storage;
 
     public BlockStorage()

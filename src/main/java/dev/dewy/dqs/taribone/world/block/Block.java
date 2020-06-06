@@ -7,7 +7,6 @@ import dev.dewy.dqs.protocol.game.chunk.Column;
 import dev.dewy.dqs.protocol.game.world.block.BlockState;
 import dev.dewy.dqs.taribone.world.World;
 import dev.dewy.dqs.taribone.world.chunk.Chunk;
-import dev.dewy.dqs.utils.Constants;
 import dev.dewy.dqs.utils.vector.Vector3i;
 
 import java.util.Objects;

@@ -56,8 +56,7 @@ public class WhitelistCommand extends Command
                             .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                             .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
                             .build());
-                }
-                else
+                } else
                 {
                     event.reply(new EmbedBuilder()
                             .setTitle("**DQS** - Whitelist")
@@ -103,8 +102,7 @@ public class WhitelistCommand extends Command
                             .build());
 
                     Constants.saveConfig();
-                }
-                else
+                } else
                 {
                     event.reply(new EmbedBuilder()
                             .setTitle("**DQS** - Invalid Command Arguments")
@@ -184,8 +182,7 @@ public class WhitelistCommand extends Command
                     .setFooter("Focused on " + Constants.CONFIG.authentication.username)
                     .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
                     .build());
-        }
-        catch (Throwable t)
+        } catch (Throwable t)
         {
             Constants.DISCORD_LOG.error(t);
 

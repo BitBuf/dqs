@@ -20,14 +20,12 @@ public class AuthenticationService
 
     private final String clientToken;
     private final Proxy proxy;
-
+    private final List<GameProfile.Property> properties = new ArrayList<GameProfile.Property>();
     private String username;
     private String password;
     private String accessToken;
-
     private boolean loggedIn;
     private String id;
-    private final List<GameProfile.Property> properties = new ArrayList<GameProfile.Property>();
     private List<GameProfile> profiles = new ArrayList<GameProfile>();
     private GameProfile selectedProfile;
 

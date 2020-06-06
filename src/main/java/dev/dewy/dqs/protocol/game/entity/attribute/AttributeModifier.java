@@ -8,10 +8,10 @@ import java.util.UUID;
 
 public class AttributeModifier
 {
-    private ModifierType type;
     private final UUID uuid;
     private final double amount;
     private final ModifierOperation operation;
+    private ModifierType type;
 
     public AttributeModifier(ModifierType type, double amount, ModifierOperation operation)
     {

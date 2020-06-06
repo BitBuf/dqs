@@ -57,13 +57,11 @@ public class SignInCommand extends Command
             if (DQS.getInstance().isConnected())
             {
                 DQS.getInstance().getClient().getSession().disconnect("Account changeup! :o");
-            }
-            else
+            } else
             {
                 DQS.getInstance().start();
             }
-        }
-        catch (Throwable t)
+        } catch (Throwable t)
         {
             Constants.DISCORD_LOG.error(t);
 

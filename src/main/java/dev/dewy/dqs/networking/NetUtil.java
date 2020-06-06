@@ -338,8 +338,8 @@ public class NetUtil
     private static class NetInputStream extends InputStream
     {
         private final NetInput in;
-        private boolean readFirst;
         private final byte firstByte;
+        private boolean readFirst;
 
         public NetInputStream(NetInput in, byte firstByte)
         {

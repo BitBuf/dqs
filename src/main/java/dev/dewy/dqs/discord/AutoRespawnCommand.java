@@ -54,8 +54,7 @@ public class AutoRespawnCommand extends Command
                             .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                             .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
                             .build());
-                }
-                else
+                } else
                 {
                     event.reply(new EmbedBuilder()
                             .setTitle("**DQS** - Auto Respawn")
@@ -72,8 +71,7 @@ public class AutoRespawnCommand extends Command
             try
             {
                 Integer.parseInt(args[0]);
-            }
-            catch (NumberFormatException e)
+            } catch (NumberFormatException e)
             {
                 event.reply(new EmbedBuilder()
                         .setTitle("**DQS** - Invalid Command Arguments")
@@ -110,8 +108,7 @@ public class AutoRespawnCommand extends Command
                         .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                         .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
                         .build());
-            }
-            else
+            } else
             {
                 event.reply(new EmbedBuilder()
                         .setTitle("**DQS** - Auto Respawn")
@@ -121,8 +118,7 @@ public class AutoRespawnCommand extends Command
                         .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
                         .build());
             }
-        }
-        catch (Throwable t)
+        } catch (Throwable t)
         {
             Constants.DISCORD_LOG.error(t);
 

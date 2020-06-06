@@ -31,7 +31,6 @@ import dev.dewy.dqs.taribone.world.World;
 import dev.dewy.dqs.taribone.world.block.Block;
 import dev.dewy.dqs.taribone.world.chunk.Chunk;
 import dev.dewy.dqs.taribone.world.chunk.ChunkLocation;
-import dev.dewy.dqs.utils.Constants;
 import dev.dewy.dqs.utils.ServerData;
 import dev.dewy.dqs.utils.vector.Vector3d;
 

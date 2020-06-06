@@ -2,7 +2,6 @@ package dev.dewy.dqs.taribone.ticker;
 
 import dev.dewy.dqs.DQS;
 import dev.dewy.dqs.taribone.task.api.TaskStatus;
-import dev.dewy.dqs.utils.Constants;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 

@@ -10,9 +10,9 @@ public class Advancement
 {
     private final String id;
     private final String parentId;
-    private DisplayData displayData;
     private final List<String> criteria;
     private final List<List<String>> requirements;
+    private DisplayData displayData;
 
     public Advancement(String id, String parentId, List<String> criteria, List<List<String>> requirements)
     {
@@ -87,9 +87,9 @@ public class Advancement
         private final FrameType frameType;
         private final boolean showToast;
         private final boolean hidden;
-        private String backgroundTexture;
         private final float posX;
         private final float posY;
+        private String backgroundTexture;
 
         public DisplayData(String title, String description, ItemStack icon, FrameType frameType,
                            boolean showToast, boolean hidden, float posX, float posY)

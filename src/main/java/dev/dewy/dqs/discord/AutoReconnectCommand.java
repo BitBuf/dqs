@@ -44,8 +44,7 @@ public class AutoReconnectCommand extends Command
             try
             {
                 Integer.parseInt(args[0]);
-            }
-            catch (NumberFormatException e)
+            } catch (NumberFormatException e)
             {
                 event.reply(new EmbedBuilder()
                         .setTitle("**DQS** - Invalid Command Arguments")
@@ -82,8 +81,7 @@ public class AutoReconnectCommand extends Command
                         .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                         .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
                         .build());
-            }
-            else
+            } else
             {
                 event.reply(new EmbedBuilder()
                         .setTitle("**DQS** - Auto Reconnect")
@@ -93,8 +91,7 @@ public class AutoReconnectCommand extends Command
                         .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
                         .build());
             }
-        }
-        catch (Throwable e)
+        } catch (Throwable e)
         {
             Constants.DISCORD_LOG.error(e);
 

@@ -32,7 +32,6 @@ import dev.dewy.dqs.taribone.pathing.PathNode;
 import dev.dewy.dqs.taribone.task.api.TaskStatus;
 import dev.dewy.dqs.taribone.world.block.Block;
 import dev.dewy.dqs.taribone.world.block.Material;
-import dev.dewy.dqs.utils.Constants;
 import dev.dewy.dqs.utils.vector.Vector3d;
 import dev.dewy.dqs.utils.vector.Vector3i;
 
@@ -48,12 +47,6 @@ public class WalkTaskExecutor extends AbstractTaskExecutor
     private final Vector3i target;
 
     private final long startTime;
-
-    private Future<PathNode> pathFuture;
-    private PathNode nextStep;
-    private int ticksSinceStepChange = 0;
-    private int timeout = defaultTimeout;
-
     private final Callable<PathNode> task = new Callable<PathNode>()
     {
         @Override
@@ -64,6 +57,10 @@ public class WalkTaskExecutor extends AbstractTaskExecutor
             return start;
         }
     };
+    private Future<PathNode> pathFuture;
+    private PathNode nextStep;
+    private int ticksSinceStepChange = 0;
+    private int timeout = defaultTimeout;
 
     public WalkTaskExecutor(final DQS dqs, final Vector3i target)
     {

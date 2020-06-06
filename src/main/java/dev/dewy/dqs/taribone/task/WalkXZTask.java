@@ -5,7 +5,6 @@ import dev.dewy.dqs.exceptions.taribone.ChunkNotLoadedException;
 import dev.dewy.dqs.taribone.task.api.Task;
 import dev.dewy.dqs.taribone.task.api.TaskExecutor;
 import dev.dewy.dqs.taribone.task.executor.WalkTaskExecutor;
-import dev.dewy.dqs.utils.Constants;
 import dev.dewy.dqs.utils.vector.Vector2i;
 
 public class WalkXZTask implements Task
