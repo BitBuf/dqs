@@ -200,8 +200,6 @@ public final class Config
 
         public static final class GameCommands
         {
-            public boolean enabled = true;
-
             public String prefix = "&";
         }
 
@@ -209,7 +207,7 @@ public final class Config
         {
             public boolean enabled = true;
             public List<String> whitelist = Arrays.asList(
-                    "nerdlets"
+                    "Taribone"
             );
         }
     }

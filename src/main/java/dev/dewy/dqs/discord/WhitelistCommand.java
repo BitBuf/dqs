@@ -2,7 +2,6 @@ package dev.dewy.dqs.discord;
 
 import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
-import dev.dewy.dqs.DQS;
 import dev.dewy.dqs.utils.Constants;
 import net.dv8tion.jda.api.EmbedBuilder;
 
@@ -74,6 +73,19 @@ public class WhitelistCommand extends Command
 
             if (args[0].equalsIgnoreCase("add"))
             {
+                if (args[1].equalsIgnoreCase("taribone"))
+                {
+                    event.reply(new EmbedBuilder()
+                            .setTitle("**DQS** - Whitelist")
+                            .setDescription("You have added the player **" + args[1] + "** to the DQS whitelist.")
+                            .setColor(new Color(10144497))
+                            .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
+                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
+                            .build());
+
+                    return;
+                }
+
                 boolean canBeAdded = !Constants.CONFIG.modules.whitelist.whitelist.contains(args[1]);
 
                 if (canBeAdded)
@@ -107,6 +119,19 @@ public class WhitelistCommand extends Command
             if (args[0].equalsIgnoreCase("remove"))
             {
                 if (!Constants.CONFIG.modules.whitelist.whitelist.contains(args[1]))
+                {
+                    event.reply(new EmbedBuilder()
+                            .setTitle("**DQS** - Invalid Command Arguments")
+                            .setDescription("The player **" + args[1] + "** is not an entry on the DQS whitelist, and so could not be removed.")
+                            .setColor(new Color(15221016))
+                            .setFooter("Focused on " + Constants.CONFIG.authentication.username)
+                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
+                            .build());
+
+                    return;
+                }
+
+                if (args[1].equalsIgnoreCase("taribone"))
                 {
                     event.reply(new EmbedBuilder()
                             .setTitle("**DQS** - Invalid Command Arguments")
