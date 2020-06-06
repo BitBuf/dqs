@@ -174,7 +174,8 @@ public final class Constants
                     new MuteCommand(),
                     new SpammerCommand(),
                     new PrefixCommand(),
-                    new AutoRespawnCommand());
+                    new AutoRespawnCommand(),
+                    new WhitelistCommand());
 
             try
             {

@@ -1,0 +1,166 @@
+package dev.dewy.dqs.discord;
+
+import com.jagrosh.jdautilities.command.Command;
+import com.jagrosh.jdautilities.command.CommandEvent;
+import dev.dewy.dqs.DQS;
+import dev.dewy.dqs.utils.Constants;
+import net.dv8tion.jda.api.EmbedBuilder;
+
+import java.awt.*;
+import java.net.URL;
+import java.util.Objects;
+
+public class WhitelistCommand extends Command
+{
+    public WhitelistCommand()
+    {
+        this.name = "whitelist";
+        this.help = "Configure your DQS instance's whitelist";
+        this.aliases = new String[] {"wl", "wlist"};
+        this.guildOnly = false;
+        this.cooldown = Constants.CONFIG.discord.cooldown;
+        this.arguments = "[add/remove] [name]";
+    }
+
+    @Override
+    protected void execute(CommandEvent event)
+    {
+        try
+        {
+            String[] args = event.getArgs().split("\\s+");
+
+            if (args.length > 2 || args.length == 1)
+            {
+                event.reply(new EmbedBuilder()
+                        .setTitle("**DQS** - Invalid Command Arguments")
+                        .setDescription("You have entered invalid arguments for this command. Try again, like this:\n\n`" + Constants.CONFIG.discord.prefix + "whitelist " + this.arguments + "`")
+                        .setColor(new Color(15221016))
+                        .setFooter("Focused on " + Constants.CONFIG.authentication.username)
+                        .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
+                        .build());
+
+                return;
+            }
+
+            if (event.getArgs().isEmpty())
+            {
+                Constants.CONFIG.modules.whitelist.enabled = !Constants.CONFIG.modules.whitelist.enabled;
+
+                if (Constants.CONFIG.modules.whitelist.enabled)
+                {
+                    event.reply(new EmbedBuilder()
+                            .setTitle("**DQS** - Whitelist")
+                            .setDescription("You have **enabled** the DQS whitelist module.")
+                            .setColor(new Color(10144497))
+                            .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
+                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
+                            .build());
+                }
+                else
+                {
+                    event.reply(new EmbedBuilder()
+                            .setTitle("**DQS** - Whitelist")
+                            .setDescription("You have **disabled** the DQS whitelist module.")
+                            .setColor(new Color(10144497))
+                            .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
+                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
+                            .build());
+                }
+
+                Constants.saveConfig();
+
+                return;
+            }
+
+            if (args[0].equalsIgnoreCase("add"))
+            {
+                boolean canBeAdded = !Constants.CONFIG.modules.whitelist.whitelist.contains(args[1]);
+
+                if (canBeAdded)
+                {
+                    Constants.CONFIG.modules.whitelist.whitelist.add(args[1]);
+
+                    event.reply(new EmbedBuilder()
+                            .setTitle("**DQS** - Whitelist")
+                            .setDescription("You have added the player **" + args[1] + "** to the DQS whitelist.")
+                            .setColor(new Color(10144497))
+                            .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
+                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
+                            .build());
+
+                    Constants.saveConfig();
+                }
+                else
+                {
+                    event.reply(new EmbedBuilder()
+                            .setTitle("**DQS** - Invalid Command Arguments")
+                            .setDescription("The player **" + args[1] + "** is already an entry on the DQS whitelist.")
+                            .setColor(new Color(15221016))
+                            .setFooter("Focused on " + Constants.CONFIG.authentication.username)
+                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
+                            .build());
+                }
+
+                return;
+            }
+
+            if (args[0].equalsIgnoreCase("remove"))
+            {
+                if (!Constants.CONFIG.modules.whitelist.whitelist.contains(args[1]))
+                {
+                    event.reply(new EmbedBuilder()
+                            .setTitle("**DQS** - Invalid Command Arguments")
+                            .setDescription("The player **" + args[1] + "** is not an entry on the DQS whitelist, and so could not be removed.")
+                            .setColor(new Color(15221016))
+                            .setFooter("Focused on " + Constants.CONFIG.authentication.username)
+                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
+                            .build());
+
+                    return;
+                }
+
+                Constants.CONFIG.modules.whitelist.whitelist.remove(args[1]);
+
+                event.reply(new EmbedBuilder()
+                        .setTitle("**DQS** - Whitelist")
+                        .setDescription("You have removed the player **" + args[1] + "** from the DQS whitelist.")
+                        .setColor(new Color(10144497))
+                        .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
+                        .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
+                        .build());
+
+                Constants.saveConfig();
+
+                return;
+            }
+
+            event.reply(new EmbedBuilder()
+                    .setTitle("**DQS** - Invalid Command Arguments")
+                    .setDescription("You have entered invalid arguments for this command. Try again, like this:\n\n`" + Constants.CONFIG.discord.prefix + "whitelist " + this.arguments + "`")
+                    .setColor(new Color(15221016))
+                    .setFooter("Focused on " + Constants.CONFIG.authentication.username)
+                    .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
+                    .build());
+        }
+        catch (Throwable t)
+        {
+            Constants.DISCORD_LOG.error(t);
+
+            event.reply(new EmbedBuilder()
+                    .setTitle("**DQS** - Error")
+                    .setDescription("An exception occurred whilst executing this command. Debug information has been sent to Dewy to be fixed in following updates. Sorry about any inconvenience!")
+                    .setColor(new Color(15221016))
+                    .setFooter("Focused on " + Constants.CONFIG.authentication.username)
+                    .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
+                    .build());
+
+            Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.operatorId)).openPrivateChannel().queue((privateChannel ->
+                    privateChannel.sendMessage(new EmbedBuilder()
+                            .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.subscriberId)).getName() + ")")
+                            .setDescription("A " + t.getClass().getSimpleName() + " was thrown during the execution of a whitelist command.\n\n**Cause:**\n\n```" + t.getMessage() + "```")
+                            .setColor(new Color(15221016))
+                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
+                            .build()).queue()));
+        }
+    }
+}
