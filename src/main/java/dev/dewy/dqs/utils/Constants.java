@@ -31,6 +31,7 @@ import net.daporkchop.lib.logging.Logging;
 import net.daporkchop.lib.logging.impl.DefaultLogger;
 import net.daporkchop.lib.minecraft.text.parser.MCFormatParser;
 import net.dv8tion.jda.api.AccountType;
+import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 
@@ -134,6 +135,8 @@ public final class Constants
     public static Config CONFIG;
     public static volatile boolean SHOULD_RECONNECT;
 
+    public static JDA DISCORD;
+
     static
     {
         String date = new SimpleDateFormat("yyyy.MM.dd HH.mm.ss").format(Date.from(Instant.now()));
@@ -179,7 +182,7 @@ public final class Constants
 
             try
             {
-                new JDABuilder(AccountType.BOT)
+                DISCORD = new JDABuilder(AccountType.BOT)
                         .setToken(CONFIG.discord.token)
                         .addEventListeners(commandClient.build())
                         .build();

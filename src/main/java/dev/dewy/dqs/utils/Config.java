@@ -160,6 +160,7 @@ public final class Config
         public AutoRespawn autoRespawn = new AutoRespawn();
         public ChatSpammer chatSpammer = new ChatSpammer();
         public GameCommands gameCommands = new GameCommands();
+        public Notifications notifications = new Notifications();
         public Whitelist whitelist = new Whitelist();
 
         public static final class AutoReconnect
@@ -190,6 +191,18 @@ public final class Config
         public static final class GameCommands
         {
             public String prefix = "&";
+        }
+
+        public static final class Notifications
+        {
+            public boolean enabled = true;
+
+            public boolean playerInRange = true;
+            public boolean crystalInRange = true;
+
+            public boolean connected = true;
+            public boolean relogged = true;
+            public boolean serverRestarts = true;
         }
 
         public static final class Whitelist
