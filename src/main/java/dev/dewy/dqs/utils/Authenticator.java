@@ -1,7 +1,7 @@
 package dev.dewy.dqs.utils;
 
 import dev.dewy.dqs.exceptions.request.RequestException;
-import dev.dewy.dqs.protocol.MinecraftProtocol;
+import dev.dewy.dqs.protocol.DQSProtocol;
 import dev.dewy.dqs.services.AuthenticationService;
 
 import java.net.Proxy;
@@ -26,17 +26,17 @@ public class Authenticator
         }
     }
 
-    public MinecraftProtocol handleRelog()
+    public DQSProtocol handleRelog()
     {
         if (this.auth == null)
         {
-            return new MinecraftProtocol(CONFIG.authentication.username);
+            return new DQSProtocol(CONFIG.authentication.username);
         } else
         {
             try
             {
                 this.auth.login();
-                return new MinecraftProtocol(
+                return new DQSProtocol(
                         this.auth.getSelectedProfile(),
                         this.auth.getClientToken(),
                         this.auth.getAccessToken()

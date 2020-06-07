@@ -17,7 +17,7 @@ import dev.dewy.dqs.packet.ingame.server.world.ServerBlockChangePacket;
 import dev.dewy.dqs.packet.ingame.server.world.ServerChunkDataPacket;
 import dev.dewy.dqs.packet.ingame.server.world.ServerMultiBlockChangePacket;
 import dev.dewy.dqs.packet.ingame.server.world.ServerUnloadChunkPacket;
-import dev.dewy.dqs.protocol.MinecraftProtocol;
+import dev.dewy.dqs.protocol.DQSProtocol;
 import dev.dewy.dqs.protocol.SubProtocol;
 import dev.dewy.dqs.protocol.game.chunk.Column;
 import dev.dewy.dqs.protocol.game.entity.metadata.Position;
@@ -52,7 +52,7 @@ public class TariboneListener implements SessionListener
     @Override
     public void packetReceived(PacketReceivedEvent pre)
     {
-        MinecraftProtocol protocol = (MinecraftProtocol) pre.getSession().getPacketProtocol();
+        DQSProtocol protocol = (DQSProtocol) pre.getSession().getPacketProtocol();
 
         if (protocol.getSubProtocol() != SubProtocol.GAME)
         {

@@ -28,18 +28,14 @@ import dev.dewy.dqs.taribone.ticker.TariboneTicker;
 import dev.dewy.dqs.taribone.world.World;
 import dev.dewy.dqs.taribone.world.physics.TariboneWorldPhysics;
 import dev.dewy.dqs.utils.Authenticator;
-import dev.dewy.dqs.utils.Constants;
 import dev.dewy.dqs.utils.ServerData;
-import net.dv8tion.jda.api.EmbedBuilder;
 
 import javax.imageio.ImageIO;
 import javax.security.auth.login.LoginException;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.Proxy;
 import java.net.URL;
 import java.util.*;
@@ -59,7 +55,7 @@ public class DQS
     public boolean inQueue = true;
     public int currentPos = -1;
     public boolean connectedToProxy;
-    protected MinecraftProtocol protocol;
+    protected DQSProtocol protocol;
     protected Client client;
     protected Server server;
     protected Authenticator authenticator;
@@ -199,7 +195,7 @@ public class DQS
                         while (true)
                         {
                             Thread.sleep(500L);
-                            if (this.isConnected() && ((MinecraftProtocol) this.client.getSession().getPacketProtocol()).getSubProtocol() == SubProtocol.GAME)
+                            if (this.isConnected() && ((DQSProtocol) this.client.getSession().getPacketProtocol()).getSubProtocol() == SubProtocol.GAME)
                             {
                                 modules.forEach(Runnable::run);
                             }
@@ -316,7 +312,7 @@ public class DQS
                 int port = CONFIG.server.bind.port;
 
                 SERVER_LOG.info("Starting server on %s:%d...", address, port);
-                this.server = new Server(address, port, MinecraftProtocol.class, this.sessionFactory);
+                this.server = new Server(address, port, DQSProtocol.class, this.sessionFactory);
                 this.server.setGlobalFlag(MinecraftConstants.AUTH_PROXY_KEY, Proxy.NO_PROXY);
                 this.server.setGlobalFlag(MinecraftConstants.VERIFY_USERS_KEY, CONFIG.server.verifyUsers);
                 this.server.setGlobalFlag(MinecraftConstants.SERVER_INFO_BUILDER_KEY, (ServerInfoBuilder) session -> new ServerStatusInfo(
@@ -424,7 +420,7 @@ public class DQS
         return this.sessionFactory;
     }
 
-    public MinecraftProtocol getProtocol()
+    public DQSProtocol getProtocol()
     {
         return this.protocol;
     }

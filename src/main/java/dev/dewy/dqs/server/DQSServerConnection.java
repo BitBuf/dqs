@@ -5,7 +5,7 @@ import dev.dewy.dqs.networking.Session;
 import dev.dewy.dqs.networking.event.session.*;
 import dev.dewy.dqs.packet.Packet;
 import dev.dewy.dqs.packet.PacketProtocol;
-import dev.dewy.dqs.protocol.MinecraftProtocol;
+import dev.dewy.dqs.protocol.DQSProtocol;
 import dev.dewy.dqs.protocol.SubProtocol;
 
 import java.io.IOException;
@@ -38,7 +38,7 @@ public class DQSServerConnection implements Session, SessionListener
     public void packetReceived(PacketReceivedEvent event)
     {
         this.lastPacket = System.currentTimeMillis();
-        if (SERVER_HANDLERS.handleInbound(event.getPacket(), this) && ((MinecraftProtocol) this.session.getPacketProtocol()).getSubProtocol() == SubProtocol.GAME && this.isLoggedIn)
+        if (SERVER_HANDLERS.handleInbound(event.getPacket(), this) && ((DQSProtocol) this.session.getPacketProtocol()).getSubProtocol() == SubProtocol.GAME && this.isLoggedIn)
         {
             this.dqs.getClient().getSession().send(event.getPacket()); //TODO: handle multi-client correctly (i.e. only allow one client to send packets at a time)
         }

@@ -3,7 +3,7 @@ package dev.dewy.dqs.client;
 import dev.dewy.dqs.DQS;
 import dev.dewy.dqs.networking.event.session.*;
 import dev.dewy.dqs.packet.Packet;
-import dev.dewy.dqs.protocol.MinecraftProtocol;
+import dev.dewy.dqs.protocol.DQSProtocol;
 import dev.dewy.dqs.protocol.SubProtocol;
 import dev.dewy.dqs.server.DQSServerConnection;
 import dev.dewy.dqs.utils.Constants;
@@ -36,7 +36,7 @@ public class ClientListener implements SessionListener
             if (CLIENT_HANDLERS.handleInbound(event.getPacket(), this.session))
             {
                 DQSServerConnection connection = this.dqs.getCurrentPlayer().get();
-                if (connection != null && ((MinecraftProtocol) connection.getPacketProtocol()).getSubProtocol() == SubProtocol.GAME)
+                if (connection != null && ((DQSProtocol) connection.getPacketProtocol()).getSubProtocol() == SubProtocol.GAME)
                 {
                     connection.send(event.getPacket());
                 }

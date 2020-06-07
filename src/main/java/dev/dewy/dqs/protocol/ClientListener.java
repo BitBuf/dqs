@@ -38,7 +38,7 @@ public class ClientListener extends SessionAdapter
     @Override
     public void packetReceived(PacketReceivedEvent event)
     {
-        MinecraftProtocol protocol = (MinecraftProtocol) event.getSession().getPacketProtocol();
+        DQSProtocol protocol = (DQSProtocol) event.getSession().getPacketProtocol();
         if (protocol.getSubProtocol() == SubProtocol.LOGIN)
         {
             if (event.getPacket() instanceof EncryptionRequestPacket)
@@ -128,7 +128,7 @@ public class ClientListener extends SessionAdapter
     @Override
     public void connected(ConnectedEvent event)
     {
-        MinecraftProtocol protocol = (MinecraftProtocol) event.getSession().getPacketProtocol();
+        DQSProtocol protocol = (DQSProtocol) event.getSession().getPacketProtocol();
         if (protocol.getSubProtocol() == SubProtocol.LOGIN)
         {
             GameProfile profile = event.getSession().getFlag(MinecraftConstants.PROFILE_KEY);

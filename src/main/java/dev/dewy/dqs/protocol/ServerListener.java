@@ -64,7 +64,7 @@ public class ServerListener extends SessionAdapter
     @Override
     public void packetReceived(PacketReceivedEvent event)
     {
-        MinecraftProtocol protocol = (MinecraftProtocol) event.getSession().getPacketProtocol();
+        DQSProtocol protocol = (DQSProtocol) event.getSession().getPacketProtocol();
         if (protocol.getSubProtocol() == SubProtocol.HANDSHAKE)
         {
             if (event.getPacket() instanceof HandshakePacket)
@@ -164,7 +164,7 @@ public class ServerListener extends SessionAdapter
     @Override
     public void disconnecting(DisconnectingEvent event)
     {
-        MinecraftProtocol protocol = (MinecraftProtocol) event.getSession().getPacketProtocol();
+        DQSProtocol protocol = (DQSProtocol) event.getSession().getPacketProtocol();
         boolean escape = false;
         if (event.getReason() != null)
         {
@@ -242,7 +242,7 @@ public class ServerListener extends SessionAdapter
             this.session.setCompressionThreshold(threshold);
             this.session.send(new LoginSuccessPacket(profile));
             this.session.setFlag(MinecraftConstants.PROFILE_KEY, profile);
-            ((MinecraftProtocol) this.session.getPacketProtocol()).setSubProtocol(SubProtocol.GAME, false, this.session);
+            ((DQSProtocol) this.session.getPacketProtocol()).setSubProtocol(SubProtocol.GAME, false, this.session);
             ServerLoginHandler handler = this.session.getFlag(MinecraftConstants.SERVER_LOGIN_HANDLER_KEY);
             if (handler != null)
             {

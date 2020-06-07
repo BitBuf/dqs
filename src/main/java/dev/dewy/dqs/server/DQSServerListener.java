@@ -3,7 +3,7 @@ package dev.dewy.dqs.server;
 import dev.dewy.dqs.DQS;
 import dev.dewy.dqs.networking.Session;
 import dev.dewy.dqs.networking.event.server.*;
-import dev.dewy.dqs.protocol.MinecraftProtocol;
+import dev.dewy.dqs.protocol.DQSProtocol;
 import dev.dewy.dqs.protocol.SubProtocol;
 
 import java.net.SocketAddress;
@@ -50,7 +50,7 @@ public class DQSServerListener implements ServerListener
     public void sessionAdded(SessionAddedEvent event)
     {
         //SERVER_LOG.info("session added");
-        if (((MinecraftProtocol) event.getSession().getPacketProtocol()).getSubProtocol() != SubProtocol.STATUS)
+        if (((DQSProtocol) event.getSession().getPacketProtocol()).getSubProtocol() != SubProtocol.STATUS)
         {
             DQSServerConnection connection = new DQSServerConnection(this.dqs, event.getSession());
             event.getSession().addListener(connection);

@@ -42,7 +42,7 @@ import java.security.GeneralSecurityException;
 import java.security.Key;
 import java.util.UUID;
 
-public class MinecraftProtocol extends PacketProtocol
+public class DQSProtocol extends PacketProtocol
 {
     private final PacketHeader header = new DefaultPacketHeader();
     private SubProtocol subProtocol = SubProtocol.HANDSHAKE;
@@ -53,11 +53,11 @@ public class MinecraftProtocol extends PacketProtocol
     private String accessToken = "";
 
     @SuppressWarnings("unused")
-    private MinecraftProtocol()
+    private DQSProtocol()
     {
     }
 
-    public MinecraftProtocol(SubProtocol subProtocol)
+    public DQSProtocol(SubProtocol subProtocol)
     {
         if (subProtocol != SubProtocol.LOGIN && subProtocol != SubProtocol.STATUS)
         {
@@ -71,33 +71,33 @@ public class MinecraftProtocol extends PacketProtocol
         }
     }
 
-    public MinecraftProtocol(String username)
+    public DQSProtocol(String username)
     {
         this(SubProtocol.LOGIN);
         this.profile = new GameProfile((UUID) null, username);
     }
 
-    public MinecraftProtocol(String username, String password) throws RequestException
+    public DQSProtocol(String username, String password) throws RequestException
     {
         this(username, password, Proxy.NO_PROXY);
     }
 
-    public MinecraftProtocol(String username, String clientToken, String accessToken) throws RequestException
+    public DQSProtocol(String username, String clientToken, String accessToken) throws RequestException
     {
         this(username, clientToken, accessToken, Proxy.NO_PROXY);
     }
 
-    public MinecraftProtocol(String username, String password, Proxy proxy) throws RequestException
+    public DQSProtocol(String username, String password, Proxy proxy) throws RequestException
     {
         this(username, UUID.randomUUID().toString(), password, false, proxy);
     }
 
-    public MinecraftProtocol(String username, String clientToken, String accessToken, Proxy proxy) throws RequestException
+    public DQSProtocol(String username, String clientToken, String accessToken, Proxy proxy) throws RequestException
     {
         this(username, clientToken, accessToken, true, proxy);
     }
 
-    private MinecraftProtocol(String username, String clientToken, String using, boolean token, Proxy authProxy) throws RequestException
+    private DQSProtocol(String username, String clientToken, String using, boolean token, Proxy authProxy) throws RequestException
     {
         this(SubProtocol.LOGIN);
 
@@ -117,7 +117,7 @@ public class MinecraftProtocol extends PacketProtocol
         this.accessToken = auth.getAccessToken();
     }
 
-    public MinecraftProtocol(GameProfile profile, String clientToken, String accessToken)
+    public DQSProtocol(GameProfile profile, String clientToken, String accessToken)
     {
         this(SubProtocol.LOGIN);
         this.profile = profile;
