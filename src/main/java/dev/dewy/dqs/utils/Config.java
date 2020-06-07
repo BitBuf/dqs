@@ -199,7 +199,7 @@ public final class Config
 
             public boolean playerInRange = true;
             public boolean crystalInRange = true;
-            
+
             public boolean nearlyFinishedQueueing = true;
             public int threshold = 15;
 
