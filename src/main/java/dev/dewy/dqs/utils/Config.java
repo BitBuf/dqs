@@ -202,7 +202,7 @@ public final class Config
 
             public boolean connected = true;
             public boolean relogged = true;
-            public boolean serverRestarts = true;
+            public boolean serverMessages = true;
         }
 
         public static final class Whitelist
