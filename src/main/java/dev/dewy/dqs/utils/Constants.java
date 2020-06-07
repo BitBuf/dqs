@@ -179,7 +179,8 @@ public final class Constants
                     new WhitelistCommand(),
                     new InfoCommand(),
                     new ModulesCommand(),
-                    new SayCommand());
+                    new SayCommand(),
+                    new WhisperCommand());
 
             try
             {

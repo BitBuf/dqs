@@ -11,16 +11,16 @@ import java.awt.*;
 import java.net.URL;
 import java.util.Objects;
 
-public class SayCommand extends Command
+public class WhisperCommand extends Command
 {
-    public SayCommand()
+    public WhisperCommand()
     {
-        this.name = "say";
+        this.name = "whisper";
         this.help = "Send a message to public chat.";
-        this.aliases = new String[] {"chat", "pubchat", "shout"};
+        this.aliases = new String[] {"msg", "w", "pm"};
         this.guildOnly = false;
         this.cooldown = Constants.CONFIG.discord.cooldown;
-        this.arguments = "<MESSAGE>";
+        this.arguments = "<RECIPIENT> <MESSAGE>";
     }
 
     @Override
@@ -28,11 +28,21 @@ public class SayCommand extends Command
     {
         try
         {
-            if (event.getArgs().length() >= 255)
+            String[] args = event.getArgs().split("\\s+");
+            StringBuilder message = new StringBuilder();
+
+            for (int i = 1; i < args.length; i++)
+            {
+                message.append(" ").append(args[i]);
+            }
+
+            message.insert(0, "/msg " + args[0] + " ");
+
+            if (message.length() >= 255)
             {
                 event.reply(new EmbedBuilder()
                         .setTitle("**DQS** - Invalid Command Arguments")
-                        .setDescription("You can not send a chat message larger than 255 characters. Please try and shorten your message.")
+                        .setDescription("You can not send a whisper larger than 255 characters. Please try and shorten your message.")
                         .setColor(new Color(15221016))
                         .setFooter("Focused on " + Constants.CONFIG.authentication.username)
                         .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
@@ -41,11 +51,11 @@ public class SayCommand extends Command
                 return;
             }
 
-            DQS.getInstance().getClient().getSession().send(new ClientChatPacket(event.getArgs()));
+            DQS.getInstance().getClient().getSession().send(new ClientChatPacket(message.toString()));
 
             event.reply(new EmbedBuilder()
-                    .setTitle("**DQS** - Chat")
-                    .setDescription("The following message has been sent to public chat:\n\n`" + event.getArgs() + "`")
+                    .setTitle("**DQS** - Whisper")
+                    .setDescription("The following message has been sent to **" + args[0] + "**:\n\n`" + message.substring((5 + args[0].length()) + 2) + "`")
                     .setColor(new Color(10144497))
                     .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                     .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
@@ -66,7 +76,7 @@ public class SayCommand extends Command
             Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.operatorId)).openPrivateChannel().queue((privateChannel ->
                     privateChannel.sendMessage(new EmbedBuilder()
                             .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.subscriberId)).getName() + ")")
-                            .setDescription("A " + t.getClass().getSimpleName() + " was thrown during the execution of a say command.\n\n**Cause:**\n\n```" + t.getMessage() + "```")
+                            .setDescription("A " + t.getClass().getSimpleName() + " was thrown during the execution of a whisper command.\n\n**Cause:**\n\n```" + t.getMessage() + "```")
                             .setColor(new Color(15221016))
                             .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
                             .build()).queue()));
