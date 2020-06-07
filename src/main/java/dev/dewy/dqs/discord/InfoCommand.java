@@ -65,7 +65,7 @@ public class InfoCommand extends Command
         return Math.round(f * 2.0F) / 2.0F;
     }
 
-    private static String getEmojiFromBoolean(boolean in)
+    public static String getEmojiFromBoolean(boolean in)
     {
         if (in)
         {

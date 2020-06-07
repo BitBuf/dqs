@@ -199,8 +199,10 @@ public final class Config
 
             public boolean playerInRange = true;
             public boolean crystalInRange = true;
+            
+            public boolean nearlyFinishedQueueing = true;
+            public int threshold = 15;
 
-            public boolean connected = true;
             public boolean relogged = true;
             public boolean serverMessages = true;
         }

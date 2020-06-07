@@ -178,7 +178,8 @@ public final class Constants
                     new PrefixCommand(),
                     new AutoRespawnCommand(),
                     new WhitelistCommand(),
-                    new InfoCommand());
+                    new InfoCommand(),
+                    new ModulesCommand());
 
             try
             {
