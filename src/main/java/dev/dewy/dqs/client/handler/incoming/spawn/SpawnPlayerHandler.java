@@ -38,7 +38,7 @@ public class SpawnPlayerHandler implements HandlerRegistry.IncomingHandler<Serve
 
         try
         {
-            if (Constants.CONFIG.modules.notifications.enabled && Constants.CONFIG.modules.notifications.playerInRange && !DQS.getInstance().isConnected())
+            if (Constants.CONFIG.modules.notifications.enabled && Constants.CONFIG.modules.notifications.playerInRange && DQS.getInstance().isConnected() && !DQS.getInstance().connectedToProxy)
             {
                 Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.discord.subscriberId)).openPrivateChannel().queue((privateChannel ->
                 {

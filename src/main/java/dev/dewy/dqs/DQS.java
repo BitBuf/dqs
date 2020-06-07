@@ -57,6 +57,7 @@ public class DQS
     public EventWaiter waiter = new EventWaiter();
     public boolean inQueue = true;
     public int currentPos = -1;
+    public boolean connectedToProxy;
     protected MinecraftProtocol protocol;
     protected Client client;
     protected Server server;
@@ -358,6 +359,9 @@ public class DQS
                             CACHE.getPlayerCache().isReducedDebugInfo()
                     ));
                     SERVER_LOG.info("Player connected: %s", session.getRemoteAddress());
+
+                    connectedToProxy = true;
+
                     if (this.currentPlayer.get() != connection)
                     {
                         SERVER_LOG.alert("login handler fired when session wasn't set yet...");

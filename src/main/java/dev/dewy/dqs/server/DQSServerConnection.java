@@ -80,8 +80,11 @@ public class DQSServerConnection implements Session, SessionListener
         if (event.getCause() != null && !((event.getCause() instanceof IOException || event.getCause() instanceof ClosedChannelException) && !this.isPlayer))
         {
             SERVER_LOG.alert(String.format("Player disconnected: %s", event.getSession().getRemoteAddress()), event.getCause());
+
+            DQS.getInstance().connectedToProxy = false;
         } else if (this.isPlayer)
         {
+            DQS.getInstance().connectedToProxy = false;
             SERVER_LOG.info("Player disconnected: %s", event.getSession().getRemoteAddress());
         }
     }
