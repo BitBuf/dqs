@@ -6,6 +6,13 @@ import dev.dewy.dqs.packet.Packet;
 import dev.dewy.dqs.protocol.MinecraftProtocol;
 import dev.dewy.dqs.protocol.SubProtocol;
 import dev.dewy.dqs.server.DQSServerConnection;
+import dev.dewy.dqs.utils.Constants;
+import net.dv8tion.jda.api.EmbedBuilder;
+
+import java.awt.*;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Objects;
 
 import static dev.dewy.dqs.utils.Constants.*;
 
@@ -92,6 +99,26 @@ public class ClientListener implements SessionListener
         WEBSOCKET_SERVER.fireReset();
         CLIENT_LOG.info("Disconnecting from server...")
                 .trace("Disconnect reason: %s", event.getReason());
+
+        if (Constants.CONFIG.modules.notifications.enabled && CONFIG.modules.notifications.relogged)
+        {
+            Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.discord.subscriberId)).openPrivateChannel().queue((privateChannel ->
+            {
+                try
+                {
+                    privateChannel.sendMessage(new EmbedBuilder()
+                            .setTitle("**DQS** - Relog Notification")
+                            .setDescription("Your account has been disconnected from the server. Relogging after " + CONFIG.modules.autoReconnect.delaySeconds + " seconds...")
+                            .setColor(new Color(15221016))
+                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
+                            .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
+                            .build()).queue();
+                } catch (MalformedURLException e)
+                {
+                    Constants.DISCORD_LOG.error(e);
+                }
+            }));
+        }
 
         DQSServerConnection connection = this.dqs.getCurrentPlayer().get();
         if (connection != null)
