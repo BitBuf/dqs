@@ -28,20 +28,21 @@ import dev.dewy.dqs.taribone.ticker.TariboneTicker;
 import dev.dewy.dqs.taribone.world.World;
 import dev.dewy.dqs.taribone.world.physics.TariboneWorldPhysics;
 import dev.dewy.dqs.utils.Authenticator;
+import dev.dewy.dqs.utils.Constants;
 import dev.dewy.dqs.utils.ServerData;
+import net.dv8tion.jda.api.EmbedBuilder;
 
 import javax.imageio.ImageIO;
 import javax.security.auth.login.LoginException;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.Proxy;
 import java.net.URL;
-import java.util.ArrayDeque;
-import java.util.Base64;
-import java.util.Collection;
-import java.util.Scanner;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
@@ -240,6 +241,27 @@ public class DQS
             this.logIn();
             this.startServer();
             CACHE.reset(true);
+
+            if (Constants.CONFIG.modules.notifications.enabled && CONFIG.modules.notifications.relogged && DQS.getInstance().isConnected() && !DQS.getInstance().connectedToProxy)
+            {
+                Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.discord.subscriberId)).openPrivateChannel().queue((privateChannel ->
+                {
+                    try
+                    {
+                        privateChannel.sendMessage(new EmbedBuilder()
+                                .setTitle("**DQS** - Relog Notification")
+                                .setDescription("Your account has been disconnected from the server. Relogging after " + CONFIG.modules.autoReconnect.delaySeconds + " seconds...")
+                                .setColor(new Color(15221016))
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
+                                .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
+                                .build()).queue();
+                    } catch (MalformedURLException e)
+                    {
+                        Constants.DISCORD_LOG.error(e);
+                    }
+                }));
+            }
+
             do
             {
                 this.logIn();

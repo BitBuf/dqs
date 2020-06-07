@@ -45,7 +45,7 @@ public class ChatHandler implements HandlerRegistry.IncomingHandler<ServerChatPa
             session.disconnect("§7[§b§lDQS§r§7] §fAntiStuck Disconnect");
         }
 
-        if ("2b2t.org".equalsIgnoreCase(CONFIG.client.server.address) && MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString().toLowerCase().startsWith("[SERVER]".toLowerCase()) && CONFIG.modules.notifications.serverMessages)
+        if ("2b2t.org".equalsIgnoreCase(CONFIG.client.server.address) && MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString().toLowerCase().startsWith("[SERVER]".toLowerCase()) && CONFIG.modules.notifications.serverMessages && CONFIG.modules.notifications.enabled)
         {
             Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.discord.subscriberId)).openPrivateChannel().queue((privateChannel ->
             {
