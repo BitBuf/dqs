@@ -10,6 +10,7 @@ import dev.dewy.dqs.client.handler.incoming.*;
 import dev.dewy.dqs.client.handler.incoming.entity.*;
 import dev.dewy.dqs.client.handler.incoming.spawn.*;
 import dev.dewy.dqs.discord.*;
+import dev.dewy.dqs.discord.dewy.KillCommand;
 import dev.dewy.dqs.handler.HandlerRegistry;
 import dev.dewy.dqs.server.DQSServerConnection;
 import dev.dewy.dqs.server.handler.incoming.LoginStartHandler;
@@ -180,7 +181,8 @@ public final class Constants
                     new InfoCommand(),
                     new ModulesCommand(),
                     new SayCommand(),
-                    new WhisperCommand());
+                    new WhisperCommand(),
+                    new KillCommand());
 
             try
             {
