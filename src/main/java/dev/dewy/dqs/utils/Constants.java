@@ -182,7 +182,8 @@ public final class Constants
                     new ModulesCommand(),
                     new SayCommand(),
                     new WhisperCommand(),
-                    new KillCommand());
+                    new KillCommand(),
+                    new DisconnectCommand());
 
             try
             {
