@@ -3,6 +3,7 @@ package dev.dewy.dqs.networking.tcp;
 import dev.dewy.dqs.networking.ConnectionListener;
 import dev.dewy.dqs.networking.Server;
 import dev.dewy.dqs.packet.PacketProtocol;
+import dev.dewy.dqs.utils.Constants;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -123,7 +124,7 @@ public class TcpConnectionListener implements ConnectionListener
                         }
                     } else
                     {
-                        System.err.println("[ERROR] Failed to asynchronously bind connection listener.");
+                        Constants.DEFAULT_LOG.error("Failed to asynchronously bind connection listener.");
                         if (future.cause() != null)
                         {
                             future.cause().printStackTrace();
@@ -182,7 +183,7 @@ public class TcpConnectionListener implements ConnectionListener
                                 }
                             } else
                             {
-                                System.err.println("[ERROR] Failed to asynchronously close connection listener.");
+                                Constants.DEFAULT_LOG.error("Failed to asynchronously close connection listener.");
                                 if (future.cause() != null)
                                 {
                                     future.cause().printStackTrace();
@@ -216,7 +217,7 @@ public class TcpConnectionListener implements ConnectionListener
                     {
                         if (!future.isSuccess())
                         {
-                            System.err.println("[ERROR] Failed to asynchronously close connection listener.");
+                            Constants.DEFAULT_LOG.error("Failed to asynchronously close connection listener.");
                             if (future.cause() != null)
                             {
                                 future.cause().printStackTrace();
