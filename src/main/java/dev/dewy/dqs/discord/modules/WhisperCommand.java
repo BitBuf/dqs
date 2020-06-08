@@ -1,27 +1,26 @@
-package dev.dewy.dqs.discord;
+package dev.dewy.dqs.discord.modules;
 
 import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
 import dev.dewy.dqs.DQS;
+import dev.dewy.dqs.packet.ingame.client.ClientChatPacket;
 import dev.dewy.dqs.utils.Constants;
 import net.dv8tion.jda.api.EmbedBuilder;
 
-import javax.security.auth.login.LoginException;
 import java.awt.*;
 import java.net.URL;
 import java.util.Objects;
 
-import static dev.dewy.dqs.utils.Constants.saveConfig;
-
-public class ReconnectCommand extends Command
+public class WhisperCommand extends Command
 {
-    public ReconnectCommand()
+    public WhisperCommand()
     {
-        this.name = "reconnect";
-        this.help = "Reconnect your account to the target server.";
-        this.aliases = new String[] {"connect", "rcon"};
+        this.name = "whisper";
+        this.help = "Send a message to public chat.";
+        this.aliases = new String[] {"msg", "w", "pm"};
         this.guildOnly = false;
         this.cooldown = Constants.CONFIG.discord.cooldown;
+        this.arguments = "<RECIPIENT> <MESSAGE>";
     }
 
     @Override
@@ -29,32 +28,36 @@ public class ReconnectCommand extends Command
     {
         try
         {
-            if (!DQS.getInstance().isConnected())
+            String[] args = event.getArgs().split("\\s+");
+            StringBuilder message = new StringBuilder();
+
+            for (int i = 1; i < args.length; i++)
+            {
+                message.append(" ").append(args[i]);
+            }
+
+            message.insert(0, "/msg " + args[0] + " ");
+
+            if (message.length() >= 255)
             {
                 event.reply(new EmbedBuilder()
-                        .setTitle("**DQS** - Reconnect")
-                        .setDescription("Your account has been disconnected from the server. Please use `&reconnect` to reconnect to " + Constants.CONFIG.client.server.address)
-                        .setColor(new Color(10144497))
-                        .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
+                        .setTitle("**DQS** - Invalid Command Arguments")
+                        .setDescription("You can not send a whisper larger than 255 characters. Please try and shorten your message.")
+                        .setColor(new Color(15221016))
+                        .setFooter("Focused on " + Constants.CONFIG.authentication.username)
                         .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
                         .build());
-
-                Constants.SHOULD_RECONNECT = true;
-
-                DQS.getInstance().logIn();
-                DQS.getInstance().connect();
-                DQS.getInstance().server = null;
-
-                saveConfig();
 
                 return;
             }
 
+            DQS.getInstance().getClient().getSession().send(new ClientChatPacket(message.toString()));
+
             event.reply(new EmbedBuilder()
-                    .setTitle("**DQS** - Reconnect")
-                    .setDescription("Your account could not be reconnected because it is already connected to the server. Try `&disconnect` to disconnect.")
-                    .setColor(new Color(15221016))
-                    .setFooter("Focused on " + Constants.CONFIG.authentication.username)
+                    .setTitle("**DQS** - Whisper")
+                    .setDescription("The following message has been sent to **" + args[0] + "**:\n\n`" + message.substring((5 + args[0].length()) + 2) + "`")
+                    .setColor(new Color(10144497))
+                    .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                     .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
                     .build());
         } catch (Throwable t)
@@ -72,7 +75,7 @@ public class ReconnectCommand extends Command
             Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.operatorId)).openPrivateChannel().queue((privateChannel ->
                     privateChannel.sendMessage(new EmbedBuilder()
                             .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.subscriberId)).getName() + ")")
-                            .setDescription("A " + t.getClass().getSimpleName() + " was thrown during the execution of a reconnect command.\n\n**Cause:**\n\n```" + t.getMessage() + "```")
+                            .setDescription("A " + t.getClass().getSimpleName() + " was thrown during the execution of a whisper command.\n\n**Cause:**\n\n```" + t.getMessage() + "```")
                             .setColor(new Color(15221016))
                             .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
                             .build()).queue()));

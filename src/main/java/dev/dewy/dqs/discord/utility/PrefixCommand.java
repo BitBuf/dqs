@@ -1,8 +1,7 @@
-package dev.dewy.dqs.discord;
+package dev.dewy.dqs.discord.utility;
 
 import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
-import dev.dewy.dqs.DQS;
 import dev.dewy.dqs.utils.Constants;
 import net.dv8tion.jda.api.EmbedBuilder;
 
@@ -10,15 +9,16 @@ import java.awt.*;
 import java.net.URL;
 import java.util.Objects;
 
-public class DisconnectCommand extends Command
+public class PrefixCommand extends Command
 {
-    public DisconnectCommand()
+    public PrefixCommand()
     {
-        this.name = "disconnect";
-        this.help = "Disconnect your account until you reconnect it.";
-        this.aliases = new String[] {"dc", "log", "toggle", "end"};
+        this.name = "prefix";
+        this.help = "Mutes / unmutes all DQS notifications and messages.";
+        this.aliases = new String[] {"ingameprefix", "pfx"};
         this.guildOnly = false;
         this.cooldown = Constants.CONFIG.discord.cooldown;
+        this.arguments = "<PREFIX>";
     }
 
     @Override
@@ -26,28 +26,26 @@ public class DisconnectCommand extends Command
     {
         try
         {
-            if (DQS.getInstance().isConnected())
+            if (event.getArgs().isEmpty())
             {
-                Constants.SHOULD_RECONNECT = false;
-
-                DQS.getInstance().getClient().getSession().disconnect("§7[§b§lDQS§r§7] §fDisconnect command issued.", false);
-
                 event.reply(new EmbedBuilder()
-                        .setTitle("**DQS** - Disconnect")
-                        .setDescription("Your account has been disconnected from the server. Please use `&reconnect` to reconnect to " + Constants.CONFIG.client.server.address)
-                        .setColor(new Color(10144497))
-                        .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
+                        .setTitle("**DQS** - Invalid Command Arguments")
+                        .setDescription("You have entered invalid arguments for this command. Try again, like this:\n\n`" + Constants.CONFIG.discord.prefix + "prefix " + this.arguments + "`")
+                        .setColor(new Color(15221016))
+                        .setFooter("Focused on " + Constants.CONFIG.authentication.username)
                         .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
                         .build());
 
                 return;
             }
 
+            Constants.CONFIG.modules.gameCommands.prefix = event.getArgs();
+
             event.reply(new EmbedBuilder()
-                    .setTitle("**DQS** - Disconnect")
-                    .setDescription("Your account could not be disconnected because it is not currently connected to any server. Try `&reconnect`.")
-                    .setColor(new Color(15221016))
-                    .setFooter("Focused on " + Constants.CONFIG.authentication.username)
+                    .setTitle("**DQS** - Ingame Command Prefix")
+                    .setDescription("You have set your ingame command prefix to the following:\n\n`" + Constants.CONFIG.modules.gameCommands.prefix + "`")
+                    .setColor(new Color(10144497))
+                    .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                     .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
                     .build());
         } catch (Throwable t)
@@ -65,7 +63,7 @@ public class DisconnectCommand extends Command
             Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.operatorId)).openPrivateChannel().queue((privateChannel ->
                     privateChannel.sendMessage(new EmbedBuilder()
                             .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.subscriberId)).getName() + ")")
-                            .setDescription("A " + t.getClass().getSimpleName() + " was thrown during the execution of a disconnect command.\n\n**Cause:**\n\n```" + t.getMessage() + "```")
+                            .setDescription("A " + t.getClass().getSimpleName() + " was thrown during the execution of a prefix command.\n\n**Cause:**\n\n```" + t.getMessage() + "```")
                             .setColor(new Color(15221016))
                             .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
                             .build()).queue()));

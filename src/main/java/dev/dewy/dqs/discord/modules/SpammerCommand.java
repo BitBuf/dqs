@@ -1,4 +1,4 @@
-package dev.dewy.dqs.discord;
+package dev.dewy.dqs.discord.modules;
 
 import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
