@@ -1,23 +1,27 @@
-package dev.dewy.dqs.discord.dewy;
+package dev.dewy.dqs.discord;
 
 import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
+import dev.dewy.dqs.DQS;
 import dev.dewy.dqs.utils.Constants;
 import net.dv8tion.jda.api.EmbedBuilder;
 
+import javax.security.auth.login.LoginException;
 import java.awt.*;
 import java.net.URL;
 import java.util.Objects;
 
-public class KillCommand extends Command
+import static dev.dewy.dqs.utils.Constants.saveConfig;
+
+public class ReconnectCommand extends Command
 {
-    public KillCommand()
+    public ReconnectCommand()
     {
-        this.name = "kill";
-        this.help = "Stops the instance.";
-        this.aliases = new String[] {"terminate", "term"};
-        this.ownerCommand = true;
+        this.name = "reconnect";
+        this.help = "Reconnect your account to the target server.";
+        this.aliases = new String[] {"connect", "rcon"};
         this.guildOnly = false;
+        this.cooldown = Constants.CONFIG.discord.cooldown;
     }
 
     @Override
@@ -25,24 +29,30 @@ public class KillCommand extends Command
     {
         try
         {
-            if (event.getAuthor().getId().equals(Constants.CONFIG.discord.operatorId))
+            if (!DQS.getInstance().isConnected())
             {
                 event.reply(new EmbedBuilder()
-                        .setTitle("**DQS** - Instance Termination")
-                        .setDescription("Shutting down instance for " + event.getJDA().getUserById(Constants.CONFIG.discord.subscriberId).getName() + "...")
+                        .setTitle("**DQS** - Reconnect")
+                        .setDescription("Your account has been disconnected from the server. Please use `&reconnect` to reconnect to " + Constants.CONFIG.client.server.address)
                         .setColor(new Color(10144497))
                         .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                         .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
                         .build());
 
-                Thread.sleep(1000L);
+                Constants.SHOULD_RECONNECT = true;
 
-                Runtime.getRuntime().exit(0);
+                DQS.getInstance().logIn();
+                DQS.getInstance().connect();
+                DQS.getInstance().server = null;
+
+                saveConfig();
+
+                return;
             }
 
             event.reply(new EmbedBuilder()
-                    .setTitle("**DQS** - Insufficient Permissions")
-                    .setDescription("This command can only be executed by an operator.")
+                    .setTitle("**DQS** - Reconnect")
+                    .setDescription("Your account could not be reconnected because it is already connected to the server. Try `&disconnect` to disconnect.")
                     .setColor(new Color(15221016))
                     .setFooter("Focused on " + Constants.CONFIG.authentication.username)
                     .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
@@ -62,7 +72,7 @@ public class KillCommand extends Command
             Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.operatorId)).openPrivateChannel().queue((privateChannel ->
                     privateChannel.sendMessage(new EmbedBuilder()
                             .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.subscriberId)).getName() + ")")
-                            .setDescription("A " + t.getClass().getSimpleName() + " was thrown during the execution of a kill command.\n\n**Cause:**\n\n```" + t.getMessage() + "```")
+                            .setDescription("A " + t.getClass().getSimpleName() + " was thrown during the execution of a reconnect command.\n\n**Cause:**\n\n```" + t.getMessage() + "```")
                             .setColor(new Color(15221016))
                             .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
                             .build()).queue()));

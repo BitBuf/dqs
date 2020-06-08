@@ -30,7 +30,7 @@ public class DisconnectCommand extends Command
             {
                 Constants.SHOULD_RECONNECT = false;
 
-                DQS.getInstance().getClient().getSession().disconnect("user disconnect");
+                DQS.getInstance().getClient().getSession().disconnect("§7[§b§lDQS§r§7] §fDisconnect command issued.", false);
 
                 event.reply(new EmbedBuilder()
                         .setTitle("**DQS** - Disconnect")

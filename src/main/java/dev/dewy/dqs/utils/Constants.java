@@ -183,7 +183,8 @@ public final class Constants
                     new SayCommand(),
                     new WhisperCommand(),
                     new KillCommand(),
-                    new DisconnectCommand());
+                    new DisconnectCommand(),
+                    new ReconnectCommand());
 
             try
             {

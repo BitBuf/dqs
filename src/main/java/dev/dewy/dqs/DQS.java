@@ -60,7 +60,7 @@ public class DQS
     public boolean connectedToProxy;
     protected DQSProtocol protocol;
     protected Client client;
-    protected Server server;
+    public Server server;
     protected Authenticator authenticator;
     protected BufferedImage serverIcon;
     private World world;
@@ -70,6 +70,8 @@ public class DQS
     private TariboneController controller;
     private TariboneTicker ticker;
     private TariboneDQSPlayer player;
+
+    public Thread mainThread = Thread.currentThread();
 
     public static void main(String... args) throws LoginException
     {
@@ -265,7 +267,7 @@ public class DQS
         }
     }
 
-    protected void connect()
+    public void connect()
     {
         synchronized (this)
         {
@@ -375,7 +377,7 @@ public class DQS
         }
     }
 
-    protected void logIn()
+    public void logIn()
     {
         AUTH_LOG.info("Logging in...");
         if (this.authenticator == null)
