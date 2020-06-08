@@ -45,8 +45,7 @@ public class KillCommand extends Command
                     .setFooter("Focused on " + Constants.CONFIG.authentication.username)
                     .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
                     .build());
-        }
-        catch (Throwable t)
+        } catch (Throwable t)
         {
             Constants.DISCORD_LOG.error(t);
 

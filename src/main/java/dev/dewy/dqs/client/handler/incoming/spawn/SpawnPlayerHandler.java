@@ -22,6 +22,30 @@ import static dev.dewy.dqs.utils.Constants.DISCORD;
 
 public class SpawnPlayerHandler implements HandlerRegistry.IncomingHandler<ServerSpawnPlayerPacket, DQSClientSession>
 {
+    private static String getNameFromUUID(String uuid)
+    {
+        try
+        {
+            String jsonUrl = IOUtils.toString(new URL("https://api.mojang.com/user/profiles/" + uuid.replace("-", "") + "/names"));
+            JsonParser parser = new JsonParser();
+
+            return parser.parse(jsonUrl).getAsJsonArray().get(parser.parse(jsonUrl).getAsJsonArray().size() - 1).getAsJsonObject().get("name").toString();
+        } catch (IOException ex)
+        {
+            Constants.MODULE_LOG.error(ex);
+
+            Objects.requireNonNull(DISCORD.getUserById(Constants.CONFIG.discord.operatorId)).openPrivateChannel().queue((privateChannel ->
+                    privateChannel.sendMessage(new EmbedBuilder()
+                            .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(DISCORD.getUserById(Constants.CONFIG.discord.subscriberId)).getName() + ")")
+                            .setDescription("A " + ex.getClass().getSimpleName() + " was thrown whilst getting the name from the UUID in a player spawn warning.\n\n**Cause:**\n\n```" + ex.getMessage() + "```")
+                            .setColor(new Color(15221016))
+                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
+                            .build()).queue()));
+        }
+
+        return null;
+    }
+
     @Override
     public boolean apply(ServerSpawnPlayerPacket packet, DQSClientSession session)
     {
@@ -57,8 +81,7 @@ public class SpawnPlayerHandler implements HandlerRegistry.IncomingHandler<Serve
                     }
                 }));
             }
-        }
-        catch (Throwable t)
+        } catch (Throwable t)
         {
             Constants.DISCORD_LOG.error(t);
 
@@ -78,30 +101,5 @@ public class SpawnPlayerHandler implements HandlerRegistry.IncomingHandler<Serve
     public Class<ServerSpawnPlayerPacket> getPacketClass()
     {
         return ServerSpawnPlayerPacket.class;
-    }
-
-    private static String getNameFromUUID(String uuid)
-    {
-        try
-        {
-            String jsonUrl = IOUtils.toString(new URL("https://api.mojang.com/user/profiles/" + uuid.replace("-", "") + "/names"));
-            JsonParser parser = new JsonParser();
-
-            return parser.parse(jsonUrl).getAsJsonArray().get(parser.parse(jsonUrl).getAsJsonArray().size() - 1).getAsJsonObject().get("name").toString();
-        }
-        catch (IOException ex)
-        {
-            Constants.MODULE_LOG.error(ex);
-
-            Objects.requireNonNull(DISCORD.getUserById(Constants.CONFIG.discord.operatorId)).openPrivateChannel().queue((privateChannel ->
-                    privateChannel.sendMessage(new EmbedBuilder()
-                            .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(DISCORD.getUserById(Constants.CONFIG.discord.subscriberId)).getName() + ")")
-                            .setDescription("A " + ex.getClass().getSimpleName() + " was thrown whilst getting the name from the UUID in a player spawn warning.\n\n**Cause:**\n\n```" + ex.getMessage() + "```")
-                            .setColor(new Color(15221016))
-                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
-                            .build()).queue()));
-        }
-
-        return null;
     }
 }

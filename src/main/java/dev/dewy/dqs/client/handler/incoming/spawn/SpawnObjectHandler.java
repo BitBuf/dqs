@@ -58,8 +58,7 @@ public class SpawnObjectHandler implements HandlerRegistry.IncomingHandler<Serve
                     }
                 }));
             }
-        }
-        catch (Throwable t)
+        } catch (Throwable t)
         {
             Constants.DISCORD_LOG.error(t);
 

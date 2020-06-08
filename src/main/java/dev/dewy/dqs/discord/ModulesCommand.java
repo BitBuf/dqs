@@ -35,8 +35,7 @@ public class ModulesCommand extends Command
                     .addField("**Auto Respawn**", "**Enabled:** " + InfoCommand.getEmojiFromBoolean(Constants.CONFIG.modules.autoRespawn.enabled) + "\n**Delay:** " + Constants.CONFIG.modules.autoRespawn.delaySeconds, true)
                     .addField("**Notifications**", "**Player In Range:** " + InfoCommand.getEmojiFromBoolean(Constants.CONFIG.modules.notifications.playerInRange) + "\n**Crystal In Range:** " + InfoCommand.getEmojiFromBoolean(Constants.CONFIG.modules.notifications.crystalInRange) + "\n\n**Nearly Finished Queueing:** " + InfoCommand.getEmojiFromBoolean(Constants.CONFIG.modules.notifications.nearlyFinishedQueueing) + "\n**Threshold:** " + Constants.CONFIG.modules.notifications.threshold + "\n\n**Relog:** " + InfoCommand.getEmojiFromBoolean(Constants.CONFIG.modules.notifications.relogged) + "\n**Server Messages:** " + InfoCommand.getEmojiFromBoolean(Constants.CONFIG.modules.notifications.serverMessages), true)
                     .build());
-        }
-        catch (Throwable t)
+        } catch (Throwable t)
         {
             Constants.DISCORD_LOG.error(t);
 

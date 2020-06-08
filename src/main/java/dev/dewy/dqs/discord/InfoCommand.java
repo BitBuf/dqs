@@ -21,6 +21,42 @@ public class InfoCommand extends Command
         this.cooldown = Constants.CONFIG.discord.cooldown;
     }
 
+    private static float roundToHalf(float f)
+    {
+        return Math.round(f * 2.0F) / 2.0F;
+    }
+
+    public static String getEmojiFromBoolean(boolean in)
+    {
+        if (in)
+        {
+            return ":white_check_mark:";
+        } else
+        {
+            return ":no_entry:";
+        }
+    }
+
+    private static String getDimensionFromCode(int in)
+    {
+        if (in == 0)
+        {
+            return "overworld";
+        }
+
+        if (in == 1)
+        {
+            return "nether";
+        }
+
+        if (in == -1)
+        {
+            return "the end";
+        }
+
+        return "null";
+    }
+
     @Override
     protected void execute(CommandEvent event)
     {
@@ -58,42 +94,5 @@ public class InfoCommand extends Command
                             .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
                             .build()).queue()));
         }
-    }
-
-    private static float roundToHalf(float f)
-    {
-        return Math.round(f * 2.0F) / 2.0F;
-    }
-
-    public static String getEmojiFromBoolean(boolean in)
-    {
-        if (in)
-        {
-            return ":white_check_mark:";
-        }
-        else
-        {
-            return ":no_entry:";
-        }
-    }
-
-    private static String getDimensionFromCode(int in)
-    {
-        if (in == 0)
-        {
-            return "overworld";
-        }
-
-        if (in == 1)
-        {
-            return "nether";
-        }
-
-        if (in == -1)
-        {
-            return "the end";
-        }
-
-        return "null";
     }
 }
