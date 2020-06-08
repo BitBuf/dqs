@@ -2,12 +2,16 @@ package dev.dewy.dqs.discord.dewy;
 
 import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
+import dev.dewy.dqs.DQS;
 import dev.dewy.dqs.utils.Constants;
 import net.dv8tion.jda.api.EmbedBuilder;
 
 import java.awt.*;
 import java.net.URL;
 import java.util.Objects;
+
+import static dev.dewy.dqs.utils.Constants.WEBSOCKET_SERVER;
+import static dev.dewy.dqs.utils.Constants.saveConfig;
 
 public class KillCommand extends Command
 {
@@ -35,7 +39,15 @@ public class KillCommand extends Command
                         .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
                         .build());
 
-                Thread.sleep(1000L);
+                Thread.sleep(10000L);
+
+                if (DQS.getInstance().server != null)
+                {
+                    DQS.getInstance().server.close(true);
+                }
+
+                WEBSOCKET_SERVER.shutdown();
+                saveConfig();
 
                 Runtime.getRuntime().exit(0);
             }
