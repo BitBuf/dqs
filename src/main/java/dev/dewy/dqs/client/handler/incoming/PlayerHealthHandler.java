@@ -27,7 +27,7 @@ public class PlayerHealthHandler implements HandlerRegistry.IncomingHandler<Serv
             new Thread(() ->
             {
                 PorkUtil.sleep(CONFIG.modules.autoRespawn.delaySeconds);
-                if (DQS.getInstance().isConnected() && CACHE.getPlayerCache().getThePlayer().getHealth() <= 0)
+                if (CACHE.getPlayerCache().getThePlayer().getHealth() <= 0)
                 {
                     CACHE.getChunkCache().reset(true); //i don't think this is needed, but it can't hurt
                     DQS.getInstance().getClient().getSession().send(new ClientRequestPacket(ClientRequest.RESPAWN));
