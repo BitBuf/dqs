@@ -33,7 +33,8 @@ public class HelpCommand extends Command
                         .setDescription("Please visit [here](https://dewy.dev/dqs/features) for a commands / features list.\n\nIf you have any other queries, consult the [FAQ](https://dewy.dev/dqs/faq) before contacting Dewy.")
                         .setColor(new Color(10144497))
                         .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
-                        .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")                         .build());
+                        .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
+                        .build());
             } catch (MalformedURLException e)
             {
                 Constants.DISCORD_LOG.error(e);

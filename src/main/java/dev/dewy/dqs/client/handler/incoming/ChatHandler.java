@@ -65,6 +65,17 @@ public class ChatHandler implements HandlerRegistry.IncomingHandler<ServerChatPa
             }));
         }
 
+        if (MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString().toLowerCase().contains("whispers"))
+        {
+            Objects.requireNonNull(DISCORD.getUserById(CONFIG.discord.subscriberId)).openPrivateChannel().queue((privateChannel ->
+                    privateChannel.sendMessage(new EmbedBuilder()
+                            .setTitle("**DQS** - Message Received")
+                            .setDescription("You received a message:\n\n`" + MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString() + "`")
+                            .setColor(new Color(15221016))
+                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
+                            .build()).queue()));
+        }
+
         WEBSOCKET_SERVER.fireChat(packet.getMessage());
         return true;
     }
