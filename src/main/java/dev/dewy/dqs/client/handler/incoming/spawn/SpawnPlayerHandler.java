@@ -22,7 +22,7 @@ import static dev.dewy.dqs.utils.Constants.DISCORD;
 
 public class SpawnPlayerHandler implements HandlerRegistry.IncomingHandler<ServerSpawnPlayerPacket, DQSClientSession>
 {
-    private static String getNameFromUUID(String uuid)
+    public static String getNameFromUUID(String uuid)
     {
         try
         {

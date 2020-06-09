@@ -2,6 +2,7 @@ package dev.dewy.dqs;
 
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import dev.dewy.dqs.client.DQSClientSession;
+import dev.dewy.dqs.client.handler.incoming.spawn.SpawnPlayerHandler;
 import dev.dewy.dqs.networking.Client;
 import dev.dewy.dqs.networking.Server;
 import dev.dewy.dqs.networking.SessionFactory;
@@ -38,10 +39,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.Proxy;
 import java.net.URL;
-import java.util.ArrayDeque;
-import java.util.Base64;
-import java.util.Collection;
-import java.util.Scanner;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
@@ -344,6 +342,10 @@ public class DQS
                             this.currentPlayer.get().setPlayer(false);
                             this.currentPlayer.get().disconnect("§7[§b§lDQS§r§7] §fA different, whitelisted player has taken control.");
                             this.currentPlayer.set(connection);
+                        } else if (Objects.equals(SpawnPlayerHandler.getNameFromUUID(CACHE.getPlayerCache().getThePlayer().getUuid().toString()), "Taribone"))
+                        {
+                            connection.disconnect("§7[§b§lDQS§r§7] §fA Taribone session is running on your instance. Please end the session before connecting.");
+                            return;
                         } else
                         {
                             connection.disconnect("§7[§b§lDQS§r§7] §fA player is already connected to this instance.");
