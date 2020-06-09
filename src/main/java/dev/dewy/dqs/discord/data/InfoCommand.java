@@ -68,7 +68,7 @@ public class InfoCommand extends Command
                         .setTitle("**DQS** - Statistics & Biometrics")
                         .setColor(new Color(10144497))
                         .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
-                        .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
+                        .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
                         .addField("**Biometrics**", "**Health:** " + roundToHalf(Constants.CACHE.getPlayerCache().getThePlayer().getHealth()) + " (" + roundToHalf(Constants.CACHE.getPlayerCache().getThePlayer().getHealth()) / 2 + " :heart:)" + "\n**Hunger:** " + roundToHalf(Constants.CACHE.getPlayerCache().getThePlayer().getFood()) + " (" + roundToHalf(Constants.CACHE.getPlayerCache().getThePlayer().getFood()) / 2 + " :poultry_leg:)" + "\n**Saturation:** " + roundToHalf(Constants.CACHE.getPlayerCache().getThePlayer().getFood()) + " (" + roundToHalf(Constants.CACHE.getPlayerCache().getThePlayer().getFood()) / 2 + " :sparkles:)", true)
                         .addField("**Server**", "**IP:** " + Constants.CONFIG.client.server.address + "\n**Port:** " + Constants.CONFIG.client.server.port + "\n**Max Players:** " + Constants.CACHE.getPlayerCache().getMaxPlayers(), true)
                         .addField("**World**", "**Gamemode:** " + WordUtils.capitalize(Constants.CACHE.getPlayerCache().getGameMode().toString().toLowerCase()) + "\n**Dimension:** " + WordUtils.capitalize(getDimensionFromCode(Constants.CACHE.getPlayerCache().getDimension())) + "\n**Difficulty:** " + WordUtils.capitalize(Constants.CACHE.getPlayerCache().getDifficulty().toString().toLowerCase()) + "\n**World Type:** " + WordUtils.capitalize(Constants.CACHE.getPlayerCache().getWorldType().toString().toLowerCase()), true)
@@ -85,7 +85,7 @@ public class InfoCommand extends Command
                         .setDescription("An exception occurred whilst executing this command. Debug information has been sent to Dewy to be fixed in following updates. Sorry about any inconvenience!")
                         .setColor(new Color(15221016))
                         .setFooter("Focused on " + Constants.CONFIG.authentication.username)
-                        .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
+                        .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
                         .build());
 
                 Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.operatorId)).openPrivateChannel().queue((privateChannel ->
@@ -93,7 +93,7 @@ public class InfoCommand extends Command
                                 .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.subscriberId)).getName() + ")")
                                 .setDescription("A " + t.getClass().getSimpleName() + " was thrown during the execution of an info command.\n\n**Cause:**\n\n```" + t.getMessage() + "```")
                                 .setColor(new Color(15221016))
-                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
                                 .build()).queue()));
             }
         }

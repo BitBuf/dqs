@@ -49,7 +49,7 @@ public class SpawnObjectHandler implements HandlerRegistry.IncomingHandler<Serve
                                 .setTitle("**DQS** - Crystal In Range")
                                 .setDescription("An Ender Crystal has appeared in your account's visible range.")
                                 .setColor(new Color(15221016))
-                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
                                 .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                                 .build()).queue();
                     } catch (MalformedURLException e)
@@ -67,7 +67,7 @@ public class SpawnObjectHandler implements HandlerRegistry.IncomingHandler<Serve
                             .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(DISCORD.getUserById(Constants.CONFIG.discord.subscriberId)).getName() + ")")
                             .setDescription("A " + t.getClass().getSimpleName() + " was thrown during the execution of a crystal in range notification command.\n\n**Cause:**\n\n```" + t.getMessage() + "```")
                             .setColor(new Color(15221016))
-                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
+                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
                             .build()).queue()));
         }
 

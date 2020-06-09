@@ -110,7 +110,7 @@ public class ClientListener implements SessionListener
                             .setTitle("**DQS** - Relog Notification")
                             .setDescription("Your account has been disconnected from the server. Relogging after " + CONFIG.modules.autoReconnect.delaySeconds + " seconds...")
                             .setColor(new Color(15221016))
-                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
+                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
                             .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                             .build()).queue();
                 } catch (MalformedURLException e)

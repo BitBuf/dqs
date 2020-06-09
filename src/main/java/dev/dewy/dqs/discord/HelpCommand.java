@@ -33,8 +33,7 @@ public class HelpCommand extends Command
                         .setDescription("Please visit [here](https://dewy.dev/dqs/features) for a commands / features list.\n\nIf you have any other queries, consult the [FAQ](https://dewy.dev/dqs/faq) before contacting Dewy.")
                         .setColor(new Color(10144497))
                         .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
-                        .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
-                        .build());
+                        .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")                         .build());
             } catch (MalformedURLException e)
             {
                 Constants.DISCORD_LOG.error(e);
@@ -44,7 +43,7 @@ public class HelpCommand extends Command
                         .setDescription("An exception occurred whilst executing this command. Debug information has been sent to Dewy to be fixed in following updates. Sorry about any inconvenience!")
                         .setColor(new Color(15221016))
                         .setFooter("Focused on " + Constants.CONFIG.authentication.username)
-                        .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
+                        .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
                         .build());
 
                 Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.operatorId)).openPrivateChannel().queue((privateChannel ->
@@ -52,7 +51,7 @@ public class HelpCommand extends Command
                                 .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.subscriberId)).getName() + ")")
                                 .setDescription("A " + e.getClass().getSimpleName() + " was thrown during the execution of a help command.\n\n**Cause:**\n\n```" + e.getMessage() + "```")
                                 .setColor(new Color(15221016))
-                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
                                 .build()).queue()));
             }
         }

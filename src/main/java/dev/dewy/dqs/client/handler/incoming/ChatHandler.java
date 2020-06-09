@@ -55,7 +55,7 @@ public class ChatHandler implements HandlerRegistry.IncomingHandler<ServerChatPa
                             .setTitle("**DQS** - Server Notification")
                             .setDescription(MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString())
                             .setColor(new Color(10144497))
-                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
+                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
                             .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                             .build()).queue();
                 } catch (MalformedURLException e)
