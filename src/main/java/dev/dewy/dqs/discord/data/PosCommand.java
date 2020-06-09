@@ -24,53 +24,56 @@ public class PosCommand extends Command
     @Override
     protected void execute(CommandEvent event)
     {
-        try
+        if (event.getAuthor().getId().equals(Constants.CONFIG.discord.subscriberId) || event.getAuthor().getId().equals(Constants.CONFIG.discord.operatorId) && (event.getChannel().getId().equals(Constants.CONFIG.discord.channelId) || !event.getMessage().getChannelType().isGuild()))
         {
-            if (DQS.getInstance().inQueue && DQS.getInstance().currentPos != -1)
+            try
             {
-                event.reply(new EmbedBuilder()
-                        .setTitle("**DQS** - Queue Position")
-                        .setDescription("Your current queue position: **" + DQS.getInstance().currentPos + "**")
-                        .setColor(new Color(10144497))
-                        .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
-                        .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
-                        .build());
-            } else if (DQS.getInstance().inQueue)
-            {
-                event.reply(new EmbedBuilder()
-                        .setTitle("**DQS** - Queue Position")
-                        .setDescription("Please wait a few seconds before querying your queue position.")
-                        .setColor(new Color(10144497))
-                        .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
-                        .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
-                        .build());
-            } else
-            {
-                event.reply(new EmbedBuilder()
-                        .setTitle("**DQS** - Queue Position")
-                        .setDescription("Your account is currently in-game, not in the queue.")
-                        .setColor(new Color(10144497))
-                        .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
-                        .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
-                        .build());
-            }
-        } catch (Exception e)
-        {
-            event.reply(new EmbedBuilder()
-                    .setTitle("**DQS** - Error")
-                    .setDescription("An exception occurred whilst executing this command. Debug information has been sent to Dewy to be fixed in following updates. Sorry about any inconvenience!")
-                    .setColor(new Color(15221016))
-                    .setFooter("Focused on " + Constants.CONFIG.authentication.username)
-                    .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
-                    .build());
-
-            Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.operatorId)).openPrivateChannel().queue((privateChannel ->
-                    privateChannel.sendMessage(new EmbedBuilder()
-                            .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.subscriberId)).getName() + ")")
-                            .setDescription("A " + e.getClass().getSimpleName() + " was thrown during the execution of a queue pos command.\n\n**Cause:**\n\n```" + e.getMessage() + "```")
-                            .setColor(new Color(15221016))
+                if (DQS.getInstance().inQueue && DQS.getInstance().currentPos != -1)
+                {
+                    event.reply(new EmbedBuilder()
+                            .setTitle("**DQS** - Queue Position")
+                            .setDescription("Your current queue position: **" + DQS.getInstance().currentPos + "**")
+                            .setColor(new Color(10144497))
+                            .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                             .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
-                            .build()).queue()));
+                            .build());
+                } else if (DQS.getInstance().inQueue)
+                {
+                    event.reply(new EmbedBuilder()
+                            .setTitle("**DQS** - Queue Position")
+                            .setDescription("Please wait a few seconds before querying your queue position.")
+                            .setColor(new Color(10144497))
+                            .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
+                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
+                            .build());
+                } else
+                {
+                    event.reply(new EmbedBuilder()
+                            .setTitle("**DQS** - Queue Position")
+                            .setDescription("Your account is currently in-game, not in the queue.")
+                            .setColor(new Color(10144497))
+                            .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
+                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
+                            .build());
+                }
+            } catch (Exception e)
+            {
+                event.reply(new EmbedBuilder()
+                        .setTitle("**DQS** - Error")
+                        .setDescription("An exception occurred whilst executing this command. Debug information has been sent to Dewy to be fixed in following updates. Sorry about any inconvenience!")
+                        .setColor(new Color(15221016))
+                        .setFooter("Focused on " + Constants.CONFIG.authentication.username)
+                        .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
+                        .build());
+
+                Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.operatorId)).openPrivateChannel().queue((privateChannel ->
+                        privateChannel.sendMessage(new EmbedBuilder()
+                                .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.subscriberId)).getName() + ")")
+                                .setDescription("A " + e.getClass().getSimpleName() + " was thrown during the execution of a queue pos command.\n\n**Cause:**\n\n```" + e.getMessage() + "```")
+                                .setColor(new Color(15221016))
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
+                                .build()).queue()));
+            }
         }
     }
 }

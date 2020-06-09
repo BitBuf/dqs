@@ -24,32 +24,88 @@ public class AutoRespawnCommand extends Command
     @Override
     protected void execute(CommandEvent event)
     {
-        try
+        if (event.getAuthor().getId().equals(Constants.CONFIG.discord.subscriberId) || event.getAuthor().getId().equals(Constants.CONFIG.discord.operatorId) && (event.getChannel().getId().equals(Constants.CONFIG.discord.channelId) || !event.getMessage().getChannelType().isGuild()))
         {
-            String[] args = event.getArgs().split("\\s+");
-
-            if (args.length > 1)
+            try
             {
-                event.reply(new EmbedBuilder()
-                        .setTitle("**DQS** - Invalid Command Arguments")
-                        .setDescription("You have entered invalid arguments for this command. Try again, like this:\n\n`" + Constants.CONFIG.discord.prefix + "autorespawn " + this.arguments + "`")
-                        .setColor(new Color(15221016))
-                        .setFooter("Focused on " + Constants.CONFIG.authentication.username)
-                        .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
-                        .build());
+                String[] args = event.getArgs().split("\\s+");
 
-                return;
-            }
+                if (args.length > 1)
+                {
+                    event.reply(new EmbedBuilder()
+                            .setTitle("**DQS** - Invalid Command Arguments")
+                            .setDescription("You have entered invalid arguments for this command. Try again, like this:\n\n`" + Constants.CONFIG.discord.prefix + "autorespawn " + this.arguments + "`")
+                            .setColor(new Color(15221016))
+                            .setFooter("Focused on " + Constants.CONFIG.authentication.username)
+                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
+                            .build());
 
-            if (event.getArgs().isEmpty())
-            {
-                Constants.CONFIG.modules.autoRespawn.enabled = !Constants.CONFIG.modules.autoRespawn.enabled;
+                    return;
+                }
 
-                if (Constants.CONFIG.modules.autoRespawn.enabled)
+                if (event.getArgs().isEmpty())
+                {
+                    Constants.CONFIG.modules.autoRespawn.enabled = !Constants.CONFIG.modules.autoRespawn.enabled;
+
+                    if (Constants.CONFIG.modules.autoRespawn.enabled)
+                    {
+                        event.reply(new EmbedBuilder()
+                                .setTitle("**DQS** - Auto Respawn")
+                                .setDescription("You have **enabled** the DQS auto respawn module.")
+                                .setColor(new Color(10144497))
+                                .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
+                                .build());
+                    } else
+                    {
+                        event.reply(new EmbedBuilder()
+                                .setTitle("**DQS** - Auto Respawn")
+                                .setDescription("You have **disabled** the DQS auto respawn module.")
+                                .setColor(new Color(10144497))
+                                .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
+                                .build());
+                    }
+
+                    return;
+                }
+
+                try
+                {
+                    Integer.parseInt(args[0]);
+                } catch (NumberFormatException e)
+                {
+                    event.reply(new EmbedBuilder()
+                            .setTitle("**DQS** - Invalid Command Arguments")
+                            .setDescription("You have not entered a valid integer for the auto respawn delay. Try again, like this:\n\n`" + Constants.CONFIG.discord.prefix + "autorespawn " + this.arguments + "`")
+                            .setColor(new Color(15221016))
+                            .setFooter("Focused on " + Constants.CONFIG.authentication.username)
+                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
+                            .build());
+
+                    return;
+                }
+
+                if (Integer.parseInt(args[0]) <= 0)
+                {
+                    event.reply(new EmbedBuilder()
+                            .setTitle("**DQS** - Invalid Command Arguments")
+                            .setDescription("The DQS auto respawn delay must be a positive integer above 0. Try again, like this:\n\n`" + Constants.CONFIG.discord.prefix + "autorespawn " + this.arguments + "`")
+                            .setColor(new Color(15221016))
+                            .setFooter("Focused on " + Constants.CONFIG.authentication.username)
+                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
+                            .build());
+
+                    return;
+                }
+
+                Constants.CONFIG.modules.autoRespawn.delaySeconds = Integer.parseInt(args[0]);
+
+                if (Integer.parseInt(args[0]) > 1)
                 {
                     event.reply(new EmbedBuilder()
                             .setTitle("**DQS** - Auto Respawn")
-                            .setDescription("You have **enabled** the DQS auto respawn module.")
+                            .setDescription("You have set the auto respawn delay to **" + Constants.CONFIG.modules.autoRespawn.delaySeconds + " seconds.**")
                             .setColor(new Color(10144497))
                             .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                             .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
@@ -58,85 +114,32 @@ public class AutoRespawnCommand extends Command
                 {
                     event.reply(new EmbedBuilder()
                             .setTitle("**DQS** - Auto Respawn")
-                            .setDescription("You have **disabled** the DQS auto respawn module.")
+                            .setDescription("You have set the auto respawn delay to **" + Constants.CONFIG.modules.autoRespawn.delaySeconds + " second.**")
                             .setColor(new Color(10144497))
                             .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                             .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
                             .build());
                 }
-
-                return;
-            }
-
-            try
+            } catch (Throwable t)
             {
-                Integer.parseInt(args[0]);
-            } catch (NumberFormatException e)
-            {
+                Constants.DISCORD_LOG.error(t);
+
                 event.reply(new EmbedBuilder()
-                        .setTitle("**DQS** - Invalid Command Arguments")
-                        .setDescription("You have not entered a valid integer for the auto respawn delay. Try again, like this:\n\n`" + Constants.CONFIG.discord.prefix + "autorespawn " + this.arguments + "`")
+                        .setTitle("**DQS** - Error")
+                        .setDescription("An exception occurred whilst executing this command. Debug information has been sent to Dewy to be fixed in following updates. Sorry about any inconvenience!")
                         .setColor(new Color(15221016))
                         .setFooter("Focused on " + Constants.CONFIG.authentication.username)
                         .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
                         .build());
 
-                return;
+                Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.operatorId)).openPrivateChannel().queue((privateChannel ->
+                        privateChannel.sendMessage(new EmbedBuilder()
+                                .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.subscriberId)).getName() + ")")
+                                .setDescription("A " + t.getClass().getSimpleName() + " was thrown during the execution of an auto respawn command.\n\n**Cause:**\n\n```" + t.getMessage() + "```")
+                                .setColor(new Color(15221016))
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
+                                .build()).queue()));
             }
-
-            if (Integer.parseInt(args[0]) <= 0)
-            {
-                event.reply(new EmbedBuilder()
-                        .setTitle("**DQS** - Invalid Command Arguments")
-                        .setDescription("The DQS auto respawn delay must be a positive integer above 0. Try again, like this:\n\n`" + Constants.CONFIG.discord.prefix + "autorespawn " + this.arguments + "`")
-                        .setColor(new Color(15221016))
-                        .setFooter("Focused on " + Constants.CONFIG.authentication.username)
-                        .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
-                        .build());
-
-                return;
-            }
-
-            Constants.CONFIG.modules.autoRespawn.delaySeconds = Integer.parseInt(args[0]);
-
-            if (Integer.parseInt(args[0]) > 1)
-            {
-                event.reply(new EmbedBuilder()
-                        .setTitle("**DQS** - Auto Respawn")
-                        .setDescription("You have set the auto respawn delay to **" + Constants.CONFIG.modules.autoRespawn.delaySeconds + " seconds.**")
-                        .setColor(new Color(10144497))
-                        .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
-                        .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
-                        .build());
-            } else
-            {
-                event.reply(new EmbedBuilder()
-                        .setTitle("**DQS** - Auto Respawn")
-                        .setDescription("You have set the auto respawn delay to **" + Constants.CONFIG.modules.autoRespawn.delaySeconds + " second.**")
-                        .setColor(new Color(10144497))
-                        .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
-                        .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
-                        .build());
-            }
-        } catch (Throwable t)
-        {
-            Constants.DISCORD_LOG.error(t);
-
-            event.reply(new EmbedBuilder()
-                    .setTitle("**DQS** - Error")
-                    .setDescription("An exception occurred whilst executing this command. Debug information has been sent to Dewy to be fixed in following updates. Sorry about any inconvenience!")
-                    .setColor(new Color(15221016))
-                    .setFooter("Focused on " + Constants.CONFIG.authentication.username)
-                    .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
-                    .build());
-
-            Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.operatorId)).openPrivateChannel().queue((privateChannel ->
-                    privateChannel.sendMessage(new EmbedBuilder()
-                            .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.subscriberId)).getName() + ")")
-                            .setDescription("A " + t.getClass().getSimpleName() + " was thrown during the execution of an auto respawn command.\n\n**Cause:**\n\n```" + t.getMessage() + "```")
-                            .setColor(new Color(15221016))
-                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
-                            .build()).queue()));
         }
     }
 }

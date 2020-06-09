@@ -23,37 +23,40 @@ public class ModulesCommand extends Command
     @Override
     protected void execute(CommandEvent event)
     {
-        try
+        if (event.getAuthor().getId().equals(Constants.CONFIG.discord.subscriberId) || event.getAuthor().getId().equals(Constants.CONFIG.discord.operatorId) && (event.getChannel().getId().equals(Constants.CONFIG.discord.channelId) || !event.getMessage().getChannelType().isGuild()))
         {
-            event.reply(new EmbedBuilder()
-                    .setTitle("**DQS** - Modules")
-                    .setDescription("An overview of your active modules and their configurations is displayed below.")
-                    .setColor(new Color(10144497))
-                    .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
-                    .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
-                    .addField("**Auto Reconnect**", "**Delay:** " + Constants.CONFIG.modules.autoReconnect.delaySeconds, true)
-                    .addField("**Auto Respawn**", "**Enabled:** " + InfoCommand.getEmojiFromBoolean(Constants.CONFIG.modules.autoRespawn.enabled) + "\n**Delay:** " + Constants.CONFIG.modules.autoRespawn.delaySeconds, true)
-                    .addField("**Notifications**", "**Player In Range:** " + InfoCommand.getEmojiFromBoolean(Constants.CONFIG.modules.notifications.playerInRange) + "\n**Crystal In Range:** " + InfoCommand.getEmojiFromBoolean(Constants.CONFIG.modules.notifications.crystalInRange) + "\n\n**Nearly Finished Queueing:** " + InfoCommand.getEmojiFromBoolean(Constants.CONFIG.modules.notifications.nearlyFinishedQueueing) + "\n**Threshold:** " + Constants.CONFIG.modules.notifications.threshold + "\n\n**Relog:** " + InfoCommand.getEmojiFromBoolean(Constants.CONFIG.modules.notifications.relogged) + "\n**Server Messages:** " + InfoCommand.getEmojiFromBoolean(Constants.CONFIG.modules.notifications.serverMessages), true)
-                    .build());
-        } catch (Throwable t)
-        {
-            Constants.DISCORD_LOG.error(t);
+            try
+            {
+                event.reply(new EmbedBuilder()
+                        .setTitle("**DQS** - Modules")
+                        .setDescription("An overview of your active modules and their configurations is displayed below.")
+                        .setColor(new Color(10144497))
+                        .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
+                        .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
+                        .addField("**Auto Reconnect**", "**Delay:** " + Constants.CONFIG.modules.autoReconnect.delaySeconds, true)
+                        .addField("**Auto Respawn**", "**Enabled:** " + InfoCommand.getEmojiFromBoolean(Constants.CONFIG.modules.autoRespawn.enabled) + "\n**Delay:** " + Constants.CONFIG.modules.autoRespawn.delaySeconds, true)
+                        .addField("**Notifications**", "**Player In Range:** " + InfoCommand.getEmojiFromBoolean(Constants.CONFIG.modules.notifications.playerInRange) + "\n**Crystal In Range:** " + InfoCommand.getEmojiFromBoolean(Constants.CONFIG.modules.notifications.crystalInRange) + "\n\n**Nearly Finished Queueing:** " + InfoCommand.getEmojiFromBoolean(Constants.CONFIG.modules.notifications.nearlyFinishedQueueing) + "\n**Threshold:** " + Constants.CONFIG.modules.notifications.threshold + "\n\n**Relog:** " + InfoCommand.getEmojiFromBoolean(Constants.CONFIG.modules.notifications.relogged) + "\n**Server Messages:** " + InfoCommand.getEmojiFromBoolean(Constants.CONFIG.modules.notifications.serverMessages), true)
+                        .build());
+            } catch (Throwable t)
+            {
+                Constants.DISCORD_LOG.error(t);
 
-            event.reply(new EmbedBuilder()
-                    .setTitle("**DQS** - Error")
-                    .setDescription("An exception occurred whilst executing this command. Debug information has been sent to Dewy to be fixed in following updates. Sorry about any inconvenience!")
-                    .setColor(new Color(15221016))
-                    .setFooter("Focused on " + Constants.CONFIG.authentication.username)
-                    .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
-                    .build());
+                event.reply(new EmbedBuilder()
+                        .setTitle("**DQS** - Error")
+                        .setDescription("An exception occurred whilst executing this command. Debug information has been sent to Dewy to be fixed in following updates. Sorry about any inconvenience!")
+                        .setColor(new Color(15221016))
+                        .setFooter("Focused on " + Constants.CONFIG.authentication.username)
+                        .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
+                        .build());
 
-            Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.operatorId)).openPrivateChannel().queue((privateChannel ->
-                    privateChannel.sendMessage(new EmbedBuilder()
-                            .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.subscriberId)).getName() + ")")
-                            .setDescription("A " + t.getClass().getSimpleName() + " was thrown during the execution of a modules command.\n\n**Cause:**\n\n```" + t.getMessage() + "```")
-                            .setColor(new Color(15221016))
-                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
-                            .build()).queue()));
+                Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.operatorId)).openPrivateChannel().queue((privateChannel ->
+                        privateChannel.sendMessage(new EmbedBuilder()
+                                .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.subscriberId)).getName() + ")")
+                                .setDescription("A " + t.getClass().getSimpleName() + " was thrown during the execution of a modules command.\n\n**Cause:**\n\n```" + t.getMessage() + "```")
+                                .setColor(new Color(15221016))
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
+                                .build()).queue()));
+            }
         }
     }
 }

@@ -361,9 +361,13 @@ public class DQS
                             CACHE.getPlayerCache().getWorldType(),
                             CACHE.getPlayerCache().isReducedDebugInfo()
                     ));
+
                     SERVER_LOG.info("Player connected: %s", session.getRemoteAddress());
 
-                    connectedToProxy = true;
+                    if (!session.getRemoteAddress().toString().contains(CONFIG.discord.tariboneIp))
+                    {
+                        connectedToProxy = true;
+                    }
 
                     if (this.currentPlayer.get() != connection)
                     {

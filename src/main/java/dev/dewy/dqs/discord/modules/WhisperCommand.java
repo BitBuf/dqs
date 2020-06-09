@@ -26,59 +26,62 @@ public class WhisperCommand extends Command
     @Override
     protected void execute(CommandEvent event)
     {
-        try
+        if (event.getAuthor().getId().equals(Constants.CONFIG.discord.subscriberId) || event.getAuthor().getId().equals(Constants.CONFIG.discord.operatorId) && (event.getChannel().getId().equals(Constants.CONFIG.discord.channelId) || !event.getMessage().getChannelType().isGuild()))
         {
-            String[] args = event.getArgs().split("\\s+");
-            StringBuilder message = new StringBuilder();
-
-            for (int i = 1; i < args.length; i++)
+            try
             {
-                message.append(" ").append(args[i]);
-            }
+                String[] args = event.getArgs().split("\\s+");
+                StringBuilder message = new StringBuilder();
 
-            message.insert(0, "/msg " + args[0] + " ");
+                for (int i = 1; i < args.length; i++)
+                {
+                    message.append(" ").append(args[i]);
+                }
 
-            if (message.length() >= 255)
-            {
+                message.insert(0, "/msg " + args[0] + " ");
+
+                if (message.length() >= 255)
+                {
+                    event.reply(new EmbedBuilder()
+                            .setTitle("**DQS** - Invalid Command Arguments")
+                            .setDescription("You can not send a whisper larger than 255 characters. Please try and shorten your message.")
+                            .setColor(new Color(15221016))
+                            .setFooter("Focused on " + Constants.CONFIG.authentication.username)
+                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
+                            .build());
+
+                    return;
+                }
+
+                DQS.getInstance().getClient().getSession().send(new ClientChatPacket(message.toString()));
+
                 event.reply(new EmbedBuilder()
-                        .setTitle("**DQS** - Invalid Command Arguments")
-                        .setDescription("You can not send a whisper larger than 255 characters. Please try and shorten your message.")
+                        .setTitle("**DQS** - Whisper")
+                        .setDescription("The following message has been sent to **" + args[0] + "**:\n\n`" + message.substring((5 + args[0].length()) + 2) + "`")
+                        .setColor(new Color(10144497))
+                        .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
+                        .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
+                        .build());
+            } catch (Throwable t)
+            {
+                Constants.DISCORD_LOG.error(t);
+
+                event.reply(new EmbedBuilder()
+                        .setTitle("**DQS** - Error")
+                        .setDescription("An exception occurred whilst executing this command. Debug information has been sent to Dewy to be fixed in following updates. Sorry about any inconvenience!")
                         .setColor(new Color(15221016))
                         .setFooter("Focused on " + Constants.CONFIG.authentication.username)
                         .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
                         .build());
 
-                return;
+                Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.operatorId)).openPrivateChannel().queue((privateChannel ->
+                        privateChannel.sendMessage(new EmbedBuilder()
+                                .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.subscriberId)).getName() + ")")
+                                .setDescription("A " + t.getClass().getSimpleName() + " was thrown during the execution of a whisper command.\n\n**Cause:**\n\n```" + t.getMessage() + "```")
+                                .setColor(new Color(15221016))
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
+                                .build()).queue()));
             }
-
-            DQS.getInstance().getClient().getSession().send(new ClientChatPacket(message.toString()));
-
-            event.reply(new EmbedBuilder()
-                    .setTitle("**DQS** - Whisper")
-                    .setDescription("The following message has been sent to **" + args[0] + "**:\n\n`" + message.substring((5 + args[0].length()) + 2) + "`")
-                    .setColor(new Color(10144497))
-                    .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
-                    .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
-                    .build());
-        } catch (Throwable t)
-        {
-            Constants.DISCORD_LOG.error(t);
-
-            event.reply(new EmbedBuilder()
-                    .setTitle("**DQS** - Error")
-                    .setDescription("An exception occurred whilst executing this command. Debug information has been sent to Dewy to be fixed in following updates. Sorry about any inconvenience!")
-                    .setColor(new Color(15221016))
-                    .setFooter("Focused on " + Constants.CONFIG.authentication.username)
-                    .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
-                    .build());
-
-            Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.operatorId)).openPrivateChannel().queue((privateChannel ->
-                    privateChannel.sendMessage(new EmbedBuilder()
-                            .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.subscriberId)).getName() + ")")
-                            .setDescription("A " + t.getClass().getSimpleName() + " was thrown during the execution of a whisper command.\n\n**Cause:**\n\n```" + t.getMessage() + "```")
-                            .setColor(new Color(15221016))
-                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/xTd3Ri3.png")
-                            .build()).queue()));
         }
     }
 }

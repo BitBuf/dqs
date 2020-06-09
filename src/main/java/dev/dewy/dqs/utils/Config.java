@@ -43,10 +43,13 @@ public final class Config
 
         public String serverId = "690871121406459924";
         public String categoryName = "DQS";
+        public String channelId = "default";
 
         public String operatorId = "326039530971070474";
         public String subscriberId = "default";
         public String subscriberRole = "Subscriber";
+
+        public String tariboneIp = "127.0.0.1";
 
         public boolean muted = false;
 
