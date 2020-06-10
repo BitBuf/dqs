@@ -129,7 +129,6 @@ public final class Config
         public Extra extra = new Extra();
         public Ping ping = new Ping();
         public boolean verifyUsers = false;
-        public boolean kickPrevious = false;
 
         public static final class Bind
         {
