@@ -10,6 +10,7 @@ import java.awt.*;
 import java.net.URL;
 import java.util.Objects;
 
+import static dev.dewy.dqs.utils.Constants.CONFIG;
 import static dev.dewy.dqs.utils.Constants.saveConfig;
 
 public class ReconnectCommand extends Command
@@ -34,7 +35,7 @@ public class ReconnectCommand extends Command
                 {
                     event.reply(new EmbedBuilder()
                             .setTitle("**DQS** - Reconnect")
-                            .setDescription("Your account has been disconnected from the server. Please use `&reconnect` to reconnect to " + Constants.CONFIG.client.server.address)
+                            .setDescription("Attempting reconnection to **" + CONFIG.client.server.address + "**")
                             .setColor(new Color(10144497))
                             .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                             .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
@@ -44,7 +45,15 @@ public class ReconnectCommand extends Command
 
                     DQS.getInstance().logIn();
                     DQS.getInstance().connect();
+
                     DQS.getInstance().server = null;
+                    DQS.getInstance().startServer();
+
+                    saveConfig();
+
+                    DQS.placeInQueue = -1;
+                    DQS.startTime = -1;
+                    DQS.startPosition = -1;
 
                     saveConfig();
 

@@ -10,6 +10,8 @@ import java.awt.*;
 import java.net.URL;
 import java.util.Objects;
 
+import static dev.dewy.dqs.utils.Constants.saveConfig;
+
 public class DisconnectCommand extends Command
 {
     public DisconnectCommand()

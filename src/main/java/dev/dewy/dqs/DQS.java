@@ -249,6 +249,7 @@ public class DQS
 
             do
             {
+                this.logIn();
                 this.connect();
 
                 saveConfig();
@@ -302,7 +303,7 @@ public class DQS
         return this.client != null && this.client.getSession() != null && this.client.getSession().isConnected();
     }
 
-    protected void startServer()
+    public void startServer()
     {
         synchronized (this)
         {
