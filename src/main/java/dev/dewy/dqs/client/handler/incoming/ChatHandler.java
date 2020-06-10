@@ -22,20 +22,25 @@ public class ChatHandler implements HandlerRegistry.IncomingHandler<ServerChatPa
     {
         CHAT_LOG.info(packet.getMessage());
 
-        DQS.getInstance().inQueue = "2b2t.org".equalsIgnoreCase(CONFIG.client.server.address)
-                && MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString().toLowerCase().startsWith("Position in queue".toLowerCase());
+//        DQS.getInstance().inQueue = "2b2t.org".equalsIgnoreCase(CONFIG.client.server.address)
+//                && MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString().toLowerCase().startsWith("Position in queue".toLowerCase());
 
-        if ("2b2t.org".equalsIgnoreCase(CONFIG.client.server.address) && !MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString().toLowerCase().startsWith("Position in queue".toLowerCase()))
+        if (MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString().startsWith("<"))
         {
-            DQS.getInstance().inQueue = false;
-            DQS.getInstance().currentPos = -1;
+            DQS.placeInQueue = -1;
+            DQS.startTime = -1;
+            DQS.startPosition = -1;
         }
 
-        if (DQS.getInstance().inQueue)
+        if (MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString().startsWith("Position in queue: "))
         {
-            String[] result = MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString().split("(?=\\d*$)", 2);
+            DQS.placeInQueue = Integer.parseInt(MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString().split("Position in queue: ") [1]);
 
-            DQS.getInstance().currentPos = Integer.parseInt(result[1]);
+            if (DQS.startPosition == -1 && DQS.startTime == -1)
+            {
+                DQS.startPosition = DQS.placeInQueue;
+                DQS.startTime = System.nanoTime();
+            }
         }
 
         if ("2b2t.org".equalsIgnoreCase(CONFIG.client.server.address)

@@ -28,20 +28,11 @@ public class PosCommand extends Command
         {
             try
             {
-                if (DQS.getInstance().inQueue && DQS.getInstance().currentPos != -1)
+                if (DQS.placeInQueue != -1)
                 {
                     event.reply(new EmbedBuilder()
                             .setTitle("**DQS** - Queue Position")
-                            .setDescription("Your current queue position: **" + DQS.getInstance().currentPos + "**")
-                            .setColor(new Color(10144497))
-                            .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
-                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
-                            .build());
-                } else if (DQS.getInstance().inQueue)
-                {
-                    event.reply(new EmbedBuilder()
-                            .setTitle("**DQS** - Queue Position")
-                            .setDescription("Please wait a few seconds before querying your queue position.")
+                            .setDescription("Your current queue position: **" + DQS.getPosition() + "**")
                             .setColor(new Color(10144497))
                             .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                             .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")

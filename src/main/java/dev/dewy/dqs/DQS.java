@@ -70,7 +70,12 @@ public class DQS
     private TariboneTicker ticker;
     private TariboneDQSPlayer player;
 
-    public Thread mainThread = Thread.currentThread();
+    public static int placeInQueue = -1;
+    public static long startTime = -1L;
+    public static int startPosition = -1;
+
+    public static String prevEta = "N/A";
+    public static int etaDelay = 0;
 
     public static void main(String... args) throws LoginException
     {
@@ -244,10 +249,14 @@ public class DQS
 
             do
             {
-                this.logIn();
                 this.connect();
 
                 saveConfig();
+
+                placeInQueue = -1;
+                startTime = -1;
+                startPosition = -1;
+
                 //wait for client to disconnect before starting again
                 CLIENT_LOG.info("Disconnected. Reason: %s", ((DQSClientSession) this.client.getSession()).getDisconnectReason());
             } while (SHOULD_RECONNECT && CACHE.reset(true) && this.delayBeforeReconnect());
@@ -408,6 +417,62 @@ public class DQS
         }
         CACHE.getProfileCache().setProfile(this.protocol.getProfile());
         AUTH_LOG.success("Logged in.");
+    }
+
+    public static String getEta()
+    {
+        if (!CONFIG.client.server.address.equalsIgnoreCase("2b2t.org"))
+        {
+            return "N/A";
+        }
+
+        if ((startPosition - placeInQueue) == 0)
+        {
+            return "Determining...";
+        }
+
+        if (etaDelay == 60)
+        {
+            etaDelay = 0;
+        }
+
+        if (etaDelay++ != 0)
+        {
+            return prevEta;
+        }
+
+        long rate = ((System.nanoTime() - startTime) / 1000000) / (startPosition - placeInQueue);
+
+        long milliseconds = (int) (rate * placeInQueue);
+
+        int minutes = (int) ((milliseconds / (1000 * 60)) % 60);
+        int hours = (int) ((milliseconds / (1000 * 60 * 60)) % 24);
+
+        String time = "";
+
+        if (hours > 0)
+        {
+            time += hours + "h ";
+        }
+
+        if (minutes > 0)
+        {
+            time += minutes + "m ";
+        }
+
+        prevEta = time;
+
+        return time;
+    }
+
+    public static String getPosition()
+    {
+        if (!CONFIG.client.server.address.equalsIgnoreCase("2b2t.org"))
+        {
+            return "N/A";
+        }
+
+        return String.valueOf(placeInQueue);
     }
 
     protected boolean delayBeforeReconnect()
