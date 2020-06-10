@@ -21,13 +21,12 @@ public class ReconnectCommand extends Command
         this.help = "Reconnect your account to the target server.";
         this.aliases = new String[] {"connect", "rcon"};
         this.guildOnly = false;
-        this.cooldown = Constants.CONFIG.service.cooldown;
-    }
+}
 
     @Override
     protected void execute(CommandEvent event)
     {
-        if (event.getAuthor().getId().equals(Constants.CONFIG.service.subscriberId) || event.getAuthor().getId().equals(Constants.CONFIG.service.operatorId) && (event.getChannel().getId().equals(Constants.CONFIG.service.channelId) || !event.getMessage().getChannelType().isGuild()))
+        if ((event.getAuthor().getId().equals(Constants.CONFIG.service.subscriberId) || event.getAuthor().getId().equals(Constants.CONFIG.service.operatorId)) && (event.getChannel().getId().equals(Constants.CONFIG.service.channelId) || !event.getMessage().getChannelType().isGuild()))
         {
             try
             {

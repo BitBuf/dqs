@@ -18,13 +18,12 @@ public class DisconnectCommand extends Command
         this.help = "Disconnect your account until you reconnect it.";
         this.aliases = new String[] {"dc", "log", "toggle", "end"};
         this.guildOnly = false;
-        this.cooldown = Constants.CONFIG.service.cooldown;
-    }
+}
 
     @Override
     protected void execute(CommandEvent event)
     {
-        if (event.getAuthor().getId().equals(Constants.CONFIG.service.subscriberId) || event.getAuthor().getId().equals(Constants.CONFIG.service.operatorId) && (event.getChannel().getId().equals(Constants.CONFIG.service.channelId) || !event.getMessage().getChannelType().isGuild()))
+        if ((event.getAuthor().getId().equals(Constants.CONFIG.service.subscriberId) || event.getAuthor().getId().equals(Constants.CONFIG.service.operatorId)) && (event.getChannel().getId().equals(Constants.CONFIG.service.channelId) || !event.getMessage().getChannelType().isGuild()))
         {
             try
             {

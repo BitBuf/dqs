@@ -17,13 +17,12 @@ public class ModulesCommand extends Command
         this.help = "Displays information about the status and configuration of modules.";
         this.aliases = new String[] {"m", "mods", "features"};
         this.guildOnly = false;
-        this.cooldown = Constants.CONFIG.service.cooldown;
-    }
+}
 
     @Override
     protected void execute(CommandEvent event)
     {
-        if (event.getAuthor().getId().equals(Constants.CONFIG.service.subscriberId) || event.getAuthor().getId().equals(Constants.CONFIG.service.operatorId) && (event.getChannel().getId().equals(Constants.CONFIG.service.channelId) || !event.getMessage().getChannelType().isGuild()))
+        if ((event.getAuthor().getId().equals(Constants.CONFIG.service.subscriberId) || event.getAuthor().getId().equals(Constants.CONFIG.service.operatorId)) && (event.getChannel().getId().equals(Constants.CONFIG.service.channelId) || !event.getMessage().getChannelType().isGuild()))
         {
             try
             {

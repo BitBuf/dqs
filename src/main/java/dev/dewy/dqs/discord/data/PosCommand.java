@@ -18,13 +18,12 @@ public class PosCommand extends Command
         this.help = "View your position in queue.";
         this.aliases = new String[] {"qpos", "position"};
         this.guildOnly = false;
-        this.cooldown = Constants.CONFIG.service.cooldown;
-    }
+}
 
     @Override
     protected void execute(CommandEvent event)
     {
-        if (event.getAuthor().getId().equals(Constants.CONFIG.service.subscriberId) || event.getAuthor().getId().equals(Constants.CONFIG.service.operatorId) && (event.getChannel().getId().equals(Constants.CONFIG.service.channelId) || !event.getMessage().getChannelType().isGuild()))
+        if (((event.getAuthor().getId().equals(Constants.CONFIG.service.subscriberId) || event.getAuthor().getId().equals(Constants.CONFIG.service.operatorId))) && (event.getChannel().getId().equals(Constants.CONFIG.service.channelId) || !event.getMessage().getChannelType().isGuild()))
         {
             try
             {
@@ -41,7 +40,7 @@ public class PosCommand extends Command
                 {
                     event.reply(new EmbedBuilder()
                             .setTitle("**DQS** - Queue Position")
-                            .setDescription("Your account is currently in-game, not in the queue.")
+                            .setDescription("Your account is currently in-game, not in the queue.\n\n*PLEASE NOTE: if your instance has only just started, this is likely a lie.*")
                             .setColor(new Color(10144497))
                             .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                             .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")

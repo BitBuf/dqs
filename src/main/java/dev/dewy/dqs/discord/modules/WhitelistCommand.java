@@ -19,14 +19,13 @@ public class WhitelistCommand extends Command
         this.help = "Configure your DQS instance's whitelist";
         this.aliases = new String[] {"wl", "wlist"};
         this.guildOnly = false;
-        this.cooldown = Constants.CONFIG.service.cooldown;
-        this.arguments = "[add/remove/display] [name]";
+this.arguments = "[add/remove/display] [name]";
     }
 
     @Override
     protected void execute(CommandEvent event)
     {
-        if (event.getAuthor().getId().equals(Constants.CONFIG.service.subscriberId) || event.getAuthor().getId().equals(Constants.CONFIG.service.operatorId) && (event.getChannel().getId().equals(Constants.CONFIG.service.channelId) || !event.getMessage().getChannelType().isGuild()))
+        if ((event.getAuthor().getId().equals(Constants.CONFIG.service.subscriberId) || event.getAuthor().getId().equals(Constants.CONFIG.service.operatorId)) && (event.getChannel().getId().equals(Constants.CONFIG.service.channelId) || !event.getMessage().getChannelType().isGuild()))
         {
             try
             {

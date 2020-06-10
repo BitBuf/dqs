@@ -17,14 +17,13 @@ public class PrefixCommand extends Command
         this.help = "Mutes / unmutes all DQS notifications and messages.";
         this.aliases = new String[] {"ingameprefix", "pfx"};
         this.guildOnly = false;
-        this.cooldown = Constants.CONFIG.service.cooldown;
-        this.arguments = "<PREFIX>";
+this.arguments = "<PREFIX>";
     }
 
     @Override
     protected void execute(CommandEvent event)
     {
-        if (event.getAuthor().getId().equals(Constants.CONFIG.service.subscriberId) || event.getAuthor().getId().equals(Constants.CONFIG.service.operatorId) && (event.getChannel().getId().equals(Constants.CONFIG.service.channelId) || !event.getMessage().getChannelType().isGuild()))
+        if ((event.getAuthor().getId().equals(Constants.CONFIG.service.subscriberId) || event.getAuthor().getId().equals(Constants.CONFIG.service.operatorId)) && (event.getChannel().getId().equals(Constants.CONFIG.service.channelId) || !event.getMessage().getChannelType().isGuild()))
         {
             try
             {

@@ -17,14 +17,13 @@ public class SpammerCommand extends Command
         this.help = "Configure the DQS spammer.";
         this.aliases = new String[] {"spam", "dqsspam", "chatspam", "chatspammer"};
         this.guildOnly = false;
-        this.cooldown = Constants.CONFIG.service.cooldown;
-        this.arguments = "[ADD / REMOVE / DELAY] [MESSAGE ID / SECONDS DELAY]";
+this.arguments = "[ADD / REMOVE / DELAY] [MESSAGE ID / SECONDS DELAY]";
     }
 
     @Override
     protected void execute(CommandEvent event)
     {
-        if (event.getAuthor().getId().equals(Constants.CONFIG.service.subscriberId) || event.getAuthor().getId().equals(Constants.CONFIG.service.operatorId) && (event.getChannel().getId().equals(Constants.CONFIG.service.channelId) || !event.getMessage().getChannelType().isGuild()))
+        if ((event.getAuthor().getId().equals(Constants.CONFIG.service.subscriberId) || event.getAuthor().getId().equals(Constants.CONFIG.service.operatorId)) && (event.getChannel().getId().equals(Constants.CONFIG.service.channelId) || !event.getMessage().getChannelType().isGuild()))
         {
             try
             {

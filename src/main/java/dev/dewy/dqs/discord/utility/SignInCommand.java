@@ -18,14 +18,13 @@ public class SignInCommand extends Command
         this.help = "Sign into your Mojang account.";
         this.aliases = new String[] {"login"};
         this.guildOnly = false;
-        this.cooldown = Constants.CONFIG.service.cooldown;
-        this.arguments = "<IGN> <EMAIL> <PASSWORD>";
+this.arguments = "<IGN> <EMAIL> <PASSWORD>";
     }
 
     @Override
     protected void execute(CommandEvent event)
     {
-        if (event.getAuthor().getId().equals(Constants.CONFIG.service.subscriberId) || event.getAuthor().getId().equals(Constants.CONFIG.service.operatorId) && (event.getChannel().getId().equals(Constants.CONFIG.service.channelId) || !event.getMessage().getChannelType().isGuild()))
+        if ((event.getAuthor().getId().equals(Constants.CONFIG.service.subscriberId) || event.getAuthor().getId().equals(Constants.CONFIG.service.operatorId)) && (event.getChannel().getId().equals(Constants.CONFIG.service.channelId) || !event.getMessage().getChannelType().isGuild()))
         {
             try
             {

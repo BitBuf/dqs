@@ -18,8 +18,7 @@ public class InfoCommand extends Command
         this.help = "Display your account's biometrics and statistics.";
         this.aliases = new String[] {"stats", "statistics", "information", "figures", "i", "biometrics"};
         this.guildOnly = false;
-        this.cooldown = Constants.CONFIG.service.cooldown;
-    }
+}
 
     private static float roundToHalf(float f)
     {
@@ -60,7 +59,7 @@ public class InfoCommand extends Command
     @Override
     protected void execute(CommandEvent event)
     {
-        if (event.getAuthor().getId().equals(Constants.CONFIG.service.subscriberId) || event.getAuthor().getId().equals(Constants.CONFIG.service.operatorId) && (event.getChannel().getId().equals(Constants.CONFIG.service.channelId) || !event.getMessage().getChannelType().isGuild()))
+        if ((event.getAuthor().getId().equals(Constants.CONFIG.service.subscriberId) || event.getAuthor().getId().equals(Constants.CONFIG.service.operatorId)) && (event.getChannel().getId().equals(Constants.CONFIG.service.channelId) || !event.getMessage().getChannelType().isGuild()))
         {
             try
             {

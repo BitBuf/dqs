@@ -19,14 +19,13 @@ public class WhisperCommand extends Command
         this.help = "Send a message to public chat.";
         this.aliases = new String[] {"msg", "w", "pm"};
         this.guildOnly = false;
-        this.cooldown = Constants.CONFIG.service.cooldown;
-        this.arguments = "<RECIPIENT> <MESSAGE>";
+this.arguments = "<RECIPIENT> <MESSAGE>";
     }
 
     @Override
     protected void execute(CommandEvent event)
     {
-        if (event.getAuthor().getId().equals(Constants.CONFIG.service.subscriberId) || event.getAuthor().getId().equals(Constants.CONFIG.service.operatorId) && (event.getChannel().getId().equals(Constants.CONFIG.service.channelId) || !event.getMessage().getChannelType().isGuild()))
+        if ((event.getAuthor().getId().equals(Constants.CONFIG.service.subscriberId) || event.getAuthor().getId().equals(Constants.CONFIG.service.operatorId)) && (event.getChannel().getId().equals(Constants.CONFIG.service.channelId) || !event.getMessage().getChannelType().isGuild()))
         {
             try
             {
