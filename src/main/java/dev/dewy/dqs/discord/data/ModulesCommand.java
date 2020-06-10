@@ -17,13 +17,13 @@ public class ModulesCommand extends Command
         this.help = "Displays information about the status and configuration of modules.";
         this.aliases = new String[] {"m", "mods", "features"};
         this.guildOnly = false;
-        this.cooldown = Constants.CONFIG.discord.cooldown;
+        this.cooldown = Constants.CONFIG.service.cooldown;
     }
 
     @Override
     protected void execute(CommandEvent event)
     {
-        if (event.getAuthor().getId().equals(Constants.CONFIG.discord.subscriberId) || event.getAuthor().getId().equals(Constants.CONFIG.discord.operatorId) && (event.getChannel().getId().equals(Constants.CONFIG.discord.channelId) || !event.getMessage().getChannelType().isGuild()))
+        if (event.getAuthor().getId().equals(Constants.CONFIG.service.subscriberId) || event.getAuthor().getId().equals(Constants.CONFIG.service.operatorId) && (event.getChannel().getId().equals(Constants.CONFIG.service.channelId) || !event.getMessage().getChannelType().isGuild()))
         {
             try
             {
@@ -49,9 +49,9 @@ public class ModulesCommand extends Command
                         .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
                         .build());
 
-                Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.operatorId)).openPrivateChannel().queue((privateChannel ->
+                Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.service.operatorId)).openPrivateChannel().queue((privateChannel ->
                         privateChannel.sendMessage(new EmbedBuilder()
-                                .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.subscriberId)).getName() + ")")
+                                .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.service.subscriberId)).getName() + ")")
                                 .setDescription("A " + t.getClass().getSimpleName() + " was thrown during the execution of a modules command.\n\n**Cause:**\n\n```" + t.getMessage() + "```")
                                 .setColor(new Color(15221016))
                                 .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")

@@ -10,8 +10,6 @@ import java.awt.*;
 import java.net.URL;
 import java.util.Objects;
 
-import static dev.dewy.dqs.utils.Constants.saveConfig;
-
 public class DisconnectCommand extends Command
 {
     public DisconnectCommand()
@@ -20,13 +18,13 @@ public class DisconnectCommand extends Command
         this.help = "Disconnect your account until you reconnect it.";
         this.aliases = new String[] {"dc", "log", "toggle", "end"};
         this.guildOnly = false;
-        this.cooldown = Constants.CONFIG.discord.cooldown;
+        this.cooldown = Constants.CONFIG.service.cooldown;
     }
 
     @Override
     protected void execute(CommandEvent event)
     {
-        if (event.getAuthor().getId().equals(Constants.CONFIG.discord.subscriberId) || event.getAuthor().getId().equals(Constants.CONFIG.discord.operatorId) && (event.getChannel().getId().equals(Constants.CONFIG.discord.channelId) || !event.getMessage().getChannelType().isGuild()))
+        if (event.getAuthor().getId().equals(Constants.CONFIG.service.subscriberId) || event.getAuthor().getId().equals(Constants.CONFIG.service.operatorId) && (event.getChannel().getId().equals(Constants.CONFIG.service.channelId) || !event.getMessage().getChannelType().isGuild()))
         {
             try
             {
@@ -66,9 +64,9 @@ public class DisconnectCommand extends Command
                         .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
                         .build());
 
-                Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.operatorId)).openPrivateChannel().queue((privateChannel ->
+                Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.service.operatorId)).openPrivateChannel().queue((privateChannel ->
                         privateChannel.sendMessage(new EmbedBuilder()
-                                .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.subscriberId)).getName() + ")")
+                                .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.service.subscriberId)).getName() + ")")
                                 .setDescription("A " + t.getClass().getSimpleName() + " was thrown during the execution of a disconnect command.\n\n**Cause:**\n\n```" + t.getMessage() + "```")
                                 .setColor(new Color(15221016))
                                 .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")

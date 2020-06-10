@@ -29,7 +29,6 @@ import dev.dewy.dqs.taribone.ticker.TariboneTicker;
 import dev.dewy.dqs.taribone.world.World;
 import dev.dewy.dqs.taribone.world.physics.TariboneWorldPhysics;
 import dev.dewy.dqs.utils.Authenticator;
-import dev.dewy.dqs.utils.Constants;
 import dev.dewy.dqs.utils.ServerData;
 
 import javax.imageio.ImageIO;
@@ -348,7 +347,7 @@ public class DQS
                             .getConnections().get(session);
                     if (!this.currentPlayer.compareAndSet(null, connection))
                     {
-                        if (connection.getRemoteAddress().toString().equals(CONFIG.discord.tariboneIp))
+                        if (connection.getRemoteAddress().toString().equals(CONFIG.service.tariboneIp))
                         {
                             this.currentPlayer.get().setPlayer(false);
                             this.currentPlayer.get().disconnect("§7[§b§lDQS§r§7] §fA Taribone session has taken control. Please end it to reconnect.");
@@ -377,7 +376,7 @@ public class DQS
 
                     SERVER_LOG.info("Player connected: %s", session.getRemoteAddress());
 
-                    if (!session.getRemoteAddress().toString().contains(CONFIG.discord.tariboneIp))
+                    if (!session.getRemoteAddress().toString().contains(CONFIG.service.tariboneIp))
                     {
                         connectedToProxy = true;
                     }

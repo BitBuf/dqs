@@ -17,14 +17,14 @@ public class SpammerCommand extends Command
         this.help = "Configure the DQS spammer.";
         this.aliases = new String[] {"spam", "dqsspam", "chatspam", "chatspammer"};
         this.guildOnly = false;
-        this.cooldown = Constants.CONFIG.discord.cooldown;
+        this.cooldown = Constants.CONFIG.service.cooldown;
         this.arguments = "[ADD / REMOVE / DELAY] [MESSAGE ID / SECONDS DELAY]";
     }
 
     @Override
     protected void execute(CommandEvent event)
     {
-        if (event.getAuthor().getId().equals(Constants.CONFIG.discord.subscriberId) || event.getAuthor().getId().equals(Constants.CONFIG.discord.operatorId) && (event.getChannel().getId().equals(Constants.CONFIG.discord.channelId) || !event.getMessage().getChannelType().isGuild()))
+        if (event.getAuthor().getId().equals(Constants.CONFIG.service.subscriberId) || event.getAuthor().getId().equals(Constants.CONFIG.service.operatorId) && (event.getChannel().getId().equals(Constants.CONFIG.service.channelId) || !event.getMessage().getChannelType().isGuild()))
         {
             try
             {
@@ -88,7 +88,7 @@ public class SpammerCommand extends Command
                     {
                         event.reply(new EmbedBuilder()
                                 .setTitle("**DQS** - Invalid Command Arguments")
-                                .setDescription("You have not entered a valid spammer message ID. Try again, like this:\n\n`" + Constants.CONFIG.discord.prefix + "spam " + this.arguments + "`")
+                                .setDescription("You have not entered a valid spammer message ID. Try again, like this:\n\n`" + Constants.CONFIG.service.prefix + "spam " + this.arguments + "`")
                                 .setColor(new Color(15221016))
                                 .setFooter("Focused on " + Constants.CONFIG.authentication.username)
                                 .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
@@ -119,7 +119,7 @@ public class SpammerCommand extends Command
                     {
                         event.reply(new EmbedBuilder()
                                 .setTitle("**DQS** - Invalid Command Arguments")
-                                .setDescription("You have not entered a valid integer for the chat spammer delay. Try again, like this:\n\n`" + Constants.CONFIG.discord.prefix + "spam " + this.arguments + "`")
+                                .setDescription("You have not entered a valid integer for the chat spammer delay. Try again, like this:\n\n`" + Constants.CONFIG.service.prefix + "spam " + this.arguments + "`")
                                 .setColor(new Color(15221016))
                                 .setFooter("Focused on " + Constants.CONFIG.authentication.username)
                                 .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
@@ -132,7 +132,7 @@ public class SpammerCommand extends Command
                     {
                         event.reply(new EmbedBuilder()
                                 .setTitle("**DQS** - Invalid Command Arguments")
-                                .setDescription("The DQS chat spammer delay must be a positive integer above 0. Try again, like this:\n\n`" + Constants.CONFIG.discord.prefix + "spam " + this.arguments + "`")
+                                .setDescription("The DQS chat spammer delay must be a positive integer above 0. Try again, like this:\n\n`" + Constants.CONFIG.service.prefix + "spam " + this.arguments + "`")
                                 .setColor(new Color(15221016))
                                 .setFooter("Focused on " + Constants.CONFIG.authentication.username)
                                 .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
@@ -168,7 +168,7 @@ public class SpammerCommand extends Command
 
                 event.reply(new EmbedBuilder()
                         .setTitle("**DQS** - Invalid Command Arguments")
-                        .setDescription("You have entered invalid arguments for this command. Try again, like this:\n\n`" + Constants.CONFIG.discord.prefix + "spam " + this.arguments + "`")
+                        .setDescription("You have entered invalid arguments for this command. Try again, like this:\n\n`" + Constants.CONFIG.service.prefix + "spam " + this.arguments + "`")
                         .setColor(new Color(15221016))
                         .setFooter("Focused on " + Constants.CONFIG.authentication.username)
                         .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
@@ -185,9 +185,9 @@ public class SpammerCommand extends Command
                         .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
                         .build());
 
-                Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.operatorId)).openPrivateChannel().queue((privateChannel ->
+                Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.service.operatorId)).openPrivateChannel().queue((privateChannel ->
                         privateChannel.sendMessage(new EmbedBuilder()
-                                .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.subscriberId)).getName() + ")")
+                                .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.service.subscriberId)).getName() + ")")
                                 .setDescription("A " + t.getClass().getSimpleName() + " was thrown during the execution of a spammer command.\n\n**Cause:**\n\n```" + t.getMessage() + "```")
                                 .setColor(new Color(15221016))
                                 .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")

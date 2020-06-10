@@ -162,18 +162,18 @@ public final class Constants
 
         loadConfig();
 
-        if (CONFIG.discord.subscriberId.equals("default") || CONFIG.discord.token.equals("default"))
+        if (CONFIG.service.subscriberId.equals("default") || CONFIG.service.token.equals("default"))
         {
             DISCORD_LOG.error("Subscriber ID or token not specified.");
         }
 
-        if (CONFIG.discord.discordService)
+        if (CONFIG.service.discordService)
         {
             CommandClientBuilder commandClient = new CommandClientBuilder();
 
             commandClient.setActivity(Activity.playing("2b2t"));
-            commandClient.setPrefix(CONFIG.discord.prefix);
-            commandClient.setOwnerId(CONFIG.discord.operatorId);
+            commandClient.setPrefix(CONFIG.service.prefix);
+            commandClient.setOwnerId(CONFIG.service.operatorId);
 
             commandClient.setHelpWord("DWWWWWWWWWWWWWWWWWWWWWWWWWWWJIWJFUJEWMFCNWEF");
 
@@ -197,7 +197,7 @@ public final class Constants
             try
             {
                 DISCORD = new JDABuilder(AccountType.BOT)
-                        .setToken(CONFIG.discord.token)
+                        .setToken(CONFIG.service.token)
                         .addEventListeners(commandClient.build())
                         .build();
             } catch (LoginException e)

@@ -17,14 +17,14 @@ public class AutoReconnectCommand extends Command
         this.help = "Modify the auto reconnect delay";
         this.aliases = new String[] {"autorc", "arc"};
         this.guildOnly = false;
-        this.cooldown = Constants.CONFIG.discord.cooldown;
+        this.cooldown = Constants.CONFIG.service.cooldown;
         this.arguments = "<seconds delay>";
     }
 
     @Override
     protected void execute(CommandEvent event)
     {
-        if (event.getAuthor().getId().equals(Constants.CONFIG.discord.subscriberId) || event.getAuthor().getId().equals(Constants.CONFIG.discord.operatorId) && (event.getChannel().getId().equals(Constants.CONFIG.discord.channelId) || !event.getMessage().getChannelType().isGuild()))
+        if (event.getAuthor().getId().equals(Constants.CONFIG.service.subscriberId) || event.getAuthor().getId().equals(Constants.CONFIG.service.operatorId) && (event.getChannel().getId().equals(Constants.CONFIG.service.channelId) || !event.getMessage().getChannelType().isGuild()))
         {
             try
             {
@@ -34,7 +34,7 @@ public class AutoReconnectCommand extends Command
                 {
                     event.reply(new EmbedBuilder()
                             .setTitle("**DQS** - Invalid Command Arguments")
-                            .setDescription("You have entered invalid arguments for this command. Try again, like this:\n\n`" + Constants.CONFIG.discord.prefix + "autoreconnect " + this.arguments + "`")
+                            .setDescription("You have entered invalid arguments for this command. Try again, like this:\n\n`" + Constants.CONFIG.service.prefix + "autoreconnect " + this.arguments + "`")
                             .setColor(new Color(15221016))
                             .setFooter("Focused on " + Constants.CONFIG.authentication.username)
                             .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
@@ -50,7 +50,7 @@ public class AutoReconnectCommand extends Command
                 {
                     event.reply(new EmbedBuilder()
                             .setTitle("**DQS** - Invalid Command Arguments")
-                            .setDescription("You have not entered a valid integer for the auto reconnect delay. Try again, like this:\n\n`" + Constants.CONFIG.discord.prefix + "autoreconnect " + this.arguments + "`")
+                            .setDescription("You have not entered a valid integer for the auto reconnect delay. Try again, like this:\n\n`" + Constants.CONFIG.service.prefix + "autoreconnect " + this.arguments + "`")
                             .setColor(new Color(15221016))
                             .setFooter("Focused on " + Constants.CONFIG.authentication.username)
                             .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
@@ -63,7 +63,7 @@ public class AutoReconnectCommand extends Command
                 {
                     event.reply(new EmbedBuilder()
                             .setTitle("**DQS** - Invalid Command Arguments")
-                            .setDescription("The DQS auto reconnect delay must be a positive integer above 0. Try again, like this:\n\n`" + Constants.CONFIG.discord.prefix + "autoreconnect " + this.arguments + "`")
+                            .setDescription("The DQS auto reconnect delay must be a positive integer above 0. Try again, like this:\n\n`" + Constants.CONFIG.service.prefix + "autoreconnect " + this.arguments + "`")
                             .setColor(new Color(15221016))
                             .setFooter("Focused on " + Constants.CONFIG.authentication.username)
                             .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
@@ -105,9 +105,9 @@ public class AutoReconnectCommand extends Command
                         .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
                         .build());
 
-                Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.operatorId)).openPrivateChannel().queue((privateChannel ->
+                Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.service.operatorId)).openPrivateChannel().queue((privateChannel ->
                         privateChannel.sendMessage(new EmbedBuilder()
-                                .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.subscriberId)).getName() + ")")
+                                .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.service.subscriberId)).getName() + ")")
                                 .setDescription("A " + e.getClass().getSimpleName() + " was thrown during the execution of an autoreconnect command.\n\n**Cause:**\n\n```" + e.getMessage() + "```")
                                 .setColor(new Color(15221016))
                                 .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")

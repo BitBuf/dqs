@@ -41,7 +41,7 @@ public class SpawnObjectHandler implements HandlerRegistry.IncomingHandler<Serve
         {
             if (Constants.CONFIG.modules.notifications.enabled && Constants.CONFIG.modules.notifications.crystalInRange && DQS.getInstance().isConnected() && packet.getType().equals(ObjectType.ENDER_CRYSTAL) && !DQS.getInstance().connectedToProxy)
             {
-                Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.discord.subscriberId)).openPrivateChannel().queue((privateChannel ->
+                Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.service.subscriberId)).openPrivateChannel().queue((privateChannel ->
                 {
                     try
                     {
@@ -62,9 +62,9 @@ public class SpawnObjectHandler implements HandlerRegistry.IncomingHandler<Serve
         {
             Constants.DISCORD_LOG.error(t);
 
-            Objects.requireNonNull(DISCORD.getUserById(Constants.CONFIG.discord.operatorId)).openPrivateChannel().queue((privateChannel ->
+            Objects.requireNonNull(DISCORD.getUserById(Constants.CONFIG.service.operatorId)).openPrivateChannel().queue((privateChannel ->
                     privateChannel.sendMessage(new EmbedBuilder()
-                            .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(DISCORD.getUserById(Constants.CONFIG.discord.subscriberId)).getName() + ")")
+                            .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(DISCORD.getUserById(Constants.CONFIG.service.subscriberId)).getName() + ")")
                             .setDescription("A " + t.getClass().getSimpleName() + " was thrown during the execution of a crystal in range notification command.\n\n**Cause:**\n\n```" + t.getMessage() + "```")
                             .setColor(new Color(15221016))
                             .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")

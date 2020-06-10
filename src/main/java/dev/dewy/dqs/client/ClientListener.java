@@ -100,9 +100,9 @@ public class ClientListener implements SessionListener
         CLIENT_LOG.info("Disconnecting from server...")
                 .trace("Disconnect reason: %s", event.getReason());
 
-        if (Constants.CONFIG.modules.notifications.enabled && CONFIG.modules.notifications.relogged)
+        if (Constants.CONFIG.modules.notifications.enabled && CONFIG.modules.notifications.relogged && SHOULD_RECONNECT)
         {
-            Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.discord.subscriberId)).openPrivateChannel().queue((privateChannel ->
+            Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.service.subscriberId)).openPrivateChannel().queue((privateChannel ->
             {
                 try
                 {

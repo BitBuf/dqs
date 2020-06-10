@@ -27,15 +27,15 @@ public class KillCommand extends Command
     @Override
     protected void execute(CommandEvent event)
     {
-        if (event.getAuthor().getId().equals(Constants.CONFIG.discord.operatorId) && event.getChannel().getId().equals(Constants.CONFIG.discord.channelId))
+        if (event.getAuthor().getId().equals(Constants.CONFIG.service.operatorId) && event.getChannel().getId().equals(Constants.CONFIG.service.channelId))
         {
             try
             {
-                if (event.getAuthor().getId().equals(Constants.CONFIG.discord.operatorId))
+                if (event.getAuthor().getId().equals(Constants.CONFIG.service.operatorId))
                 {
                     event.reply(new EmbedBuilder()
                             .setTitle("**DQS** - Instance Termination")
-                            .setDescription("Shutting down instance for " + event.getJDA().getUserById(Constants.CONFIG.discord.subscriberId).getName() + "...")
+                            .setDescription("Shutting down instance for " + event.getJDA().getUserById(Constants.CONFIG.service.subscriberId).getName() + "...")
                             .setColor(new Color(10144497))
                             .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                             .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
@@ -73,9 +73,9 @@ public class KillCommand extends Command
                         .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
                         .build());
 
-                Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.operatorId)).openPrivateChannel().queue((privateChannel ->
+                Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.service.operatorId)).openPrivateChannel().queue((privateChannel ->
                         privateChannel.sendMessage(new EmbedBuilder()
-                                .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.subscriberId)).getName() + ")")
+                                .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.service.subscriberId)).getName() + ")")
                                 .setDescription("A " + t.getClass().getSimpleName() + " was thrown during the execution of a kill command.\n\n**Cause:**\n\n```" + t.getMessage() + "```")
                                 .setColor(new Color(15221016))
                                 .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")

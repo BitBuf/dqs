@@ -6,7 +6,7 @@ import java.util.List;
 public final class Config
 {
     public Authentication authentication = new Authentication();
-    public Discord discord = new Discord();
+    public Service service = new Service();
     public Client client = new Client();
     public Debug debug = new Debug();
     public Log log = new Log();
@@ -35,14 +35,12 @@ public final class Config
         public String uuid = "lamo";
     }
 
-    public static final class Discord
+    public static final class Service
     {
         public boolean discordService = true;
 
         public String token = "default";
 
-        public String serverId = "690871121406459924";
-        public String categoryName = "DQS";
         public String channelId = "default";
 
         public String operatorId = "326039530971070474";
@@ -50,8 +48,6 @@ public final class Config
         public String subscriberRole = "Subscriber";
 
         public String tariboneIp = "127.0.0.1";
-
-        public boolean muted = false;
 
         public int cooldown = 5;
         public String prefix = "&";

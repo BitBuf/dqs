@@ -52,7 +52,7 @@ public class ChatHandler implements HandlerRegistry.IncomingHandler<ServerChatPa
 
         if ("2b2t.org".equalsIgnoreCase(CONFIG.client.server.address) && MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString().toLowerCase().startsWith("[SERVER]".toLowerCase()) && CONFIG.modules.notifications.serverMessages && CONFIG.modules.notifications.enabled)
         {
-            Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.discord.subscriberId)).openPrivateChannel().queue((privateChannel ->
+            Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.service.subscriberId)).openPrivateChannel().queue((privateChannel ->
             {
                 try
                 {
@@ -72,7 +72,7 @@ public class ChatHandler implements HandlerRegistry.IncomingHandler<ServerChatPa
 
         if (MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString().toLowerCase().contains("whispers"))
         {
-            Objects.requireNonNull(DISCORD.getUserById(CONFIG.discord.subscriberId)).openPrivateChannel().queue((privateChannel ->
+            Objects.requireNonNull(DISCORD.getUserById(CONFIG.service.subscriberId)).openPrivateChannel().queue((privateChannel ->
                     privateChannel.sendMessage(new EmbedBuilder()
                             .setTitle("**DQS** - Message Received")
                             .setDescription("You received a message:\n\n`" + MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString() + "`")

@@ -18,7 +18,7 @@ public class InfoCommand extends Command
         this.help = "Display your account's biometrics and statistics.";
         this.aliases = new String[] {"stats", "statistics", "information", "figures", "i", "biometrics"};
         this.guildOnly = false;
-        this.cooldown = Constants.CONFIG.discord.cooldown;
+        this.cooldown = Constants.CONFIG.service.cooldown;
     }
 
     private static float roundToHalf(float f)
@@ -60,7 +60,7 @@ public class InfoCommand extends Command
     @Override
     protected void execute(CommandEvent event)
     {
-        if (event.getAuthor().getId().equals(Constants.CONFIG.discord.subscriberId) || event.getAuthor().getId().equals(Constants.CONFIG.discord.operatorId) && (event.getChannel().getId().equals(Constants.CONFIG.discord.channelId) || !event.getMessage().getChannelType().isGuild()))
+        if (event.getAuthor().getId().equals(Constants.CONFIG.service.subscriberId) || event.getAuthor().getId().equals(Constants.CONFIG.service.operatorId) && (event.getChannel().getId().equals(Constants.CONFIG.service.channelId) || !event.getMessage().getChannelType().isGuild()))
         {
             try
             {
@@ -72,7 +72,7 @@ public class InfoCommand extends Command
                         .addField("**Biometrics**", "**Health:** " + roundToHalf(Constants.CACHE.getPlayerCache().getThePlayer().getHealth()) + " (" + roundToHalf(Constants.CACHE.getPlayerCache().getThePlayer().getHealth()) / 2 + " :heart:)" + "\n**Hunger:** " + roundToHalf(Constants.CACHE.getPlayerCache().getThePlayer().getFood()) + " (" + roundToHalf(Constants.CACHE.getPlayerCache().getThePlayer().getFood()) / 2 + " :poultry_leg:)" + "\n**Saturation:** " + roundToHalf(Constants.CACHE.getPlayerCache().getThePlayer().getFood()) + " (" + roundToHalf(Constants.CACHE.getPlayerCache().getThePlayer().getFood()) / 2 + " :sparkles:)", true)
                         .addField("**Server**", "**IP:** " + Constants.CONFIG.client.server.address + "\n**Port:** " + Constants.CONFIG.client.server.port + "\n**Max Players:** " + Constants.CACHE.getPlayerCache().getMaxPlayers(), true)
                         .addField("**World**", "**Gamemode:** " + WordUtils.capitalize(Constants.CACHE.getPlayerCache().getGameMode().toString().toLowerCase()) + "\n**Dimension:** " + WordUtils.capitalize(getDimensionFromCode(Constants.CACHE.getPlayerCache().getDimension())) + "\n**Difficulty:** " + WordUtils.capitalize(Constants.CACHE.getPlayerCache().getDifficulty().toString().toLowerCase()) + "\n**World Type:** " + WordUtils.capitalize(Constants.CACHE.getPlayerCache().getWorldType().toString().toLowerCase()), true)
-                        .addField("**Discord**", "**User:** " + event.getJDA().getUserById(Constants.CONFIG.discord.subscriberId).getName() + "\n**Operator:** " + event.getJDA().getUserById(Constants.CONFIG.discord.operatorId).getName() + "\n**Cooldown:** " + Constants.CONFIG.discord.cooldown, true)
+                        .addField("**Discord**", "**User:** " + event.getJDA().getUserById(Constants.CONFIG.service.subscriberId).getName() + "\n**Operator:** " + event.getJDA().getUserById(Constants.CONFIG.service.operatorId).getName() + "\n**Cooldown:** " + Constants.CONFIG.service.cooldown, true)
                         .addField("**Identification**", "**Entity ID:** " + Constants.CACHE.getPlayerCache().getThePlayer().getEntityId(), true)
                         .build());
 
@@ -88,9 +88,9 @@ public class InfoCommand extends Command
                         .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
                         .build());
 
-                Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.operatorId)).openPrivateChannel().queue((privateChannel ->
+                Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.service.operatorId)).openPrivateChannel().queue((privateChannel ->
                         privateChannel.sendMessage(new EmbedBuilder()
-                                .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.discord.subscriberId)).getName() + ")")
+                                .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.service.subscriberId)).getName() + ")")
                                 .setDescription("A " + t.getClass().getSimpleName() + " was thrown during the execution of an info command.\n\n**Cause:**\n\n```" + t.getMessage() + "```")
                                 .setColor(new Color(15221016))
                                 .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
