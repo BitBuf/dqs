@@ -29,6 +29,7 @@ import dev.dewy.dqs.taribone.ticker.TariboneTicker;
 import dev.dewy.dqs.taribone.world.World;
 import dev.dewy.dqs.taribone.world.physics.TariboneWorldPhysics;
 import dev.dewy.dqs.utils.Authenticator;
+import dev.dewy.dqs.utils.Constants;
 import dev.dewy.dqs.utils.ServerData;
 
 import javax.imageio.ImageIO;
@@ -337,10 +338,10 @@ public class DQS
                             .getConnections().get(session);
                     if (!this.currentPlayer.compareAndSet(null, connection))
                     {
-                        if (CONFIG.server.kickPrevious)
+                        if (connection.getRemoteAddress().toString().equals(CONFIG.discord.tariboneIp))
                         {
                             this.currentPlayer.get().setPlayer(false);
-                            this.currentPlayer.get().disconnect("§7[§b§lDQS§r§7] §fA different, whitelisted player has taken control.");
+                            this.currentPlayer.get().disconnect("§7[§b§lDQS§r§7] §fA Taribone session has taken control. Please end it to reconnect.");
                             this.currentPlayer.set(connection);
                         } else if (Objects.equals(SpawnPlayerHandler.getNameFromUUID(CACHE.getPlayerCache().getThePlayer().getUuid().toString()), "Taribone"))
                         {
