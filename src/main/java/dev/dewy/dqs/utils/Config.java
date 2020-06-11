@@ -158,8 +158,20 @@ public final class Config
         public AutoRespawn autoRespawn = new AutoRespawn();
         public ChatSpammer chatSpammer = new ChatSpammer();
         public GameCommands gameCommands = new GameCommands();
+        public Focus focus = new Focus();
         public Notifications notifications = new Notifications();
         public Whitelist whitelist = new Whitelist();
+
+        public static final class Focus
+        {
+            public boolean enabled = false;
+            public boolean focused = true;
+
+            public List<String> accounts = Arrays.asList(
+                    "bean",
+                    "gggg"
+            );
+        }
 
         public static final class AutoReconnect
         {

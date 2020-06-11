@@ -27,7 +27,7 @@ public class KillCommand extends Command
     @Override
     protected void execute(CommandEvent event)
     {
-        if (event.getAuthor().getId().equals(Constants.CONFIG.service.operatorId) && event.getChannel().getId().equals(Constants.CONFIG.service.channelId))
+        if (event.getAuthor().getId().equals(Constants.CONFIG.service.operatorId) && event.getChannel().getId().equals(Constants.CONFIG.service.channelId) && Constants.CONFIG.modules.focus.focused)
         {
             try
             {
@@ -35,7 +35,7 @@ public class KillCommand extends Command
                 {
                     event.reply(new EmbedBuilder()
                             .setTitle("**DQS** - Instance Termination")
-                            .setDescription("Shutting down instance for " + event.getJDA().getUserById(Constants.CONFIG.service.subscriberId).getName() + "...")
+                            .setDescription("Shutting down instance for " + event.getJDA().getUserById(Constants.CONFIG.service.subscriberId).getName() + " (" + Constants.CONFIG.authentication.username + ")...")
                             .setColor(new Color(10144497))
                             .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                             .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")

@@ -192,7 +192,8 @@ public final class Constants
                     new WhisperCommand(),
                     new KillCommand(),
                     new DisconnectCommand(),
-                    new ReconnectCommand());
+                    new ReconnectCommand(),
+                    new FocusCommand());
 
             try
             {
