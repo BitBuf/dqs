@@ -165,6 +165,39 @@ this.arguments = "[ADD / REMOVE / DELAY] [MESSAGE ID / SECONDS DELAY]";
                     return;
                 }
 
+                if (args[0].equalsIgnoreCase("display"))
+                {
+                    if (Constants.CONFIG.modules.chatSpammer.messages.isEmpty())
+                    {
+                        event.reply(new EmbedBuilder()
+                                .setTitle("**DQS** - Spammer")
+                                .setDescription("You do not have any registered DQS spam messages. Try `&spammer add` to add one.")
+                                .setColor(new Color(10144497))
+                                .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
+                                .build());
+
+                        return;
+                    }
+
+                    StringBuilder builder = new StringBuilder();
+
+                    for (int i = 0; i < Constants.CONFIG.modules.chatSpammer.messages.size(); i++)
+                    {
+                        builder.append("**ID ").append(i).append(": **").append(Constants.CONFIG.modules.chatSpammer.messages.get(i)).append("\n");
+                    }
+
+                    event.reply(new EmbedBuilder()
+                            .setTitle("**DQS** - Spammer")
+                            .setDescription("Your registered DQS spam messages: \n\n" + builder)
+                            .setColor(new Color(10144497))
+                            .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
+                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
+                            .build());
+
+                    return;
+                }
+
                 event.reply(new EmbedBuilder()
                         .setTitle("**DQS** - Invalid Command Arguments")
                         .setDescription("You have entered invalid arguments for this command. Try again, like this:\n\n`" + Constants.CONFIG.service.prefix + "spam " + this.arguments + "`")
