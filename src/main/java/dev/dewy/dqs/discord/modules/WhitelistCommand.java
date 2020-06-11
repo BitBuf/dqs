@@ -165,6 +165,19 @@ this.arguments = "[add/remove/display] [name]";
                     List<String> moddedWhitelist = Constants.CONFIG.modules.whitelist.whitelist;
                     moddedWhitelist.remove("Taribone");
 
+                    if (moddedWhitelist.isEmpty())
+                    {
+                        event.reply(new EmbedBuilder()
+                                .setTitle("**DQS** - Whitelist")
+                                .setDescription("You do not have any accounts registered on the DQS whitelist. Try adding one with `&whitelist add <NAME>`.")
+                                .setColor(new Color(10144497))
+                                .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
+                                .build());
+
+                        return;
+                    }
+
                     event.reply(new EmbedBuilder()
                             .setTitle("**DQS** - Whitelist")
                             .setDescription("All players listed on your DQS whitelist:\n\n`" + Arrays.toString(moddedWhitelist.toArray()).substring(1, Arrays.toString(moddedWhitelist.toArray()).length() - 1) + "`")

@@ -41,7 +41,7 @@ public class KillCommand extends Command
                             .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
                             .build());
 
-                    Thread.sleep(10000L);
+                    Thread.sleep(5000L);
 
                     if (DQS.getInstance().server != null)
                     {
