@@ -35,6 +35,8 @@ public class ModulesCommand extends Command
                         .addField("**Auto Reconnect**", "**Delay:** " + Constants.CONFIG.modules.autoReconnect.delaySeconds, true)
                         .addField("**Auto Respawn**", "**Enabled:** " + InfoCommand.getEmojiFromBoolean(Constants.CONFIG.modules.autoRespawn.enabled) + "\n**Delay:** " + Constants.CONFIG.modules.autoRespawn.delaySeconds, true)
                         .addField("**Notifications**", "**Player In Range:** " + InfoCommand.getEmojiFromBoolean(Constants.CONFIG.modules.notifications.playerInRange) + "\n**Crystal In Range:** " + InfoCommand.getEmojiFromBoolean(Constants.CONFIG.modules.notifications.crystalInRange) + "\n\n**Nearly Finished Queueing:** " + InfoCommand.getEmojiFromBoolean(Constants.CONFIG.modules.notifications.nearlyFinishedQueueing) + "\n**Threshold:** " + Constants.CONFIG.modules.notifications.threshold + "\n\n**Relog:** " + InfoCommand.getEmojiFromBoolean(Constants.CONFIG.modules.notifications.relogged) + "\n**Server Messages:** " + InfoCommand.getEmojiFromBoolean(Constants.CONFIG.modules.notifications.serverMessages), true)
+                        .addField("**Focus**", "**Focused Account:** " + Constants.CONFIG.authentication.username + "\n**Refocusable:** " + InfoCommand.getEmojiFromBoolean(Constants.CONFIG.modules.focus.enabled), true)
+                        .addField("**Whitelist**", "**Whitelist Active:** " + InfoCommand.getEmojiFromBoolean(Constants.CONFIG.modules.whitelist.enabled), true)
                         .build());
             } catch (Throwable t)
             {
