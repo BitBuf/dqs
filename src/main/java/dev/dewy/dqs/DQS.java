@@ -396,10 +396,8 @@ public class DQS
     public void logIn()
     {
         AUTH_LOG.info("Logging in...");
-        if (this.authenticator == null)
-        {
-            this.authenticator = new Authenticator();
-        }
+        this.authenticator = new Authenticator();
+
         this.protocol = this.authenticator.handleRelog();
         if (CONFIG.server.enabled && CONFIG.server.ping.favicon)
         {
