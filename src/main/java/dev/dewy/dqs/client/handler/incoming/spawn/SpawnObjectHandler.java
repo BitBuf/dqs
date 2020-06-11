@@ -50,7 +50,7 @@ public class SpawnObjectHandler implements HandlerRegistry.IncomingHandler<Serve
                                 .setDescription("An Ender Crystal has appeared in your account's visible range.")
                                 .setColor(new Color(15221016))
                                 .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
-                                .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
+                                .setFooter("Notification intended for " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                                 .build()).queue();
                     } catch (MalformedURLException e)
                     {

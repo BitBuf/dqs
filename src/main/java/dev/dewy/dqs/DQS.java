@@ -69,6 +69,8 @@ public class DQS
     private TariboneTicker ticker;
     private TariboneDQSPlayer player;
 
+    public static boolean queueNotifArmed = true;
+
     public static int placeInQueue = -1;
     public static long startTime = -1L;
     public static int startPosition = -1;

@@ -193,7 +193,8 @@ public final class Constants
                     new KillCommand(),
                     new DisconnectCommand(),
                     new ReconnectCommand(),
-                    new FocusCommand());
+                    new FocusCommand(),
+                    new NotificationsCommand());
 
             try
             {
