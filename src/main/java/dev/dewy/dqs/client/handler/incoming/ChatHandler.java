@@ -54,6 +54,26 @@ public class ChatHandler implements HandlerRegistry.IncomingHandler<ServerChatPa
             }));
         }
 
+        if (MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString().matches("^.* whispers: .*$") && !DQS.getInstance().isConnected())
+        {
+            Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.service.subscriberId)).openPrivateChannel().queue((privateChannel ->
+            {
+                try
+                {
+                    privateChannel.sendMessage(new EmbedBuilder()
+                            .setTitle("**DQS** - Message Relay")
+                            .setDescription(MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString())
+                            .setColor(new Color(10144497))
+                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
+                            .setFooter("Message relay intended for " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
+                            .build()).queue();
+                } catch (MalformedURLException e)
+                {
+                    Constants.DISCORD_LOG.error(e);
+                }
+            }));
+        }
+
         if (MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString().startsWith("Position in queue: "))
         {
             DQS.placeInQueue = Integer.parseInt(MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString().split("Position in queue: ") [1]);

@@ -172,7 +172,7 @@ public final class Constants
             commandClient.setPrefix(CONFIG.service.prefix);
             commandClient.setOwnerId(CONFIG.service.operatorId);
 
-            commandClient.setHelpWord("DWWWWWWWWWWWWWWWWWWWWWWWWWWWJIWJFUJEWMFCNWEF");
+            commandClient.setHelpWord("DWWWWWWWWWWWWWWWWWWWWWWjljubmjhbgWWWWWJIWJFUJEWMFCNWEF");
 
             commandClient.addCommands(
                     new HelpCommand(),
@@ -180,7 +180,6 @@ public final class Constants
                     new PosCommand(),
                     new AutoReconnectCommand(),
                     new SpammerCommand(),
-                    new PrefixCommand(),
                     new AutoRespawnCommand(),
                     new WhitelistCommand(),
                     new InfoCommand(),
