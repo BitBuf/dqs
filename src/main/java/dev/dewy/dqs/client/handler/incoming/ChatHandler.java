@@ -34,6 +34,26 @@ public class ChatHandler implements HandlerRegistry.IncomingHandler<ServerChatPa
             DQS.queueNotifArmed = true;
         }
 
+        if (CONFIG.modules.chatRelay.enabled && CONFIG.modules.focus.focused)
+        {
+            Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.service.subscriberId)).openPrivateChannel().queue((privateChannel ->
+            {
+                try
+                {
+                    privateChannel.sendMessage(new EmbedBuilder()
+                            .setTitle("**DQS** - Chat Relay")
+                            .setDescription(MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString())
+                            .setColor(new Color(10144497))
+                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
+                            .setFooter("Chat relay intended for " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
+                            .build()).queue();
+                } catch (MalformedURLException e)
+                {
+                    Constants.DISCORD_LOG.error(e);
+                }
+            }));
+        }
+
         if (MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString().startsWith("Position in queue: "))
         {
             DQS.placeInQueue = Integer.parseInt(MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString().split("Position in queue: ") [1]);

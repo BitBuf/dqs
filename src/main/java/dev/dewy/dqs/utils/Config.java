@@ -157,6 +157,7 @@ public final class Config
         public AutoReconnect autoReconnect = new AutoReconnect();
         public AutoRespawn autoRespawn = new AutoRespawn();
         public ChatSpammer chatSpammer = new ChatSpammer();
+        public ChatRelay chatRelay = new ChatRelay();
         public GameCommands gameCommands = new GameCommands();
         public Focus focus = new Focus();
         public Notifications notifications = new Notifications();
@@ -196,6 +197,11 @@ public final class Config
                     "bean",
                     "gggg"
             );
+        }
+
+        public static final class ChatRelay
+        {
+            public boolean enabled = false;
         }
 
         public static final class GameCommands

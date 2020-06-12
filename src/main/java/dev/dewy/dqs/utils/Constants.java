@@ -193,7 +193,8 @@ public final class Constants
                     new FocusCommand(),
                     new NotificationsCommand(),
                     new RelogCommand(),
-                    new RecoverCommand());
+                    new RecoverCommand(),
+                    new RelayCommand());
 
             try
             {
