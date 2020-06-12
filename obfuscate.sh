@@ -1,0 +1,1 @@
+java -jar ./build/dqsobf.jar ./build/libs/dqs-3.0.0-dev-dist.jar

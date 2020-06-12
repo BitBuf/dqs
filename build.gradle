@@ -61,4 +61,8 @@ shadowJar {
     classifier = 'dist'
 }
 
+task obfuscate(type: Exec) {
+    commandLine 'sh', './obfuscate.sh'
+}
+
 build.dependsOn(shadowJar, sourcesJar)
