@@ -5,7 +5,14 @@ import com.jagrosh.jdautilities.command.CommandEvent;
 import dev.dewy.dqs.DQS;
 import dev.dewy.dqs.utils.Constants;
 import net.dv8tion.jda.api.EmbedBuilder;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 
+import javax.net.ssl.SSLContext;
 import java.awt.*;
 import java.net.URL;
 import java.util.Objects;
@@ -30,8 +37,8 @@ public class PosCommand extends Command
                 if (DQS.placeInQueue != -1)
                 {
                     event.reply(new EmbedBuilder()
-                            .setTitle("**DQS** - Queue Position")
-                            .setDescription("Your current queue position: **" + DQS.getPosition() + "**")
+                            .setTitle("**DQS** - Queue Position & Statistics")
+                            .setDescription("Your current queue position: **" + DQS.getPosition() + "**\n\nQueue Length: **" + getNormalQueueLength() + "**\nPrioQ Length: **" + getPrioQueueLength() + "**")
                             .setColor(new Color(10144497))
                             .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                             .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
@@ -66,4 +73,71 @@ public class PosCommand extends Command
             }
         }
     }
+
+    private static int getNormalQueueLength()
+    {
+        try
+        {
+            String data = getDataFrom("https://2b2t.io/api/queue?last=true");
+
+            return Integer.parseInt(data.replace("[", "").replace("]", "").split(",")[1]);
+        }
+        catch (Throwable t)
+        {
+            Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.service.operatorId)).openPrivateChannel().queue((privateChannel ->
+                    privateChannel.sendMessage(new EmbedBuilder()
+                            .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.service.subscriberId)).getName() + ")")
+                            .setDescription("The 2b2t.io API may be down. Notify the public.")
+                            .setColor(new Color(15221016))
+                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
+                            .build()).queue()));
+
+            return -1;
+        }
+    }
+
+    private static int getPrioQueueLength()
+    {
+        try
+        {
+            String data = getDataFrom("https://2b2t.io/api/prioqueue?last=true");
+
+            return Integer.parseInt(data.replace("[", "").replace("]", "").split(",")[1]);
+        }
+        catch (Throwable t)
+        {
+            Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.service.operatorId)).openPrivateChannel().queue((privateChannel ->
+                    privateChannel.sendMessage(new EmbedBuilder()
+                            .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.service.subscriberId)).getName() + ")")
+                            .setDescription("The 2b2t.io API may be down for PrioQ specifically. Notify the public.")
+                            .setColor(new Color(15221016))
+                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
+                            .build()).queue()));
+
+            return -1;
+        }
+    }
+
+    private static String getDataFrom(String url)
+    {
+        try
+        {
+            SSLContext sslContext = SSLContext.getInstance("TLSv1.2");
+            sslContext.init(null, null, null);
+
+            SSLConnectionSocketFactory socketFactory = new SSLConnectionSocketFactory(sslContext, SSLConnectionSocketFactory.BROWSER_COMPATIBLE_HOSTNAME_VERIFIER);
+
+            HttpClient client = HttpClients.custom().setSSLSocketFactory(socketFactory).build();
+
+            HttpGet httpGet = new HttpGet(url);
+            HttpResponse response = client.execute(httpGet);
+
+            return EntityUtils.toString(response.getEntity());
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
+    }
 }
+
