@@ -16,7 +16,7 @@ public class DisconnectCommand extends Command
     {
         this.name = "disconnect";
         this.help = "Disconnect your account until you reconnect it.";
-        this.aliases = new String[] {"dc", "log", "toggle", "end"};
+        this.aliases = new String[] {"dc", "log", "toggle"};
         this.guildOnly = false;
 }
 

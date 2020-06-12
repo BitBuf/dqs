@@ -29,7 +29,7 @@ public class HelpCommand extends Command
             {
                 event.reply(new EmbedBuilder()
                         .setTitle("**DQS** - Help")
-                        .setDescription("Please visit [here](https://dewy.dev/dqs/features) for a commands / features list.\n\nIf you have any other queries, consult the [FAQ](https://dewy.dev/dqs/faq) before contacting Dewy.")
+                        .setDescription("Please visit [here](https://dqs.dewy.dev/features) for documentation on all commands and features.\n\nIf you have any other queries, consult the [FAQ](https://dqs.dewy.dev/faq), barring that, start a support ticket from [here](https://dqs.dewy.dev/support).")
                         .setColor(new Color(10144497))
                         .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                         .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
