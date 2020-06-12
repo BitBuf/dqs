@@ -191,8 +191,8 @@ public final class Constants
                     new SayCommand(),
                     new WhisperCommand(),
                     new KillCommand(),
-                    new DisconnectCommand(),
-                    new ReconnectCommand(),
+//                    new DisconnectCommand(),
+//                    new ReconnectCommand(),
                     new FocusCommand(),
                     new NotificationsCommand());
 
