@@ -192,7 +192,8 @@ public final class Constants
 //                    new ReconnectCommand(),
                     new FocusCommand(),
                     new NotificationsCommand(),
-                    new RelogCommand());
+                    new RelogCommand(),
+                    new RecoverCommand());
 
             try
             {
