@@ -45,12 +45,12 @@ public class InfoCommand extends Command
 
         if (in == 1)
         {
-            return "nether";
+            return "the end";
         }
 
         if (in == -1)
         {
-            return "the end";
+            return "the nether";
         }
 
         return "null";
@@ -72,7 +72,7 @@ public class InfoCommand extends Command
                         .addField("**Server**", "**IP:** " + Constants.CONFIG.client.server.address + "\n**Port:** " + Constants.CONFIG.client.server.port + "\n**Max Players:** " + Constants.CACHE.getPlayerCache().getMaxPlayers(), true)
                         .addField("**World**", "**Gamemode:** " + WordUtils.capitalize(Constants.CACHE.getPlayerCache().getGameMode().toString().toLowerCase()) + "\n**Dimension:** " + WordUtils.capitalize(getDimensionFromCode(Constants.CACHE.getPlayerCache().getDimension())) + "\n**Difficulty:** " + WordUtils.capitalize(Constants.CACHE.getPlayerCache().getDifficulty().toString().toLowerCase()) + "\n**World Type:** " + WordUtils.capitalize(Constants.CACHE.getPlayerCache().getWorldType().toString().toLowerCase()), true)
                         .addField("**Discord**", "**User:** " + event.getJDA().getUserById(Constants.CONFIG.service.subscriberId).getName() + "\n**Operator:** " + event.getJDA().getUserById(Constants.CONFIG.service.operatorId).getName() + "\n**Cooldown:** " + Constants.CONFIG.service.cooldown, true)
-                        .addField("**Identification**", "**Entity ID:** " + Constants.CACHE.getPlayerCache().getThePlayer().getEntityId(), true)
+                        .addField("**Account**", "**IGN:** " + Constants.CACHE.getProfileCache().getProfile().getName() + "\n**UUID:** " + Constants.CACHE.getProfileCache().getProfile().getIdAsString(), true)
                         .build());
 
             } catch (Throwable t)
