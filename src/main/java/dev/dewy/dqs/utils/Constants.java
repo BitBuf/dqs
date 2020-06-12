@@ -15,10 +15,7 @@ import dev.dewy.dqs.discord.data.ModulesCommand;
 import dev.dewy.dqs.discord.data.PosCommand;
 import dev.dewy.dqs.discord.dewy.KillCommand;
 import dev.dewy.dqs.discord.modules.*;
-import dev.dewy.dqs.discord.utility.DisconnectCommand;
-import dev.dewy.dqs.discord.utility.PrefixCommand;
-import dev.dewy.dqs.discord.utility.ReconnectCommand;
-import dev.dewy.dqs.discord.utility.SignInCommand;
+import dev.dewy.dqs.discord.utility.*;
 import dev.dewy.dqs.handler.HandlerRegistry;
 import dev.dewy.dqs.server.DQSServerConnection;
 import dev.dewy.dqs.server.handler.incoming.LoginStartHandler;
@@ -194,7 +191,8 @@ public final class Constants
 //                    new DisconnectCommand(),
 //                    new ReconnectCommand(),
                     new FocusCommand(),
-                    new NotificationsCommand());
+                    new NotificationsCommand(),
+                    new RelogCommand());
 
             try
             {
