@@ -29,6 +29,7 @@ import dev.dewy.dqs.taribone.ticker.TariboneTicker;
 import dev.dewy.dqs.taribone.world.World;
 import dev.dewy.dqs.taribone.world.physics.TariboneWorldPhysics;
 import dev.dewy.dqs.utils.Authenticator;
+import dev.dewy.dqs.utils.Constants;
 import dev.dewy.dqs.utils.ServerData;
 
 import javax.imageio.ImageIO;
@@ -250,10 +251,36 @@ public class DQS
 
             do
             {
-                this.logIn();
-                this.connect();
+                Constants.SHOULD_RECONNECT = true;
+
+                CACHE.reset(true);
+
+                if (DQS.getInstance().isConnected())
+                {
+                    DQS.getInstance().getClient().getSession().disconnect("lol");
+                }
+
+                DQS.getInstance().logIn();
+                DQS.getInstance().connect();
+
+                if (DQS.getInstance().server != null)
+                {
+                    DQS.getInstance().server.close();
+                    DQS.getInstance().server = null;
+                }
+
+                DQS.getInstance().startServer();
+
+                DQS.placeInQueue = -1;
+                DQS.startTime = -1;
+                DQS.startPosition = -1;
 
                 saveConfig();
+//
+//                this.logIn();
+//                this.connect();
+//
+//                saveConfig();
 
                 placeInQueue = -1;
                 startTime = -1;

@@ -10,6 +10,9 @@ import java.awt.*;
 import java.net.URL;
 import java.util.Objects;
 
+import static dev.dewy.dqs.utils.Constants.CACHE;
+import static dev.dewy.dqs.utils.Constants.saveConfig;
+
 public class SignInCommand extends Command
 {
     public SignInCommand()
@@ -60,7 +63,31 @@ this.arguments = "<IGN> <EMAIL> <PASSWORD>";
                     DQS.getInstance().getClient().getSession().disconnect("Account changeup! :o");
                 } else
                 {
-                    DQS.getInstance().start();
+                    Constants.SHOULD_RECONNECT = true;
+
+                    CACHE.reset(true);
+
+                    if (DQS.getInstance().isConnected())
+                    {
+                        DQS.getInstance().getClient().getSession().disconnect("lol");
+                    }
+
+                    DQS.getInstance().logIn();
+                    DQS.getInstance().connect();
+
+                    if (DQS.getInstance().server != null)
+                    {
+                        DQS.getInstance().server.close();
+                        DQS.getInstance().server = null;
+                    }
+
+                    DQS.getInstance().startServer();
+
+                    DQS.placeInQueue = -1;
+                    DQS.startTime = -1;
+                    DQS.startPosition = -1;
+
+                    saveConfig();
                 }
             } catch (Throwable t)
             {
