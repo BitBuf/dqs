@@ -34,11 +34,24 @@ public class PosCommand extends Command
         {
             try
             {
+                if (!Constants.CONFIG.client.server.address.equalsIgnoreCase("2b2t.org"))
+                {
+                    event.reply(new EmbedBuilder()
+                            .setTitle("**DQS** - Not Set To 2B2T")
+                            .setDescription("A queue position could not be determined because your target server is not set to **2b2t.org**, it is currently set to **" + Constants.CONFIG.client.server.address + "**.")
+                            .setColor(new Color(15221016))
+                            .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
+                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
+                            .build());
+
+                    return;
+                }
+
                 if (DQS.placeInQueue != -1)
                 {
                     event.reply(new EmbedBuilder()
                             .setTitle("**DQS** - Queue Position & Statistics")
-                            .setDescription("Your current queue position: **" + DQS.getPosition() + "**\n\nQueue Length: **" + getNormalQueueLength() + "**\nPrioQ Length: **" + getPrioQueueLength() + "**")
+                            .setDescription("Your current queue position: **" + DQS.getPosition() + "**\n\nNormal Queue Length: **" + getNormalQueueLength() + "**\nPriority Queue Length: **" + getPrioQueueLength() + "**")
                             .setColor(new Color(10144497))
                             .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                             .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
