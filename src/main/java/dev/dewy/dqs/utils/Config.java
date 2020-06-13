@@ -156,6 +156,7 @@ public final class Config
     {
         public AutoReconnect autoReconnect = new AutoReconnect();
         public AutoRespawn autoRespawn = new AutoRespawn();
+        public AutoFish autoFish = new AutoFish();
         public ChatSpammer chatSpammer = new ChatSpammer();
         public ChatRelay chatRelay = new ChatRelay();
         public GameCommands gameCommands = new GameCommands();
@@ -207,6 +208,11 @@ public final class Config
         public static final class GameCommands
         {
             public String prefix = "&";
+        }
+
+        public static final class AutoFish
+        {
+            public boolean enabled = false;
         }
 
         public static final class Notifications
