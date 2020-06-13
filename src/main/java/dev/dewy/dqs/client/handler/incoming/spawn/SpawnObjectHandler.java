@@ -71,6 +71,11 @@ public class SpawnObjectHandler implements HandlerRegistry.IncomingHandler<Serve
                             .build()).queue()));
         }
 
+        if (Constants.CONFIG.modules.autoDisconnect.enabled && Constants.CONFIG.modules.autoDisconnect.crystalInRange && DQS.getInstance().isConnected() && packet.getType().equals(ObjectType.ENDER_CRYSTAL) && !DQS.getInstance().connectedToProxy)
+        {
+            session.getDqs().getClient().getSession().disconnect("§7[§b§lDQS§r§7] §fAuto disconnect.", false);
+        }
+
         return true;
     }
 

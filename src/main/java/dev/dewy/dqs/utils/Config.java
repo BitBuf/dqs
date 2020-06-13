@@ -155,6 +155,7 @@ public final class Config
     public static final class Modules
     {
         public AutoReconnect autoReconnect = new AutoReconnect();
+        public AutoDisconnect autoDisconnect = new AutoDisconnect();
         public AutoRespawn autoRespawn = new AutoRespawn();
         public AutoFish autoFish = new AutoFish();
         public ChatSpammer chatSpammer = new ChatSpammer();
@@ -223,10 +224,21 @@ public final class Config
             public boolean crystalInRange = true;
 
             public boolean nearlyFinishedQueueing = true;
-            public int threshold = 15;
+            public int threshold = 30;
 
             public boolean relogged = true;
             public boolean serverMessages = true;
+        }
+
+        public static final class AutoDisconnect
+        {
+            public boolean enabled = true;
+
+            public boolean playerInRange = true;
+            public boolean crystalInRange = true;
+
+            public boolean nearlyFinishedQueueing = false;
+            public int threshold = 5;
         }
 
         public static final class Whitelist

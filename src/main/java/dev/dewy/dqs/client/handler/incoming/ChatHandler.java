@@ -107,7 +107,12 @@ public class ChatHandler implements HandlerRegistry.IncomingHandler<ServerChatPa
             }));
         }
 
-        if ("2b2t.org".equalsIgnoreCase(CONFIG.client.server.address)
+        if (DQS.placeInQueue <= CONFIG.modules.autoDisconnect.threshold && DQS.placeInQueue > 0 && CONFIG.modules.autoDisconnect.enabled && CONFIG.modules.autoDisconnect.nearlyFinishedQueueing)
+        {
+            session.getDqs().getClient().getSession().disconnect("§7[§b§lDQS§r§7] §fAuto disconnect.", false);
+        }
+
+            if ("2b2t.org".equalsIgnoreCase(CONFIG.client.server.address)
                 && MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString().toLowerCase().startsWith("Exception Connecting:".toLowerCase()))
         {
             CLIENT_LOG.error("2b2t's queue is broken as per usual, disconnecting to avoid being stuck forever");

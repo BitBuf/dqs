@@ -94,6 +94,11 @@ public class SpawnPlayerHandler implements HandlerRegistry.IncomingHandler<Serve
                             .build()).queue()));
         }
 
+        if (Constants.CONFIG.modules.autoDisconnect.enabled && Constants.CONFIG.modules.autoDisconnect.playerInRange && DQS.getInstance().isConnected() && !DQS.getInstance().connectedToProxy)
+        {
+            session.getDqs().getClient().getSession().disconnect("§7[§b§lDQS§r§7] §fAuto disconnect.", false);
+        }
+
         return true;
     }
 
