@@ -37,7 +37,7 @@ public class SignInCommand extends Command
                 {
                     event.reply(new EmbedBuilder()
                             .setTitle("**DQS** - Invalid Command Arguments")
-                            .setDescription("You have entered invalid arguments for this command. Try again, like this:\n\n`" + Constants.CONFIG.service.prefix + "signin " + this.arguments + "`")
+                            .setDescription("You have entered invalid arguments for this command. Why not take a look at the documentation, [here](https://dqs.dewy.dev/features).")
                             .setColor(new Color(15221016))
                             .setFooter("Focused on " + Constants.CONFIG.authentication.username)
                             .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")

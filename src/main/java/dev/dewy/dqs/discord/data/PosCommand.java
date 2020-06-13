@@ -39,7 +39,7 @@ public class PosCommand extends Command
             Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.service.operatorId)).openPrivateChannel().queue((privateChannel ->
                     privateChannel.sendMessage(new EmbedBuilder()
                             .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.service.subscriberId)).getName() + ")")
-                            .setDescription("The 2b2t.io API may be down. Notify the public.")
+                            .setDescription("The 2b2t.io API may be down for normal queue. Notify the public.")
                             .setColor(new Color(15221016))
                             .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
                             .build()).queue()));
