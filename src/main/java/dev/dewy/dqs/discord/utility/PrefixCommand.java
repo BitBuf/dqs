@@ -17,7 +17,7 @@ public class PrefixCommand extends Command
         this.help = "Mutes / unmutes all DQS notifications and messages.";
         this.aliases = new String[] {"ingameprefix", "pfx"};
         this.guildOnly = false;
-this.arguments = "<PREFIX>";
+        this.arguments = "<PREFIX>";
     }
 
     @Override

@@ -49,17 +49,22 @@ import static dev.dewy.dqs.utils.Constants.*;
 
 public class DQS
 {
+    public static boolean queueNotifArmed = true;
+    public static int placeInQueue = -1;
+    public static long startTime = -1L;
+    public static int startPosition = -1;
+    public static String prevEta = "N/A";
+    public static int etaDelay = 0;
     protected static DQS instance;
-
     protected final SessionFactory sessionFactory = new DQSSessionFactory(this);
     protected final AtomicReference<DQSServerConnection> currentPlayer = new AtomicReference<>();
     public EventWaiter waiter = new EventWaiter();
     public boolean inQueue = true;
     public int currentPos = -1;
     public boolean connectedToProxy;
+    public Server server;
     protected DQSProtocol protocol;
     protected Client client;
-    public Server server;
     protected Authenticator authenticator;
     protected BufferedImage serverIcon;
     private World world;
@@ -69,15 +74,6 @@ public class DQS
     private TariboneController controller;
     private TariboneTicker ticker;
     private TariboneDQSPlayer player;
-
-    public static boolean queueNotifArmed = true;
-
-    public static int placeInQueue = -1;
-    public static long startTime = -1L;
-    public static int startPosition = -1;
-
-    public static String prevEta = "N/A";
-    public static int etaDelay = 0;
 
     public static void main(String... args) throws LoginException
     {
@@ -97,6 +93,62 @@ public class DQS
     public static DQS getInstance()
     {
         return DQS.instance;
+    }
+
+    public static String getEta()
+    {
+        if (!CONFIG.client.server.address.equalsIgnoreCase("2b2t.org"))
+        {
+            return "N/A";
+        }
+
+        if ((startPosition - placeInQueue) == 0)
+        {
+            return "Determining...";
+        }
+
+        if (etaDelay == 60)
+        {
+            etaDelay = 0;
+        }
+
+        if (etaDelay++ != 0)
+        {
+            return prevEta;
+        }
+
+        long rate = ((System.nanoTime() - startTime) / 1000000) / (startPosition - placeInQueue);
+
+        long milliseconds = (int) (rate * placeInQueue);
+
+        int minutes = (int) ((milliseconds / (1000 * 60)) % 60);
+        int hours = (int) ((milliseconds / (1000 * 60 * 60)) % 24);
+
+        String time = "";
+
+        if (hours > 0)
+        {
+            time += hours + "h ";
+        }
+
+        if (minutes > 0)
+        {
+            time += minutes + "m ";
+        }
+
+        prevEta = time;
+
+        return time;
+    }
+
+    public static String getPosition()
+    {
+        if (!CONFIG.client.server.address.equalsIgnoreCase("2b2t.org"))
+        {
+            return "N/A";
+        }
+
+        return String.valueOf(placeInQueue);
     }
 
     public void start() throws LoginException
@@ -444,62 +496,6 @@ public class DQS
         }
         CACHE.getProfileCache().setProfile(this.protocol.getProfile());
         AUTH_LOG.success("Logged in.");
-    }
-
-    public static String getEta()
-    {
-        if (!CONFIG.client.server.address.equalsIgnoreCase("2b2t.org"))
-        {
-            return "N/A";
-        }
-
-        if ((startPosition - placeInQueue) == 0)
-        {
-            return "Determining...";
-        }
-
-        if (etaDelay == 60)
-        {
-            etaDelay = 0;
-        }
-
-        if (etaDelay++ != 0)
-        {
-            return prevEta;
-        }
-
-        long rate = ((System.nanoTime() - startTime) / 1000000) / (startPosition - placeInQueue);
-
-        long milliseconds = (int) (rate * placeInQueue);
-
-        int minutes = (int) ((milliseconds / (1000 * 60)) % 60);
-        int hours = (int) ((milliseconds / (1000 * 60 * 60)) % 24);
-
-        String time = "";
-
-        if (hours > 0)
-        {
-            time += hours + "h ";
-        }
-
-        if (minutes > 0)
-        {
-            time += minutes + "m ";
-        }
-
-        prevEta = time;
-
-        return time;
-    }
-
-    public static String getPosition()
-    {
-        if (!CONFIG.client.server.address.equalsIgnoreCase("2b2t.org"))
-        {
-            return "N/A";
-        }
-
-        return String.valueOf(placeInQueue);
     }
 
     protected boolean delayBeforeReconnect()

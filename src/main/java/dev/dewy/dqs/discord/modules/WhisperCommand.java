@@ -19,7 +19,7 @@ public class WhisperCommand extends Command
         this.help = "Send a message to public chat.";
         this.aliases = new String[] {"msg", "w", "pm"};
         this.guildOnly = false;
-this.arguments = "<RECIPIENT> <MESSAGE>";
+        this.arguments = "<RECIPIENT> <MESSAGE>";
     }
 
     @Override

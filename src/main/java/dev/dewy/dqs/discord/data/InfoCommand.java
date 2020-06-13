@@ -18,7 +18,7 @@ public class InfoCommand extends Command
         this.help = "Display your account's biometrics and statistics.";
         this.aliases = new String[] {"stats", "statistics", "information", "figures", "i", "biometrics"};
         this.guildOnly = false;
-}
+    }
 
     private static float roundToHalf(float f)
     {

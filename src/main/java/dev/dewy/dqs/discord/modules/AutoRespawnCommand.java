@@ -17,7 +17,7 @@ public class AutoRespawnCommand extends Command
         this.help = "Configure the DQS auto respawn module.";
         this.aliases = new String[] {"autors", "respawn", "spawn", "ars"};
         this.guildOnly = false;
-this.arguments = "[seconds delay]";
+        this.arguments = "[seconds delay]";
     }
 
     @Override

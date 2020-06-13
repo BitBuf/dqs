@@ -18,7 +18,7 @@ public class DisconnectCommand extends Command
         this.help = "Disconnect your account until you reconnect it.";
         this.aliases = new String[] {"dc", "log", "toggle"};
         this.guildOnly = false;
-}
+    }
 
     @Override
     protected void execute(CommandEvent event)

@@ -20,7 +20,7 @@ public class RecoverCommand extends Command
         this.name = "recover";
         this.help = "Reconnect your account to the target server.";
         this.guildOnly = false;
-}
+    }
 
     @Override
     protected void execute(CommandEvent event)

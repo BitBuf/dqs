@@ -25,7 +25,70 @@ public class PosCommand extends Command
         this.help = "View your position in queue.";
         this.aliases = new String[] {"qpos", "position"};
         this.guildOnly = false;
-}
+    }
+
+    private static int getNormalQueueLength()
+    {
+        try
+        {
+            String data = getDataFrom("https://2b2t.io/api/queue?last=true");
+
+            return Integer.parseInt(data.replace("[", "").replace("]", "").split(",")[1]);
+        } catch (Throwable t)
+        {
+            Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.service.operatorId)).openPrivateChannel().queue((privateChannel ->
+                    privateChannel.sendMessage(new EmbedBuilder()
+                            .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.service.subscriberId)).getName() + ")")
+                            .setDescription("The 2b2t.io API may be down. Notify the public.")
+                            .setColor(new Color(15221016))
+                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
+                            .build()).queue()));
+
+            return -1;
+        }
+    }
+
+    private static int getPrioQueueLength()
+    {
+        try
+        {
+            String data = getDataFrom("https://2b2t.io/api/prioqueue?last=true");
+
+            return Integer.parseInt(data.replace("[", "").replace("]", "").split(",")[1]);
+        } catch (Throwable t)
+        {
+            Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.service.operatorId)).openPrivateChannel().queue((privateChannel ->
+                    privateChannel.sendMessage(new EmbedBuilder()
+                            .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.service.subscriberId)).getName() + ")")
+                            .setDescription("The 2b2t.io API may be down for PrioQ specifically. Notify the public.")
+                            .setColor(new Color(15221016))
+                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
+                            .build()).queue()));
+
+            return -1;
+        }
+    }
+
+    private static String getDataFrom(String url)
+    {
+        try
+        {
+            SSLContext sslContext = SSLContext.getInstance("TLSv1.2");
+            sslContext.init(null, null, null);
+
+            SSLConnectionSocketFactory socketFactory = new SSLConnectionSocketFactory(sslContext, SSLConnectionSocketFactory.BROWSER_COMPATIBLE_HOSTNAME_VERIFIER);
+
+            HttpClient client = HttpClients.custom().setSSLSocketFactory(socketFactory).build();
+
+            HttpGet httpGet = new HttpGet(url);
+            HttpResponse response = client.execute(httpGet);
+
+            return EntityUtils.toString(response.getEntity());
+        } catch (Exception e)
+        {
+            return null;
+        }
+    }
 
     @Override
     protected void execute(CommandEvent event)
@@ -84,72 +147,6 @@ public class PosCommand extends Command
                                 .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
                                 .build()).queue()));
             }
-        }
-    }
-
-    private static int getNormalQueueLength()
-    {
-        try
-        {
-            String data = getDataFrom("https://2b2t.io/api/queue?last=true");
-
-            return Integer.parseInt(data.replace("[", "").replace("]", "").split(",")[1]);
-        }
-        catch (Throwable t)
-        {
-            Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.service.operatorId)).openPrivateChannel().queue((privateChannel ->
-                    privateChannel.sendMessage(new EmbedBuilder()
-                            .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.service.subscriberId)).getName() + ")")
-                            .setDescription("The 2b2t.io API may be down. Notify the public.")
-                            .setColor(new Color(15221016))
-                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
-                            .build()).queue()));
-
-            return -1;
-        }
-    }
-
-    private static int getPrioQueueLength()
-    {
-        try
-        {
-            String data = getDataFrom("https://2b2t.io/api/prioqueue?last=true");
-
-            return Integer.parseInt(data.replace("[", "").replace("]", "").split(",")[1]);
-        }
-        catch (Throwable t)
-        {
-            Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.service.operatorId)).openPrivateChannel().queue((privateChannel ->
-                    privateChannel.sendMessage(new EmbedBuilder()
-                            .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.service.subscriberId)).getName() + ")")
-                            .setDescription("The 2b2t.io API may be down for PrioQ specifically. Notify the public.")
-                            .setColor(new Color(15221016))
-                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
-                            .build()).queue()));
-
-            return -1;
-        }
-    }
-
-    private static String getDataFrom(String url)
-    {
-        try
-        {
-            SSLContext sslContext = SSLContext.getInstance("TLSv1.2");
-            sslContext.init(null, null, null);
-
-            SSLConnectionSocketFactory socketFactory = new SSLConnectionSocketFactory(sslContext, SSLConnectionSocketFactory.BROWSER_COMPATIBLE_HOSTNAME_VERIFIER);
-
-            HttpClient client = HttpClients.custom().setSSLSocketFactory(socketFactory).build();
-
-            HttpGet httpGet = new HttpGet(url);
-            HttpResponse response = client.execute(httpGet);
-
-            return EntityUtils.toString(response.getEntity());
-        }
-        catch (Exception e)
-        {
-            return null;
         }
     }
 }

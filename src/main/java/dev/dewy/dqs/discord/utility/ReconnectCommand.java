@@ -21,7 +21,7 @@ public class ReconnectCommand extends Command
         this.help = "Reconnect your account to the target server.";
         this.aliases = new String[] {"connect", "rcon"};
         this.guildOnly = false;
-}
+    }
 
     @Override
     protected void execute(CommandEvent event)

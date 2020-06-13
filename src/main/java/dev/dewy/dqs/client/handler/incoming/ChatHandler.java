@@ -76,7 +76,7 @@ public class ChatHandler implements HandlerRegistry.IncomingHandler<ServerChatPa
 
         if (MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString().startsWith("Position in queue: "))
         {
-            DQS.placeInQueue = Integer.parseInt(MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString().split("Position in queue: ") [1]);
+            DQS.placeInQueue = Integer.parseInt(MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString().split("Position in queue: ")[1]);
 
             if (DQS.startPosition == -1 && DQS.startTime == -1)
             {
@@ -85,7 +85,7 @@ public class ChatHandler implements HandlerRegistry.IncomingHandler<ServerChatPa
             }
         }
 
-        if (DQS.placeInQueue <= CONFIG.modules.notifications.threshold && DQS.placeInQueue > 0 && DQS.queueNotifArmed && CONFIG.modules.notifications.enabled &&  CONFIG.modules.notifications.nearlyFinishedQueueing)
+        if (DQS.placeInQueue <= CONFIG.modules.notifications.threshold && DQS.placeInQueue > 0 && DQS.queueNotifArmed && CONFIG.modules.notifications.enabled && CONFIG.modules.notifications.nearlyFinishedQueueing)
         {
             Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.service.subscriberId)).openPrivateChannel().queue((privateChannel ->
             {

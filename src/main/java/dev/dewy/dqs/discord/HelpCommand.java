@@ -18,7 +18,7 @@ public class HelpCommand extends Command
         this.help = "DQS help directory.";
         this.aliases = new String[] {"h", "halp", "?"};
         this.guildOnly = false;
-}
+    }
 
     @Override
     protected void execute(CommandEvent event)

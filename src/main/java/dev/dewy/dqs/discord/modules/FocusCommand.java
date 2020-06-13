@@ -2,8 +2,6 @@ package dev.dewy.dqs.discord.modules;
 
 import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
-import dev.dewy.dqs.DQS;
-import dev.dewy.dqs.packet.ingame.client.ClientChatPacket;
 import dev.dewy.dqs.utils.Constants;
 import net.dv8tion.jda.api.EmbedBuilder;
 

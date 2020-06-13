@@ -17,7 +17,7 @@ public class AutoReconnectCommand extends Command
         this.help = "Modify the auto reconnect delay";
         this.aliases = new String[] {"autorc", "arc"};
         this.guildOnly = false;
-this.arguments = "<seconds delay>";
+        this.arguments = "<seconds delay>";
     }
 
     @Override

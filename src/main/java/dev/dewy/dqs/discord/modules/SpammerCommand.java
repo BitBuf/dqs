@@ -17,7 +17,7 @@ public class SpammerCommand extends Command
         this.help = "Configure the DQS spammer.";
         this.aliases = new String[] {"spam", "dqsspam", "chatspam", "chatspammer"};
         this.guildOnly = false;
-this.arguments = "[ADD / REMOVE / DELAY] [MESSAGE ID / SECONDS DELAY]";
+        this.arguments = "[ADD / REMOVE / DELAY] [MESSAGE ID / SECONDS DELAY]";
     }
 
     @Override

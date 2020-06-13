@@ -17,7 +17,7 @@ public class ModulesCommand extends Command
         this.help = "Displays information about the status and configuration of modules.";
         this.aliases = new String[] {"m", "mods", "features"};
         this.guildOnly = false;
-}
+    }
 
     @Override
     protected void execute(CommandEvent event)

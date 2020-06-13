@@ -19,7 +19,7 @@ public class SayCommand extends Command
         this.help = "Send a message to public chat.";
         this.aliases = new String[] {"chat", "pubchat", "shout"};
         this.guildOnly = false;
-this.arguments = "<MESSAGE>";
+        this.arguments = "<MESSAGE>";
     }
 
     @Override

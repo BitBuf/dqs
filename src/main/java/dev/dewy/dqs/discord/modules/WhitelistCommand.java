@@ -19,7 +19,7 @@ public class WhitelistCommand extends Command
         this.help = "Configure your DQS instance's whitelist";
         this.aliases = new String[] {"wl", "wlist"};
         this.guildOnly = false;
-this.arguments = "[add/remove/display] [name]";
+        this.arguments = "[add/remove/display] [name]";
     }
 
     @Override

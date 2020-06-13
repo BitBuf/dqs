@@ -42,8 +42,7 @@ public class NotificationsCommand extends Command
                                 .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                                 .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
                                 .build());
-                    }
-                    else
+                    } else
                     {
                         event.reply(new EmbedBuilder()
                                 .setTitle("**DQS** - Notifications")
@@ -70,8 +69,7 @@ public class NotificationsCommand extends Command
                                 .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                                 .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
                                 .build());
-                    }
-                    else
+                    } else
                     {
                         event.reply(new EmbedBuilder()
                                 .setTitle("**DQS** - Notifications")
@@ -98,8 +96,7 @@ public class NotificationsCommand extends Command
                                 .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                                 .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
                                 .build());
-                    }
-                    else
+                    } else
                     {
                         event.reply(new EmbedBuilder()
                                 .setTitle("**DQS** - Notifications")
@@ -170,8 +167,7 @@ public class NotificationsCommand extends Command
                                 .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                                 .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
                                 .build());
-                    }
-                    else
+                    } else
                     {
                         event.reply(new EmbedBuilder()
                                 .setTitle("**DQS** - Notifications")
@@ -198,8 +194,7 @@ public class NotificationsCommand extends Command
                                 .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                                 .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
                                 .build());
-                    }
-                    else
+                    } else
                     {
                         event.reply(new EmbedBuilder()
                                 .setTitle("**DQS** - Notifications")
@@ -226,8 +221,7 @@ public class NotificationsCommand extends Command
                                 .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                                 .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
                                 .build());
-                    }
-                    else
+                    } else
                     {
                         event.reply(new EmbedBuilder()
                                 .setTitle("**DQS** - Notifications")

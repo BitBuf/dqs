@@ -21,7 +21,7 @@ public class SignInCommand extends Command
         this.help = "Sign into your Mojang account.";
         this.aliases = new String[] {"login"};
         this.guildOnly = false;
-this.arguments = "<IGN> <EMAIL> <PASSWORD>";
+        this.arguments = "<IGN> <EMAIL> <PASSWORD>";
     }
 
     @Override
