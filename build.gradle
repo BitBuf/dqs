@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'dev.dewy'
-version '3.0.0-dev'
+version '3.0.0'
 
 repositories {
     mavenCentral()
@@ -32,11 +32,11 @@ dependencies {
     implementation group: 'net.daporkchop.lib', name: 'logging', version: '0.5.5-SNAPSHOT'
     implementation group: 'net.daporkchop.lib', name: 'minecraft-text', version: '0.5.5-SNAPSHOT'
 
-    implementation ('net.dv8tion:JDA:4.1.1_163') {
+    implementation ('net.dv8tion:JDA:4.1.1_165') {
         exclude module: 'opus-java'
     }
 
-    implementation group: 'com.jagrosh', name: 'jda-utilities', version: '3.0.3'
+    implementation group: 'com.jagrosh', name: 'jda-utilities', version: '3.0.4'
 }
 
 compileJava {
@@ -50,7 +50,7 @@ tasks.withType(JavaCompile) {
 jar {
     manifest {
         attributes("Implementation-Title": "DQS",
-                "Implementation-Version": "3.0.0-dev",
+                "Implementation-Version": "3.0.0",
                 "Main-Class": "dev.dewy.dqs.DQS")
     }
 }
