@@ -6,12 +6,12 @@ import dev.dewy.dqs.DQS;
 import dev.dewy.dqs.utils.Constants;
 import net.dv8tion.jda.api.EmbedBuilder;
 
+import javax.security.auth.login.LoginException;
 import java.awt.*;
 import java.net.URL;
 import java.util.Objects;
 
-import static dev.dewy.dqs.utils.Constants.CONFIG;
-import static dev.dewy.dqs.utils.Constants.saveConfig;
+import static dev.dewy.dqs.utils.Constants.*;
 
 public class RecoverCommand extends Command
 {
@@ -41,17 +41,35 @@ public class RecoverCommand extends Command
 
                     Constants.SHOULD_RECONNECT = true;
 
-                    DQS.getInstance().logIn();
-                    DQS.getInstance().connect();
+                    CACHE.reset(true);
 
-                    DQS.getInstance().server = null;
-                    DQS.getInstance().startServer();
+                    if (DQS.getInstance().isConnected())
+                    {
+                        DQS.getInstance().getClient().getSession().disconnect("lol");
+                    }
 
-                    saveConfig();
+                    if (DQS.getInstance().server != null)
+                    {
+                        DQS.getInstance().server.close();
+                        DQS.getInstance().server = null;
+                    }
 
                     DQS.placeInQueue = -1;
                     DQS.startTime = -1;
                     DQS.startPosition = -1;
+
+                    new Thread(() ->
+                    {
+                        try
+                        {
+                            DQS.getInstance().start();
+                        } catch (LoginException e)
+                        {
+                            e.printStackTrace();
+                        }
+                    }).start();
+
+                    saveConfig();
 
                     return;
                 }

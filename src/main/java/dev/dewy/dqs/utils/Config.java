@@ -45,7 +45,6 @@ public final class Config
 
         public String operatorId = "326039530971070474";
         public String subscriberId = "default";
-        public String subscriberRole = "Subscriber";
 
         public String tariboneIp = "127.0.0.1";
 
@@ -245,7 +244,8 @@ public final class Config
         {
             public boolean enabled = true;
             public List<String> whitelist = Arrays.asList(
-                    "Taribone"
+                    "Taribone",
+                    "user"
             );
             public String kickmsg = "§7[§b§lDQS§r§7] §fAccess denied.";
         }

@@ -312,7 +312,7 @@ public class DQS
                     DQS.getInstance().getClient().getSession().disconnect("lol");
                 }
 
-                DQS.getInstance().logIn();
+//                DQS.getInstance().logIn();
                 DQS.getInstance().connect();
 
                 if (DQS.getInstance().server != null)
