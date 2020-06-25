@@ -170,7 +170,7 @@ public final class Constants
         {
             CommandClientBuilder commandClient = new CommandClientBuilder();
 
-            commandClient.setActivity(Activity.playing("2b2t"));
+            commandClient.setActivity(Activity.playing("for you!"));
             commandClient.setPrefix(CONFIG.service.prefix);
             commandClient.setOwnerId(CONFIG.service.operatorId);
 
