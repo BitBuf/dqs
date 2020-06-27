@@ -29,7 +29,7 @@ public class RecoverCommand extends Command
         {
             try
             {
-                if (!DQS.getInstance().isConnected())
+                if (!DQS.getInstance().isConnected() && !DQS.isRecon)
                 {
                     event.reply(new EmbedBuilder()
                             .setTitle("**DQS** - Recover")

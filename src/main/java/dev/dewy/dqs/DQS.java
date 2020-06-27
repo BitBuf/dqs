@@ -75,6 +75,8 @@ public class DQS
     private TariboneTicker ticker;
     private TariboneDQSPlayer player;
 
+    public static boolean isRecon = false;
+
     public static void main(String... args) throws LoginException
     {
         DEFAULT_LOG.info("Starting DQS %s...", VERSION);
@@ -304,6 +306,7 @@ public class DQS
             do
             {
                 Constants.SHOULD_RECONNECT = true;
+                isRecon = false;
 
                 CACHE.reset(true);
 
@@ -312,16 +315,16 @@ public class DQS
                     DQS.getInstance().getClient().getSession().disconnect("lol");
                 }
 
-//                DQS.getInstance().logIn();
+                DQS.getInstance().logIn();
                 DQS.getInstance().connect();
 
-                if (DQS.getInstance().server != null)
-                {
-                    DQS.getInstance().server.close();
-                    DQS.getInstance().server = null;
-                }
+//                if (DQS.getInstance().server != null)
+//                {
+//                    DQS.getInstance().server.close();
+//                    DQS.getInstance().server = null;
+//                }
 
-                DQS.getInstance().startServer();
+//                DQS.getInstance().startServer();
 
                 DQS.placeInQueue = -1;
                 DQS.startTime = -1;
@@ -500,6 +503,8 @@ public class DQS
 
     protected boolean delayBeforeReconnect()
     {
+        isRecon = true;
+
         try
         {
             for (int i = CONFIG.modules.autoReconnect.delaySeconds; SHOULD_RECONNECT && i > 0; i--)

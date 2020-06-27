@@ -114,7 +114,7 @@ public class ClientListener implements SessionListener
                 {
                     privateChannel.sendMessage(new EmbedBuilder()
                             .setTitle("**DQS** - Relog Notification")
-                            .setDescription("Your account has been disconnected from the server. Relogging after " + CONFIG.modules.autoReconnect.delaySeconds + " seconds...")
+                            .setDescription("Your account has been disconnected from the server. Attempting relog after " + CONFIG.modules.autoReconnect.delaySeconds + " seconds...")
                             .setColor(new Color(15221016))
                             .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
                             .setFooter("Notification intended for  " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())

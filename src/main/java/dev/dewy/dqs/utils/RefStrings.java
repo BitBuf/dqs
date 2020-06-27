@@ -11,7 +11,7 @@ import static dev.dewy.dqs.utils.Constants.VERSION;
 public final class RefStrings
 {
     public static final byte[] BRAND_ENCODED;
-    protected static final String BRAND = String.format("DQS %s", VERSION);
+    protected static final String BRAND = String.format("vanilla");
 
     static
     {

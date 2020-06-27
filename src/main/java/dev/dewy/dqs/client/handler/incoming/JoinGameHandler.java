@@ -27,7 +27,7 @@ public class JoinGameHandler implements HandlerRegistry.IncomingHandler<ServerJo
 
         session.send(new ClientSettingsPacket(
                 "en_US",
-                8,
+                10,
                 ChatVisibility.FULL,
                 true,
                 SkinPart.values(),
