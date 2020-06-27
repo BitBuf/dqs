@@ -44,7 +44,7 @@ public class ChatHandler implements HandlerRegistry.IncomingHandler<ServerChatPa
                             .setTitle("**DQS** - Chat Relay")
                             .setDescription(MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString())
                             .setColor(new Color(10144497))
-                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
+                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
                             .setFooter("Chat relay intended for " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                             .build()).queue();
                 } catch (MalformedURLException e)
@@ -64,7 +64,7 @@ public class ChatHandler implements HandlerRegistry.IncomingHandler<ServerChatPa
                             .setTitle("**DQS** - Message Relay")
                             .setDescription(MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString())
                             .setColor(new Color(10144497))
-                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
+                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
                             .setFooter("Message relay intended for " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                             .build()).queue();
                 } catch (MalformedURLException e)
@@ -95,7 +95,7 @@ public class ChatHandler implements HandlerRegistry.IncomingHandler<ServerChatPa
                             .setTitle("**DQS** - Almost Finished Queueing")
                             .setDescription("The account **" + CONFIG.authentication.username + "** has almost finished queueing, at queue position " + DQS.placeInQueue + ".")
                             .setColor(new Color(10144497))
-                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
+                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
                             .setFooter("Notification intended for  " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                             .build()).queue();
 
@@ -129,7 +129,7 @@ public class ChatHandler implements HandlerRegistry.IncomingHandler<ServerChatPa
                             .setTitle("**DQS** - Server Notification")
                             .setDescription(MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString())
                             .setColor(new Color(10144497))
-                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
+                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
                             .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                             .build()).queue();
                 } catch (MalformedURLException e)
@@ -146,7 +146,7 @@ public class ChatHandler implements HandlerRegistry.IncomingHandler<ServerChatPa
                             .setTitle("**DQS** - Message Received")
                             .setDescription("You received a message:\n\n`" + MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString() + "`")
                             .setColor(new Color(15221016))
-                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
+                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
                             .build()).queue()));
         }
 

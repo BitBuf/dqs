@@ -40,7 +40,7 @@ public class NotificationsCommand extends Command
                                 .setDescription("You have **enabled** the DQS notifications module.")
                                 .setColor(new Color(10144497))
                                 .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
-                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
                                 .build());
                     } else
                     {
@@ -49,7 +49,7 @@ public class NotificationsCommand extends Command
                                 .setDescription("You have **disabled** the DQS notifications module.")
                                 .setColor(new Color(10144497))
                                 .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
-                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
                                 .build());
                     }
 
@@ -67,7 +67,7 @@ public class NotificationsCommand extends Command
                                 .setDescription("You have **enabled** DQS player in range notifications.")
                                 .setColor(new Color(10144497))
                                 .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
-                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
                                 .build());
                     } else
                     {
@@ -76,7 +76,7 @@ public class NotificationsCommand extends Command
                                 .setDescription("You have **disabled** DQS player in range notifications.")
                                 .setColor(new Color(10144497))
                                 .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
-                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
                                 .build());
                     }
 
@@ -94,7 +94,7 @@ public class NotificationsCommand extends Command
                                 .setDescription("You have **enabled** DQS crystal in range notifications.")
                                 .setColor(new Color(10144497))
                                 .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
-                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
                                 .build());
                     } else
                     {
@@ -103,7 +103,7 @@ public class NotificationsCommand extends Command
                                 .setDescription("You have **disabled** DQS crystal in range notifications.")
                                 .setColor(new Color(10144497))
                                 .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
-                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
                                 .build());
                     }
 
@@ -124,7 +124,7 @@ public class NotificationsCommand extends Command
                                     .setDescription("You have not entered a valid integer for the queue notification threshold.")
                                     .setColor(new Color(15221016))
                                     .setFooter("Focused on " + Constants.CONFIG.authentication.username)
-                                    .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
+                                    .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
                                     .build());
 
                             return;
@@ -137,7 +137,7 @@ public class NotificationsCommand extends Command
                                     .setDescription("The DQS auto respawn delay must be a positive integer above 5. This is to ensure that you get the best value in DQS's service.")
                                     .setColor(new Color(15221016))
                                     .setFooter("Focused on " + Constants.CONFIG.authentication.username)
-                                    .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
+                                    .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
                                     .build());
 
                             return;
@@ -150,7 +150,7 @@ public class NotificationsCommand extends Command
                                 .setDescription("You have set the DQS queue notification threshold to **" + Constants.CONFIG.modules.notifications.threshold + "**.")
                                 .setColor(new Color(10144497))
                                 .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
-                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
                                 .build());
 
                         return;
@@ -165,7 +165,7 @@ public class NotificationsCommand extends Command
                                 .setDescription("You have **enabled** DQS queue notifications.")
                                 .setColor(new Color(10144497))
                                 .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
-                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
                                 .build());
                     } else
                     {
@@ -174,7 +174,7 @@ public class NotificationsCommand extends Command
                                 .setDescription("You have **disabled** DQS queue notifications.")
                                 .setColor(new Color(10144497))
                                 .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
-                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
                                 .build());
                     }
 
@@ -192,7 +192,7 @@ public class NotificationsCommand extends Command
                                 .setDescription("You have **enabled** DQS relog notifications.")
                                 .setColor(new Color(10144497))
                                 .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
-                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
                                 .build());
                     } else
                     {
@@ -201,7 +201,7 @@ public class NotificationsCommand extends Command
                                 .setDescription("You have **disabled** DQS relog notifications.")
                                 .setColor(new Color(10144497))
                                 .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
-                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
                                 .build());
                     }
 
@@ -219,7 +219,7 @@ public class NotificationsCommand extends Command
                                 .setDescription("You have **enabled** DQS 2B2T server & restart notifications.")
                                 .setColor(new Color(10144497))
                                 .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
-                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
                                 .build());
                     } else
                     {
@@ -228,7 +228,7 @@ public class NotificationsCommand extends Command
                                 .setDescription("You have **disabled** DQS 2B2T server & restart notifications.")
                                 .setColor(new Color(10144497))
                                 .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
-                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
                                 .build());
                     }
 
@@ -240,7 +240,7 @@ public class NotificationsCommand extends Command
                         .setDescription("Please enter a valid notification type to toggle. Why not take a look at the documentation, [here](https://dqs.dewy.dev/features), for a list of notification types.")
                         .setColor(new Color(15221016))
                         .setFooter("Focused on " + Constants.CONFIG.authentication.username)
-                        .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
+                        .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
                         .build());
             } catch (Throwable e)
             {
@@ -251,7 +251,7 @@ public class NotificationsCommand extends Command
                         .setDescription("An exception occurred whilst executing this command. Debug information has been sent to Dewy to be fixed in following updates. Sorry about any inconvenience!")
                         .setColor(new Color(15221016))
                         .setFooter("Focused on " + Constants.CONFIG.authentication.username)
-                        .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
+                        .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
                         .build());
 
                 Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.service.operatorId)).openPrivateChannel().queue((privateChannel ->
@@ -259,7 +259,7 @@ public class NotificationsCommand extends Command
                                 .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(event.getJDA().getUserById(Constants.CONFIG.service.subscriberId)).getName() + ")")
                                 .setDescription("A " + e.getClass().getSimpleName() + " was thrown during the execution of a notifications command.\n\n**Cause:**\n\n```" + e.getMessage() + "```")
                                 .setColor(new Color(15221016))
-                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
                                 .build()).queue()));
             }
         }

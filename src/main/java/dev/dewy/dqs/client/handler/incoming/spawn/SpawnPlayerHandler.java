@@ -39,7 +39,7 @@ public class SpawnPlayerHandler implements HandlerRegistry.IncomingHandler<Serve
                             .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(DISCORD.getUserById(Constants.CONFIG.service.subscriberId)).getName() + ")")
                             .setDescription("A " + ex.getClass().getSimpleName() + " was thrown whilst getting the name from the UUID in a player spawn warning.\n\n**Cause:**\n\n```" + ex.getMessage() + "```")
                             .setColor(new Color(15221016))
-                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
+                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
                             .build()).queue()));
         }
 
@@ -72,7 +72,7 @@ public class SpawnPlayerHandler implements HandlerRegistry.IncomingHandler<Serve
                                 .setTitle("**DQS** - Player In Range")
                                 .setDescription("A player by the name of **" + getNameFromUUID(packet.getUUID().toString()) + "** has entered your account's visible range.")
                                 .setColor(new Color(15221016))
-                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
                                 .setFooter("Notification intended for  " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                                 .build()).queue();
                     } catch (MalformedURLException e)
@@ -90,7 +90,7 @@ public class SpawnPlayerHandler implements HandlerRegistry.IncomingHandler<Serve
                             .setTitle("**DQS** - Error Report (" + Objects.requireNonNull(DISCORD.getUserById(Constants.CONFIG.service.subscriberId)).getName() + ")")
                             .setDescription("A " + t.getClass().getSimpleName() + " was thrown during the execution of a player in range notification command.\n\n**Cause:**\n\n```" + t.getMessage() + "```")
                             .setColor(new Color(15221016))
-                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/QQHhpKT.png")
+                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
                             .build()).queue()));
         }
 
