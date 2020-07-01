@@ -48,7 +48,7 @@ public class AutoReconnectCommand extends Command
                 } catch (NumberFormatException e)
                 {
                     event.reply(new EmbedBuilder()
-                            .setTitle("**DQS** - Invalid Command Arguments")
+                            .setTitle("**DQS** - Invalid Integer")
                             .setDescription("You have not entered a valid integer for the auto reconnect delay. Why not take a look at the documentation, [here](https://dqs.dewy.dev/features).")
                             .setColor(new Color(15221016))
                             .setFooter("Focused on " + Constants.CONFIG.authentication.username)
@@ -58,10 +58,10 @@ public class AutoReconnectCommand extends Command
                     return;
                 }
 
-                if (Integer.parseInt(args[0]) <= 29)
+                if (Integer.parseInt(args[0]) <= 30)
                 {
                     event.reply(new EmbedBuilder()
-                            .setTitle("**DQS** - Invalid Command Arguments")
+                            .setTitle("**DQS** - Inapplicable Integer")
                             .setDescription("The DQS auto reconnect delay must be a positive integer above or equal to 30, due to Hause's new anti-queueskip measures. Why not take a look at the documentation, [here](https://dqs.dewy.dev/features).")
                             .setColor(new Color(15221016))
                             .setFooter("Focused on " + Constants.CONFIG.authentication.username)
