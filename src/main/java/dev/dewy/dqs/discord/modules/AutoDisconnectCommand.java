@@ -63,7 +63,7 @@ public class AutoDisconnectCommand extends Command
                     {
                         event.reply(new EmbedBuilder()
                                 .setTitle("**DQS** - Auto Disconnect")
-                                .setDescription("You have **enabled** auto reconnect for when a player comes into range.")
+                                .setDescription("You have **enabled** auto disconnect for when a player comes into range.")
                                 .setColor(new Color(10144497))
                                 .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                                 .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
@@ -72,7 +72,7 @@ public class AutoDisconnectCommand extends Command
                     {
                         event.reply(new EmbedBuilder()
                                 .setTitle("**DQS** - Auto Disconnect")
-                                .setDescription("You have **disabled** auto reconnect for when a player comes into range.")
+                                .setDescription("You have **disabled** auto disconnect for when a player comes into range.")
                                 .setColor(new Color(10144497))
                                 .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                                 .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
@@ -90,7 +90,7 @@ public class AutoDisconnectCommand extends Command
                     {
                         event.reply(new EmbedBuilder()
                                 .setTitle("**DQS** - Auto Disconnect")
-                                .setDescription("You have **enabled** auto reconnect for when an Ender Crystal comes into range.")
+                                .setDescription("You have **enabled** auto disconnect for when an Ender Crystal comes into range.")
                                 .setColor(new Color(10144497))
                                 .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                                 .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
@@ -99,7 +99,7 @@ public class AutoDisconnectCommand extends Command
                     {
                         event.reply(new EmbedBuilder()
                                 .setTitle("**DQS** - Auto Disconnect")
-                                .setDescription("You have **disabled** auto reconnect for when an Ender Crystal comes into range.")
+                                .setDescription("You have **disabled** auto disconnect for when an Ender Crystal comes into range.")
                                 .setColor(new Color(10144497))
                                 .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                                 .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
@@ -119,8 +119,8 @@ public class AutoDisconnectCommand extends Command
                         } catch (NumberFormatException e)
                         {
                             event.reply(new EmbedBuilder()
-                                    .setTitle("**DQS** - Invalid Command Arguments")
-                                    .setDescription("You have not entered a valid integer for the queue auto relog threshold.")
+                                    .setTitle("**DQS** - Invalid Integer")
+                                    .setDescription("You have not entered a valid integer for the 'almost finished queueing' threshold.")
                                     .setColor(new Color(15221016))
                                     .setFooter("Focused on " + Constants.CONFIG.authentication.username)
                                     .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
@@ -132,8 +132,8 @@ public class AutoDisconnectCommand extends Command
                         if (Integer.parseInt(args[1]) <= 5)
                         {
                             event.reply(new EmbedBuilder()
-                                    .setTitle("**DQS** - Invalid Command Arguments")
-                                    .setDescription("The DQS auto queue relog delay must be a positive integer above 5. This is to ensure that you get the best value in DQS's service.")
+                                    .setTitle("**DQS** - Inapplicable Integer")
+                                    .setDescription("The DQS 'almost finished queueing' threshold must be a positive integer above 5. This is to ensure that you get the best value in DQS's service.")
                                     .setColor(new Color(15221016))
                                     .setFooter("Focused on " + Constants.CONFIG.authentication.username)
                                     .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
@@ -142,11 +142,11 @@ public class AutoDisconnectCommand extends Command
                             return;
                         }
 
-                        Constants.CONFIG.modules.autoDisconnect.threshold = Integer.parseInt(args[1]);
+                        Constants.CONFIG.modules.autoDisconnect.nearlyFinishedQueueingThreshold = Integer.parseInt(args[1]);
 
                         event.reply(new EmbedBuilder()
-                                .setTitle("**DQS** - Notifications")
-                                .setDescription("You have set the DQS queue auto relog threshold to **" + Constants.CONFIG.modules.autoDisconnect.threshold + "**.")
+                                .setTitle("**DQS** - Auto Disconnect")
+                                .setDescription("You have set the DQS queue 'almost finished queueing' threshold to **" + Constants.CONFIG.modules.autoDisconnect.nearlyFinishedQueueingThreshold + "**.")
                                 .setColor(new Color(10144497))
                                 .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                                 .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
@@ -160,8 +160,8 @@ public class AutoDisconnectCommand extends Command
                     if (Constants.CONFIG.modules.autoDisconnect.nearlyFinishedQueueing)
                     {
                         event.reply(new EmbedBuilder()
-                                .setTitle("**DQS** - Notifications")
-                                .setDescription("You have **enabled** DQS queue auto relog.")
+                                .setTitle("**DQS** - Auto Disconnect")
+                                .setDescription("You have **enabled** auto disconnect for when you've almost finished queueing.")
                                 .setColor(new Color(10144497))
                                 .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                                 .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
@@ -169,8 +169,79 @@ public class AutoDisconnectCommand extends Command
                     } else
                     {
                         event.reply(new EmbedBuilder()
-                                .setTitle("**DQS** - Notifications")
-                                .setDescription("You have **disabled** DQS queue auto relog.")
+                                .setTitle("**DQS** - Auto Disconnect")
+                                .setDescription("You have **disabled** auto disconnect for when you've almost finished queueing.")
+                                .setColor(new Color(10144497))
+                                .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
+                                .build());
+                    }
+
+                    return;
+                }
+
+                if (args[0].equalsIgnoreCase("health") || args[0].equalsIgnoreCase("hp"))
+                {
+                    if (args.length == 2)
+                    {
+                        try
+                        {
+                            Float.parseFloat(args[1]);
+                        } catch (NumberFormatException e)
+                        {
+                            event.reply(new EmbedBuilder()
+                                    .setTitle("**DQS** - Invalid Number")
+                                    .setDescription("You have not entered a valid number for the low HP auto disconnect threshold.")
+                                    .setColor(new Color(15221016))
+                                    .setFooter("Focused on " + Constants.CONFIG.authentication.username)
+                                    .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
+                                    .build());
+
+                            return;
+                        }
+
+                        if (Float.parseFloat(args[1]) >= 9.5)
+                        {
+                            event.reply(new EmbedBuilder()
+                                    .setTitle("**DQS** - Inapplicable Number")
+                                    .setDescription("The low HP auto disconnect threshold must be less than 9.5 hearts.")
+                                    .setColor(new Color(15221016))
+                                    .setFooter("Focused on " + Constants.CONFIG.authentication.username)
+                                    .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
+                                    .build());
+
+                            return;
+                        }
+
+                        Constants.CONFIG.modules.autoDisconnect.lowHpThreshold = Float.parseFloat(args[1]);
+
+                        event.reply(new EmbedBuilder()
+                                .setTitle("**DQS** - Auto Disconnect")
+                                .setDescription("You have set the low HP auto disconnect threshold to **" + Constants.CONFIG.modules.autoDisconnect.lowHpThreshold + "**.")
+                                .setColor(new Color(10144497))
+                                .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
+                                .build());
+
+                        return;
+                    }
+
+                    Constants.CONFIG.modules.autoDisconnect.lowHp = !Constants.CONFIG.modules.autoDisconnect.lowHp;
+
+                    if (Constants.CONFIG.modules.autoDisconnect.lowHp)
+                    {
+                        event.reply(new EmbedBuilder()
+                                .setTitle("**DQS** - Auto Disconnect")
+                                .setDescription("You have **enabled** low HP auto disconnect.")
+                                .setColor(new Color(10144497))
+                                .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
+                                .build());
+                    } else
+                    {
+                        event.reply(new EmbedBuilder()
+                                .setTitle("**DQS** - Auto Disconnect")
+                                .setDescription("You have **disabled** low HP auto disconnect.")
                                 .setColor(new Color(10144497))
                                 .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                                 .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
@@ -182,7 +253,7 @@ public class AutoDisconnectCommand extends Command
 
                 event.reply(new EmbedBuilder()
                         .setTitle("**DQS** - Invalid Command Arguments")
-                        .setDescription("Please enter a valid auto disconnect type to toggle.")
+                        .setDescription("Please enter a valid auto disconnect type to toggle / modify.")
                         .setColor(new Color(15221016))
                         .setFooter("Focused on " + Constants.CONFIG.authentication.username)
                         .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")

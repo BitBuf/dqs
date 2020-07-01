@@ -235,11 +235,14 @@ public final class Config
         {
             public boolean enabled = true;
 
-            public boolean playerInRange = true;
+            public boolean playerInRange = false;
             public boolean crystalInRange = true;
 
             public boolean nearlyFinishedQueueing = false;
-            public int threshold = 5;
+            public int nearlyFinishedQueueingThreshold = 5;
+
+            public boolean lowHp = true;
+            public float lowHpThreshold = 2.5F;
         }
 
         public static final class Whitelist

@@ -6,7 +6,12 @@ import dev.dewy.dqs.handler.HandlerRegistry;
 import dev.dewy.dqs.packet.ingame.client.ClientRequestPacket;
 import dev.dewy.dqs.packet.ingame.server.entity.player.ServerPlayerHealthPacket;
 import dev.dewy.dqs.protocol.game.ClientRequest;
+import dev.dewy.dqs.utils.Constants;
 import net.daporkchop.lib.common.util.PorkUtil;
+import net.dv8tion.jda.api.EmbedBuilder;
+
+import java.awt.*;
+import java.util.Objects;
 
 import static dev.dewy.dqs.utils.Constants.*;
 
@@ -34,6 +39,22 @@ public class PlayerHealthHandler implements HandlerRegistry.IncomingHandler<Serv
                 }
             }).start();
         }
+
+        if (packet.getHealth() <= CONFIG.modules.autoDisconnect.lowHpThreshold)
+        {
+            DQS.getInstance().getClient().getSession().disconnect("user disconnect", false);
+
+            Objects.requireNonNull(DISCORD.getUserById(Constants.CONFIG.service.operatorId)).openPrivateChannel().queue((privateChannel ->
+                    privateChannel.sendMessage(new EmbedBuilder()
+                            .setTitle("**DQS** - Auto Disconnect")
+                            .setDescription("You were automatically disconnected and **saved** due to your health reaching " + (Math.round(packet.getHealth() * 2.0F) / 2.0F) + " hearts. Ouchies! .-.")
+                            .setColor(new Color(15221016))
+                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
+                            .build()).queue()));
+
+            return false;
+        }
+
         return true;
     }
 
