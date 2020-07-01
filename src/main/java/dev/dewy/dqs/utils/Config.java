@@ -33,6 +33,8 @@ public final class Config
         public String password = "my_secure_password";
         public String username = "Steve";
         public String uuid = "lamo";
+
+        public boolean isRateLimit = false;
     }
 
     public static final class Service

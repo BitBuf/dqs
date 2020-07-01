@@ -39,7 +39,9 @@ public class RelogCommand extends Command
                     return;
                 }
 
-                DQS.getInstance().getClient().getSession().disconnect("§7[§b§lDQS§r§7] §fRelog command issued.", false);
+                Constants.SHOULD_RECONNECT = true;
+
+                DQS.getInstance().getClient().getSession().disconnect("user disconnect", false);
             } catch (Throwable e)
             {
                 Constants.DISCORD_LOG.error(e);

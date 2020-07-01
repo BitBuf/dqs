@@ -10,8 +10,7 @@ import java.awt.*;
 import java.net.URL;
 import java.util.Objects;
 
-import static dev.dewy.dqs.utils.Constants.CACHE;
-import static dev.dewy.dqs.utils.Constants.saveConfig;
+import static dev.dewy.dqs.utils.Constants.*;
 
 public class SignInCommand extends Command
 {
@@ -50,6 +49,8 @@ public class SignInCommand extends Command
                 Constants.CONFIG.authentication.email = args[1];
                 Constants.CONFIG.authentication.password = args[2];
 
+                CONFIG.authentication.isRateLimit = false;
+
                 event.reply(new EmbedBuilder()
                         .setTitle("**DQS** - Authentication")
                         .setDescription("Your Minecraft account details have been entered, encrypted and locked away. Attempting authentication...")
@@ -60,28 +61,13 @@ public class SignInCommand extends Command
 
                 if (DQS.getInstance().isConnected())
                 {
-                    DQS.getInstance().getClient().getSession().disconnect("Account changeup! :o");
+                    DQS.getInstance().getClient().getSession().disconnect("user disconnect", false);
                 } else
                 {
-                    Constants.SHOULD_RECONNECT = true;
-
                     CACHE.reset(true);
-
-                    if (DQS.getInstance().isConnected())
-                    {
-                        DQS.getInstance().getClient().getSession().disconnect("lol");
-                    }
 
                     DQS.getInstance().logIn();
                     DQS.getInstance().connect();
-
-                    if (DQS.getInstance().server != null)
-                    {
-                        DQS.getInstance().server.close();
-                        DQS.getInstance().server = null;
-                    }
-
-                    DQS.getInstance().startServer();
 
                     DQS.placeInQueue = -1;
                     DQS.startTime = -1;

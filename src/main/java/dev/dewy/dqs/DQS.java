@@ -3,6 +3,7 @@ package dev.dewy.dqs;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import dev.dewy.dqs.client.DQSClientSession;
 import dev.dewy.dqs.client.handler.incoming.spawn.SpawnPlayerHandler;
+import dev.dewy.dqs.exceptions.request.InvalidCredentialsException;
 import dev.dewy.dqs.networking.Client;
 import dev.dewy.dqs.networking.Server;
 import dev.dewy.dqs.networking.SessionFactory;
@@ -31,9 +32,11 @@ import dev.dewy.dqs.taribone.world.physics.TariboneWorldPhysics;
 import dev.dewy.dqs.utils.Authenticator;
 import dev.dewy.dqs.utils.Constants;
 import dev.dewy.dqs.utils.ServerData;
+import net.dv8tion.jda.api.EmbedBuilder;
 
 import javax.imageio.ImageIO;
 import javax.security.auth.login.LoginException;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -346,16 +349,47 @@ public class DQS
             } while (SHOULD_RECONNECT && CACHE.reset(true) && this.delayBeforeReconnect());
         } catch (Exception e)
         {
+            if (e.getMessage().contains("Unable to log in") && CONFIG.authentication.isRateLimit && SHOULD_RECONNECT)
+            {
+                Objects.requireNonNull(DISCORD.getUserById(CONFIG.service.subscriberId)).openPrivateChannel().queue((privateChannel ->
+                        privateChannel.sendMessage(new EmbedBuilder()
+                                .setTitle("**DQS** - Mojang Auth Ratelimit")
+                                .setDescription("DQS believes that you were not able to log in due to Mojang's Authentication API ratelimit. Attempting reconnection in " + CONFIG.modules.autoReconnect.delaySeconds + 60 + " seconds.")
+                                .setColor(new Color(15221016))
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
+                                .build()).queue()));
+
+                try
+                {
+                    Thread.sleep((CONFIG.modules.autoReconnect.delaySeconds + 60) * 1000);
+                } catch (InterruptedException ignored)
+                {
+
+                }
+
+                DQS.getInstance().logIn();
+                DQS.getInstance().connect();
+
+                DQS.placeInQueue = -1;
+                DQS.startTime = -1;
+                DQS.startPosition = -1;
+
+                saveConfig();
+            }
+
             DEFAULT_LOG.alert(e);
         } finally
         {
-            DEFAULT_LOG.info("Shutting down...");
-            if (this.server != null)
+            if (!CONFIG.authentication.isRateLimit)
             {
-                this.server.close(true);
+                DEFAULT_LOG.info("Shutting down...");
+                if (this.server != null)
+                {
+                    this.server.close(true);
+                }
+                WEBSOCKET_SERVER.shutdown();
+                saveConfig();
             }
-            WEBSOCKET_SERVER.shutdown();
-            saveConfig();
         }
     }
 
@@ -499,6 +533,7 @@ public class DQS
         }
         CACHE.getProfileCache().setProfile(this.protocol.getProfile());
         AUTH_LOG.success("Logged in.");
+        CONFIG.authentication.isRateLimit = true;
     }
 
     protected boolean delayBeforeReconnect()
