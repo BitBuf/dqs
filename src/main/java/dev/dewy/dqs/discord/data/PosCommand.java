@@ -23,7 +23,7 @@ public class PosCommand extends Command
     {
         this.name = "pos";
         this.help = "View your position in queue.";
-        this.aliases = new String[] {"qpos", "position"};
+        this.aliases = new String[] {"qpos", "position", "queuepos"};
         this.guildOnly = false;
     }
 
@@ -112,6 +112,19 @@ public class PosCommand extends Command
 
                 if (DQS.placeInQueue != -1)
                 {
+                    if (Integer.parseInt(DQS.getPosition()) > getNormalQueueLength())
+                    {
+                        event.reply(new EmbedBuilder()
+                                .setTitle("**DQS** - Queue Position & Statistics")
+                                .setDescription("Your current queue position: **" + DQS.getPosition() + "**\n\nNormal Queue Length: **" + getNormalQueueLength() + "**\nPriority Queue Length: **" + getPrioQueueLength() + "**\n\n**Disclaimer:** The 2B2T API hasn't updated in the last few minutes, so queue length data may be inaccurate.")
+                                .setColor(new Color(10144497))
+                                .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
+                                .build());
+
+                        return;
+                    }
+
                     event.reply(new EmbedBuilder()
                             .setTitle("**DQS** - Queue Position & Statistics")
                             .setDescription("Your current queue position: **" + DQS.getPosition() + "**\n\nNormal Queue Length: **" + getNormalQueueLength() + "**\nPriority Queue Length: **" + getPrioQueueLength() + "**")
