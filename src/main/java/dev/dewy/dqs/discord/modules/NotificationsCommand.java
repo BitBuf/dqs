@@ -120,7 +120,7 @@ public class NotificationsCommand extends Command
                         } catch (NumberFormatException e)
                         {
                             event.reply(new EmbedBuilder()
-                                    .setTitle("**DQS** - Invalid Command Arguments")
+                                    .setTitle("**DQS** - Invalid Integer")
                                     .setDescription("You have not entered a valid integer for the queue notification threshold.")
                                     .setColor(new Color(15221016))
                                     .setFooter("Focused on " + Constants.CONFIG.authentication.username)
@@ -133,8 +133,8 @@ public class NotificationsCommand extends Command
                         if (Integer.parseInt(args[1]) <= 5)
                         {
                             event.reply(new EmbedBuilder()
-                                    .setTitle("**DQS** - Invalid Command Arguments")
-                                    .setDescription("The DQS auto respawn delay must be a positive integer above 5. This is to ensure that you get the best value in DQS's service.")
+                                    .setTitle("**DQS** - Inapplicable Integer")
+                                    .setDescription("The DQS queue notification threshold must be a positive integer above 5. This is to ensure that you get the best value in DQS's service.")
                                     .setColor(new Color(15221016))
                                     .setFooter("Focused on " + Constants.CONFIG.authentication.username)
                                     .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
@@ -226,6 +226,77 @@ public class NotificationsCommand extends Command
                         event.reply(new EmbedBuilder()
                                 .setTitle("**DQS** - Notifications")
                                 .setDescription("You have **disabled** DQS 2B2T server & restart notifications.")
+                                .setColor(new Color(10144497))
+                                .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
+                                .build());
+                    }
+
+                    return;
+                }
+
+                if (args[0].equalsIgnoreCase("health") || args[0].equalsIgnoreCase("hp"))
+                {
+                    if (args.length == 2)
+                    {
+                        try
+                        {
+                            Float.parseFloat(args[1]);
+                        } catch (NumberFormatException e)
+                        {
+                            event.reply(new EmbedBuilder()
+                                    .setTitle("**DQS** - Invalid Number")
+                                    .setDescription("You have not entered a valid number for the low HP notification threshold.")
+                                    .setColor(new Color(15221016))
+                                    .setFooter("Focused on " + Constants.CONFIG.authentication.username)
+                                    .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
+                                    .build());
+
+                            return;
+                        }
+
+                        if (Float.parseFloat(args[1]) >= 9.5)
+                        {
+                            event.reply(new EmbedBuilder()
+                                    .setTitle("**DQS** - Inapplicable Number")
+                                    .setDescription("The low HP notification threshold must be less than 9.5 hearts.")
+                                    .setColor(new Color(15221016))
+                                    .setFooter("Focused on " + Constants.CONFIG.authentication.username)
+                                    .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
+                                    .build());
+
+                            return;
+                        }
+
+                        Constants.CONFIG.modules.notifications.lowHpThreshold = Float.parseFloat(args[1]);
+
+                        event.reply(new EmbedBuilder()
+                                .setTitle("**DQS** - Notifications")
+                                .setDescription("You have set the low HP notification threshold to **" + Constants.CONFIG.modules.notifications.lowHpThreshold + "**.")
+                                .setColor(new Color(10144497))
+                                .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
+                                .build());
+
+                        return;
+                    }
+
+                    Constants.CONFIG.modules.notifications.lowHp = !Constants.CONFIG.modules.notifications.lowHp;
+
+                    if (Constants.CONFIG.modules.notifications.lowHp)
+                    {
+                        event.reply(new EmbedBuilder()
+                                .setTitle("**DQS** - Notifications")
+                                .setDescription("You have **enabled** low HP notifications.")
+                                .setColor(new Color(10144497))
+                                .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
+                                .build());
+                    } else
+                    {
+                        event.reply(new EmbedBuilder()
+                                .setTitle("**DQS** - Notifications")
+                                .setDescription("You have **disabled** low HP notifications.")
                                 .setColor(new Color(10144497))
                                 .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                                 .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")

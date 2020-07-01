@@ -229,6 +229,9 @@ public final class Config
 
             public boolean relogged = true;
             public boolean serverMessages = true;
+
+            public boolean lowHp = true;
+            public float lowHpThreshold = 4.0F;
         }
 
         public static final class AutoDisconnect

@@ -44,7 +44,7 @@ public class PlayerHealthHandler implements HandlerRegistry.IncomingHandler<Serv
         {
             DQS.getInstance().getClient().getSession().disconnect("user disconnect", false);
 
-            Objects.requireNonNull(DISCORD.getUserById(Constants.CONFIG.service.operatorId)).openPrivateChannel().queue((privateChannel ->
+            Objects.requireNonNull(DISCORD.getUserById(CONFIG.service.subscriberId)).openPrivateChannel().queue((privateChannel ->
                     privateChannel.sendMessage(new EmbedBuilder()
                             .setTitle("**DQS** - Auto Disconnect")
                             .setDescription("You were automatically disconnected and **saved** due to your health reaching " + (Math.round(packet.getHealth() * 2.0F) / 2.0F) + " hearts. Ouchies! .-.")
@@ -53,6 +53,17 @@ public class PlayerHealthHandler implements HandlerRegistry.IncomingHandler<Serv
                             .build()).queue()));
 
             return false;
+        }
+
+        if (packet.getHealth() <= CONFIG.modules.notifications.lowHpThreshold)
+        {
+            Objects.requireNonNull(DISCORD.getUserById(CONFIG.service.subscriberId)).openPrivateChannel().queue((privateChannel ->
+                    privateChannel.sendMessage(new EmbedBuilder()
+                            .setTitle("**DQS** - Low HP Notification")
+                            .setDescription("Low HP warning. Your health has just reached " + (Math.round(packet.getHealth() * 2.0F) / 2.0F) + " hearts.")
+                            .setColor(new Color(15221016))
+                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
+                            .build()).queue()));
         }
 
         return true;
