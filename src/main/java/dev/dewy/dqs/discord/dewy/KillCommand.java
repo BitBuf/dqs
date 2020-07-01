@@ -27,31 +27,36 @@ public class KillCommand extends Command
     @Override
     protected void execute(CommandEvent event)
     {
-        if (event.getAuthor().getId().equals(Constants.CONFIG.service.operatorId) && event.getChannel().getId().equals(Constants.CONFIG.service.channelId) && Constants.CONFIG.modules.focus.focused)
+        if ((event.getAuthor().getId().equals(Constants.CONFIG.service.subscriberId) || event.getAuthor().getId().equals(Constants.CONFIG.service.operatorId)) && (event.getChannel().getId().equals(Constants.CONFIG.service.channelId) || !event.getMessage().getChannelType().isGuild()) && Constants.CONFIG.modules.focus.focused)
         {
             try
             {
                 if (event.getAuthor().getId().equals(Constants.CONFIG.service.operatorId))
                 {
-                    event.reply(new EmbedBuilder()
-                            .setTitle("**DQS** - Instance Termination")
-                            .setDescription("Shutting down instance for " + event.getJDA().getUserById(Constants.CONFIG.service.subscriberId).getName() + " (" + Constants.CONFIG.authentication.username + ")...")
-                            .setColor(new Color(10144497))
-                            .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
-                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
-                            .build());
-
-                    Thread.sleep(5000L);
-
-                    if (DQS.getInstance().server != null)
+                    if (event.getArgs().equalsIgnoreCase(Constants.CONFIG.authentication.username))
                     {
-                        DQS.getInstance().server.close(true);
+                        event.reply(new EmbedBuilder()
+                                .setTitle("**DQS** - Instance Termination")
+                                .setDescription("Shutting down instance for " + event.getJDA().getUserById(Constants.CONFIG.service.subscriberId).getName() + " (" + Constants.CONFIG.authentication.username + ")...")
+                                .setColor(new Color(10144497))
+                                .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
+                                .build());
+
+                        Thread.sleep(5000L);
+
+                        if (DQS.getInstance().server != null)
+                        {
+                            DQS.getInstance().server.close(true);
+                        }
+
+                        WEBSOCKET_SERVER.shutdown();
+                        saveConfig();
+
+                        Runtime.getRuntime().exit(0);
                     }
 
-                    WEBSOCKET_SERVER.shutdown();
-                    saveConfig();
-
-                    Runtime.getRuntime().exit(0);
+                    return;
                 }
 
                 event.reply(new EmbedBuilder()
