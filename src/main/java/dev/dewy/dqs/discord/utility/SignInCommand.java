@@ -1,5 +1,7 @@
 package dev.dewy.dqs.discord.utility;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
 import dev.dewy.dqs.DQS;
@@ -7,6 +9,9 @@ import dev.dewy.dqs.utils.Constants;
 import net.dv8tion.jda.api.EmbedBuilder;
 
 import java.awt.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.net.URL;
 import java.util.Objects;
 
@@ -48,6 +53,8 @@ public class SignInCommand extends Command
                 Constants.CONFIG.authentication.username = args[0];
                 Constants.CONFIG.authentication.email = args[1];
                 Constants.CONFIG.authentication.password = args[2];
+
+                CONFIG.authentication.uuid = getUUIDFromName(CONFIG.authentication.username, true, true);
 
                 CONFIG.authentication.isRateLimit = false;
 
@@ -96,5 +103,46 @@ public class SignInCommand extends Command
                                 .build()).queue()));
             }
         }
+    }
+
+    private static String getUUIDFromName(final String name, final boolean onlinemode, final boolean withSeperators)
+    {
+        String uuid;
+
+        if (onlinemode)
+        {
+            try
+            {
+                final BufferedReader in = new BufferedReader(new InputStreamReader(new URL("https://api.mojang.com/users/profiles/minecraft/" + name).openStream()));
+                uuid = ((JsonObject)new JsonParser().parse(in)).get("id").toString().replaceAll("\"", "");
+
+                in.close();
+            }
+            catch (Exception e)
+            {
+                uuid = null;
+            }
+        }
+        else
+        {
+            uuid = null;
+        }
+
+        if (uuid != null)
+        {
+            if (withSeperators)
+            {
+                if (!uuid.contains("-"))
+                {
+                    return uuid.replaceAll("(\\w{8})(\\w{4})(\\w{4})(\\w{4})(\\w{12})", "$1-$2-$3-$4-$5");
+                }
+            }
+            else
+            {
+                uuid = uuid.replaceAll("-", "");
+            }
+        }
+
+        return uuid;
     }
 }
