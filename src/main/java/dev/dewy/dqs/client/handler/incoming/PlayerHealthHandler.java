@@ -40,7 +40,7 @@ public class PlayerHealthHandler implements HandlerRegistry.IncomingHandler<Serv
             }).start();
         }
 
-        if (packet.getHealth() <= CONFIG.modules.autoDisconnect.lowHpThreshold)
+        if (packet.getHealth() <= CONFIG.modules.autoDisconnect.lowHpThreshold && CONFIG.modules.autoDisconnect.enabled && CONFIG.modules.autoDisconnect.lowHp && !DQS.getInstance().connectedToProxy)
         {
             DQS.getInstance().getClient().getSession().disconnect("user disconnect", false);
 
@@ -55,7 +55,7 @@ public class PlayerHealthHandler implements HandlerRegistry.IncomingHandler<Serv
             return false;
         }
 
-        if (packet.getHealth() <= CONFIG.modules.notifications.lowHpThreshold)
+        if (packet.getHealth() <= CONFIG.modules.notifications.lowHpThreshold && CONFIG.modules.notifications.enabled && CONFIG.modules.notifications.lowHp && !DQS.getInstance().connectedToProxy)
         {
             Objects.requireNonNull(DISCORD.getUserById(CONFIG.service.subscriberId)).openPrivateChannel().queue((privateChannel ->
                     privateChannel.sendMessage(new EmbedBuilder()
