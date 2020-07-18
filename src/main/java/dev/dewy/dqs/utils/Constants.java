@@ -197,7 +197,8 @@ public final class Constants
                     new RecoverCommand(),
                     new RelayCommand(),
                     new AutoDisconnectCommand(),
-                    new AutoReplyCommand());
+                    new AutoReplyCommand(),
+                    new MailForwardCommand());
 
             try
             {
