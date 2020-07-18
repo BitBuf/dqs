@@ -23,6 +23,8 @@ public class ChatHandler implements HandlerRegistry.IncomingHandler<ServerChatPa
     @Override
     public boolean apply(ServerChatPacket packet, DQSClientSession session)
     {
+        Runtime.getRuntime().gc();
+
         CHAT_LOG.info(packet.getMessage());
 
 //        DQS.getInstance().inQueue = "2b2t.org".equalsIgnoreCase(CONFIG.client.server.address)

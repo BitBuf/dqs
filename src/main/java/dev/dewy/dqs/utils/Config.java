@@ -149,7 +149,7 @@ public final class Config
         {
             public boolean favicon = true;
             public int maxPlayers = Integer.MAX_VALUE;
-            public String motd = "§7[§b§lDQS§r§7] §fDQS 3.0.1 Instance for %s";
+            public String motd = "§7[§b§lDQS§r§7] §fDQS 3.0.2 Instance for %s";
         }
     }
 
