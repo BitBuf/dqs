@@ -32,7 +32,7 @@ dependencies {
     implementation group: 'net.daporkchop.lib', name: 'logging', version: '0.5.5-SNAPSHOT'
     implementation group: 'net.daporkchop.lib', name: 'minecraft-text', version: '0.5.5-SNAPSHOT'
 
-    implementation ('net.dv8tion:JDA:4.1.1_165') {
+    implementation ('net.dv8tion:JDA:4.2.0_180') {
         exclude module: 'opus-java'
     }
 
