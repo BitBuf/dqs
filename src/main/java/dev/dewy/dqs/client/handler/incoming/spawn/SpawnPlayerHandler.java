@@ -74,7 +74,7 @@ public class SpawnPlayerHandler implements HandlerRegistry.IncomingHandler<Serve
                                 .setColor(new Color(15221016))
                                 .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
                                 .setFooter("Notification intended for  " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
-                                .build()).queue();
+                            .build()).queue();
                     } catch (MalformedURLException e)
                     {
                         Constants.DISCORD_LOG.error(e);

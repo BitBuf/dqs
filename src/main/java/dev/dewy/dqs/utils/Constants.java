@@ -196,7 +196,8 @@ public final class Constants
                     new RelogCommand(),
                     new RecoverCommand(),
                     new RelayCommand(),
-                    new AutoDisconnectCommand());
+                    new AutoDisconnectCommand(),
+                    new AutoReplyCommand());
 
             try
             {

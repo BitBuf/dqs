@@ -2,9 +2,12 @@ package dev.dewy.dqs.client.handler.incoming;
 
 import dev.dewy.dqs.DQS;
 import dev.dewy.dqs.client.DQSClientSession;
+import dev.dewy.dqs.discord.utility.SignInCommand;
 import dev.dewy.dqs.handler.HandlerRegistry;
+import dev.dewy.dqs.packet.ingame.client.ClientChatPacket;
 import dev.dewy.dqs.packet.ingame.server.ServerChatPacket;
 import dev.dewy.dqs.utils.Constants;
+import dev.dewy.dqs.utils.RegexUtils;
 import net.daporkchop.lib.minecraft.text.parser.MCFormatParser;
 import net.dv8tion.jda.api.EmbedBuilder;
 
@@ -32,6 +35,37 @@ public class ChatHandler implements HandlerRegistry.IncomingHandler<ServerChatPa
             DQS.startPosition = -1;
 
             DQS.queueNotifArmed = true;
+        }
+
+        if (!DQS.getInstance().connectedToProxy && RegexUtils.isWhisperFrom(MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString().toLowerCase()))
+        {
+            String who = MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString().substring(0, MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString().indexOf(" "));
+            String msg = MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString().substring(MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString().indexOf(":") + 2).replaceAll("§([a-f]|[0-9])", "");
+
+            if (CONFIG.modules.autoReply.enabled)
+            {
+                DQS.getInstance().getClient().getSession().send(new ClientChatPacket("/w " + who + " " + CONFIG.modules.autoReply.message));
+            }
+
+            if (CONFIG.modules.mailForwarding.enabled)
+            {
+                Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.service.subscriberId)).openPrivateChannel().queue((privateChannel ->
+                {
+                    try
+                    {
+                        privateChannel.sendMessage(new EmbedBuilder()
+                                .setTitle("**DQS** - Ingame PM Recieved")
+                                .setDescription("The player **" + who + "** sent you a PM in game:\n\n`" + msg + "`")
+                                .setColor(new Color(10144497))
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
+                                .setFooter("Received PM from " + who, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", SignInCommand.getUUIDFromName(who, true, true))).toString())
+                                .build()).queue();
+                    } catch (MalformedURLException e)
+                    {
+                        Constants.DISCORD_LOG.error(e);
+                    }
+                }));
+            }
         }
 
         if (CONFIG.modules.chatRelay.enabled && CONFIG.modules.focus.focused)

@@ -105,7 +105,7 @@ public class SignInCommand extends Command
         }
     }
 
-    private static String getUUIDFromName(final String name, final boolean onlinemode, final boolean withSeperators)
+    public static String getUUIDFromName(final String name, final boolean onlinemode, final boolean withSeperators)
     {
         String uuid;
 

@@ -157,12 +157,14 @@ public final class Config
     {
         public AutoReconnect autoReconnect = new AutoReconnect();
         public AutoDisconnect autoDisconnect = new AutoDisconnect();
+        public AutoReply autoReply = new AutoReply();
         public AutoRespawn autoRespawn = new AutoRespawn();
         public AutoFish autoFish = new AutoFish();
         public ChatSpammer chatSpammer = new ChatSpammer();
         public ChatRelay chatRelay = new ChatRelay();
         public GameCommands gameCommands = new GameCommands();
         public Focus focus = new Focus();
+        public MailForwarding mailForwarding = new MailForwarding();
         public Notifications notifications = new Notifications();
         public Whitelist whitelist = new Whitelist();
 
@@ -175,6 +177,18 @@ public final class Config
                     "bean",
                     "gggg"
             );
+        }
+
+        public static final class AutoReply
+        {
+            public boolean enabled = true;
+
+            public String message = "I'm AFK right now with DQS! Check it out here: https://discord.gg/8mWZqv5";
+        }
+
+        public static final class MailForwarding
+        {
+            public boolean enabled = true;
         }
 
         public static final class AutoReconnect
