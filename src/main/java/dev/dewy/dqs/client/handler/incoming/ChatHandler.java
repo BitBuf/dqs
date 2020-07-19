@@ -70,7 +70,7 @@ public class ChatHandler implements HandlerRegistry.IncomingHandler<ServerChatPa
             }
         }
 
-        if (CONFIG.modules.chatRelay.enabled && CONFIG.modules.focus.focused)
+        if (CONFIG.modules.chatRelay.enabled && CONFIG.modules.focus.focused && DQS.getInstance().connectedToProxy)
         {
             Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.service.subscriberId)).openPrivateChannel().queue((privateChannel ->
             {
