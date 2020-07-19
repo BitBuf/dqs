@@ -308,7 +308,7 @@ public class NotificationsCommand extends Command
 
                 event.reply(new EmbedBuilder()
                         .setTitle("**DQS** - Invalid Command Arguments")
-                        .setDescription("Please enter a valid notification type to toggle. Why not take a look at the documentation, [here](https://dqs.dewy.dev/features), for a list of notification types.")
+                        .setDescription("Please enter a valid notification type to toggle. Why not take a look at the documentation, [here](https://dqs.dewy.dev/features/#notifications-command), for a list of notification types.")
                         .setColor(new Color(15221016))
                         .setFooter("Focused on " + Constants.CONFIG.authentication.username)
                         .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")

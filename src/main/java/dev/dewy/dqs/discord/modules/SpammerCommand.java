@@ -87,7 +87,7 @@ public class SpammerCommand extends Command
                     {
                         event.reply(new EmbedBuilder()
                                 .setTitle("**DQS** - Invalid Command Arguments")
-                                .setDescription("You have not entered a valid spammer message ID. Why not take a look at the documentation, [here](https://dqs.dewy.dev/features).")
+                                .setDescription("You have not entered a valid spammer message ID. Why not take a look at the documentation, [here](https://dqs.dewy.dev/features/#spammer-command).")
                                 .setColor(new Color(15221016))
                                 .setFooter("Focused on " + Constants.CONFIG.authentication.username)
                                 .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
@@ -118,7 +118,7 @@ public class SpammerCommand extends Command
                     {
                         event.reply(new EmbedBuilder()
                                 .setTitle("**DQS** - Invalid Command Arguments")
-                                .setDescription("You have not entered a valid integer for the chat spammer delay. Why not take a look at the documentation, [here](https://dqs.dewy.dev/features).")
+                                .setDescription("You have not entered a valid integer for the chat spammer delay. Why not take a look at the documentation, [here](https://dqs.dewy.dev/features/#spammer-command).")
                                 .setColor(new Color(15221016))
                                 .setFooter("Focused on " + Constants.CONFIG.authentication.username)
                                 .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
@@ -131,7 +131,7 @@ public class SpammerCommand extends Command
                     {
                         event.reply(new EmbedBuilder()
                                 .setTitle("**DQS** - Invalid Command Arguments")
-                                .setDescription("The DQS chat spammer delay must be a positive integer above 0. Why not take a look at the documentation, [here](https://dqs.dewy.dev/features).")
+                                .setDescription("The DQS chat spammer delay must be a positive integer above 0. Why not take a look at the documentation, [here](https://dqs.dewy.dev/features/#spammer-command).")
                                 .setColor(new Color(15221016))
                                 .setFooter("Focused on " + Constants.CONFIG.authentication.username)
                                 .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
@@ -200,7 +200,7 @@ public class SpammerCommand extends Command
 
                 event.reply(new EmbedBuilder()
                         .setTitle("**DQS** - Invalid Command Arguments")
-                        .setDescription("You have entered invalid arguments for this command. Why not take a look at the documentation, [here](https://dqs.dewy.dev/features).")
+                        .setDescription("You have entered invalid arguments for this command. Why not take a look at the documentation, [here](https://dqs.dewy.dev/features/#spammer-command).")
                         .setColor(new Color(15221016))
                         .setFooter("Focused on " + Constants.CONFIG.authentication.username)
                         .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")

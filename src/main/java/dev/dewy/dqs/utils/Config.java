@@ -48,7 +48,7 @@ public final class Config
         public String operatorId = "326039530971070474";
         public String subscriberId = "default";
 
-        public String tariboneIp = "127.0.0.1";
+        public String tariboneIp = "95.217.14.50";
 
         public int cooldown = 5;
         public String prefix = "&";
@@ -122,7 +122,7 @@ public final class Config
     {
         public Bind bind = new Bind();
         public int compressionThreshold = 256;
-        public boolean enabled = false;
+        public boolean enabled = true;
         public Extra extra = new Extra();
         public Ping ping = new Ping();
         public boolean verifyUsers = false;
@@ -130,7 +130,7 @@ public final class Config
         public static final class Bind
         {
             public String address = "0.0.0.0";
-            public int port = 25565;
+            public int port = 25567;
         }
 
         public static final class Extra
@@ -147,7 +147,7 @@ public final class Config
 
         public static final class Ping
         {
-            public boolean favicon = true;
+            public boolean favicon = false;
             public int maxPlayers = Integer.MAX_VALUE;
             public String motd = "§7[§b§lDQS§r§7] §fDQS 3.0.2 Instance for %s";
         }
@@ -174,8 +174,8 @@ public final class Config
             public boolean focused = true;
 
             public List<String> accounts = Arrays.asList(
-                    "bean",
-                    "gggg"
+                    "user",
+                    "otheraccount"
             );
         }
 
@@ -195,7 +195,7 @@ public final class Config
         {
             public boolean enabled = true;
 
-            public int delaySeconds = 3;
+            public int delaySeconds = 120;
         }
 
         public static final class AutoRespawn

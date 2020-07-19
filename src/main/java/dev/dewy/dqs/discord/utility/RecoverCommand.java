@@ -76,7 +76,7 @@ public class RecoverCommand extends Command
 
                 event.reply(new EmbedBuilder()
                         .setTitle("**DQS** - Recover")
-                        .setDescription("Your account could not be recovered because it is not connected to the target server. Keep in mind this command should only be used in emergency stuck-age. Why not take a look at the documentation, [here](https://dqs.dewy.dev/features).")
+                        .setDescription("Your account could not be recovered because it is not connected to the target server. Keep in mind this command should only be used in emergency stuck-age. Why not take a look at the documentation, [here](https://dqs.dewy.dev/features/#recover-command).")
                         .setColor(new Color(15221016))
                         .setFooter("Focused on " + Constants.CONFIG.authentication.username)
                         .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
