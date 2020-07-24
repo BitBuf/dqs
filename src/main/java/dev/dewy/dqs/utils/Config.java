@@ -34,6 +34,8 @@ public final class Config
         public String username = "Steve";
         public String uuid = "lamo";
 
+        public boolean hasAuthenticated = false;
+
         public boolean isRateLimit = false;
     }
 

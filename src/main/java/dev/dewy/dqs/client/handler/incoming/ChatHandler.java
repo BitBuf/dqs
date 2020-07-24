@@ -25,6 +25,11 @@ public class ChatHandler implements HandlerRegistry.IncomingHandler<ServerChatPa
     {
         Runtime.getRuntime().gc();
 
+        if (!CONFIG.authentication.hasAuthenticated)
+        {
+            CONFIG.authentication.hasAuthenticated = true;
+        }
+
         CHAT_LOG.info(packet.getMessage());
 
 //        DQS.getInstance().inQueue = "2b2t.org".equalsIgnoreCase(CONFIG.client.server.address)

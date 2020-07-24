@@ -315,7 +315,7 @@ public class DQS
 
                 if (DQS.getInstance().isConnected())
                 {
-                    DQS.getInstance().getClient().getSession().disconnect("lol");
+                    DQS.getInstance().getClient().getSession().disconnect("user disconnect");
                 }
 
                 DQS.getInstance().logIn();
@@ -349,33 +349,47 @@ public class DQS
             } while (SHOULD_RECONNECT && CACHE.reset(true) && this.delayBeforeReconnect());
         } catch (Exception e)
         {
-            if (e.getMessage().contains("Unable to log in") && CONFIG.authentication.isRateLimit && SHOULD_RECONNECT)
+            do
             {
-                Objects.requireNonNull(DISCORD.getUserById(CONFIG.service.subscriberId)).openPrivateChannel().queue((privateChannel ->
-                        privateChannel.sendMessage(new EmbedBuilder()
-                                .setTitle("**DQS** - Mojang Auth Ratelimit")
-                                .setDescription("DQS believes that you were not able to log in due to Mojang's Authentication API ratelimit. Attempting reconnection in " + CONFIG.modules.autoReconnect.delaySeconds + 60 + " seconds.")
-                                .setColor(new Color(15221016))
-                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
-                                .build()).queue()));
+                Constants.SHOULD_RECONNECT = true;
+                isRecon = false;
 
-                try
-                {
-                    Thread.sleep((CONFIG.modules.autoReconnect.delaySeconds + 60) * 1000);
-                } catch (InterruptedException ignored)
-                {
+                CACHE.reset(true);
 
+                if (DQS.getInstance().isConnected())
+                {
+                    DQS.getInstance().getClient().getSession().disconnect("lol");
                 }
 
                 DQS.getInstance().logIn();
                 DQS.getInstance().connect();
+
+//                if (DQS.getInstance().server != null)
+//                {
+//                    DQS.getInstance().server.close();
+//                    DQS.getInstance().server = null;
+//                }
+
+//                DQS.getInstance().startServer();
 
                 DQS.placeInQueue = -1;
                 DQS.startTime = -1;
                 DQS.startPosition = -1;
 
                 saveConfig();
-            }
+//
+//                this.logIn();
+//                this.connect();
+//
+//                saveConfig();
+
+                placeInQueue = -1;
+                startTime = -1;
+                startPosition = -1;
+
+                //wait for client to disconnect before starting again
+                CLIENT_LOG.info("Disconnected. Reason: %s", ((DQSClientSession) this.client.getSession()).getDisconnectReason());
+            } while (SHOULD_RECONNECT && CACHE.reset(true) && this.delayBeforeReconnect());
 
             DEFAULT_LOG.alert(e);
         } finally

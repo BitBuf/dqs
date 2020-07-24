@@ -35,6 +35,19 @@ public class SignInCommand extends Command
         {
             try
             {
+                if (CONFIG.authentication.hasAuthenticated)
+                {
+                    event.reply(new EmbedBuilder()
+                            .setTitle("**DQS** - Already Signed In")
+                            .setDescription("In order for you to sign in with a new account, contact Dewy.")
+                            .setColor(new Color(15221016))
+                            .setFooter("Focused on " + Constants.CONFIG.authentication.username)
+                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
+                            .build());
+
+                    return;
+                }
+
                 String[] args = event.getArgs().split("\\s+");
 
                 if (event.getArgs().isEmpty() || args.length != 3)
