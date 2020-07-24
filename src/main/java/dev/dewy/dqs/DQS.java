@@ -351,18 +351,47 @@ public class DQS
         {
             DEFAULT_LOG.alert(e);
 
-            new Thread(() ->
+            do
             {
-                try
-                {
-                    Thread.sleep(5000L);
+                Constants.SHOULD_RECONNECT = true;
+                isRecon = false;
 
-                    instance.start();
-                } catch (LoginException | InterruptedException loginException)
+                CACHE.reset(true);
+
+                if (DQS.getInstance().isConnected())
                 {
-                    loginException.printStackTrace();
+                    DQS.getInstance().getClient().getSession().disconnect("user disconnect");
                 }
-            }).start();
+
+                DQS.getInstance().logIn();
+                DQS.getInstance().connect();
+
+//                if (DQS.getInstance().server != null)
+//                {
+//                    DQS.getInstance().server.close();
+//                    DQS.getInstance().server = null;
+//                }
+
+//                DQS.getInstance().startServer();
+
+                DQS.placeInQueue = -1;
+                DQS.startTime = -1;
+                DQS.startPosition = -1;
+
+                saveConfig();
+//
+//                this.logIn();
+//                this.connect();
+//
+//                saveConfig();
+
+                placeInQueue = -1;
+                startTime = -1;
+                startPosition = -1;
+
+                //wait for client to disconnect before starting again
+                CLIENT_LOG.info("Disconndwsdected. Reason: %s", ((DQSClientSession) this.client.getSession()).getDisconnectReason());
+            } while (SHOULD_RECONNECT && CACHE.reset(true) && this.delayBeforeReconnect());
         } finally
         {
             if (!CONFIG.authentication.isRateLimit)
