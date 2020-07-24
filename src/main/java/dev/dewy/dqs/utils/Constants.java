@@ -53,7 +53,7 @@ import java.util.Date;
 
 public final class Constants
 {
-    public static final String VERSION = "3.0.2";
+    public static final String VERSION = "3.0.3";
 
     public static final JsonParser JSON_PARSER = new JsonParser();
     public static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
