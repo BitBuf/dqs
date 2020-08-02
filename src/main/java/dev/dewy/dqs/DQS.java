@@ -3,7 +3,6 @@ package dev.dewy.dqs;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import dev.dewy.dqs.client.DQSClientSession;
 import dev.dewy.dqs.client.handler.incoming.spawn.SpawnPlayerHandler;
-import dev.dewy.dqs.exceptions.request.InvalidCredentialsException;
 import dev.dewy.dqs.networking.Client;
 import dev.dewy.dqs.networking.Server;
 import dev.dewy.dqs.networking.SessionFactory;
@@ -77,6 +76,8 @@ public class DQS
     private TariboneController controller;
     private TariboneTicker ticker;
     private TariboneDQSPlayer player;
+
+    private int reconnectCounter;
 
     public static boolean isRecon = false;
 
@@ -340,16 +341,20 @@ public class DQS
 //
 //                saveConfig();
 
-                placeInQueue = -1;
-                startTime = -1;
-                startPosition = -1;
-
                 //wait for client to disconnect before starting again
                 CLIENT_LOG.info("Disconnected. Reason: %s", ((DQSClientSession) this.client.getSession()).getDisconnectReason());
             } while (SHOULD_RECONNECT && CACHE.reset(true) && this.delayBeforeReconnect());
         } catch (Exception e)
         {
             DEFAULT_LOG.alert(e);
+
+            Objects.requireNonNull(DISCORD.getUserById(Constants.CONFIG.service.operatorId)).openPrivateChannel().queue((privateChannel ->
+                    privateChannel.sendMessage(new EmbedBuilder()
+                            .setTitle("**DQS** - Fallback Alert (" + Objects.requireNonNull(DISCORD.getUserById(Constants.CONFIG.service.subscriberId)).getName() + ")")
+                            .setDescription("Instance has come on fallback.")
+                            .setColor(new Color(15221016))
+                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
+                            .build()).queue()));
 
             do
             {
@@ -385,14 +390,10 @@ public class DQS
 //
 //                saveConfig();
 
-                placeInQueue = -1;
-                startTime = -1;
-                startPosition = -1;
-
                 //wait for client to disconnect before starting again
-                CLIENT_LOG.info("Disconndwsdected. Reason: %s", ((DQSClientSession) this.client.getSession()).getDisconnectReason());
+                CLIENT_LOG.info("Disconnected. Reason: %s", ((DQSClientSession) this.client.getSession()).getDisconnectReason());
             } while (SHOULD_RECONNECT && CACHE.reset(true) && this.delayBeforeReconnect());
-        } finally
+       } finally
         {
             if (!CONFIG.authentication.isRateLimit)
             {
@@ -556,11 +557,25 @@ public class DQS
 
         try
         {
-            for (int i = CONFIG.modules.autoReconnect.delaySeconds; SHOULD_RECONNECT && i > 0; i--)
+            final int countdown;
+
+            if (((DQSClientSession) client.getSession()).isServerProbablyOff())
+            {
+                countdown = CONFIG.modules.autoReconnect.delaySecondsOffline;
+
+                reconnectCounter = 0;
+            }
+            else
+            {
+                countdown = CONFIG.modules.autoReconnect.delaySeconds + CONFIG.modules.autoReconnect.linearIncrease * reconnectCounter++;
+            }
+
+            for (int i = countdown; SHOULD_RECONNECT && i > 0; i--)
             {
                 CLIENT_LOG.info("Reconnecting in %d", i);
                 Thread.sleep(1000L);
             }
+
             return true;
         } catch (InterruptedException e)
         {
