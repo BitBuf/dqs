@@ -344,7 +344,43 @@ public class DQS
             } while (SHOULD_RECONNECT && CACHE.reset(true) && this.delayBeforeReconnect());
         } catch (Exception e)
         {
-            DEFAULT_LOG.alert(e);
+            do
+            {
+                Constants.SHOULD_RECONNECT = true;
+                isRecon = false;
+
+                CACHE.reset(true);
+
+                if (DQS.getInstance().isConnected())
+                {
+                    DQS.getInstance().getClient().getSession().disconnect("user disconnect");
+                }
+
+                DQS.getInstance().logIn();
+                DQS.getInstance().connect();
+
+//                if (DQS.getInstance().server != null)
+//                {
+//                    DQS.getInstance().server.close();
+//                    DQS.getInstance().server = null;
+//                }
+
+//                DQS.getInstance().startServer();
+
+                DQS.placeInQueue = -1;
+                DQS.startTime = -1;
+                DQS.startPosition = -1;
+
+                saveConfig();
+//
+//                this.logIn();
+//                this.connect();
+//
+//                saveConfig();
+
+                //wait for client to disconnect before starting again
+                CLIENT_LOG.info("Disconnected. Reason: %s", ((DQSClientSession) this.client.getSession()).getDisconnectReason());
+            } while (SHOULD_RECONNECT && CACHE.reset(true) && this.delayBeforeReconnect());
        } finally
         {
             if (!CONFIG.authentication.isRateLimit)
