@@ -67,4 +67,9 @@ public class DQSClientSession extends TcpClientSession
     {
         return this.disconnectFuture;
     }
+
+    public boolean isOffline()
+    {
+        return offline;
+    }
 }
