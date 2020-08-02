@@ -197,7 +197,8 @@ public final class Config
         {
             public boolean enabled = true;
 
-            public int delaySeconds = 120;
+            public int delaySecondsOffline = 1;
+            public int delaySeconds = 30;
         }
 
         public static final class AutoRespawn

@@ -16,6 +16,8 @@ public class DQSClientSession extends TcpClientSession
     protected final CompletableFuture<String> disconnectFuture = new CompletableFuture<>();
     protected final DQS dqs;
 
+    protected boolean offline;
+
     public DQSClientSession(String host, int port, PacketProtocol protocol, Client client, DQS dqs)
     {
         super(host, port, protocol, client, null);
@@ -39,11 +41,15 @@ public class DQSClientSession extends TcpClientSession
     public void disconnect(String reason, Throwable cause, boolean wait)
     {
         super.disconnect(reason, cause, wait);
+
+        offline = false;
+
         if (cause == null)
         {
             this.disconnectFuture.complete(reason);
         } else if (cause instanceof IOException)
         {
+            offline = true;
             this.disconnectFuture.complete(String.format("IOException: %s", cause.getMessage()));
         } else
         {
