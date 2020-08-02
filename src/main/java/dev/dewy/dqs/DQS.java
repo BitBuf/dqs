@@ -3,7 +3,6 @@ package dev.dewy.dqs;
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import dev.dewy.dqs.client.DQSClientSession;
 import dev.dewy.dqs.client.handler.incoming.spawn.SpawnPlayerHandler;
-import dev.dewy.dqs.exceptions.request.InvalidCredentialsException;
 import dev.dewy.dqs.networking.Client;
 import dev.dewy.dqs.networking.Server;
 import dev.dewy.dqs.networking.SessionFactory;
@@ -32,11 +31,9 @@ import dev.dewy.dqs.taribone.world.physics.TariboneWorldPhysics;
 import dev.dewy.dqs.utils.Authenticator;
 import dev.dewy.dqs.utils.Constants;
 import dev.dewy.dqs.utils.ServerData;
-import net.dv8tion.jda.api.EmbedBuilder;
 
 import javax.imageio.ImageIO;
 import javax.security.auth.login.LoginException;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -77,6 +74,8 @@ public class DQS
     private TariboneController controller;
     private TariboneTicker ticker;
     private TariboneDQSPlayer player;
+
+    private int reconnectCounter;
 
     public static boolean isRecon = false;
 
@@ -510,12 +509,27 @@ public class DQS
 
         try
         {
-            for (int i = ((DQSClientSession) client.getSession()).isOffline() ?
-                    CONFIG.modules.autoReconnect.delaySecondsOffline :
-                    CONFIG.modules.autoReconnect.delaySeconds; SHOULD_RECONNECT && i > 0; i--) {
+            final int countdown;
+
+            if (((DQSClientSession) client.getSession()).isServerProbablyOff())
+            {
+                countdown = CONFIG.modules.autoReconnect.delaySecondsOffline;
+
+                reconnectCounter = 0;
+            }
+            else
+            {
+                countdown = CONFIG.modules.autoReconnect.delaySeconds + CONFIG.modules.autoReconnect.linearIncrease * reconnectCounter;
+
+                reconnectCounter++;
+            }
+
+            for (int i = countdown; SHOULD_RECONNECT && i > 0; i--)
+            {
                 CLIENT_LOG.info("Reconnecting in %d", i);
                 Thread.sleep(1000L);
             }
+            
             return true;
         } catch (InterruptedException e)
         {
