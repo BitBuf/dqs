@@ -58,7 +58,7 @@ public class AutoReconnectCommand extends Command
                     return;
                 }
 
-                if (Integer.parseInt(args[0]) <= 30)
+                if (Integer.parseInt(args[0]) < 30)
                 {
                     event.reply(new EmbedBuilder()
                             .setTitle("**DQS** - Inapplicable Integer")
