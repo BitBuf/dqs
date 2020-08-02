@@ -519,9 +519,7 @@ public class DQS
             }
             else
             {
-                countdown = CONFIG.modules.autoReconnect.delaySeconds + CONFIG.modules.autoReconnect.linearIncrease * reconnectCounter;
-
-                reconnectCounter++;
+                countdown = CONFIG.modules.autoReconnect.delaySeconds + CONFIG.modules.autoReconnect.linearIncrease * reconnectCounter++;
             }
 
             for (int i = countdown; SHOULD_RECONNECT && i > 0; i--)
@@ -529,7 +527,7 @@ public class DQS
                 CLIENT_LOG.info("Reconnecting in %d", i);
                 Thread.sleep(1000L);
             }
-            
+
             return true;
         } catch (InterruptedException e)
         {
