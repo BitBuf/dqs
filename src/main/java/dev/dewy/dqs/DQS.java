@@ -395,6 +395,14 @@ public class DQS
             } while (SHOULD_RECONNECT && CACHE.reset(true) && this.delayBeforeReconnect());
        } finally
         {
+            Objects.requireNonNull(DISCORD.getUserById(Constants.CONFIG.service.operatorId)).openPrivateChannel().queue((privateChannel ->
+                    privateChannel.sendMessage(new EmbedBuilder()
+                            .setTitle("**DQS** - Post Fallback Alert (" + Objects.requireNonNull(DISCORD.getUserById(Constants.CONFIG.service.subscriberId)).getName() + ")")
+                            .setDescription("Reset immediately.")
+                            .setColor(new Color(15221016))
+                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
+                            .build()).queue()));
+
             if (!CONFIG.authentication.isRateLimit)
             {
                 DEFAULT_LOG.info("Shutting down...");
