@@ -148,7 +148,7 @@ public class ChatHandler implements HandlerRegistry.IncomingHandler<ServerChatPa
             }));
         }
 
-        if (DQS.placeInQueue <= CONFIG.modules.autoDisconnect.nearlyFinishedQueueingThreshold && DQS.placeInQueue > 0 && CONFIG.modules.autoDisconnect.enabled && CONFIG.modules.autoDisconnect.nearlyFinishedQueueing)
+        if (DQS.placeInQueue <= CONFIG.modules.autoDisconnect.nearlyFinishedQueueingThreshold && DQS.placeInQueue > 0 && CONFIG.modules.autoDisconnect.enabled && CONFIG.modules.autoDisconnect.nearlyFinishedQueueing && !DQS.getInstance().connectedToProxy)
         {
             session.getDqs().getClient().getSession().disconnect("§7[§b§lDQS§r§7] §fAuto disconnect.", false);
         }
