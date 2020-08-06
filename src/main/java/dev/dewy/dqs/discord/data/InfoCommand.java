@@ -2,6 +2,7 @@ package dev.dewy.dqs.discord.data;
 
 import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
+import dev.dewy.dqs.DQS;
 import dev.dewy.dqs.utils.Constants;
 import net.dv8tion.jda.api.EmbedBuilder;
 import org.apache.commons.text.WordUtils;
@@ -63,6 +64,19 @@ public class InfoCommand extends Command
         {
             try
             {
+                if (!DQS.getInstance().isConnected())
+                {
+                    event.reply(new EmbedBuilder()
+                            .setTitle("**DQS** - Currently Not Connected")
+                            .setDescription("Your account is currently not connected to the server due to it currently relogging, try again in a bit.")
+                            .setColor(new Color(15221016))
+                            .setFooter("Focused on " + Constants.CONFIG.authentication.username)
+                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
+                            .build());
+
+                    return;
+                }
+
                 event.reply(new EmbedBuilder()
                         .setTitle("**DQS** - Statistics & Biometrics")
                         .setColor(new Color(10144497))

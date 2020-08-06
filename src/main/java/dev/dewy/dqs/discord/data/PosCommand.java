@@ -110,6 +110,19 @@ public class PosCommand extends Command
                     return;
                 }
 
+                if (!DQS.getInstance().isConnected())
+                {
+                    event.reply(new EmbedBuilder()
+                            .setTitle("**DQS** - Not Connected To 2B2T")
+                            .setDescription("A queue position could not be determined because your account is currently not on 2B2T. Try again in a little bit once your account has relogged.")
+                            .setColor(new Color(15221016))
+                            .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
+                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
+                            .build());
+
+                    return;
+                }
+
                 if (DQS.placeInQueue != -1)
                 {
                     if (Integer.parseInt(DQS.getPosition()) > getNormalQueueLength())

@@ -17,8 +17,7 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.Objects;
 
-import static dev.dewy.dqs.utils.Constants.CACHE;
-import static dev.dewy.dqs.utils.Constants.DISCORD;
+import static dev.dewy.dqs.utils.Constants.*;
 
 public class SpawnPlayerHandler implements HandlerRegistry.IncomingHandler<ServerSpawnPlayerPacket, DQSClientSession>
 {
@@ -80,6 +79,44 @@ public class SpawnPlayerHandler implements HandlerRegistry.IncomingHandler<Serve
                         Constants.DISCORD_LOG.error(e);
                     }
                 }));
+
+                try
+                {
+                    Thread.sleep(2000L);
+                } catch (InterruptedException e)
+                {
+                    DEFAULT_LOG.alert(e);
+                }
+            }
+
+            if (Constants.CONFIG.modules.autoDisconnect.enabled && Constants.CONFIG.modules.autoDisconnect.playerInRange && DQS.getInstance().isConnected() && !DQS.getInstance().connectedToProxy)
+            {
+                session.getDqs().getClient().getSession().disconnect("§7[§b§lDQS§r§7] §fAuto disconnect.", false);
+
+                Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.service.subscriberId)).openPrivateChannel().queue((privateChannel ->
+                {
+                    try
+                    {
+                        privateChannel.sendMessage(new EmbedBuilder()
+                                .setTitle("**DQS** - Player In Range")
+                                .setDescription("You were disconnected because **" + getNameFromUUID(packet.getUUID().toString()) + "** has entered your accounts visible range.")
+                                .setColor(new Color(15221016))
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
+                                .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
+                                .build()).queue();
+                    } catch (MalformedURLException e)
+                    {
+                        Constants.DISCORD_LOG.error(e);
+                    }
+                }));
+
+                try
+                {
+                    Thread.sleep(10000L);
+                } catch (InterruptedException e)
+                {
+                    DEFAULT_LOG.alert(e);
+                }
             }
         } catch (Throwable t)
         {
@@ -92,11 +129,6 @@ public class SpawnPlayerHandler implements HandlerRegistry.IncomingHandler<Serve
                             .setColor(new Color(15221016))
                             .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
                             .build()).queue()));
-        }
-
-        if (Constants.CONFIG.modules.autoDisconnect.enabled && Constants.CONFIG.modules.autoDisconnect.playerInRange && DQS.getInstance().isConnected() && !DQS.getInstance().connectedToProxy)
-        {
-            session.getDqs().getClient().getSession().disconnect("§7[§b§lDQS§r§7] §fAuto disconnect.", false);
         }
 
         return true;

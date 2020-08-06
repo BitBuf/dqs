@@ -1,6 +1,5 @@
 package dev.dewy.dqs.server.handler.incoming;
 
-import dev.dewy.dqs.DQS;
 import dev.dewy.dqs.handler.HandlerRegistry;
 import dev.dewy.dqs.packet.login.client.LoginStartPacket;
 import dev.dewy.dqs.server.DQSServerConnection;
@@ -20,10 +19,7 @@ public class LoginStartHandler implements HandlerRegistry.IncomingHandler<LoginS
             session.disconnect(CONFIG.modules.whitelist.kickmsg);
             return false;
         }
-        if (!DQS.getInstance().isConnected())
-        {
-            session.disconnect("Not connected to server!");
-        }
+
         return false;
     }
 
