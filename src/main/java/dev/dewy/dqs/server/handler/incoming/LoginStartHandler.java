@@ -1,5 +1,6 @@
 package dev.dewy.dqs.server.handler.incoming;
 
+import dev.dewy.dqs.DQS;
 import dev.dewy.dqs.handler.HandlerRegistry;
 import dev.dewy.dqs.packet.login.client.LoginStartPacket;
 import dev.dewy.dqs.server.DQSServerConnection;
@@ -18,6 +19,11 @@ public class LoginStartHandler implements HandlerRegistry.IncomingHandler<LoginS
             SERVER_LOG.warn("User %s [%s] tried to connect!", packet.getUsername(), session.getRemoteAddress());
             session.disconnect(CONFIG.modules.whitelist.kickmsg);
             return false;
+        }
+
+        if (DQS.isRecon)
+        {
+            session.disconnect("Currently relogging. Please wait a little bit.");
         }
 
         return false;
