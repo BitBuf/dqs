@@ -488,19 +488,16 @@ public class DQS
                             .getConnections().get(session);
                     if (!this.currentPlayer.compareAndSet(null, connection))
                     {
-                        if (connection.getRemoteAddress().toString().equals(CONFIG.service.tariboneIp))
+                        if (connection.getRemoteAddress().toString().contains(CONFIG.service.tariboneIp))
                         {
                             this.currentPlayer.get().setPlayer(false);
-                            this.currentPlayer.get().disconnect("§7[§b§lDQS§r§7] §fA Taribone session has taken control. Please end it to reconnect.");
+                            this.currentPlayer.get().disconnect("§7[§b§lDQS§r§7] §fA Taribone session has taken control. To end it, use &end or simply reconnect.");
                             this.currentPlayer.set(connection);
-                        } else if (Objects.equals(SpawnPlayerHandler.getNameFromUUID(CACHE.getPlayerCache().getThePlayer().getUuid().toString()), "Taribone"))
-                        {
-                            connection.disconnect("§7[§b§lDQS§r§7] §fA Taribone session is running on your instance. Please end the session before connecting.");
-                            return;
                         } else
                         {
-                            connection.disconnect("§7[§b§lDQS§r§7] §fA player is already connected to this instance.");
-                            return;
+                            this.currentPlayer.get().setPlayer(false);
+                            this.currentPlayer.get().disconnect("§7[§b§lDQS§r§7] §fAnother player has taken control.");
+                            this.currentPlayer.set(connection);
                         }
                     }
                     connection.setPlayer(true);
