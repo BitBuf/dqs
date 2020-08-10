@@ -65,11 +65,11 @@ public class SpammerCommand extends Command
                         messageToAdd.append(" ").append(args[i]);
                     }
 
-                    Constants.CONFIG.modules.chatSpammer.messages.add(messageToAdd.toString().substring(1));
+                    Constants.CONFIG.modules.chatSpammer.messages.add(messageToAdd.substring(1));
 
                     event.reply(new EmbedBuilder()
                             .setTitle("**DQS** - Spammer")
-                            .setDescription("You have added this message to the DQS spammer messages list under **ID " + (Constants.CONFIG.modules.chatSpammer.messages.size() - 1) + "**...\n\n`" + messageToAdd.toString().substring(1) + "`")
+                            .setDescription("You have added this message to the DQS spammer messages list under **ID " + (Constants.CONFIG.modules.chatSpammer.messages.size() - 1) + "**...\n\n`" + messageToAdd.substring(1) + "`")
                             .setColor(new Color(10144497))
                             .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                             .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")

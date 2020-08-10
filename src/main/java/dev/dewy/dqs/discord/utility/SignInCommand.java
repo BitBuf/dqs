@@ -11,7 +11,6 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import java.awt.*;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.io.Reader;
 import java.net.URL;
 import java.util.Objects;
 
@@ -26,6 +25,44 @@ public class SignInCommand extends Command
         this.aliases = new String[] {"login"};
         this.guildOnly = false;
         this.arguments = "<IGN> <EMAIL> <PASSWORD>";
+    }
+
+    public static String getUUIDFromName(final String name, final boolean onlinemode, final boolean withSeperators)
+    {
+        String uuid;
+
+        if (onlinemode)
+        {
+            try
+            {
+                final BufferedReader in = new BufferedReader(new InputStreamReader(new URL("https://api.mojang.com/users/profiles/minecraft/" + name).openStream()));
+                uuid = ((JsonObject) new JsonParser().parse(in)).get("id").toString().replaceAll("\"", "");
+
+                in.close();
+            } catch (Exception e)
+            {
+                uuid = null;
+            }
+        } else
+        {
+            uuid = null;
+        }
+
+        if (uuid != null)
+        {
+            if (withSeperators)
+            {
+                if (!uuid.contains("-"))
+                {
+                    return uuid.replaceAll("(\\w{8})(\\w{4})(\\w{4})(\\w{4})(\\w{12})", "$1-$2-$3-$4-$5");
+                }
+            } else
+            {
+                uuid = uuid.replaceAll("-", "");
+            }
+        }
+
+        return uuid;
     }
 
     @Override
@@ -116,46 +153,5 @@ public class SignInCommand extends Command
                                 .build()).queue()));
             }
         }
-    }
-
-    public static String getUUIDFromName(final String name, final boolean onlinemode, final boolean withSeperators)
-    {
-        String uuid;
-
-        if (onlinemode)
-        {
-            try
-            {
-                final BufferedReader in = new BufferedReader(new InputStreamReader(new URL("https://api.mojang.com/users/profiles/minecraft/" + name).openStream()));
-                uuid = ((JsonObject)new JsonParser().parse(in)).get("id").toString().replaceAll("\"", "");
-
-                in.close();
-            }
-            catch (Exception e)
-            {
-                uuid = null;
-            }
-        }
-        else
-        {
-            uuid = null;
-        }
-
-        if (uuid != null)
-        {
-            if (withSeperators)
-            {
-                if (!uuid.contains("-"))
-                {
-                    return uuid.replaceAll("(\\w{8})(\\w{4})(\\w{4})(\\w{4})(\\w{12})", "$1-$2-$3-$4-$5");
-                }
-            }
-            else
-            {
-                uuid = uuid.replaceAll("-", "");
-            }
-        }
-
-        return uuid;
     }
 }

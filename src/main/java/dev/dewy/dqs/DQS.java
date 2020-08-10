@@ -2,7 +2,6 @@ package dev.dewy.dqs;
 
 import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import dev.dewy.dqs.client.DQSClientSession;
-import dev.dewy.dqs.client.handler.incoming.spawn.SpawnPlayerHandler;
 import dev.dewy.dqs.networking.Client;
 import dev.dewy.dqs.networking.Server;
 import dev.dewy.dqs.networking.SessionFactory;
@@ -57,6 +56,8 @@ public class DQS
     public static int startPosition = -1;
     public static String prevEta = "N/A";
     public static int etaDelay = 0;
+    public static boolean hasHpWarned = false;
+    public static boolean isRecon = false;
     protected static DQS instance;
     protected final SessionFactory sessionFactory = new DQSSessionFactory(this);
     protected final AtomicReference<DQSServerConnection> currentPlayer = new AtomicReference<>();
@@ -76,10 +77,7 @@ public class DQS
     private TariboneController controller;
     private TariboneTicker ticker;
     private TariboneDQSPlayer player;
-
     private int reconnectCounter;
-
-    public static boolean isRecon = false;
 
     public static void main(String... args) throws LoginException
     {
@@ -303,12 +301,13 @@ public class DQS
                 timeoutThread.start();
             }
 
-            this.logIn();
+//            this.logIn();
             this.startServer();
             CACHE.reset(true);
 
             do
             {
+                hasHpWarned = false;
                 Constants.SHOULD_RECONNECT = true;
                 isRecon = false;
 
@@ -393,7 +392,7 @@ public class DQS
                 //wait for client to disconnect before starting again
                 CLIENT_LOG.info("Disconnected. Reason: %s", ((DQSClientSession) this.client.getSession()).getDisconnectReason());
             } while (SHOULD_RECONNECT && CACHE.reset(true) && this.delayBeforeReconnect());
-       } finally
+        } finally
         {
             Objects.requireNonNull(DISCORD.getUserById(Constants.CONFIG.service.operatorId)).openPrivateChannel().queue((privateChannel ->
                     privateChannel.sendMessage(new EmbedBuilder()
@@ -569,8 +568,7 @@ public class DQS
                 countdown = CONFIG.modules.autoReconnect.delaySecondsOffline;
 
                 reconnectCounter = 0;
-            }
-            else
+            } else
             {
                 countdown = CONFIG.modules.autoReconnect.delaySeconds + CONFIG.modules.autoReconnect.linearIncrease * reconnectCounter++;
             }

@@ -40,7 +40,7 @@ public class PlayerHealthHandler implements HandlerRegistry.IncomingHandler<Serv
             }).start();
         }
 
-        if (packet.getHealth() <= CONFIG.modules.autoDisconnect.lowHpThreshold && CONFIG.modules.autoDisconnect.enabled && CONFIG.modules.autoDisconnect.lowHp && !DQS.getInstance().connectedToProxy)
+        if (packet.getHealth() <= CONFIG.modules.autoDisconnect.lowHpThreshold && CONFIG.modules.autoDisconnect.enabled && CONFIG.modules.autoDisconnect.lowHp && !DQS.getInstance().connectedToProxy && !DQS.hasHpWarned)
         {
             DQS.getInstance().getClient().getSession().disconnect("user disconnect", false);
 
@@ -52,10 +52,12 @@ public class PlayerHealthHandler implements HandlerRegistry.IncomingHandler<Serv
                             .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
                             .build()).queue()));
 
+            DQS.hasHpWarned = true;
+
             return false;
         }
 
-        if (packet.getHealth() <= CONFIG.modules.notifications.lowHpThreshold && CONFIG.modules.notifications.enabled && CONFIG.modules.notifications.lowHp && !DQS.getInstance().connectedToProxy)
+        if (packet.getHealth() <= CONFIG.modules.notifications.lowHpThreshold && CONFIG.modules.notifications.enabled && CONFIG.modules.notifications.lowHp && !DQS.getInstance().connectedToProxy && !DQS.hasHpWarned)
         {
             Objects.requireNonNull(DISCORD.getUserById(CONFIG.service.subscriberId)).openPrivateChannel().queue((privateChannel ->
                     privateChannel.sendMessage(new EmbedBuilder()
@@ -64,6 +66,8 @@ public class PlayerHealthHandler implements HandlerRegistry.IncomingHandler<Serv
                             .setColor(new Color(15221016))
                             .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
                             .build()).queue()));
+
+            DQS.hasHpWarned = true;
         }
 
         return true;

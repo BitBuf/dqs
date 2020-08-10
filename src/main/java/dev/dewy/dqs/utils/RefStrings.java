@@ -6,8 +6,6 @@ import io.netty.buffer.Unpooled;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-import static dev.dewy.dqs.utils.Constants.VERSION;
-
 public final class RefStrings
 {
     public static final byte[] BRAND_ENCODED;

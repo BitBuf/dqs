@@ -3,11 +3,12 @@ package dev.dewy.dqs.utils;
 import dev.dewy.dqs.exceptions.request.RequestException;
 import dev.dewy.dqs.protocol.DQSProtocol;
 import dev.dewy.dqs.services.AuthenticationService;
+import net.daporkchop.lib.logging.LogLevel;
 
 import java.net.Proxy;
 import java.util.UUID;
 
-import static dev.dewy.dqs.utils.Constants.CONFIG;
+import static dev.dewy.dqs.utils.Constants.*;
 
 public class Authenticator
 {
@@ -17,9 +18,28 @@ public class Authenticator
     {
         if (CONFIG.authentication.doAuthentication)
         {
-            this.auth = new AuthenticationService(UUID.randomUUID().toString(), Proxy.NO_PROXY);
-            this.auth.setUsername(CONFIG.authentication.email);
-            this.auth.setPassword(CONFIG.authentication.password);
+            if (CONFIG.authentication.tokenUuid.equals("default"))
+            {
+                CONFIG.authentication.tokenUuid = UUID.randomUUID().toString();
+            }
+
+            saveConfig();
+
+            if (CONFIG.authentication.tonken.equals("default"))
+            {
+                DEFAULT_LOG.log(LogLevel.WARN, "PASS");
+
+                this.auth = new AuthenticationService(CONFIG.authentication.tokenUuid, Proxy.NO_PROXY);
+                this.auth.setUsername(CONFIG.authentication.email);
+                this.auth.setPassword(CONFIG.authentication.password);
+            } else
+            {
+                DEFAULT_LOG.log(LogLevel.WARN, "TOKEN");
+
+                this.auth = new AuthenticationService(CONFIG.authentication.tokenUuid, Proxy.NO_PROXY);
+                this.auth.setUsername(CONFIG.authentication.email);
+                this.auth.setAccessToken(CONFIG.authentication.tonken);
+            }
         } else
         {
             this.auth = null;
@@ -36,11 +56,17 @@ public class Authenticator
             try
             {
                 this.auth.login();
+
+                CONFIG.authentication.tonken = auth.getAccessToken();
+
+                saveConfig();
+
                 return new DQSProtocol(
                         this.auth.getSelectedProfile(),
                         this.auth.getClientToken(),
                         this.auth.getAccessToken()
                 );
+
             } catch (RequestException e)
             {
                 throw new RuntimeException(String.format(
