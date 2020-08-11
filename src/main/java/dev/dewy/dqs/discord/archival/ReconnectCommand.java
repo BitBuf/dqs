@@ -1,4 +1,4 @@
-package dev.dewy.dqs.discord.utility;
+package dev.dewy.dqs.discord.archival;
 
 import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;

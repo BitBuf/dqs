@@ -39,6 +39,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.Proxy;
 import java.net.URL;
 import java.util.*;
@@ -394,13 +395,16 @@ public class DQS
             } while (SHOULD_RECONNECT && CACHE.reset(true) && this.delayBeforeReconnect());
         } finally
         {
-            Objects.requireNonNull(DISCORD.getUserById(Constants.CONFIG.service.operatorId)).openPrivateChannel().queue((privateChannel ->
-                    privateChannel.sendMessage(new EmbedBuilder()
-                            .setTitle("**DQS** - Post Fallback Alert (" + Objects.requireNonNull(DISCORD.getUserById(Constants.CONFIG.service.subscriberId)).getName() + ")")
-                            .setDescription("Reset immediately.")
-                            .setColor(new Color(15221016))
-                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
-                            .build()).queue()));
+            if (SHOULD_RECONNECT)
+            {
+                Objects.requireNonNull(DISCORD.getUserById(Constants.CONFIG.service.operatorId)).openPrivateChannel().queue((privateChannel ->
+                        privateChannel.sendMessage(new EmbedBuilder()
+                                .setTitle("**DQS** - Post Fallback Alert (" + Objects.requireNonNull(DISCORD.getUserById(Constants.CONFIG.service.subscriberId)).getName() + ")")
+                                .setDescription("Reset immediately.")
+                                .setColor(new Color(15221016))
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
+                                .build()).queue()));
+            }
 
             if (!CONFIG.authentication.isRateLimit)
             {
@@ -552,7 +556,28 @@ public class DQS
         }
         CACHE.getProfileCache().setProfile(this.protocol.getProfile());
         AUTH_LOG.success("Logged in.");
-        CONFIG.authentication.isRateLimit = true;
+
+        if (!CONFIG.authentication.hasAuthenticated)
+        {
+            Objects.requireNonNull(DISCORD.getUserById(CONFIG.service.subscriberId)).openPrivateChannel().queue((privateChannel ->
+            {
+                try
+                {
+                    privateChannel.sendMessage(new EmbedBuilder()
+                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
+                            .setTitle("**DQS** - Authenticated")
+                            .setDescription("You've successfully authenticated with the target server `" + CONFIG.client.server.address + "`")
+                            .setColor(new Color(10144497))
+                            .setFooter("Notification intended for " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
+                            .build()).queue();
+                } catch (MalformedURLException e)
+                {
+                    e.printStackTrace();
+                }
+            }));
+        }
+
+        CONFIG.authentication.hasAuthenticated = true;
     }
 
     protected boolean delayBeforeReconnect()

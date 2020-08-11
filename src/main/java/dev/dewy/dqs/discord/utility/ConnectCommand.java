@@ -12,12 +12,12 @@ import java.util.Objects;
 
 import static dev.dewy.dqs.utils.Constants.CONFIG;
 
-public class DisconnectCommand extends Command
+public class ConnectCommand extends Command
 {
-    public DisconnectCommand()
+    public ConnectCommand()
     {
-        this.name = "disconnect";
-        this.aliases = new String[] {"dc"};
+        this.name = "connect";
+        this.aliases = new String[] {"conn"};
         this.guildOnly = false;
     }
 
@@ -29,11 +29,11 @@ public class DisconnectCommand extends Command
         {
             try
             {
-                if (!DQS.getInstance().isConnected() || DQS.isRecon)
+                if (DQS.getInstance().isConnected() || DQS.isRecon)
                 {
                     event.reply(new EmbedBuilder()
-                            .setTitle("**DQS** - Disconnect")
-                            .setDescription("Your account is currently disconnected. You can connect it again with `&connect`.")
+                            .setTitle("**DQS** - Connect")
+                            .setDescription("Your account is currently connected or relogging. Please wait a little bit.")
                             .setColor(new Color(15221016))
                             .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                             .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
@@ -42,17 +42,33 @@ public class DisconnectCommand extends Command
                     return;
                 }
 
-                Constants.SHOULD_RECONNECT = false;
+                Constants.SHOULD_RECONNECT = true;
+                Constants.RATE_LIMITED = true;
 
                 event.reply(new EmbedBuilder()
-                        .setTitle("**DQS** - Disconnecting")
-                        .setDescription("Disconnecting from target server:\n\n`" + CONFIG.client.server.address + "`\n\nYou can reconnect with `&connect`.")
+                        .setTitle("**DQS** - Connecting")
+                        .setDescription("Connecting to target server:\n\n`" + CONFIG.client.server.address + "`")
                         .setColor(new Color(10144497))
                         .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                         .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
                         .build());
 
-                DQS.getInstance().getClient().getSession().disconnect("user disconnect");
+                new Thread(() ->
+                {
+                    try
+                    {
+                        if (DQS.getInstance().server != null)
+                        {
+                            DQS.getInstance().server.close();
+                            DQS.getInstance().server = null;
+                        }
+
+                        DQS.getInstance().start();
+                    } catch (Exception e)
+                    {
+                        e.printStackTrace();
+                    }
+                }).start();
             } catch (Throwable e)
             {
                 Constants.DISCORD_LOG.error(e);

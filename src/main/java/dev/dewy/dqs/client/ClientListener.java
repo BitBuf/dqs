@@ -106,7 +106,7 @@ public class ClientListener implements SessionListener
 
         DQS.queueNotifArmed = true;
 
-        if (Constants.CONFIG.modules.notifications.enabled && CONFIG.modules.notifications.relogged && SHOULD_RECONNECT)
+        if (Constants.CONFIG.modules.notifications.enabled && CONFIG.modules.notifications.relogged && SHOULD_RECONNECT && !RATE_LIMITED)
         {
             Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.service.subscriberId)).openPrivateChannel().queue((privateChannel ->
             {
@@ -125,6 +125,8 @@ public class ClientListener implements SessionListener
                 }
             }));
         }
+
+        RATE_LIMITED = false;
 
         DQSServerConnection connection = this.dqs.getCurrentPlayer().get();
         if (connection != null)

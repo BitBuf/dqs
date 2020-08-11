@@ -14,9 +14,7 @@ import dev.dewy.dqs.discord.data.ModulesCommand;
 import dev.dewy.dqs.discord.data.PosCommand;
 import dev.dewy.dqs.discord.dewy.KillCommand;
 import dev.dewy.dqs.discord.modules.*;
-import dev.dewy.dqs.discord.utility.RecoverCommand;
-import dev.dewy.dqs.discord.utility.RelogCommand;
-import dev.dewy.dqs.discord.utility.SignInCommand;
+import dev.dewy.dqs.discord.utility.*;
 import dev.dewy.dqs.handler.HandlerRegistry;
 import dev.dewy.dqs.server.DQSServerConnection;
 import dev.dewy.dqs.server.handler.incoming.LoginStartHandler;
@@ -140,6 +138,7 @@ public final class Constants
             .build();
     public static Config CONFIG;
     public static volatile boolean SHOULD_RECONNECT;
+    public static volatile boolean RATE_LIMITED = false;
 
     public static JDA DISCORD;
 
@@ -197,7 +196,9 @@ public final class Constants
                     new RelayCommand(),
                     new AutoDisconnectCommand(),
                     new AutoReplyCommand(),
-                    new MailForwardCommand());
+                    new MailForwardCommand(),
+                    new DisconnectCommand(),
+                    new ConnectCommand());
 
             try
             {
