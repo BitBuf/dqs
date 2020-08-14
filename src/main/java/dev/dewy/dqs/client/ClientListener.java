@@ -108,22 +108,28 @@ public class ClientListener implements SessionListener
 
         if (Constants.CONFIG.modules.notifications.enabled && CONFIG.modules.notifications.relogged && SHOULD_RECONNECT && !RATE_LIMITED)
         {
-            Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.service.subscriberId)).openPrivateChannel().queue((privateChannel ->
+            try
             {
-                try
+                Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.service.subscriberId)).openPrivateChannel().queue((privateChannel ->
                 {
-                    privateChannel.sendMessage(new EmbedBuilder()
-                            .setTitle("**DQS** - Relog Notification")
-                            .setDescription("Your account has been disconnected from the server. Attempting relog after " + CONFIG.modules.autoReconnect.delaySeconds + " seconds...")
-                            .setColor(new Color(15221016))
-                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
-                            .setFooter("Notification intended for " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
-                            .build()).queue();
-                } catch (MalformedURLException e)
-                {
-                    Constants.DISCORD_LOG.error(e);
-                }
-            }));
+                    try
+                    {
+                        privateChannel.sendMessage(new EmbedBuilder()
+                                .setTitle("**DQS** - Relog Notification")
+                                .setDescription("Your account has been disconnected from the server. Attempting relog after " + CONFIG.modules.autoReconnect.delaySeconds + " seconds...")
+                                .setColor(new Color(15221016))
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
+                                .setFooter("Notification intended for " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
+                                .build()).queue();
+                    } catch (MalformedURLException e)
+                    {
+                        Constants.DISCORD_LOG.error(e);
+                    }
+                }));
+            } catch (Throwable t)
+            {
+                DISCORD_LOG.alert(t);
+            }
         }
 
         RATE_LIMITED = false;

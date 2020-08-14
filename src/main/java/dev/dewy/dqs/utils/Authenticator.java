@@ -7,9 +7,7 @@ import net.daporkchop.lib.logging.LogLevel;
 import net.dv8tion.jda.api.EmbedBuilder;
 
 import java.awt.*;
-import java.net.MalformedURLException;
 import java.net.Proxy;
-import java.net.URL;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -76,14 +74,22 @@ public class Authenticator
             {
                 if (!CONFIG.authentication.hasAuthenticated)
                 {
-                    Objects.requireNonNull(DISCORD.getUserById(CONFIG.service.subscriberId)).openPrivateChannel().queue((privateChannel ->
-                            privateChannel.sendMessage(new EmbedBuilder()
-                                    .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
-                                    .setTitle("**DQS** - Failed To Authenticate")
-                                    .setDescription("You've failed to authenticate with the target server `" + CONFIG.client.server.address + "`. Try using `&signin` again.")
-                                    .setColor(new Color(10144497))
-                                    .setFooter("Notification intended for " + Constants.CONFIG.authentication.username)
-                                    .build()).queue()));
+                    try
+                    {
+                        Thread.sleep(3000L);
+
+                        Objects.requireNonNull(DISCORD.getUserById(CONFIG.service.subscriberId)).openPrivateChannel().queue((privateChannel ->
+                                privateChannel.sendMessage(new EmbedBuilder()
+                                        .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
+                                        .setTitle("**DQS** - Failed To Authenticate")
+                                        .setDescription("You've failed to authenticate with the target server `" + CONFIG.client.server.address + "`. Try using `&signin` again.")
+                                        .setColor(new Color(10144497))
+                                        .setFooter("Notification intended for " + Constants.CONFIG.authentication.username)
+                                        .build()).queue()));
+                    } catch (Throwable t)
+                    {
+                        DEFAULT_LOG.alert(t);
+                    }
                 }
 
                 throw new RuntimeException(String.format(

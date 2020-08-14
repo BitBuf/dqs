@@ -56,43 +56,55 @@ public class ChatHandler implements HandlerRegistry.IncomingHandler<ServerChatPa
 
             if (CONFIG.modules.mailForwarding.enabled)
             {
+                try
+                {
+                    Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.service.subscriberId)).openPrivateChannel().queue((privateChannel ->
+                    {
+                        try
+                        {
+                            privateChannel.sendMessage(new EmbedBuilder()
+                                    .setTitle("**DQS** - Ingame PM Recieved")
+                                    .setDescription("The player **" + who + "** sent you a PM in game:\n\n`" + msg + "`")
+                                    .setColor(new Color(10144497))
+                                    .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
+                                    .setFooter("Received PM from " + who, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", SignInCommand.getUUIDFromName(who, true, true))).toString())
+                                    .build()).queue();
+                        } catch (MalformedURLException e)
+                        {
+                            Constants.DISCORD_LOG.error(e);
+                        }
+                    }));
+                } catch (Throwable t)
+                {
+                    DISCORD_LOG.alert(t);
+                }
+            }
+        }
+
+        if (CONFIG.modules.chatRelay.enabled && CONFIG.modules.focus.focused && !DQS.getInstance().connectedToProxy)
+        {
+            try
+            {
                 Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.service.subscriberId)).openPrivateChannel().queue((privateChannel ->
                 {
                     try
                     {
                         privateChannel.sendMessage(new EmbedBuilder()
-                                .setTitle("**DQS** - Ingame PM Recieved")
-                                .setDescription("The player **" + who + "** sent you a PM in game:\n\n`" + msg + "`")
+                                .setTitle("**DQS** - Chat Relay")
+                                .setDescription(MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString())
                                 .setColor(new Color(10144497))
                                 .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
-                                .setFooter("Received PM from " + who, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", SignInCommand.getUUIDFromName(who, true, true))).toString())
+                                .setFooter("Chat relay intended for " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
                                 .build()).queue();
                     } catch (MalformedURLException e)
                     {
                         Constants.DISCORD_LOG.error(e);
                     }
                 }));
-            }
-        }
-
-        if (CONFIG.modules.chatRelay.enabled && CONFIG.modules.focus.focused && !DQS.getInstance().connectedToProxy)
-        {
-            Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.service.subscriberId)).openPrivateChannel().queue((privateChannel ->
+            } catch (Throwable t)
             {
-                try
-                {
-                    privateChannel.sendMessage(new EmbedBuilder()
-                            .setTitle("**DQS** - Chat Relay")
-                            .setDescription(MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString())
-                            .setColor(new Color(10144497))
-                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
-                            .setFooter("Chat relay intended for " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
-                            .build()).queue();
-                } catch (MalformedURLException e)
-                {
-                    Constants.DISCORD_LOG.error(e);
-                }
-            }));
+                DISCORD_LOG.alert(t);
+            }
         }
 
         if (MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString().startsWith("Position in queue: "))
@@ -108,24 +120,30 @@ public class ChatHandler implements HandlerRegistry.IncomingHandler<ServerChatPa
 
         if (DQS.placeInQueue <= CONFIG.modules.notifications.threshold && DQS.placeInQueue > 0 && DQS.queueNotifArmed && CONFIG.modules.notifications.enabled && CONFIG.modules.notifications.nearlyFinishedQueueing)
         {
-            Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.service.subscriberId)).openPrivateChannel().queue((privateChannel ->
+            try
             {
-                try
+                Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.service.subscriberId)).openPrivateChannel().queue((privateChannel ->
                 {
-                    privateChannel.sendMessage(new EmbedBuilder()
-                            .setTitle("**DQS** - Almost Finished Queueing")
-                            .setDescription("The account **" + CONFIG.authentication.username + "** has almost finished queueing, at queue position " + DQS.placeInQueue + ".")
-                            .setColor(new Color(10144497))
-                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
-                            .setFooter("Notification intended for  " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
-                            .build()).queue();
+                    try
+                    {
+                        privateChannel.sendMessage(new EmbedBuilder()
+                                .setTitle("**DQS** - Almost Finished Queueing")
+                                .setDescription("The account **" + CONFIG.authentication.username + "** has almost finished queueing, at queue position " + DQS.placeInQueue + ".")
+                                .setColor(new Color(10144497))
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
+                                .setFooter("Notification intended for  " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
+                                .build()).queue();
 
-                    DQS.queueNotifArmed = false;
-                } catch (MalformedURLException e)
-                {
-                    Constants.DISCORD_LOG.error(e);
-                }
-            }));
+                        DQS.queueNotifArmed = false;
+                    } catch (MalformedURLException e)
+                    {
+                        Constants.DISCORD_LOG.error(e);
+                    }
+                }));
+            } catch (Throwable t)
+            {
+                DISCORD_LOG.alert(t);
+            }
         }
 
         if (DQS.placeInQueue <= CONFIG.modules.autoDisconnect.nearlyFinishedQueueingThreshold && DQS.placeInQueue > 0 && CONFIG.modules.autoDisconnect.enabled && CONFIG.modules.autoDisconnect.nearlyFinishedQueueing && !DQS.getInstance().connectedToProxy)
@@ -142,22 +160,28 @@ public class ChatHandler implements HandlerRegistry.IncomingHandler<ServerChatPa
 
         if ("2b2t.org".equalsIgnoreCase(CONFIG.client.server.address) && MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString().toLowerCase().startsWith("[SERVER]".toLowerCase()) && CONFIG.modules.notifications.serverMessages && CONFIG.modules.notifications.enabled && CONFIG.modules.focus.focused)
         {
-            Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.service.subscriberId)).openPrivateChannel().queue((privateChannel ->
+            try
             {
-                try
+                Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.service.subscriberId)).openPrivateChannel().queue((privateChannel ->
                 {
-                    privateChannel.sendMessage(new EmbedBuilder()
-                            .setTitle("**DQS** - Server Notification")
-                            .setDescription(MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString())
-                            .setColor(new Color(10144497))
-                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
-                            .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
-                            .build()).queue();
-                } catch (MalformedURLException e)
-                {
-                    Constants.DISCORD_LOG.error(e);
-                }
-            }));
+                    try
+                    {
+                        privateChannel.sendMessage(new EmbedBuilder()
+                                .setTitle("**DQS** - Server Notification")
+                                .setDescription(MCFormatParser.DEFAULT.parse(packet.getMessage()).toRawString())
+                                .setColor(new Color(10144497))
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
+                                .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
+                                .build()).queue();
+                    } catch (MalformedURLException e)
+                    {
+                        Constants.DISCORD_LOG.error(e);
+                    }
+                }));
+            } catch (Throwable t)
+            {
+                DISCORD_LOG.alert(t);
+            }
         }
 
         WEBSOCKET_SERVER.fireChat(packet.getMessage());

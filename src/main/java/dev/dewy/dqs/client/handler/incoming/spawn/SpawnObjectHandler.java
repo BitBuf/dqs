@@ -40,22 +40,28 @@ public class SpawnObjectHandler implements HandlerRegistry.IncomingHandler<Serve
         {
             if (Constants.CONFIG.modules.notifications.enabled && Constants.CONFIG.modules.notifications.crystalInRange && DQS.getInstance().isConnected() && packet.getType().equals(ObjectType.ENDER_CRYSTAL) && !DQS.getInstance().connectedToProxy)
             {
-                Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.service.subscriberId)).openPrivateChannel().queue((privateChannel ->
+                try
                 {
-                    try
+                    Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.service.subscriberId)).openPrivateChannel().queue((privateChannel ->
                     {
-                        privateChannel.sendMessage(new EmbedBuilder()
-                                .setTitle("**DQS** - Crystal In Range")
-                                .setDescription("An Ender Crystal has appeared in your account's visible range.")
-                                .setColor(new Color(15221016))
-                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
-                                .setFooter("Notification intended for " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
-                                .build()).queue();
-                    } catch (MalformedURLException e)
-                    {
-                        Constants.DISCORD_LOG.error(e);
-                    }
-                }));
+                        try
+                        {
+                            privateChannel.sendMessage(new EmbedBuilder()
+                                    .setTitle("**DQS** - Crystal In Range")
+                                    .setDescription("An Ender Crystal has appeared in your account's visible range.")
+                                    .setColor(new Color(15221016))
+                                    .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
+                                    .setFooter("Notification intended for " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
+                                    .build()).queue();
+                        } catch (MalformedURLException e)
+                        {
+                            Constants.DISCORD_LOG.error(e);
+                        }
+                    }));
+                } catch (Throwable t)
+                {
+                    DISCORD_LOG.alert(t);
+                }
 
                 try
                 {
@@ -70,22 +76,28 @@ public class SpawnObjectHandler implements HandlerRegistry.IncomingHandler<Serve
             {
                 session.getDqs().getClient().getSession().disconnect("§7[§b§lDQS§r§7] §fAuto disconnect.", false);
 
-                Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.service.subscriberId)).openPrivateChannel().queue((privateChannel ->
+                try
                 {
-                    try
+                    Objects.requireNonNull(Constants.DISCORD.getUserById(Constants.CONFIG.service.subscriberId)).openPrivateChannel().queue((privateChannel ->
                     {
-                        privateChannel.sendMessage(new EmbedBuilder()
-                                .setTitle("**DQS** - Crystal In Range")
-                                .setDescription("You were disconnected because an Ender Crystal has entered your accounts visible range.")
-                                .setColor(new Color(15221016))
-                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
-                                .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
-                                .build()).queue();
-                    } catch (MalformedURLException e)
-                    {
-                        Constants.DISCORD_LOG.error(e);
-                    }
-                }));
+                        try
+                        {
+                            privateChannel.sendMessage(new EmbedBuilder()
+                                    .setTitle("**DQS** - Crystal In Range")
+                                    .setDescription("You were disconnected because an Ender Crystal has entered your accounts visible range.")
+                                    .setColor(new Color(15221016))
+                                    .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
+                                    .setFooter("Focused on " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
+                                    .build()).queue();
+                        } catch (MalformedURLException e)
+                        {
+                            Constants.DISCORD_LOG.error(e);
+                        }
+                    }));
+                } catch (Throwable t)
+                {
+                    DISCORD_LOG.alert(t);
+                }
 
                 try
                 {

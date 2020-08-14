@@ -11,8 +11,8 @@ public class EntityPlayer extends EntityEquipment
 {
     protected boolean selfPlayer;
 
-    protected int food;
-    protected float saturation;
+    protected int food = 20;
+    protected float saturation = 20;
 
     public EntityPlayer(boolean selfPlayer)
     {

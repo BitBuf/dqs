@@ -15,7 +15,7 @@ public abstract class EntityEquipment extends Entity
 {
     protected ArrayList<PotionEffect> potionEffects = new ArrayList<>();
     protected Map<EquipmentSlot, ItemStack> equipment = new EnumMap<>(EquipmentSlot.class);
-    protected float health;
+    protected float health = 20;
 
     {
         for (EquipmentSlot slot : EquipmentSlot.values())

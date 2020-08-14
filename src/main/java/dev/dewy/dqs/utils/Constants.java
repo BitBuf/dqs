@@ -50,7 +50,7 @@ import java.util.Date;
 
 public final class Constants
 {
-    public static final String VERSION = "3.2.0";
+    public static final String VERSION = "3.2.1";
 
     public static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
@@ -151,10 +151,7 @@ public final class Constants
                 .setFormatParser(MCFormatParser.DEFAULT)
                 .setLogAmount(LogAmount.NORMAL);
 
-        Thread.setDefaultUncaughtExceptionHandler((thread, e) ->
-        {
-            DEFAULT_LOG.alert(String.format("Uncaught exception in thread \"%s\"!", thread), e);
-        });
+        Thread.setDefaultUncaughtExceptionHandler((thread, e) -> DEFAULT_LOG.alert(String.format("Uncaught exception in thread \"%s\"!", thread), e));
 
         loadConfig();
         saveConfig();
@@ -187,8 +184,6 @@ public final class Constants
                     new SayCommand(),
                     new WhisperCommand(),
                     new KillCommand(),
-//                    new DisconnectCommand(),
-//                    new ReconnectCommand(),
                     new FocusCommand(),
                     new NotificationsCommand(),
                     new RelogCommand(),
@@ -198,7 +193,8 @@ public final class Constants
                     new AutoReplyCommand(),
                     new MailForwardCommand(),
                     new DisconnectCommand(),
-                    new ConnectCommand());
+                    new ConnectCommand(),
+                    new SwitchCommand());
 
             try
             {

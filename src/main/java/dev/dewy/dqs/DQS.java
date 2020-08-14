@@ -1,6 +1,5 @@
 package dev.dewy.dqs;
 
-import com.jagrosh.jdautilities.commons.waiter.EventWaiter;
 import dev.dewy.dqs.client.DQSClientSession;
 import dev.dewy.dqs.networking.Client;
 import dev.dewy.dqs.networking.Server;
@@ -62,7 +61,6 @@ public class DQS
     protected static DQS instance;
     protected final SessionFactory sessionFactory = new DQSSessionFactory(this);
     protected final AtomicReference<DQSServerConnection> currentPlayer = new AtomicReference<>();
-    public EventWaiter waiter = new EventWaiter();
     public boolean inQueue = true;
     public int currentPos = -1;
     public boolean connectedToProxy;
@@ -348,13 +346,19 @@ public class DQS
         {
             DEFAULT_LOG.alert(e);
 
-            Objects.requireNonNull(DISCORD.getUserById(Constants.CONFIG.service.operatorId)).openPrivateChannel().queue((privateChannel ->
-                    privateChannel.sendMessage(new EmbedBuilder()
-                            .setTitle("**DQS** - Fallback Alert (" + Objects.requireNonNull(DISCORD.getUserById(Constants.CONFIG.service.subscriberId)).getName() + ")")
-                            .setDescription("Instance has come on fallback.")
-                            .setColor(new Color(15221016))
-                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
-                            .build()).queue()));
+            try
+            {
+                Objects.requireNonNull(DISCORD.getUserById(Constants.CONFIG.service.operatorId)).openPrivateChannel().queue((privateChannel ->
+                        privateChannel.sendMessage(new EmbedBuilder()
+                                .setTitle("**DQS** - Fallback Alert (" + Objects.requireNonNull(DISCORD.getUserById(Constants.CONFIG.service.subscriberId)).getName() + ")")
+                                .setDescription("Instance has come on fallback.")
+                                .setColor(new Color(15221016))
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
+                                .build()).queue()));
+            } catch (Throwable t)
+            {
+                DISCORD_LOG.alert(t);
+            }
 
             do
             {
@@ -397,13 +401,19 @@ public class DQS
         {
             if (SHOULD_RECONNECT)
             {
-                Objects.requireNonNull(DISCORD.getUserById(Constants.CONFIG.service.operatorId)).openPrivateChannel().queue((privateChannel ->
-                        privateChannel.sendMessage(new EmbedBuilder()
-                                .setTitle("**DQS** - Post Fallback Alert (" + Objects.requireNonNull(DISCORD.getUserById(Constants.CONFIG.service.subscriberId)).getName() + ")")
-                                .setDescription("Reset immediately.")
-                                .setColor(new Color(15221016))
-                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
-                                .build()).queue()));
+                try
+                {
+                    Objects.requireNonNull(DISCORD.getUserById(Constants.CONFIG.service.operatorId)).openPrivateChannel().queue((privateChannel ->
+                            privateChannel.sendMessage(new EmbedBuilder()
+                                    .setTitle("**DQS** - Post Fallback Alert (" + Objects.requireNonNull(DISCORD.getUserById(Constants.CONFIG.service.subscriberId)).getName() + ")")
+                                    .setDescription("Reset immediately.")
+                                    .setColor(new Color(15221016))
+                                    .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
+                                    .build()).queue()));
+                } catch (Throwable t)
+                {
+                    DISCORD_LOG.alert(t);
+                }
             }
 
             if (!CONFIG.authentication.isRateLimit)
@@ -515,7 +525,9 @@ public class DQS
                             CACHE.getPlayerCache().isReducedDebugInfo()
                     ));
 
-                    SERVER_LOG.info("Player connected: %s", session.getRemoteAddress());
+                    if (inQueue)
+
+                        SERVER_LOG.info("Player connected: %s", session.getRemoteAddress());
 
                     if (!session.getRemoteAddress().toString().contains(CONFIG.service.tariboneIp))
                     {
@@ -559,22 +571,28 @@ public class DQS
 
         if (!CONFIG.authentication.hasAuthenticated)
         {
-            Objects.requireNonNull(DISCORD.getUserById(CONFIG.service.subscriberId)).openPrivateChannel().queue((privateChannel ->
+            try
             {
-                try
+                Objects.requireNonNull(DISCORD.getUserById(CONFIG.service.subscriberId)).openPrivateChannel().queue((privateChannel ->
                 {
-                    privateChannel.sendMessage(new EmbedBuilder()
-                            .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
-                            .setTitle("**DQS** - Authenticated")
-                            .setDescription("You've successfully authenticated with the target server `" + CONFIG.client.server.address + "`")
-                            .setColor(new Color(10144497))
-                            .setFooter("Notification intended for " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
-                            .build()).queue();
-                } catch (MalformedURLException e)
-                {
-                    e.printStackTrace();
-                }
-            }));
+                    try
+                    {
+                        privateChannel.sendMessage(new EmbedBuilder()
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
+                                .setTitle("**DQS** - Authenticated")
+                                .setDescription("You've successfully authenticated with the target server `" + CONFIG.client.server.address + "`")
+                                .setColor(new Color(10144497))
+                                .setFooter("Notification intended for " + Constants.CONFIG.authentication.username, new URL(String.format("https://crafatar.com/avatars/%s?size=64&overlay&default=MHF_Steve", Constants.CONFIG.authentication.uuid)).toString())
+                                .build()).queue();
+                    } catch (MalformedURLException e)
+                    {
+                        e.printStackTrace();
+                    }
+                }));
+            } catch (Throwable t)
+            {
+                DISCORD_LOG.alert(t);
+            }
         }
 
         CONFIG.authentication.hasAuthenticated = true;
@@ -591,6 +609,14 @@ public class DQS
             if (((DQSClientSession) client.getSession()).isServerProbablyOff())
             {
                 countdown = CONFIG.modules.autoReconnect.delaySecondsOffline;
+
+                Objects.requireNonNull(DISCORD.getUserById(CONFIG.service.subscriberId)).openPrivateChannel().queue((privateChannel ->
+                        privateChannel.sendMessage(new EmbedBuilder()
+                                .setTitle("**DQS** - Timed Out")
+                                .setDescription("Either the target server does not exist or is offline temporarily.")
+                                .setColor(new Color(15221016))
+                                .setAuthor("DQS " + Constants.VERSION, null, "https://i.imgur.com/pcSOd3K.png")
+                                .build()).queue()));
 
                 reconnectCounter = 0;
             } else
