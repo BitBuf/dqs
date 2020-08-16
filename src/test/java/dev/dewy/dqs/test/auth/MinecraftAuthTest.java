@@ -1,7 +1,7 @@
 package dev.dewy.dqs.test.auth;
 
-import dev.dewy.dqs.exceptions.request.RequestException;
-import dev.dewy.dqs.profiles.GameProfile;
+import dev.dewy.dqs.utils.exceptions.request.RequestException;
+import dev.dewy.dqs.protocol.profiles.GameProfile;
 import dev.dewy.dqs.services.AuthenticationService;
 import dev.dewy.dqs.services.ProfileService;
 import dev.dewy.dqs.services.SessionService;

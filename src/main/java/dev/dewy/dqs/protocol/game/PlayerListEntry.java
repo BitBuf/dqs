@@ -1,7 +1,7 @@
 package dev.dewy.dqs.protocol.game;
 
-import dev.dewy.dqs.packet.ingame.server.ServerChatPacket;
-import dev.dewy.dqs.profiles.GameProfile;
+import dev.dewy.dqs.protocol.packet.ingame.server.ServerChatPacket;
+import dev.dewy.dqs.protocol.profiles.GameProfile;
 import dev.dewy.dqs.protocol.game.entity.player.GameMode;
 import dev.dewy.dqs.utils.ObjectUtil;
 

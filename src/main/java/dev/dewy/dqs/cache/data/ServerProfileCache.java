@@ -1,8 +1,8 @@
 package dev.dewy.dqs.cache.data;
 
 import dev.dewy.dqs.cache.CachedData;
-import dev.dewy.dqs.packet.Packet;
-import dev.dewy.dqs.profiles.GameProfile;
+import dev.dewy.dqs.protocol.packet.Packet;
+import dev.dewy.dqs.protocol.profiles.GameProfile;
 
 import java.util.function.Consumer;
 

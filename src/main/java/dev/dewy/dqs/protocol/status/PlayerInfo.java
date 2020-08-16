@@ -1,6 +1,6 @@
 package dev.dewy.dqs.protocol.status;
 
-import dev.dewy.dqs.profiles.GameProfile;
+import dev.dewy.dqs.protocol.profiles.GameProfile;
 import dev.dewy.dqs.utils.ObjectUtil;
 
 import java.util.Arrays;

@@ -1,6 +1,6 @@
 package dev.dewy.dqs.utils;
 
-import dev.dewy.dqs.exceptions.request.RequestException;
+import dev.dewy.dqs.utils.exceptions.request.RequestException;
 import dev.dewy.dqs.protocol.DQSProtocol;
 import dev.dewy.dqs.services.AuthenticationService;
 import net.daporkchop.lib.logging.LogLevel;

@@ -3,7 +3,7 @@ package dev.dewy.dqs.client.handler.incoming.spawn;
 import dev.dewy.dqs.cache.data.entity.EntityMob;
 import dev.dewy.dqs.client.DQSClientSession;
 import dev.dewy.dqs.handler.HandlerRegistry;
-import dev.dewy.dqs.packet.ingame.server.entity.spawn.ServerSpawnMobPacket;
+import dev.dewy.dqs.protocol.packet.ingame.server.entity.spawn.ServerSpawnMobPacket;
 
 import java.util.Arrays;
 

@@ -2,7 +2,7 @@ package dev.dewy.dqs.client.handler.incoming;
 
 import dev.dewy.dqs.client.DQSClientSession;
 import dev.dewy.dqs.handler.HandlerRegistry;
-import dev.dewy.dqs.packet.ingame.server.ServerUnlockRecipesPacket;
+import dev.dewy.dqs.protocol.packet.ingame.server.ServerUnlockRecipesPacket;
 
 import static dev.dewy.dqs.utils.Constants.CACHE;
 import static dev.dewy.dqs.utils.Constants.CLIENT_LOG;

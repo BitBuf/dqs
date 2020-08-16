@@ -2,9 +2,9 @@ package dev.dewy.dqs.cache.data;
 
 import dev.dewy.dqs.cache.CachedData;
 import dev.dewy.dqs.cache.data.entity.EntityPlayer;
-import dev.dewy.dqs.packet.Packet;
-import dev.dewy.dqs.packet.ingame.server.entity.player.ServerPlayerPositionRotationPacket;
-import dev.dewy.dqs.packet.ingame.server.window.ServerWindowItemsPacket;
+import dev.dewy.dqs.protocol.packet.Packet;
+import dev.dewy.dqs.protocol.packet.ingame.server.entity.player.ServerPlayerPositionRotationPacket;
+import dev.dewy.dqs.protocol.packet.ingame.server.window.ServerWindowItemsPacket;
 import dev.dewy.dqs.protocol.game.entity.metadata.ItemStack;
 import dev.dewy.dqs.protocol.game.entity.player.GameMode;
 import dev.dewy.dqs.protocol.game.setting.Difficulty;

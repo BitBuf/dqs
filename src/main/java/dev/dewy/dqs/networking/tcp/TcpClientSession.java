@@ -1,7 +1,7 @@
 package dev.dewy.dqs.networking.tcp;
 
 import dev.dewy.dqs.networking.Client;
-import dev.dewy.dqs.packet.PacketProtocol;
+import dev.dewy.dqs.protocol.packet.PacketProtocol;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;

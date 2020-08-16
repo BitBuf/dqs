@@ -1,7 +1,7 @@
 package dev.dewy.dqs.protocol.game.chunk;
 
-import dev.dewy.dqs.io.NetInput;
-import dev.dewy.dqs.io.NetOutput;
+import dev.dewy.dqs.utils.io.NetInput;
+import dev.dewy.dqs.utils.io.NetOutput;
 import dev.dewy.dqs.networking.NetUtil;
 import dev.dewy.dqs.protocol.game.world.block.BlockState;
 import dev.dewy.dqs.utils.ObjectUtil;

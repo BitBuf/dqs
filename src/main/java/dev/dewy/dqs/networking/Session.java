@@ -2,8 +2,8 @@ package dev.dewy.dqs.networking;
 
 import dev.dewy.dqs.networking.event.session.SessionEvent;
 import dev.dewy.dqs.networking.event.session.SessionListener;
-import dev.dewy.dqs.packet.Packet;
-import dev.dewy.dqs.packet.PacketProtocol;
+import dev.dewy.dqs.protocol.packet.Packet;
+import dev.dewy.dqs.protocol.packet.PacketProtocol;
 
 import java.net.SocketAddress;
 import java.util.List;

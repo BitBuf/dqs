@@ -1,7 +1,7 @@
 package dev.dewy.dqs.taribone.task;
 
 import dev.dewy.dqs.DQS;
-import dev.dewy.dqs.exceptions.taribone.ChunkNotLoadedException;
+import dev.dewy.dqs.utils.exceptions.taribone.ChunkNotLoadedException;
 import dev.dewy.dqs.taribone.task.api.Task;
 import dev.dewy.dqs.taribone.task.api.TaskExecutor;
 import dev.dewy.dqs.taribone.task.executor.WalkTaskExecutor;

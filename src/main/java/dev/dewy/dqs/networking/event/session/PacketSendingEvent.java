@@ -1,7 +1,7 @@
 package dev.dewy.dqs.networking.event.session;
 
 import dev.dewy.dqs.networking.Session;
-import dev.dewy.dqs.packet.Packet;
+import dev.dewy.dqs.protocol.packet.Packet;
 
 /**
  * Called when the session is sending a packet.

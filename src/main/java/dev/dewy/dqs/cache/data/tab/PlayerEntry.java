@@ -1,6 +1,6 @@
 package dev.dewy.dqs.cache.data.tab;
 
-import dev.dewy.dqs.profiles.GameProfile;
+import dev.dewy.dqs.protocol.profiles.GameProfile;
 import dev.dewy.dqs.protocol.game.PlayerListEntry;
 import dev.dewy.dqs.protocol.game.entity.player.GameMode;
 

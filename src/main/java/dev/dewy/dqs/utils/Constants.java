@@ -25,7 +25,7 @@ import dev.dewy.dqs.server.handler.incoming.movement.PlayerPositionRotationHandl
 import dev.dewy.dqs.server.handler.incoming.movement.PlayerRotationHandler;
 import dev.dewy.dqs.server.handler.outgoing.LoginSuccessOutgoingHandler;
 import dev.dewy.dqs.server.handler.postoutgoing.JoinGamePostHandler;
-import dev.dewy.dqs.websocket.WebSocketServer;
+import dev.dewy.dqs.utils.websocket.WebSocketServer;
 import net.daporkchop.lib.binary.oio.appendable.PAppendable;
 import net.daporkchop.lib.binary.oio.reader.UTF8FileReader;
 import net.daporkchop.lib.binary.oio.writer.UTF8FileWriter;

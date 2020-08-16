@@ -2,7 +2,7 @@ package dev.dewy.dqs.client.handler.incoming;
 
 import dev.dewy.dqs.client.DQSClientSession;
 import dev.dewy.dqs.handler.HandlerRegistry;
-import dev.dewy.dqs.packet.ingame.server.world.ServerNotifyClientPacket;
+import dev.dewy.dqs.protocol.packet.ingame.server.world.ServerNotifyClientPacket;
 import dev.dewy.dqs.protocol.game.entity.player.GameMode;
 import dev.dewy.dqs.protocol.game.world.notify.ClientNotification;
 

@@ -1,6 +1,6 @@
 package dev.dewy.dqs.taribone.pathing.astar;
 
-import dev.dewy.dqs.exceptions.taribone.ChunkNotLoadedException;
+import dev.dewy.dqs.utils.exceptions.taribone.ChunkNotLoadedException;
 import dev.dewy.dqs.taribone.heuristic.Heuristic;
 import dev.dewy.dqs.taribone.pathing.BlockPathNode;
 import dev.dewy.dqs.taribone.pathing.PathNode;

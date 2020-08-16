@@ -1,6 +1,6 @@
 package dev.dewy.dqs.utils.vector;
 
-import dev.dewy.dqs.exceptions.taribone.ChunkNotLoadedException;
+import dev.dewy.dqs.utils.exceptions.taribone.ChunkNotLoadedException;
 import dev.dewy.dqs.taribone.world.World;
 
 public class Vector2i

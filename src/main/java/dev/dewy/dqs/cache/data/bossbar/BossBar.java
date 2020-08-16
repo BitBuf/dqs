@@ -1,6 +1,6 @@
 package dev.dewy.dqs.cache.data.bossbar;
 
-import dev.dewy.dqs.packet.ingame.server.ServerBossBarPacket;
+import dev.dewy.dqs.protocol.packet.ingame.server.ServerBossBarPacket;
 import dev.dewy.dqs.protocol.game.BossBarAction;
 import dev.dewy.dqs.protocol.game.BossBarColor;
 import dev.dewy.dqs.protocol.game.BossBarDivision;

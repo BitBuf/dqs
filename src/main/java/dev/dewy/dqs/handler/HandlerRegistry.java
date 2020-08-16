@@ -1,7 +1,7 @@
 package dev.dewy.dqs.handler;
 
 import dev.dewy.dqs.networking.Session;
-import dev.dewy.dqs.packet.Packet;
+import dev.dewy.dqs.protocol.packet.Packet;
 import dev.dewy.dqs.utils.ObjObjBoolFunction;
 import net.daporkchop.lib.logging.Logger;
 

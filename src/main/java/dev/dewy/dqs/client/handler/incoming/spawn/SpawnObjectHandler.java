@@ -4,7 +4,7 @@ import dev.dewy.dqs.DQS;
 import dev.dewy.dqs.cache.data.entity.EntityObject;
 import dev.dewy.dqs.client.DQSClientSession;
 import dev.dewy.dqs.handler.HandlerRegistry;
-import dev.dewy.dqs.packet.ingame.server.entity.spawn.ServerSpawnObjectPacket;
+import dev.dewy.dqs.protocol.packet.ingame.server.entity.spawn.ServerSpawnObjectPacket;
 import dev.dewy.dqs.protocol.game.entity.type.object.ObjectType;
 import dev.dewy.dqs.utils.Constants;
 import net.dv8tion.jda.api.EmbedBuilder;

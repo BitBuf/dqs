@@ -1,7 +1,7 @@
 package dev.dewy.dqs.server.handler.incoming.movement;
 
 import dev.dewy.dqs.handler.HandlerRegistry;
-import dev.dewy.dqs.packet.ingame.client.player.ClientPlayerPositionRotationPacket;
+import dev.dewy.dqs.protocol.packet.ingame.client.player.ClientPlayerPositionRotationPacket;
 import dev.dewy.dqs.server.DQSServerConnection;
 
 import static dev.dewy.dqs.utils.Constants.CACHE;

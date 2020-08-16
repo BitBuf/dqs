@@ -2,8 +2,8 @@ package dev.dewy.dqs.client.handler.incoming;
 
 import dev.dewy.dqs.client.DQSClientSession;
 import dev.dewy.dqs.handler.HandlerRegistry;
-import dev.dewy.dqs.packet.ingame.client.ClientSettingsPacket;
-import dev.dewy.dqs.packet.ingame.server.ServerJoinGamePacket;
+import dev.dewy.dqs.protocol.packet.ingame.client.ClientSettingsPacket;
+import dev.dewy.dqs.protocol.packet.ingame.server.ServerJoinGamePacket;
 import dev.dewy.dqs.protocol.game.entity.player.Hand;
 import dev.dewy.dqs.protocol.game.setting.ChatVisibility;
 import dev.dewy.dqs.protocol.game.setting.SkinPart;

@@ -2,7 +2,7 @@ package dev.dewy.dqs.networking.tcp;
 
 import dev.dewy.dqs.networking.ConnectionListener;
 import dev.dewy.dqs.networking.Server;
-import dev.dewy.dqs.packet.PacketProtocol;
+import dev.dewy.dqs.protocol.packet.PacketProtocol;
 import dev.dewy.dqs.utils.Constants;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;

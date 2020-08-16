@@ -1,7 +1,7 @@
 package dev.dewy.dqs.taribone.world.block;
 
 import com.google.common.base.Preconditions;
-import dev.dewy.dqs.exceptions.taribone.ChunkNotLoadedException;
+import dev.dewy.dqs.utils.exceptions.taribone.ChunkNotLoadedException;
 import dev.dewy.dqs.protocol.game.chunk.BlockStorage;
 import dev.dewy.dqs.protocol.game.chunk.Column;
 import dev.dewy.dqs.protocol.game.world.block.BlockState;

@@ -1,6 +1,6 @@
 package dev.dewy.dqs.cache;
 
-import dev.dewy.dqs.packet.Packet;
+import dev.dewy.dqs.protocol.packet.Packet;
 
 import java.util.function.Consumer;
 

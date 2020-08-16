@@ -1,6 +1,6 @@
 package dev.dewy.dqs.taribone.world.physics;
 
-import dev.dewy.dqs.exceptions.taribone.ChunkNotLoadedException;
+import dev.dewy.dqs.utils.exceptions.taribone.ChunkNotLoadedException;
 import dev.dewy.dqs.taribone.world.World;
 import dev.dewy.dqs.taribone.world.block.Block;
 import dev.dewy.dqs.taribone.world.block.Material;

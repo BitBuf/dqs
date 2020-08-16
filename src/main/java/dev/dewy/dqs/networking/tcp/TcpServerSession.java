@@ -1,7 +1,7 @@
 package dev.dewy.dqs.networking.tcp;
 
 import dev.dewy.dqs.networking.Server;
-import dev.dewy.dqs.packet.PacketProtocol;
+import dev.dewy.dqs.protocol.packet.PacketProtocol;
 import io.netty.channel.ChannelHandlerContext;
 
 import java.util.Map;

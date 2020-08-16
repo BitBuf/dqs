@@ -1,8 +1,8 @@
 package dev.dewy.dqs.cache.data.chunk;
 
 import dev.dewy.dqs.cache.CachedData;
-import dev.dewy.dqs.packet.Packet;
-import dev.dewy.dqs.packet.ingame.server.world.ServerChunkDataPacket;
+import dev.dewy.dqs.protocol.packet.Packet;
+import dev.dewy.dqs.protocol.packet.ingame.server.world.ServerChunkDataPacket;
 import dev.dewy.dqs.protocol.game.chunk.Chunk;
 import dev.dewy.dqs.protocol.game.chunk.Column;
 import net.daporkchop.lib.math.vector.i.Vec2i;

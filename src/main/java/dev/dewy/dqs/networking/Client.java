@@ -1,6 +1,6 @@
 package dev.dewy.dqs.networking;
 
-import dev.dewy.dqs.packet.PacketProtocol;
+import dev.dewy.dqs.protocol.packet.PacketProtocol;
 
 /**
  * A client that may connect to a server.

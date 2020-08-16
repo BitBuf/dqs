@@ -4,7 +4,7 @@ import dev.dewy.dqs.cache.data.entity.EntityEquipment;
 import dev.dewy.dqs.cache.data.entity.PotionEffect;
 import dev.dewy.dqs.client.DQSClientSession;
 import dev.dewy.dqs.handler.HandlerRegistry;
-import dev.dewy.dqs.packet.ingame.server.entity.ServerEntityEffectPacket;
+import dev.dewy.dqs.protocol.packet.ingame.server.entity.ServerEntityEffectPacket;
 
 import static dev.dewy.dqs.utils.Constants.CACHE;
 import static dev.dewy.dqs.utils.Constants.CLIENT_LOG;

@@ -3,8 +3,8 @@ package dev.dewy.dqs.server;
 import dev.dewy.dqs.DQS;
 import dev.dewy.dqs.networking.Session;
 import dev.dewy.dqs.networking.event.session.*;
-import dev.dewy.dqs.packet.Packet;
-import dev.dewy.dqs.packet.PacketProtocol;
+import dev.dewy.dqs.protocol.packet.Packet;
+import dev.dewy.dqs.protocol.packet.PacketProtocol;
 import dev.dewy.dqs.protocol.DQSProtocol;
 import dev.dewy.dqs.protocol.SubProtocol;
 

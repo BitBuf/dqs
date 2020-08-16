@@ -2,14 +2,14 @@ package dev.dewy.dqs.services;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import dev.dewy.dqs.crypto.Base64;
-import dev.dewy.dqs.exceptions.profile.ProfileException;
-import dev.dewy.dqs.exceptions.profile.ProfileLookupException;
-import dev.dewy.dqs.exceptions.profile.ProfileNotFoundException;
-import dev.dewy.dqs.exceptions.property.ProfileTextureException;
-import dev.dewy.dqs.exceptions.property.PropertyException;
-import dev.dewy.dqs.exceptions.request.RequestException;
-import dev.dewy.dqs.profiles.GameProfile;
+import dev.dewy.dqs.utils.crypto.Base64;
+import dev.dewy.dqs.utils.exceptions.profile.ProfileException;
+import dev.dewy.dqs.utils.exceptions.profile.ProfileLookupException;
+import dev.dewy.dqs.utils.exceptions.profile.ProfileNotFoundException;
+import dev.dewy.dqs.utils.exceptions.property.ProfileTextureException;
+import dev.dewy.dqs.utils.exceptions.property.PropertyException;
+import dev.dewy.dqs.utils.exceptions.request.RequestException;
+import dev.dewy.dqs.protocol.profiles.GameProfile;
 import dev.dewy.dqs.utils.HTTP;
 import dev.dewy.dqs.utils.UUIDSerializer;
 

@@ -3,7 +3,7 @@ package dev.dewy.dqs.client;
 import dev.dewy.dqs.DQS;
 import dev.dewy.dqs.networking.Client;
 import dev.dewy.dqs.networking.tcp.TcpClientSession;
-import dev.dewy.dqs.packet.PacketProtocol;
+import dev.dewy.dqs.protocol.packet.PacketProtocol;
 import net.daporkchop.lib.unsafe.PUnsafe;
 
 import java.io.IOException;

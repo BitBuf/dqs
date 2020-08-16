@@ -1,8 +1,8 @@
 package dev.dewy.dqs.server.handler.postoutgoing;
 
 import dev.dewy.dqs.handler.HandlerRegistry;
-import dev.dewy.dqs.packet.ingame.server.ServerJoinGamePacket;
-import dev.dewy.dqs.packet.ingame.server.ServerPluginMessagePacket;
+import dev.dewy.dqs.protocol.packet.ingame.server.ServerJoinGamePacket;
+import dev.dewy.dqs.protocol.packet.ingame.server.ServerPluginMessagePacket;
 import dev.dewy.dqs.server.DQSServerConnection;
 import dev.dewy.dqs.utils.RefStrings;
 

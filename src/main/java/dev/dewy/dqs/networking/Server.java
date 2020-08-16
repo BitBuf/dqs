@@ -1,7 +1,7 @@
 package dev.dewy.dqs.networking;
 
 import dev.dewy.dqs.networking.event.server.*;
-import dev.dewy.dqs.packet.PacketProtocol;
+import dev.dewy.dqs.protocol.packet.PacketProtocol;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;

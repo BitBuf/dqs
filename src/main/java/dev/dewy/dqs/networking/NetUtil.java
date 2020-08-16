@@ -1,10 +1,10 @@
 package dev.dewy.dqs.networking;
 
-import dev.dewy.dqs.io.NetInput;
-import dev.dewy.dqs.io.NetOutput;
-import dev.dewy.dqs.io.stream.StreamNetInput;
-import dev.dewy.dqs.nbt.NBTIO;
-import dev.dewy.dqs.nbt.tag.builtin.CompoundTag;
+import dev.dewy.dqs.utils.io.NetInput;
+import dev.dewy.dqs.utils.io.NetOutput;
+import dev.dewy.dqs.utils.io.stream.StreamNetInput;
+import dev.dewy.dqs.utils.nbt.NBTIO;
+import dev.dewy.dqs.utils.nbt.tag.builtin.CompoundTag;
 import dev.dewy.dqs.protocol.MagicValues;
 import dev.dewy.dqs.protocol.game.chunk.BlockStorage;
 import dev.dewy.dqs.protocol.game.chunk.Chunk;

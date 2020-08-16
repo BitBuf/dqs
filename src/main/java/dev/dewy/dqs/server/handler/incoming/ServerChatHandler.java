@@ -1,8 +1,8 @@
 package dev.dewy.dqs.server.handler.incoming;
 
 import dev.dewy.dqs.handler.HandlerRegistry;
-import dev.dewy.dqs.packet.ingame.client.ClientChatPacket;
-import dev.dewy.dqs.packet.ingame.server.ServerChatPacket;
+import dev.dewy.dqs.protocol.packet.ingame.client.ClientChatPacket;
+import dev.dewy.dqs.protocol.packet.ingame.server.ServerChatPacket;
 import dev.dewy.dqs.server.DQSServerConnection;
 import dev.dewy.dqs.utils.Constants;
 import net.daporkchop.lib.unsafe.PUnsafe;

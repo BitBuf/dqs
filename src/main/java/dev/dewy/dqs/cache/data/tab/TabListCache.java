@@ -1,9 +1,9 @@
 package dev.dewy.dqs.cache.data.tab;
 
 import dev.dewy.dqs.cache.CachedData;
-import dev.dewy.dqs.packet.Packet;
-import dev.dewy.dqs.packet.ingame.server.ServerPlayerListDataPacket;
-import dev.dewy.dqs.packet.ingame.server.ServerPlayerListEntryPacket;
+import dev.dewy.dqs.protocol.packet.Packet;
+import dev.dewy.dqs.protocol.packet.ingame.server.ServerPlayerListDataPacket;
+import dev.dewy.dqs.protocol.packet.ingame.server.ServerPlayerListEntryPacket;
 import dev.dewy.dqs.protocol.game.PlayerListEntry;
 import dev.dewy.dqs.protocol.game.PlayerListEntryAction;
 

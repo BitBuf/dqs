@@ -1,13 +1,13 @@
 package dev.dewy.dqs.test.networking;
 
-import dev.dewy.dqs.crypto.AESEncryption;
-import dev.dewy.dqs.crypto.PacketEncryption;
+import dev.dewy.dqs.utils.crypto.AESEncryption;
+import dev.dewy.dqs.utils.crypto.PacketEncryption;
 import dev.dewy.dqs.networking.Client;
 import dev.dewy.dqs.networking.Server;
 import dev.dewy.dqs.networking.Session;
-import dev.dewy.dqs.packet.DefaultPacketHeader;
-import dev.dewy.dqs.packet.PacketHeader;
-import dev.dewy.dqs.packet.PacketProtocol;
+import dev.dewy.dqs.protocol.packet.DefaultPacketHeader;
+import dev.dewy.dqs.protocol.packet.PacketHeader;
+import dev.dewy.dqs.protocol.packet.PacketProtocol;
 
 import javax.crypto.SecretKey;
 import java.security.GeneralSecurityException;

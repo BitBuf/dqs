@@ -2,7 +2,7 @@ package dev.dewy.dqs.client.handler.incoming;
 
 import dev.dewy.dqs.client.DQSClientSession;
 import dev.dewy.dqs.handler.HandlerRegistry;
-import dev.dewy.dqs.packet.ingame.server.ServerPlayerListEntryPacket;
+import dev.dewy.dqs.protocol.packet.ingame.server.ServerPlayerListEntryPacket;
 import dev.dewy.dqs.protocol.game.PlayerListEntry;
 
 import java.util.function.Consumer;

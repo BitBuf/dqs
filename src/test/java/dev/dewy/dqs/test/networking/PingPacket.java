@@ -1,8 +1,8 @@
 package dev.dewy.dqs.test.networking;
 
-import dev.dewy.dqs.io.NetInput;
-import dev.dewy.dqs.io.NetOutput;
-import dev.dewy.dqs.packet.Packet;
+import dev.dewy.dqs.utils.io.NetInput;
+import dev.dewy.dqs.utils.io.NetOutput;
+import dev.dewy.dqs.protocol.packet.Packet;
 
 import java.io.IOException;
 

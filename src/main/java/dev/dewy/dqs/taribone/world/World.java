@@ -1,6 +1,6 @@
 package dev.dewy.dqs.taribone.world;
 
-import dev.dewy.dqs.exceptions.taribone.ChunkNotLoadedException;
+import dev.dewy.dqs.utils.exceptions.taribone.ChunkNotLoadedException;
 import dev.dewy.dqs.protocol.game.entity.metadata.Position;
 import dev.dewy.dqs.protocol.game.world.WorldType;
 import dev.dewy.dqs.taribone.entity.TariboneEntity;

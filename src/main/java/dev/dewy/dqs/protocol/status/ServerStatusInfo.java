@@ -1,6 +1,6 @@
 package dev.dewy.dqs.protocol.status;
 
-import dev.dewy.dqs.packet.ingame.server.ServerChatPacket;
+import dev.dewy.dqs.protocol.packet.ingame.server.ServerChatPacket;
 import dev.dewy.dqs.utils.ObjectUtil;
 
 import java.awt.image.BufferedImage;

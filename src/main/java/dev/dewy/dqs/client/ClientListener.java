@@ -2,7 +2,7 @@ package dev.dewy.dqs.client;
 
 import dev.dewy.dqs.DQS;
 import dev.dewy.dqs.networking.event.session.*;
-import dev.dewy.dqs.packet.Packet;
+import dev.dewy.dqs.protocol.packet.Packet;
 import dev.dewy.dqs.protocol.DQSProtocol;
 import dev.dewy.dqs.protocol.SubProtocol;
 import dev.dewy.dqs.server.DQSServerConnection;
