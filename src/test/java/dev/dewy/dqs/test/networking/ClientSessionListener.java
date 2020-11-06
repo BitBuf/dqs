@@ -1,6 +1,6 @@
 package dev.dewy.dqs.test.networking;
 
-import dev.dewy.dqs.networking.event.session.*;
+import dev.dewy.dqs.protocol.core.event.session.*;
 
 public class ClientSessionListener extends SessionAdapter
 {

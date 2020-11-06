@@ -1,10 +1,10 @@
 package dev.dewy.dqs.protocol;
 
 import dev.dewy.dqs.DQS;
-import dev.dewy.dqs.client.DQSClientSession;
-import dev.dewy.dqs.networking.Client;
-import dev.dewy.dqs.networking.Session;
-import dev.dewy.dqs.networking.tcp.TcpSessionFactory;
+import dev.dewy.dqs.events.client.DQSClientSession;
+import dev.dewy.dqs.protocol.core.Client;
+import dev.dewy.dqs.protocol.core.Session;
+import dev.dewy.dqs.protocol.core.tcp.TcpSessionFactory;
 
 public class DQSSessionFactory extends TcpSessionFactory
 {

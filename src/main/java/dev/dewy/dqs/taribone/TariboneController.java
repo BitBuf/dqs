@@ -1,7 +1,7 @@
 package dev.dewy.dqs.taribone;
 
 import dev.dewy.dqs.DQS;
-import dev.dewy.dqs.networking.Session;
+import dev.dewy.dqs.protocol.core.Session;
 import dev.dewy.dqs.protocol.packet.Packet;
 import dev.dewy.dqs.protocol.packet.ingame.client.player.*;
 import dev.dewy.dqs.protocol.packet.ingame.client.window.ClientCreativeInventoryActionPacket;

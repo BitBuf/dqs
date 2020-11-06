@@ -1,9 +1,9 @@
 package dev.dewy.dqs;
 
-import dev.dewy.dqs.client.DQSClientSession;
-import dev.dewy.dqs.networking.Client;
-import dev.dewy.dqs.networking.Server;
-import dev.dewy.dqs.networking.SessionFactory;
+import dev.dewy.dqs.events.client.DQSClientSession;
+import dev.dewy.dqs.protocol.core.Client;
+import dev.dewy.dqs.protocol.core.Server;
+import dev.dewy.dqs.protocol.core.SessionFactory;
 import dev.dewy.dqs.protocol.packet.ingame.client.ClientChatPacket;
 import dev.dewy.dqs.protocol.packet.ingame.client.player.ClientPlayerRotationPacket;
 import dev.dewy.dqs.protocol.packet.ingame.client.player.ClientPlayerSwingArmPacket;
@@ -15,8 +15,8 @@ import dev.dewy.dqs.protocol.status.PlayerInfo;
 import dev.dewy.dqs.protocol.status.ServerStatusInfo;
 import dev.dewy.dqs.protocol.status.VersionInfo;
 import dev.dewy.dqs.protocol.status.handler.ServerInfoBuilder;
-import dev.dewy.dqs.server.DQSServerConnection;
-import dev.dewy.dqs.server.DQSServerListener;
+import dev.dewy.dqs.events.server.DQSServerConnection;
+import dev.dewy.dqs.events.server.DQSServerListener;
 import dev.dewy.dqs.taribone.TariboneController;
 import dev.dewy.dqs.taribone.TariboneListener;
 import dev.dewy.dqs.taribone.entity.player.TariboneDQSPlayer;

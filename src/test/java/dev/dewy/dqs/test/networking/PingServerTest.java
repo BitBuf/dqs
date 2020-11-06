@@ -1,8 +1,8 @@
 package dev.dewy.dqs.test.networking;
 
-import dev.dewy.dqs.networking.Client;
-import dev.dewy.dqs.networking.Server;
-import dev.dewy.dqs.networking.tcp.TcpSessionFactory;
+import dev.dewy.dqs.protocol.core.Client;
+import dev.dewy.dqs.protocol.core.Server;
+import dev.dewy.dqs.protocol.core.tcp.TcpSessionFactory;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;

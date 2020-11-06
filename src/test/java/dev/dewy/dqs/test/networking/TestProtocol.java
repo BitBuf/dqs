@@ -2,9 +2,9 @@ package dev.dewy.dqs.test.networking;
 
 import dev.dewy.dqs.utils.crypto.AESEncryption;
 import dev.dewy.dqs.utils.crypto.PacketEncryption;
-import dev.dewy.dqs.networking.Client;
-import dev.dewy.dqs.networking.Server;
-import dev.dewy.dqs.networking.Session;
+import dev.dewy.dqs.protocol.core.Client;
+import dev.dewy.dqs.protocol.core.Server;
+import dev.dewy.dqs.protocol.core.Session;
 import dev.dewy.dqs.protocol.packet.DefaultPacketHeader;
 import dev.dewy.dqs.protocol.packet.PacketHeader;
 import dev.dewy.dqs.protocol.packet.PacketProtocol;

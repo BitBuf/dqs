@@ -1,6 +1,6 @@
 package dev.dewy.dqs.utils.websocket;
 
-import dev.dewy.dqs.cache.data.tab.PlayerEntry;
+import dev.dewy.dqs.services.cache.data.tab.PlayerEntry;
 import org.java_websocket.WebSocket;
 import org.java_websocket.handshake.ClientHandshake;
 

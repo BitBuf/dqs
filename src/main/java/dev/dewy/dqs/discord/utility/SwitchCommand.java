@@ -3,7 +3,7 @@ package dev.dewy.dqs.discord.utility;
 import com.jagrosh.jdautilities.command.Command;
 import com.jagrosh.jdautilities.command.CommandEvent;
 import dev.dewy.dqs.DQS;
-import dev.dewy.dqs.client.DQSClientSession;
+import dev.dewy.dqs.events.client.DQSClientSession;
 import dev.dewy.dqs.utils.Constants;
 import net.dv8tion.jda.api.EmbedBuilder;
 

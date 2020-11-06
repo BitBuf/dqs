@@ -1,6 +1,6 @@
 package dev.dewy.dqs.protocol;
 
-import dev.dewy.dqs.networking.Session;
+import dev.dewy.dqs.protocol.core.Session;
 
 public interface ServerLoginHandler
 {

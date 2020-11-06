@@ -1,6 +1,6 @@
 package dev.dewy.dqs.test.networking;
 
-import dev.dewy.dqs.networking.event.server.*;
+import dev.dewy.dqs.protocol.core.event.server.*;
 
 import javax.crypto.SecretKey;
 

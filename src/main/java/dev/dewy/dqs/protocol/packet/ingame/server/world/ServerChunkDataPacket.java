@@ -4,7 +4,7 @@ import dev.dewy.dqs.utils.io.NetInput;
 import dev.dewy.dqs.utils.io.NetOutput;
 import dev.dewy.dqs.utils.io.stream.StreamNetOutput;
 import dev.dewy.dqs.utils.nbt.tag.builtin.CompoundTag;
-import dev.dewy.dqs.networking.NetUtil;
+import dev.dewy.dqs.protocol.core.NetUtil;
 import dev.dewy.dqs.protocol.packet.MinecraftPacket;
 import dev.dewy.dqs.protocol.game.chunk.Column;
 

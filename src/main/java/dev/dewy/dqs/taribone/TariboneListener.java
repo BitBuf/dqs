@@ -2,8 +2,8 @@ package dev.dewy.dqs.taribone;
 
 import dev.dewy.dqs.DQS;
 import dev.dewy.dqs.utils.exceptions.taribone.ChunkNotLoadedException;
-import dev.dewy.dqs.networking.Session;
-import dev.dewy.dqs.networking.event.session.*;
+import dev.dewy.dqs.protocol.core.Session;
+import dev.dewy.dqs.protocol.core.event.session.*;
 import dev.dewy.dqs.protocol.packet.Packet;
 import dev.dewy.dqs.protocol.packet.ingame.client.world.ClientTeleportConfirmPacket;
 import dev.dewy.dqs.protocol.packet.ingame.server.ServerDifficultyPacket;

@@ -1,7 +1,7 @@
 package dev.dewy.dqs.taribone.entity.player;
 
 import dev.dewy.dqs.DQS;
-import dev.dewy.dqs.networking.Session;
+import dev.dewy.dqs.protocol.core.Session;
 import dev.dewy.dqs.protocol.game.entity.player.GameMode;
 import dev.dewy.dqs.utils.Constants;
 

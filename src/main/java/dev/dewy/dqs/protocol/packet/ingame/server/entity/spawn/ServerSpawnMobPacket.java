@@ -2,7 +2,7 @@ package dev.dewy.dqs.protocol.packet.ingame.server.entity.spawn;
 
 import dev.dewy.dqs.utils.io.NetInput;
 import dev.dewy.dqs.utils.io.NetOutput;
-import dev.dewy.dqs.networking.NetUtil;
+import dev.dewy.dqs.protocol.core.NetUtil;
 import dev.dewy.dqs.protocol.packet.MinecraftPacket;
 import dev.dewy.dqs.protocol.MagicValues;
 import dev.dewy.dqs.protocol.game.entity.metadata.EntityMetadata;
